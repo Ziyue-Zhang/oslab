@@ -6,7 +6,7 @@ struct Node	{
 	char* name;
 	int ppid;
 	int son;
-}
+};
 int main(int argc, char *argv[]) {
   printf("Hello, World!\n");
   int i;
