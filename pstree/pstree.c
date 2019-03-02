@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <assert.h>
 
+struct Node	{
+	int pid;
+	char* name;
+	int ppid;
+	int son;
+}
 int main(int argc, char *argv[]) {
   printf("Hello, World!\n");
   int i;
