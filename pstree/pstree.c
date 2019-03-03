@@ -14,7 +14,6 @@ struct Node	{
 }node[N];
 int size;
 int cunt;
-map<char*, int> Map;
 
 void test(char *dir) {
 	DIR *dp;
@@ -50,7 +49,6 @@ void test(char *dir) {
 					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-					Map[temp] = size;
 					strcpy(node[size++].pid, temp);
 				}
 				else {
