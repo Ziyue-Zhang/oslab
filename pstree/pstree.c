@@ -33,7 +33,7 @@ void test(char *dir) {
 			}
 		}
 		else {
-			if(strcmp("ststus", entry->d_name) == 0) {
+			if(strcmp("status", entry->d_name) == 0) {
 				printf("ddhf\n");
 			}
 		}
