@@ -76,11 +76,10 @@ void printtree(int fa, int len, bool flag) {
 			else
 				printf(" ");
 		}
-		printf(" └─");
 	}
 	else {
 		if(fa != root) {
-			printf("─┬─");
+			printf("──");
 		}
 	}
 	printf("%s", node[fa].name);
