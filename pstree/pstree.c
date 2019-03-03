@@ -75,7 +75,7 @@ void match(char *dir) {
 		if(S_ISDIR(statbuf.st_mode)) {
 			if(entry->d_name[0] >= '0' && entry->d_name[0] <= '9') {
 				printf("%s\n", entry->d_name);
-				test(entry->d_name); 
+				match(entry->d_name); 
 			}
 		}
 		else {
