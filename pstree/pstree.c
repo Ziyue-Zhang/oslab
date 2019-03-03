@@ -14,7 +14,7 @@ struct Node	{
 }node[N];
 int size;
 int cunt;
-int anc;
+int root;
 
 void test(char *dir) {
 	DIR *dp;
@@ -56,7 +56,7 @@ void test(char *dir) {
 					fscanf(fp, "%s", temp);
 					strcpy(node[size++].ppid, temp);
 					if(strcmp(temp, "0") == 0)
-						anc = size - 1;
+						root = size - 1;
 				}
 				else {
 					printf("wrong\n");
@@ -68,10 +68,21 @@ void test(char *dir) {
 	closedir(dp);
 }
 
+void printtree(int fa, int len) {
+	for(int i = 0; i < len; i++)
+		printf(" ");
+	printf(node[fa].name);
+	len += strlen(node[fa].name);
+	for(int i = 0; i < size; i++) {
+		if(strcmp(node[fa].pid, node[i].ppid) == 0)
+			printtree(i, len);
+	}	
+}
 int main(int argc, char *argv[]) {
   test("/proc");
-  printf("%d\n", anc);
-   for(int i = 0; i < size; i++)
-	  printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
+  //printf("%d\n", root);
+  //for(int i = 0; i < size; i++)
+	  //printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
+  printtree(root, 0);
   return 0;
 }
