@@ -48,6 +48,7 @@ void test(char *dir) {
 					strcpy(node[size].name, temp);
 					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
+					printf("%s\n", temp);
 					fscanf(fp, "%s", temp);
 					strcmp(node[size++].pid, temp);
 				}
