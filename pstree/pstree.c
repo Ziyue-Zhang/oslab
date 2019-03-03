@@ -5,7 +5,6 @@
 #include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>
-#include <map>
 #define N 10000
 
 struct Node	{
@@ -14,6 +13,7 @@ struct Node	{
 	int son;
 }node[N];
 int size;
+int cunt;
 map<char*, int> Map;
 
 void test(char *dir) {
@@ -53,6 +53,9 @@ void test(char *dir) {
 					Map[temp] = size;
 					strcpy(node[size++].pid, temp);
 				}
+				else {
+					printf("wrong\n");
+				}
 			}
 		}
 	}
@@ -86,10 +89,12 @@ void match(char *dir) {
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
-					while(strcmp(temp, "Ppid:") != 0)
+					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-					
+					if(strcmp(node[cunt].pid, temp)!=0)
+						printf("wrong\n");
+					cunt++;
 				}
 			}
 		}
