@@ -51,7 +51,7 @@ void test(char *dir) {
 					fscanf(fp, "%s", temp);
 					strcpy(node[size].pid, temp);
                     if(strcmp(temp, "1") == 0)
-						root = temp;
+						root = size;
 					while(strcmp(temp, "PPid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
