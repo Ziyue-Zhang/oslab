@@ -87,10 +87,19 @@ void match(char *dir) {
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
-					while(strcmp(temp, "Pid:") != 0)
+					while(strcmp(temp, "Ppid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-					if(strcmp(node[cunt].pid, temp)!=0)
+				//	if(strcmp(node[cunt].pid, temp)!=0)
+				//		printf("wrong\n");
+				    int i = 0;
+					for(; i < size; i++)
+						if(strcmp(node[i].pid, temp) == 0)
+							break;
+					if(i < size) {
+						node[i].son = cunt;
+					}
+					else
 						printf("wrong\n");
 					cunt++;
 				}
