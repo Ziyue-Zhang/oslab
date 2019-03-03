@@ -52,7 +52,7 @@ void test(char *dir) {
 					fscanf(fp, "%s", temp);
 					strcpy(node[size].pid, temp);
 					while(strcmp(temp, "PPid:") != 0)
-						fscanf(dp, "%s", temp);
+						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
 					strcpy(node[size++].ppid, temp);
 				}
