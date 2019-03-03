@@ -55,6 +55,8 @@ void test(char *dir) {
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
 					strcpy(node[size++].ppid, temp);
+					if(strcmp(temp, "0") == 0)
+						anc = size - 1;
 				}
 				else {
 					printf("wrong\n");
@@ -68,6 +70,7 @@ void test(char *dir) {
 
 int main(int argc, char *argv[]) {
   test("/proc");
+  printf("%d\n", anc);
    for(int i = 0; i < size; i++)
 	  printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
   return 0;
