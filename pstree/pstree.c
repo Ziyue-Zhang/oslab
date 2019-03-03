@@ -79,8 +79,8 @@ void printtree(int fa, int len) {
 }
 int main(int argc, char *argv[]) {
   test("/proc");
-  //for(int i = 0; i < size; i++)
-	//printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
+  for(int i = 0; i < size; i++)
+	printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
   printtree(root, 0);
   return 0;
 }
