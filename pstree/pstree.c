@@ -42,6 +42,6 @@ void test(char *dir) {
 	closedir(dp);
 }
 int main(int argc, char *argv[]) {
-  test("/proc:");
+  test("/proc");
   return 0;
 }
