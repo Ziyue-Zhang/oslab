@@ -76,16 +76,9 @@ void printtree(int fa, int len) {
 	}
 	printf("%s", node[fa].name);
 	len += strlen(node[fa].name);
-	int flag = 1;
-	for(int i = 0; i < size; i++) {
+	for(int i = 0; i < size; i++) 
 		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
-			if(flag) {
-				flag = 0;
-				printf("─┬─");
-			}
-			else
-				printf(" └─");
-			printtree(i, len + 3);
+			printtree(i, len);
 		}
 	}
 	printf("\n");
