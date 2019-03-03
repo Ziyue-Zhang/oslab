@@ -56,6 +56,6 @@ void test(char *dir) {
 int main(int argc, char *argv[]) {
   test("/proc");
   for(int i = 0; i < size; i++)
-	  printf("%s\n", node[i]);
+	  printf("%s\n", node[i].name);
   return 0;
 }
