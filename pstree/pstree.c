@@ -81,6 +81,7 @@ void printtree(int fa, int len) {
 			printtree(i, len + 3);
 		}
 	}
+	printf("\n");
 }
 int main(int argc, char *argv[]) {
   test("/proc");
