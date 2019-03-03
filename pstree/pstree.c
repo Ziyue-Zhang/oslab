@@ -84,8 +84,6 @@ void printtree(int fa, int len, bool flag) {
 		}
 	}
 	printf("%s", node[fa].name);
-	if(flag)
-		printf("\n");
 	len += strlen(node[fa].name);
 	bool temp = 0;
 	for(int i = 0; i < size; i++) { 
@@ -95,7 +93,7 @@ void printtree(int fa, int len, bool flag) {
 				temp = 1;
 		}
 	}
-	if(!temp && !flag)
+	if(!temp)
 		printf("\n");
 }
 int main(int argc, char *argv[]) {
