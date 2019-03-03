@@ -87,7 +87,8 @@ void printtree(int fa, int len) {
 				printf(" └─");
 			printtree(i, len + 3);
 		}
-	}	
+	}
+	printf("\n");
 }
 int main(int argc, char *argv[]) {
   test("/proc");
