@@ -18,7 +18,7 @@ void test(char *dir) {
 	DIR *dp;
 	struct dirent *entry;
 	struct stat statbuf;
-	//char * name = dir;
+	char * name = dir;
 	if((dp = opendir(dir)) == NULL) {
 		printf("Cannot open dir: %s\n", dir);
 		return;
@@ -34,7 +34,10 @@ void test(char *dir) {
 		}
 		else {
 			if(strcmp("status", entry->d_name) == 0) {
-				printf("ddhf\n");
+				char filename[80] = "/proc/";
+				strcat(filename, name);
+				strcat(filename, "/status");
+				printf("%s\n", filename);
 			}
 		}
 	}
