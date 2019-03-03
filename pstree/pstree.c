@@ -78,7 +78,7 @@ void printtree(int fa, int len) {
 	len += strlen(node[fa].name);
 	for(int i = 0; i < size; i++) { 
 		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
-			printtree(i, len);
+			printtree(i, len + 3);
 		}
 	}
 }
