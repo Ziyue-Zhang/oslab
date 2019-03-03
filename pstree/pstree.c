@@ -5,6 +5,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <stdbool.h>
 #define N 10000
 
 struct Node	{
