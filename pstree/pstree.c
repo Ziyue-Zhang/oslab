@@ -5,14 +5,15 @@
 #include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>
-
+#define N 10000
 
 struct Node	{
-	int pid;
-	char* name;
-	int ppid;
+	char pid[80];
+	char name[80];
+	char ppid[80];
 	int son;
-};
+}node[N];
+int size;
 
 void test(char *dir) {
 	DIR *dp;
@@ -38,6 +39,14 @@ void test(char *dir) {
 				strcat(filename, name);
 				strcat(filename, "/status");
 				printf("%s\n", filename);
+				FILE *fp = fopen(filename, "r");
+				if(fp) {
+					char temp[80];
+					while(strcmp(temp, "Name:") != 0)
+						fscanf(fp, "%s", temp);
+					fscanf(fp, "%s", temp);
+					node[size++].name = temp;
+				}
 			}
 		}
 	}
@@ -46,5 +55,7 @@ void test(char *dir) {
 }
 int main(int argc, char *argv[]) {
   test("/proc");
+  for(int i = 0; i < size; i++)
+	  printf("%s\n", node[i]_;
   return 0;
 }
