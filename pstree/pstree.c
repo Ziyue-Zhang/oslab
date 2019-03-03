@@ -111,7 +111,7 @@ void match(char *dir) {
 }
 int main(int argc, char *argv[]) {
   test("/proc");
-  //for(int i = 0; i < size; i++)
-	//  printf("%s %s\n", node[i].pid, node[i].name);
+  for(int i = 0; i < size; i++)
+	  printf("%s %s %d\n", node[i].pid, node[i].name, node[i].son);
   return 0;
 }
