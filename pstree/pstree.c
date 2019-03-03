@@ -5,15 +5,16 @@
 #include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <map>
 #define N 10000
 
 struct Node	{
 	char pid[80];
 	char name[80];
-	char ppid[80];
 	int son;
 }node[N];
 int size;
+map<char*, int> Map;
 
 void test(char *dir) {
 	DIR *dp;
@@ -49,6 +50,7 @@ void test(char *dir) {
 					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
+					Map[temp] = size;
 					strcpy(node[size++].pid, temp);
 				}
 			}
@@ -84,10 +86,10 @@ void match(char *dir) {
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
-					while(strcmp(temp, "Name:") != 0)
+					while(strcmp(temp, "Ppid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-					strcpy(node[size++].name, temp);
+					
 				}
 			}
 		}
@@ -97,7 +99,7 @@ void match(char *dir) {
 }
 int main(int argc, char *argv[]) {
   test("/proc");
-  for(int i = 0; i < size; i++)
-	  printf("%s %s\n", node[i].pid, node[i].name);
+  //for(int i = 0; i < size; i++)
+	//  printf("%s %s\n", node[i].pid, node[i].name);
   return 0;
 }
