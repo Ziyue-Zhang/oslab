@@ -71,7 +71,7 @@ void test(char *dir) {
 void printtree(int fa, int len) {
 	for(int i = 0; i < len; i++)
 		printf(" ");
-	printf(node[fa].name);
+	printf("%s\n", node[fa].name);
 	len += strlen(node[fa].name);
 	for(int i = 0; i < size; i++) {
 		if(strcmp(node[fa].pid, node[i].ppid) == 0)
