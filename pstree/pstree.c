@@ -74,7 +74,7 @@ void printtree(int fa, int len) {
 		else
 			printf(" ");
 	}
-	printf("%s\n", node[fa].name);
+	printf("%s", node[fa].name);
 	len += strlen(node[fa].name);
 	int flag = 1;
 	for(int i = 0; i < size; i++) {
@@ -85,7 +85,7 @@ void printtree(int fa, int len) {
 			}
 			else
 				printf(" └─");
-			printtree(i, len);
+			printtree(i, len + 3);
 		}
 	}	
 }
