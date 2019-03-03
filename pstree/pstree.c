@@ -13,7 +13,6 @@ struct Node	{
 	char name[80];
 }node[N];
 int size;
-int cunt;
 int root;
 
 void test(char *dir) {
@@ -51,12 +50,12 @@ void test(char *dir) {
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
 					strcpy(node[size].pid, temp);
+                    if(strcmp(temp, "1") == 0)
+						root = temp;
 					while(strcmp(temp, "PPid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
 					strcpy(node[size++].ppid, temp);
-					if(strcmp(temp, "0") == 0)
-						root = size - 1;
 				}
 				else {
 					printf("wrong\n");
@@ -80,9 +79,8 @@ void printtree(int fa, int len) {
 }
 int main(int argc, char *argv[]) {
   test("/proc");
-  printf("%d\n", root);
- for(int i = 0; i < size; i++)
-printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
+  //for(int i = 0; i < size; i++)
+	//printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
   printtree(root, 0);
   return 0;
 }
