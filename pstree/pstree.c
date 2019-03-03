@@ -79,7 +79,7 @@ void printtree(int fa, int len, bool flag) {
 	}
 	else {
 		if(fa != root) {
-			printf("─");
+		//	printf("─");
 		}
 	}
 	if(fa == root)
