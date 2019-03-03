@@ -9,10 +9,12 @@
 
 struct Node	{
 	char pid[80];
+	char ppid[80];
 	char name[80];
 }node[N];
 int size;
 int cunt;
+int anc;
 
 void test(char *dir) {
 	DIR *dp;
@@ -48,7 +50,11 @@ void test(char *dir) {
 					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-					strcpy(node[size++].pid, temp);
+					strcpy(node[size].pid, temp);
+					while(strcmp(temp, "PPid:") != 0)
+						fscanf(dp, "%s", temp);
+					fscanf(fp, "%s", temp);
+					strcpy(node[size++].ppid, temp);
 				}
 				else {
 					printf("wrong\n");
