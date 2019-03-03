@@ -29,6 +29,8 @@ void test(char *dir) {
 	while ((entry = readdir(dp)) != NULL) {
 		lstat(entry->d_name, &statbuf);
 		if(S_ISDIR(statbuf.st_mode)) {
+			if(strcmp(".", entry->d_name) == 0 || strcmp("..", entry->d_name) == 0)
+				continue;
 			if(entry->d_name[0] >= '0' && entry->d_name[0] <= '9') {
 				//printf("%s\n", entry->d_name);
 				test(entry->d_name); 
