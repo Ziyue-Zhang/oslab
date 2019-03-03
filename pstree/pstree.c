@@ -91,13 +91,14 @@ void match(char *dir) {
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
 					printf("%s\n", temp);
-				if(strcmp(node[cunt].pid, temp)!=0)
-						printf("wrong\n");
+				//if(strcmp(node[cunt].pid, temp)!=0)
+				//		printf("wrong\n");
 				    int i = 0;
 					for(; i < size; i++)
 						if(strcmp(node[i].pid, temp) == 0)
 							break;
 					if(i < size) {
+						printf("%d\n", i);
 						node[i].son = cunt;
 					}
 					else
