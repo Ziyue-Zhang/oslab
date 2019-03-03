@@ -61,6 +61,7 @@ void test(char *dir) {
 	closedir(dp);
 }
 void match(char *dir) {
+	printf("nmsl\n");
 	DIR *dp;
 	struct dirent *entry;
 	struct stat statbuf;
