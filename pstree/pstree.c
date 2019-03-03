@@ -90,6 +90,7 @@ void match(char *dir) {
 					while(strcmp(temp, "Ppid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
+					printf("%s\n", temp);
 				//	if(strcmp(node[cunt].pid, temp)!=0)
 				//		printf("wrong\n");
 				    int i = 0;
