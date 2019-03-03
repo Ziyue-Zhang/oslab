@@ -87,11 +87,11 @@ void match(char *dir) {
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
-					while(strcmp(temp, "PPid:") != 0)
+					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-				//	if(strcmp(node[cunt].pid, temp)!=0)
-				//		printf("wrong\n");
+				if(strcmp(node[cunt].pid, temp)!=0)
+						printf("wrong\n");
 				    int i = 0;
 					for(; i < size; i++)
 						if(strcmp(node[i].pid, temp) == 0)
@@ -112,7 +112,7 @@ void match(char *dir) {
 int main(int argc, char *argv[]) {
   test("/proc");
   match("/proc");
-  for(int i = 0; i < size; i++)
-	  printf("%s %s %d\n", node[i].pid, node[i].name, node[i].son);
+ // for(int i = 0; i < size; i++)
+	//  printf("%s %s %d\n", node[i].pid, node[i].name, node[i].son);
   return 0;
 }
