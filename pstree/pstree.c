@@ -69,16 +69,24 @@ void test(char *dir) {
 
 void printtree(int fa, int len) {
 	for(int i = 0; i < len; i++) {
-		if(i == strlen(node[root].name))
+		if(i == strlen(node[root].name) + 1)
 			printf("│");
 		else
 			printf(" ");
 	}
 	printf("%s\n", node[fa].name);
 	len += strlen(node[fa].name);
+	bool flag = true;
 	for(int i = 0; i < size; i++) {
-		if(strcmp(node[fa].pid, node[i].ppid) == 0)
+		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
+			if(flag) {
+				flag = false;
+				printf("─┬─");
+			}
+			else
+				printf(" └─");
 			printtree(i, len);
+		}
 	}	
 }
 int main(int argc, char *argv[]) {
