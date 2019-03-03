@@ -61,7 +61,6 @@ void test(char *dir) {
 	closedir(dp);
 }
 void match(char *dir) {
-	printf("nmsl\n");
 	DIR *dp;
 	struct dirent *entry;
 	struct stat statbuf;
@@ -88,7 +87,7 @@ void match(char *dir) {
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
-					while(strcmp(temp, "Ppid:") != 0)
+					while(strcmp(temp, "PPid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
 					printf("%s\n", temp);
