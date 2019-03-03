@@ -18,7 +18,7 @@ void test(char *dir) {
 	DIR *dp;
 	struct dirent *entry;
 	struct stat statbuf;
-	char * name = dir;
+	//char * name = dir;
 	if((dp = opendir(dir)) == NULL) {
 		printf("Cannot open dir: %s\n", dir);
 		return;
