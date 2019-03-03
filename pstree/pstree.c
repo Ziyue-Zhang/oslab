@@ -95,7 +95,7 @@ void printtree(int fa, int len, bool flag) {
 				temp = 1;
 		}
 	}
-	if(!temp)
+	if(!temp && !flag)
 		printf("\n");
 }
 int main(int argc, char *argv[]) {
