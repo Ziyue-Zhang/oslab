@@ -45,7 +45,7 @@ void test(char *dir) {
 					while(strcmp(temp, "Name:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-					node[size++].name = temp;
+					strcpy(node[size++].name, temp);
 				}
 			}
 		}
@@ -56,6 +56,6 @@ void test(char *dir) {
 int main(int argc, char *argv[]) {
   test("/proc");
   for(int i = 0; i < size; i++)
-	  printf("%s\n", node[i]_;
+	  printf("%s\n", node[i]);
   return 0;
 }
