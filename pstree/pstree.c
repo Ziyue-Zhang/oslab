@@ -29,7 +29,7 @@ void test(char *dir) {
 		lstat(entry->d_name, &statbuf);
 		if(S_ISDIR(statbuf.st_mode)) {
 			if(entry->d_name[0] >= '0' && entry->d_name[0] <= '9') {
-				printf("%s\n", entry->d_name);
+				//printf("%s\n", entry->d_name);
 				test(entry->d_name); 
 			}
 		}
@@ -38,7 +38,7 @@ void test(char *dir) {
 				char filename[80] = "/proc/";
 				strcat(filename, name);
 				strcat(filename, "/status");
-				printf("%s\n", filename);
+				//printf("%s\n", filename);
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
@@ -87,9 +87,10 @@ void match(char *dir) {
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
-					while(strcmp(temp, "Pid:") != 0)
+					while(strcmp(temp, "PPid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
+					PRINTF("%s\n", temp);
 				if(strcmp(node[cunt].pid, temp)!=0)
 						printf("wrong\n");
 				    int i = 0;
