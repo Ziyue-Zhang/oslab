@@ -31,7 +31,7 @@ void test(char *dir) {
 		if(S_ISDIR(statbuf.st_mode)) {
 			if(strcmp(".", entry->d_name) == 0 || strcmp("..", entry->d_name) == 0)
 				continue;
-			if(entry->d_name[0] >= '0' && entry->d_name[0] <= '9' || strcmp("task", entry->d_name) == 0) {
+			if((entry->d_name[0] >= '0' && entry->d_name[0] <= '9') || strcmp("task", entry->d_name) == 0) {
 				//printf("%s\n", entry->d_name);
 				test(entry->d_name); 
 			}
