@@ -31,7 +31,7 @@ void test(char *dir) {
 		if(S_ISDIR(statbuf.st_mode)) {
 			if(strcmp(".", entry->d_name) == 0 || strcmp("..", entry->d_name) == 0)
 				continue;
-			if(entry->d_name[0] >= '0' && entry->d_name[0] <= '9') {
+			if(entry->d_name[0] >= '0' && entry->d_name[0] <= '9' || strcmp("task", entry->d_name) == 0) {
 				//printf("%s\n", entry->d_name);
 				test(entry->d_name); 
 			}
@@ -48,6 +48,14 @@ void test(char *dir) {
 					while(strcmp(temp, "Name:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
+					bool flag = true;
+					for(int i = 0; i < size; i++)
+						if(strcmp(node[i].name, temp) == 0) {
+							flag= false;
+							break;
+						}
+					if(!flag)
+						break;
 					strcpy(node[size].name, temp);
 					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
