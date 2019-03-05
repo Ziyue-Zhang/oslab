@@ -36,7 +36,7 @@ void test(char *dir, char *filename, bool flag) {
 				strcpy(name, filename);
 				strcat(name, "/");
 				strcat(name, entry->d_name);
-				if(strcmp("task", entry_d_name)
+				if(strcmp("task", entry->d_name)
 					test(entry->d_name, name, true);
 				else
 					test(entry->d_name, name, false);
