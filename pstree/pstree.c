@@ -69,7 +69,7 @@ void test(char *dir, char *filename) {
 				}
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
-					char tempn[80];
+					char *tempn;
 					char temp[80];
 					while(strcmp(tempn, "Name:") != 0)
 						fscanf(fp, "%s", tempn);
