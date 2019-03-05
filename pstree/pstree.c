@@ -42,7 +42,7 @@ void test(char *dir, char *filename) {
 		else {
 			if(strcmp("status", entry->d_name) == 0) {
 				strcat(filename, "/status");
-				printf("%s\n", filename);
+				//printf("%s\n", filename);
 				int i = 0;
 				bool flag = false;
 				for(; i < strlen(filename); i++)
@@ -65,7 +65,7 @@ void test(char *dir, char *filename) {
 						cmp[j] = filename[i];
 					}
 					cmp[j] = '\0';
-					printf("%s\n", cmp);
+					//printf("%s\n", cmp);
 				}
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
@@ -149,6 +149,6 @@ int main(int argc, char *argv[]) {
   test("/proc","/proc");
   //for(int i = 0; i < size; i++)
 	//printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
-  //printtree(root, 0, 0);
+  printtree(root, 0, 0);
   return 0;
 }
