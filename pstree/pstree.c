@@ -36,18 +36,16 @@ void test(char *dir, char *filename, bool flag) {
 				strcpy(name, filename);
 				strcat(name, "/");
 				strcat(name, entry->d_name);
-				if(strcmp("task", entry->d_name) == 0)
-					printf("xjm\n");
-				test(entry->d_name, name, true);
-					//test(entry->d_name, name, false);
+				if(strcmp("task", entry->d_name) == 0 || flag)
+					test(entry->d_name, name, true);
+				else	
+					test(entry->d_name, name, false);
 			}
 		}
 		else {
 			if(strcmp("status", entry->d_name) == 0) {
 				if(!flag)
 					break;
-				if(!flag)
-					printf("xjm\n");
 				strcat(filename, "/status");
 				printf("%s\n", filename);
 				FILE *fp = fopen(filename, "r");
