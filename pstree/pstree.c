@@ -121,6 +121,10 @@ int main(int argc, char *argv[]) {
   test("/proc","/proc");
   //for(int i = 0; i < size; i++)
 	//printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
+  for(int i = 0; i < size; i++)
+	  if(strcmp(node[i].name, "gdbus")==0){
+		printf("%s %s\n",node[i].pid, node[i].ppid);
+	  }
   printtree(root, 0, 0);
   return 0;
 }
