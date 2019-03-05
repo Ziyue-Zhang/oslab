@@ -51,7 +51,7 @@ void test(char *dir, char *filename) {
 					fscanf(fp, "%s", temp);
 					/*if(strcmp(temp,"gdbus")==0)
 						printf("%s\n", filename);*/
-					bool flag = true;
+					/*bool flag = true;
 					for(int i = 0; i < size; i++)
 						if(strcmp(node[i].name, temp) == 0) {
 							flag= false;
@@ -59,7 +59,7 @@ void test(char *dir, char *filename) {
 						}
 					if(!flag){
 						break;
-					}
+					}*/
 					strcpy(node[size].name, temp);
 					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
@@ -119,10 +119,6 @@ int main(int argc, char *argv[]) {
   test("/proc","/proc");
   //for(int i = 0; i < size; i++)
 	//printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
-  for(int i = 0; i < size; i++)
-	  if(strcmp(node[i].name, "gdbus")==0){
-		printf("%s %s\n",node[i].pid, node[i].ppid);
-	  }
   printtree(root, 0, 0);
   return 0;
 }
