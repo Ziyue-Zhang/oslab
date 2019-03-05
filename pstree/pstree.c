@@ -69,11 +69,12 @@ void test(char *dir, char *filename) {
 				}
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
-					char *tempn;
+					char temp0[80]
 					char temp[80];
-					while(strcmp(tempn, "Name:") != 0)
-						fscanf(fp, "%s", tempn);
-					fscanf(fp, "%[^\n]%*c", tempn);
+					while(strcmp(temp0, "Name:") != 0)
+						fscanf(fp, "%s", temp0);
+					fscanf(fp, "%[^\n]%*c", temp0);
+					char *tempn = temp0;
 					while(tempn != NULL && *tempn == ' ')
 						tempn++;
 					/*if(strcmp(temp,"gdbus")==0)
