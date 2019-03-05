@@ -37,9 +37,9 @@ void test(char *dir, char *filename, bool flag) {
 				strcat(name, "/");
 				strcat(name, entry->d_name);
 				if(strcmp("task", entry->d_name) == 0)
+					printf("xjm\n");
 					test(entry->d_name, name, true);
-				else
-					test(entry->d_name, name, false);
+					//test(entry->d_name, name, false);
 			}
 		}
 		else {
