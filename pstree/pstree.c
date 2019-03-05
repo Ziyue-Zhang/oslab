@@ -32,9 +32,11 @@ void test(char *dir, char *filename) {
 				continue;
 			if((entry->d_name[0] >= '0' && entry->d_name[0] <= '9') || strcmp("task", entry->d_name) == 0) {
 				//printf("%s %s\n", name, entry->d_name);
-				strcat(filename, "/");
-				strcat(filename, entry->d_name);
-				test(entry->d_name, filename); 
+				char name[80];
+				strcpy(name, filename);
+				strcat(name, "/");
+				strcat(name, entry->d_name);
+				test(entry->d_name, name); 
 			}
 		}
 		else {
