@@ -16,11 +16,10 @@ struct Node	{
 int size;
 int root;
 
-void test(char *dir) {
+void test(char *dir, char *filename) {
 	DIR *dp;
 	struct dirent *entry;
 	struct stat statbuf;
-	char * name = dir;
 	if((dp = opendir(dir)) == NULL) {
 		printf("Cannot open dir: %s\n", dir);
 		return;
@@ -32,16 +31,16 @@ void test(char *dir) {
 			if(strcmp(".", entry->d_name) == 0 || strcmp("..", entry->d_name) == 0)
 				continue;
 			if((entry->d_name[0] >= '0' && entry->d_name[0] <= '9') || strcmp("task", entry->d_name) == 0) {
-				printf("%s %s\n", name, entry->d_name);
-				test(entry->d_name); 
+				//printf("%s %s\n", name, entry->d_name);
+				strcat(filename, "/");
+				strcat(filename, entry->d_name);
+				test(entry->d_name, filename); 
 			}
 		}
 		else {
 			if(strcmp("status", entry->d_name) == 0) {
-				char filename[80] = "/proc/";
-				strcat(filename, name);
 				strcat(filename, "/status");
-				//printf("%s\n", filename);
+				printf("%s\n", filename);
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
