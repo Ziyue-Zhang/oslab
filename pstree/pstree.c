@@ -55,7 +55,7 @@ void test(char *dir, char *filename) {
 				if(flag){
 					i-=2;
 					while(i--)
-						if(filename == '/')
+						if(filename[i] == '/')
 							break;
 					i++;
 					char cmp[80];
