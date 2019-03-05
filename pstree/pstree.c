@@ -49,9 +49,10 @@ void test(char *dir, char *filename) {
 					if(filename[i] == 't' &&
 					   filename[i+1] == 'a' &&
 					   filename[i+2] == 's' &&
-					   filename[i+3] == 'k')
+					   filename[i+3] == 'k') {
 						flag = true;
 						break;
+					}
 				if(flag){
 					i-=2;
 					while(i--)
@@ -61,7 +62,7 @@ void test(char *dir, char *filename) {
 					char cmp[80];
 					int j = 0;
 					for(; filename[i]!='/'; i++,j++) {
-						cmp[j] = filename[i]
+						cmp[j] = filename[i];
 					}
 					cmp[j] = '\0';
 					printf("%s\n", cmp);
