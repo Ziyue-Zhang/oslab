@@ -47,7 +47,7 @@ void test(char *dir, char *filename, bool flag) {
 				if(!flag)
 					break;
 				strcat(filename, "/status");
-				//printf("%s\n", filename);
+				printf("%s\n", filename);
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
@@ -124,6 +124,6 @@ int main(int argc, char *argv[]) {
   test("/proc","/proc", false);
   //for(int i = 0; i < size; i++)
 	//printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
-  printtree(root, 0, 0);
+  //printtree(root, 0, 0);
   return 0;
 }
