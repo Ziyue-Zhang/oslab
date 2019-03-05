@@ -75,9 +75,9 @@ void test(char *dir, char *filename) {
 						fscanf(fp, "%s", temp0);
 					fscanf(fp, "%[^\n]%*c", temp0);
 					char *tempn = temp0;
-					while(*tempn == '\t' )
+					while(*tempn == '\t' || *tempn == 32)
 						tempn++;
-					printf("%s\n", tempn);
+					//printf("%s\n", tempn);
 					/*if(strcmp(temp,"gdbus")==0)
 						printf("%s\n", filename);*/
 					/*bool flag = true;
