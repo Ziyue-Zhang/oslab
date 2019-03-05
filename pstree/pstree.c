@@ -46,6 +46,8 @@ void test(char *dir, char *filename, bool flag) {
 			if(strcmp("status", entry->d_name) == 0) {
 				if(!flag)
 					break;
+				if(!flag)
+					printf("xjm\n");
 				strcat(filename, "/status");
 				printf("%s\n", filename);
 				FILE *fp = fopen(filename, "r");
