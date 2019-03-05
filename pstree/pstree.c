@@ -43,6 +43,29 @@ void test(char *dir, char *filename) {
 			if(strcmp("status", entry->d_name) == 0) {
 				strcat(filename, "/status");
 				printf("%s\n", filename);
+				int i = 0;
+				bool flag = false;
+				for(; i < strlen(filename); i++)
+					if(filename[i] == 't' &&
+					   filename[i+1] == 'a' &&
+					   filename[i+2] == 's' &&
+					   filename[i+3] == 'k')
+						flag = true;
+						break;
+				if(flag){
+					i-=2;
+					while(i--)
+						if(filename == '/')
+							break;
+					i++;
+					char cmp[80];
+					int j = 0;
+					for(; filename[i]!='/'; i++,j++) {
+						cmp[j] = filename[i]
+					}
+					cmp[j] = '\0';
+					printf("%s\n", cmp);
+				}
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
