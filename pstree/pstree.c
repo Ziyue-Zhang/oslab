@@ -16,7 +16,7 @@ struct Node	{
 int size;
 int root;
 
-void test(char *dir, char *filename) {
+void test(char *dir, char *filename, bool flag) {
 	DIR *dp;
 	struct dirent *entry;
 	struct stat statbuf;
@@ -36,11 +36,16 @@ void test(char *dir, char *filename) {
 				strcpy(name, filename);
 				strcat(name, "/");
 				strcat(name, entry->d_name);
-				test(entry->d_name, name); 
+				if(strcmp("task", entry_d_name)
+					test(entry->d_name, name, true);
+				else
+					test(entry->d_name, name, false);
 			}
 		}
 		else {
 			if(strcmp("status", entry->d_name) == 0) {
+				if(!flag)
+					break;
 				strcat(filename, "/status");
 				//printf("%s\n", filename);
 				FILE *fp = fopen(filename, "r");
@@ -116,7 +121,7 @@ void printtree(int fa, int len, bool flag) {
 		printf("\n");
 }
 int main(int argc, char *argv[]) {
-  test("/proc","/proc");
+  test("/proc","/proc", false);
   //for(int i = 0; i < size; i++)
 	//printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
   printtree(root, 0, 0);
