@@ -90,7 +90,13 @@ void test(char *dir, char *filename) {
 					fscanf(fp, "%s", temp);
 					if(flag && strcmp(cmp, temp) == 0)
 						break;
-					strcpy(node[size].name, tempn);
+					if(!flag)
+						strcpy(node[size].name, tempn);
+					else{
+						strcpy(node[size].name, '{');
+						strcat(node[size].name, tempn);
+						strcat(node[size].name, '}');
+					}
 					strcpy(node[size].pid, temp);
                     if(strcmp(temp, "1") == 0)
 						root = size;
