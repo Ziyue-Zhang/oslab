@@ -93,9 +93,9 @@ void test(char *dir, char *filename) {
 					if(!flag)
 						strcpy(node[size].name, tempn);
 					else{
-						strcpy(node[size].name, '{');
+						strcpy(node[size].name, "{");
 						strcat(node[size].name, tempn);
-						strcat(node[size].name, '}');
+						strcat(node[size].name, "}");
 					}
 					strcpy(node[size].pid, temp);
                     if(strcmp(temp, "1") == 0)
