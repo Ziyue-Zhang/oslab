@@ -55,8 +55,13 @@ void test(char *dir, char *filename) {
 							flag= false;
 							break;
 						}
-					if(!flag)
+					if(!flag){
+						printf("xjm\n");
 						break;
+					}
+					if(!flag) {
+						printf("zzy\n");
+					}
 					strcpy(node[size].name, temp);
 					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
