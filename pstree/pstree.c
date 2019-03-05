@@ -72,7 +72,8 @@ void test(char *dir, char *filename) {
 					while(strcmp(temp, "PPid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-					strcpy(node[size++].ppid, temp);
+					strcpy(node[size].ppid, temp);
+					size++;
 				}
 				else {
 					printf("wrong\n");
