@@ -53,13 +53,13 @@ void test(char *dir, char *filename) {
 						flag = true;
 						break;
 					}
+				char cmp[80];
 				if(flag){
 					i-=2;
 					while(i--)
 						if(filename[i] == '/')
 							break;
 					i++;
-					char cmp[80];
 					int j = 0;
 					for(; filename[i]!='/'; i++,j++) {
 						cmp[j] = filename[i];
