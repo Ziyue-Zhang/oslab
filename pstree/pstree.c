@@ -49,8 +49,8 @@ void test(char *dir, char *filename) {
 					while(strcmp(temp, "Name:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-					if(strcmp(temp,"gdbus")==0)
-						printf("%s\n", filename);
+					/*if(strcmp(temp,"gdbus")==0)
+						printf("%s\n", filename);*/
 					bool flag = true;
 					for(int i = 0; i < size; i++)
 						if(strcmp(node[i].name, temp) == 0) {
