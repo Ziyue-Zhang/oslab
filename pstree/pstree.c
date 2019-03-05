@@ -77,6 +77,7 @@ void test(char *dir, char *filename) {
 					char *tempn = temp0;
 					while(*tempn == ' ')
 						tempn++;
+					printf("%s\n", tempn);
 					/*if(strcmp(temp,"gdbus")==0)
 						printf("%s\n", filename);*/
 					/*bool flag = true;
