@@ -42,13 +42,15 @@ void test(char *dir, char *filename) {
 		else {
 			if(strcmp("status", entry->d_name) == 0) {
 				strcat(filename, "/status");
-				printf("%s\n", filename);
+				//printf("%s\n", filename);
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
 					char temp[80];
 					while(strcmp(temp, "Name:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
+					if(strcmp(temp,"gdbus")==0)
+						printf("%s\n", filename);
 					bool flag = true;
 					for(int i = 0; i < size; i++)
 						if(strcmp(node[i].name, temp) == 0) {
@@ -56,11 +58,7 @@ void test(char *dir, char *filename) {
 							break;
 						}
 					if(!flag){
-						printf("xjm\n");
 						break;
-					}
-					if(!flag) {
-						printf("zzy\n");
 					}
 					strcpy(node[size].name, temp);
 					while(strcmp(temp, "Pid:") != 0)
