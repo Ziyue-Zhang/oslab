@@ -69,10 +69,11 @@ void test(char *dir, char *filename) {
 				}
 				FILE *fp = fopen(filename, "r");
 				if(fp) {
+					char tempn[80];
 					char temp[80];
-					while(strcmp(temp, "Name:") != 0)
-						fscanf(fp, "%s", temp);
-					fscanf(fp, "%s", temp);
+					while(strcmp(tempn, "Name:") != 0)
+						fscanf(fp, "%s", tempn);
+					fscanf(fp, "%s", tempn);
 					/*if(strcmp(temp,"gdbus")==0)
 						printf("%s\n", filename);*/
 					/*bool flag = true;
@@ -84,17 +85,22 @@ void test(char *dir, char *filename) {
 					if(!flag){
 						break;
 					}*/
-					strcpy(node[size].name, temp);
 					while(strcmp(temp, "Pid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
+					if(flag && strcmp(cmp, temp) == 0)
+						break;
+					strcpy(node[size].name, tempn);
 					strcpy(node[size].pid, temp);
                     if(strcmp(temp, "1") == 0)
 						root = size;
 					while(strcmp(temp, "PPid:") != 0)
 						fscanf(fp, "%s", temp);
 					fscanf(fp, "%s", temp);
-					strcpy(node[size].ppid, temp);
+					if(!flag)
+						strcpy(node[size].ppid, temp);
+					else
+						strcpy(node[size].ppid, cmp);
 					size++;
 				}
 				else {
