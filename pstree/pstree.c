@@ -133,7 +133,8 @@ void printtree(int fa, int len, bool flag) {
 			printf(" ");
 		}
 	}
-	printf("───%s", node[fa].name);
+	if(fa)
+		printf("───%s", node[fa].name);
 //	else
 //		printf(" ├─%s", node[fa].name);
 	len += strlen(node[fa].name);
