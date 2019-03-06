@@ -123,7 +123,7 @@ void test(char *dir, char *filename) {
 	closedir(dp);
 }
 
-void printtree(int fa, int len, bool first, bool single) {
+void printtree(int fa, int len, bool first, bool single, bool last) {
 	if(!first) {
 		for(int i = 0; i < len; i++) {
 		/*	if(i == strlen(node[root].name) + 2)
@@ -138,8 +138,10 @@ void printtree(int fa, int len, bool first, bool single) {
 			printf("───%s", node[fa].name);
 		else if(first)
 			printf("─┬─%s", node[fa].name);
-		else
+		else if(last)
 			printf(" └─%s", node[fa].name);
+		else
+			printf(" ├─%s", node[fa].name);
 	}
 	else
 		printf("%s", node[fa].name);
@@ -147,18 +149,22 @@ void printtree(int fa, int len, bool first, bool single) {
 		len -= 3;
 	len += strlen(node[fa].name);
 	int cunt = 0;
+	int temp = 0;
 	for(int i = 0; i < size; i++) {
 		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
 				cunt++;
+				temp = i;
 			}
 	}
 	bool flag = true;
 	for(int i = 0; i < size; i++) { 
 		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
 			if(cunt == 1)
-				printtree(i, len + 3, flag, true);
+				printtree(i, len + 3, flag, true, true);
+			else if(i == temp)
+				printtree(i, len + 3, flag, false, true);
 			else
-				printtree(i, len + 3, flag, false);
+				printtree(i, len + 3, flag, false, true);
 			if(flag)
 				flag = false;
 		}
