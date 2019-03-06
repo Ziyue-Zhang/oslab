@@ -153,7 +153,15 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 	}
 	else
 		printf("%s", node[fa].name);
-	if(last && !single && pnt>0 && (draw[pnt - 1] - len) == 1) {
+	int cunt = 0;
+	int temp = 0;
+	for(int i = 0; i < size; i++) {
+		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
+				cunt++;
+				temp = i;
+			}
+	}
+	if(last && cunt > 1 && pnt>0 && (draw[pnt - 1] - len) == 1) {
 		//printf("%d %d %d", draw[pnt-1], len, pnt);
 		draw[pnt - 1] = 0;
 	}
@@ -164,14 +172,6 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 	pnt++;
 	if(fa == root)
 		len -= 3;
-	int cunt = 0;
-	int temp = 0;
-	for(int i = 0; i < size; i++) {
-		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
-				cunt++;
-				temp = i;
-			}
-	}
 	bool flag = true;
 	for(int i = 0; i < size; i++) { 
 		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
