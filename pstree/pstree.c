@@ -123,8 +123,8 @@ void test(char *dir, char *filename) {
 	closedir(dp);
 }
 
-void printtree(int fa, int len, bool flag) {
-	if(flag) {
+void printtree(int fa, int len, bool first) {
+	if(!first) {
 		for(int i = 0; i < len; i++) {
 		/*	if(i == strlen(node[root].name) + 2)
 				printf("│");
@@ -146,21 +146,21 @@ void printtree(int fa, int len, bool flag) {
 				cunt++;
 			}
 	}
-	bool temp = 0;
+	bool flag = true;
 	for(int i = 0; i < size; i++) { 
 		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
-			printtree(i, len + 3, temp);
-			if(!temp)
-				temp = 1;
+			printtree(i, len + 3, flag);
+			if(flag)
+				flag = false;
 		}
 	}
-	if(!temp)
+	if(!flag)
 		printf("\n");
 }
 int main(int argc, char *argv[]) {
   test("/proc","/proc");
   //for(int i = 0; i < size; i++)
 	//printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
-  printtree(root, 0, 0);
+  printtree(root, 0, true);
   return 0;
 }
