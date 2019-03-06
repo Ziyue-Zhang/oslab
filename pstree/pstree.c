@@ -136,6 +136,8 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 			while(j < 80) {
 				if(draw[j] == 0)
 					j++;
+				else
+					break;
 			}
 			if(j < pnt && draw[j] == i) {
 				printf("│");
