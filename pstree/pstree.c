@@ -136,6 +136,8 @@ void printtree(int fa, int len, bool first, bool single) {
 	if(fa != root) {
 		if(single)
 			printf("───%s", node[fa].name);
+		else if(flag)
+			printf("─┬─%s", node[fa].name);
 		else
 			printf(" └─%s", node[fa].name);
 	}
