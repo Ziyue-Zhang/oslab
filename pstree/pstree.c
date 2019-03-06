@@ -123,7 +123,7 @@ void test(char *dir, char *filename) {
 	closedir(dp);
 }
 
-void printtree(int fa, int len, bool first) {
+void printtree(int fa, int len, bool first, bool single) {
 	if(!first) {
 		for(int i = 0; i < len; i++) {
 		/*	if(i == strlen(node[root].name) + 2)
@@ -133,8 +133,12 @@ void printtree(int fa, int len, bool first) {
 			printf(" ");
 		}
 	}
-	if(fa != root)
-		printf("───%s", node[fa].name);
+	if(fa != root) {
+		if(single)
+			printf("───%s", node[fa].name);
+		else
+			printf(" └─%s", node[fa].name);
+	}
 	else
 		printf("%s", node[fa].name);
 	if(fa == root)
@@ -149,7 +153,10 @@ void printtree(int fa, int len, bool first) {
 	bool flag = true;
 	for(int i = 0; i < size; i++) { 
 		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
-			printtree(i, len + 3, flag);
+			if(cunt == 1)
+				printtree(i, len + 3, flag, true);
+			else
+				printtree(i, len + 3, flag, false);
 			if(flag)
 				flag = false;
 		}
@@ -161,6 +168,6 @@ int main(int argc, char *argv[]) {
   test("/proc","/proc");
   //for(int i = 0; i < size; i++)
 	//printf("%s %s %s\n", node[i].pid, node[i].name, node[i].ppid);
-  printtree(root, 0, true);
+  printtree(root, 0, true, false);
   return 0;
 }
