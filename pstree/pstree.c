@@ -153,7 +153,7 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 	}
 	else
 		printf("%s", node[fa].name);
-	if(last && (draw[pnt] - len) == 1) {
+	if(last && (draw[pnt] - len) == 2) {
 		printf("xjm");
 		pnt--;
 	}
