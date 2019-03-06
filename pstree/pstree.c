@@ -154,7 +154,7 @@ void printtree(int fa, int len, bool first) {
 				flag = false;
 		}
 	}
-	if(!flag)
+	if(flag)
 		printf("\n");
 }
 int main(int argc, char *argv[]) {
