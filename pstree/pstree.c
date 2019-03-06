@@ -154,7 +154,7 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 	else
 		printf("%s", node[fa].name);
 	if(last && pnt>0 && (draw[pnt - 1] - len) == 1) {
-		printf("xjm");
+		printf("xjmi%d", pnt);
 		pnt--;
 	}
 	len += strlen(node[fa].name);
@@ -162,7 +162,6 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 	if(fa != root)
 		draw[pnt] += 3;
 	pnt++;
-	printf("xm");
 	if(fa == root)
 		len -= 3;
 	int cunt = 0;
