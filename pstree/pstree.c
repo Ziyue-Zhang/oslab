@@ -134,8 +134,7 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 			else
 				printf(" ");*/
 			if(j < pnt && draw[j] == i) {
-				//printf("│");
-printf("%d",j);
+				printf("│");
 				j++;
 			}
 			else
