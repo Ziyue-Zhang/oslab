@@ -15,6 +15,8 @@ struct Node	{
 }node[N];
 int size;
 int root;
+int pnt;
+int draw[80];
 
 void test(char *dir, char *filename) {
 	DIR *dp;
@@ -125,12 +127,18 @@ void test(char *dir, char *filename) {
 
 void printtree(int fa, int len, bool first, bool single, bool last) {
 	if(!first) {
+		int j = 0;
 		for(int i = 0; i < len; i++) {
 		/*	if(i == strlen(node[root].name) + 2)
 				printf("│");
 			else
 				printf(" ");*/
-			printf(" ");
+			if(j < pnt && pnt[j] == i) {
+				printf("│");
+				j++;
+			}
+			else
+				printf(" ");
 		}
 	}
 	if(fa != root) {
@@ -145,9 +153,11 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 	}
 	else
 		printf("%s", node[fa].name);
+	len += strlen(node[fa].name);
+    draw[pnt] = len + 1;
+	pnt++;
 	if(fa == root)
 		len -= 3;
-	len += strlen(node[fa].name);
 	int cunt = 0;
 	int temp = 0;
 	for(int i = 0; i < size; i++) {
@@ -169,6 +179,8 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 				flag = false;
 		}
 	}
+	draw[pnt] = 0;
+	pnt--;
 	if(flag)
 		printf("\n");
 }
