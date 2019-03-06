@@ -155,6 +155,8 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 		printf("%s", node[fa].name);
 	len += strlen(node[fa].name);
     draw[pnt] = len + 1;
+	if(fa != root)
+		draw[pnt] += 3;
 	pnt++;
 	if(fa == root)
 		len -= 3;
