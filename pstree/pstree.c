@@ -126,15 +126,11 @@ void test(char *dir, char *filename) {
 void printtree(int fa, int len, bool flag) {
 	if(flag) {
 		for(int i = 0; i < len; i++) {
-			if(i == strlen(node[root].name) + 2)
+		/*	if(i == strlen(node[root].name) + 2)
 				printf("│");
 			else
-				printf(" ");
-		}
-	}
-	else {
-		if(fa != root) {
-		//	printf("─");
+				printf(" ");*/
+			printf(" ");
 		}
 	}
 	if(fa == root)
@@ -144,6 +140,12 @@ void printtree(int fa, int len, bool flag) {
 //	else
 //		printf(" ├─%s", node[fa].name);
 	len += strlen(node[fa].name);
+	int cunt = 0;
+	for(int i = 0; i < sizel i++) {
+		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
+				cunt++;
+			}
+	}
 	bool temp = 0;
 	for(int i = 0; i < size; i++) { 
 		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
