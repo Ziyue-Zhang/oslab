@@ -186,6 +186,7 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 				flag = false;
 		}
 	}
+	pnt--;
 	if(flag)
 		printf("\n");
 }
