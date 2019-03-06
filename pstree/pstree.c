@@ -137,6 +137,8 @@ void printtree(int fa, int len, bool flag) {
 		printf("───%s", node[fa].name);
 	else
 		printf("%s", node[fa].name);
+	if(fa == root)
+		len -= 3;
 	len += strlen(node[fa].name);
 	int cunt = 0;
 	for(int i = 0; i < size; i++) {
