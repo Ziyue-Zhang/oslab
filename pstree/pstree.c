@@ -186,8 +186,8 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 				flag = false;
 		}
 	}
-	draw[pnt] = 0;
 	pnt--;
+	draw[pnt] = 0;
 	if(flag)
 		printf("\n");
 }
