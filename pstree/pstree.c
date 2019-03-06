@@ -175,8 +175,6 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 				printtree(i, len + 3, flag, true, false);
 			else if(i == temp) {
 				printtree(i, len + 3, flag, false, true);
-				draw[pnt] = 0;
-				pnt--;
 			}
 			else
 				printtree(i, len + 3, flag, false, false);
@@ -184,6 +182,8 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 				flag = false;
 		}
 	}
+	draw[pnt] == 0;
+	pnt--;
 	if(flag)
 		printf("\n");
 }
