@@ -160,11 +160,11 @@ void printtree(int fa, int len, bool first, bool single, bool last) {
 	for(int i = 0; i < size; i++) { 
 		if(strcmp(node[fa].pid, node[i].ppid) == 0) {
 			if(cunt == 1)
-				printtree(i, len + 3, flag, true, true);
+				printtree(i, len + 3, flag, true, false);
 			else if(i == temp)
 				printtree(i, len + 3, flag, false, true);
 			else
-				printtree(i, len + 3, flag, false, true);
+				printtree(i, len + 3, flag, false, false);
 			if(flag)
 				flag = false;
 		}
