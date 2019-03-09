@@ -57,6 +57,7 @@ void init_screen() {
   _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, &info, sizeof(info));
   w = info.width;
   h = info.height;
+  printf("%d %d\n", w, h);
 }
 
 void draw_rectt(int x, int y, int w, int h, uint32_t color) {
