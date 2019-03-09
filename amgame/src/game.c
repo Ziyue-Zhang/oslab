@@ -4,12 +4,13 @@
 void init_screen();
 void splash();
 void read_keyy();
-
+int color;
 int main() {
   // Operating system is a C program
   _ioe_init();
   init_screen();
   splash();
+  color=0xffffff;
   while (1) {
     read_keyy();
   }
@@ -25,6 +26,7 @@ void read_keyy() {
   };
   _io_read(_DEV_INPUT, _DEVREG_INPUT_KBD, &event, sizeof(event));
   if (event.keycode != _KEY_NONE && event.keydown) {
+    color=(color+0xff)%0xffffff;
     puts("Key pressed: ");
     puts(key_names[event.keycode]);
     puts("\n");
@@ -57,7 +59,7 @@ void splash() {
     for (int y = 0; y * SIDE <= h; y++) {
       if ((x & 1) ^ (y & 1)) {
         //draw_rect(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
-		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffff00); // white
+		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, color); // white
       }
     }
   }
