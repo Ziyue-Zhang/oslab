@@ -26,7 +26,7 @@ void read_keyy() {
   };
   _io_read(_DEV_INPUT, _DEVREG_INPUT_KBD, &event, sizeof(event));
   if (event.keycode != _KEY_NONE && event.keydown) {
-    color=(color+0xff)%0xffffff;
+    color=(color+0xfff)%(0xffffff+1);
     puts("Key pressed: ");
     puts(key_names[event.keycode]);
     puts("\n");
