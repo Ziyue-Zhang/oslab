@@ -5,6 +5,7 @@ void init_screen();
 void splash();
 void read_keyy();
 int color;
+void draw_rectt(int x, int y, int w, int h, uint32_t color) ;
 int main() {
   // Operating system is a C program
   _ioe_init();
@@ -46,6 +47,7 @@ void init_screen() {
   _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, &info, sizeof(info));
   w = info.width;
   h = info.height;
+  draw_rectt(0,0,w/2,h/2,0xffffff);
 }
 
 void draw_rectt(int x, int y, int w, int h, uint32_t color) {
