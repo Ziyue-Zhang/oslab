@@ -9,10 +9,11 @@ int main() {
   // Operating system is a C program
   _ioe_init();
   init_screen();
-  splash();
   color=0xffffff;
+  splash();
   while (1) {
     read_keyy();
+     splash();
   }
   return 0;
 }
