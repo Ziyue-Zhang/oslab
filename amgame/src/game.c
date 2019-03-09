@@ -125,7 +125,7 @@ void display() {
     for (int y = 0; y * SIDE <= h; y++) {
       if (x == px && y == py) {
         //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
-		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xff00ff);
+		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffff00);
       }
     }
   }
