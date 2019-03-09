@@ -35,8 +35,8 @@ void read_keyy() {
         color=(color-0xff00)%(0xffffff+1);
     if(strcmp(key_names[event.keycode], "RIGHT") == 0)
         color=(color+0xff00)%(0xffffff+1);
-    else
-        func();    
+    /*else
+        func(); */   
     puts("Key pressed: ");
     puts(key_names[event.keycode]);
     puts("\n");
@@ -52,9 +52,9 @@ void init_screen() {
   h = info.height;
 }
 
-void func() {
+/*void func() {
     draw_rectt(0,0,w/2,h/2,0xffffff);
-}
+}*/
 void draw_rectt(int x, int y, int w, int h, uint32_t color) {
   uint32_t pixels[w * h]; // WARNING: allocated on stack
   _DEV_VIDEO_FBCTL_t event = {
