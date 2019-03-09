@@ -12,7 +12,6 @@ int main() {
   splash();
   while (1) {
     read_keyy();
-    printf("xjm\n");
   }
   return 0;
 }
