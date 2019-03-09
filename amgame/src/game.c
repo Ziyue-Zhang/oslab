@@ -34,7 +34,6 @@ void read_keyy() {
     if(strcmp(key_names[event.keycode], "LEFT") == 0)
         color=(color-0xff00)%(0xffffff+1);
     if(strcmp(key_names[event.keycode], "RIGHT") == 0) {
-        SIDE += 4;
         color=(color+0xff00)%(0xffffff+1);
         }
     /*else
