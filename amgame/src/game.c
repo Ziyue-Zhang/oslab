@@ -11,7 +11,7 @@ int main() {
   // Operating system is a C program
   _ioe_init();
   init_screen();
-  color=0xff00ff;
+  color=0xffffff;
   splash();
   while (1) {
     read_keyy();
@@ -50,14 +50,15 @@ void read_keyy() {
   }
 }
 
-int w, h;
+int w, h, mw, mh;
 
 void init_screen() {
   _DEV_VIDEO_INFO_t info = {0};
   _io_read(_DEV_VIDEO, _DEVREG_VIDEO_INFO, &info, sizeof(info));
   w = info.width;
   h = info.height;
-  printf("%d %d\n", w, h);
+  mw = w / SIDE;
+  mh = h / SIDE;
 }
 
 void draw_rectt(int x, int y, int w, int h, uint32_t color) {
@@ -87,7 +88,7 @@ void clean() {
     for (int y = 0; y * SIDE <= h; y++) {
       if ((x & 1) ^ (y & 1)) {
         //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
-		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0x000000); // white
+		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0x000000);
       }
     }
   }
