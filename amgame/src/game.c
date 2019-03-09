@@ -29,15 +29,15 @@ void read_keyy() {
   };
   _io_read(_DEV_INPUT, _DEVREG_INPUT_KBD, &event, sizeof(event));
   if (event.keycode != _KEY_NONE && event.keydown) {
-    if(strcmp(key_names[event.keycode], "UP") == 0) {
+    if(strcmp(key_names[event.keycode], "1") == 0) {
         color=(color+0xf)%(0xffffff+1);
         splash();
         }
-    if(strcmp(key_names[event.keycode], "LEFT") == 0){
+    if(strcmp(key_names[event.keycode], "2") == 0){
         color=(color-0xff00)%(0xffffff+1);
         splash();
         }
-    if(strcmp(key_names[event.keycode], "RIGHT") == 0) {
+    if(strcmp(key_names[event.keycode], "3") == 0) {
         color=(color+0xff00)%(0xffffff+1);
         splash();
     }
@@ -50,7 +50,7 @@ void read_keyy() {
   }
 }
 
-int w, h, mw, mh;
+int w, h, mw, mh, x, y;
 
 void init_screen() {
   _DEV_VIDEO_INFO_t info = {0};
@@ -59,6 +59,8 @@ void init_screen() {
   h = info.height;
   mw = w / SIDE;
   mh = h / SIDE;
+  x = 0;
+  y = 0;
 }
 
 void draw_rectt(int x, int y, int w, int h, uint32_t color) {
@@ -92,5 +94,14 @@ void clean() {
       }
     }
   }
-  color=0;
+}
+void show() {
+    for (int x = 0; x * SIDE <= w; x ++) {
+    for (int y = 0; y * SIDE <= h; y++) {
+      if ((x & 1) ^ (y & 1)) {
+        //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
+		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0x000000);
+      }
+    }
+  }
 }
