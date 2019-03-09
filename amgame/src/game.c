@@ -18,6 +18,7 @@ int main() {
   while (1) {
     read_keyy();
      //splash();
+     display();
   }
   return 0;
 }
@@ -46,21 +47,25 @@ void read_keyy() {
     if(strcmp(key_names[event.keycode], "UP") == 0) {
         if(py > 0)
         py--;
+        clean();
         display();
     }
     else if(strcmp(key_names[event.keycode], "LEFT") == 0) {
         if(px > 0)
         px--;
+        clean();
         display();
     }
     else if(strcmp(key_names[event.keycode], "RIGHT") == 0) {
         if(px < mw - 1)
         px++;
+        clean();
         display();
     }
     else if(strcmp(key_names[event.keycode], "DOWN") == 0) {
         if(py < mh - 1)
         py++;
+        clean();
         display();
     }
     else if(strcmp(key_names[event.keycode], "SPACE") == 0) {
