@@ -9,7 +9,7 @@ int main() {
   // Operating system is a C program
   _ioe_init();
   init_screen();
-  color=0xffffff;
+  color=0xff00ff;
   splash();
   while (1) {
     read_keyy();
@@ -28,7 +28,7 @@ void read_keyy() {
   _io_read(_DEV_INPUT, _DEVREG_INPUT_KBD, &event, sizeof(event));
   if (event.keycode != _KEY_NONE && event.keydown) {
     if(strcmp(key_names[event.keycode], "UP") == 0)
-        color=(color+0x1)%(0xffffff+1);
+        color=(color+0xf)%(0xffffff+1);
     puts("Key pressed: ");
     puts(key_names[event.keycode]);
     puts("\n");
