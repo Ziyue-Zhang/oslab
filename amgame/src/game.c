@@ -18,7 +18,7 @@ int main() {
   while (1) {
     read_keyy();
      //splash();
-     display();
+     //display();
   }
   return 0;
 }
