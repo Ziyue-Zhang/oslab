@@ -3,7 +3,6 @@
 
 void init_screen();
 void splash();
-void func();
 void read_keyy();
 void clean();
 int color;
@@ -16,7 +15,7 @@ int main() {
   splash();
   while (1) {
     read_keyy();
-     splash();
+     //splash();
   }
   return 0;
 }
@@ -30,17 +29,21 @@ void read_keyy() {
   };
   _io_read(_DEV_INPUT, _DEVREG_INPUT_KBD, &event, sizeof(event));
   if (event.keycode != _KEY_NONE && event.keydown) {
-    if(strcmp(key_names[event.keycode], "UP") == 0)
+    if(strcmp(key_names[event.keycode], "UP") == 0) {
         color=(color+0xf)%(0xffffff+1);
-    if(strcmp(key_names[event.keycode], "LEFT") == 0)
+        splash();
+        }
+    if(strcmp(key_names[event.keycode], "LEFT") == 0){
         color=(color-0xff00)%(0xffffff+1);
-    if(strcmp(key_names[event.keycode], "RIGHT") == 0) 
+        splash();
+        }
+    if(strcmp(key_names[event.keycode], "RIGHT") == 0) {
         color=(color+0xff00)%(0xffffff+1);
+        splash();
+    }
     if(strcmp(key_names[event.keycode], "SPACE") == 0) {
         clean();
-    }
-    /*else
-        func(); */   
+    }   
     puts("Key pressed: ");
     puts(key_names[event.keycode]);
     puts("\n");
@@ -56,9 +59,6 @@ void init_screen() {
   h = info.height;
 }
 
-/*void func() {
-    draw_rectt(0,0,w/2,h/2,0xffffff);
-}*/
 void draw_rectt(int x, int y, int w, int h, uint32_t color) {
   uint32_t pixels[w * h]; // WARNING: allocated on stack
   _DEV_VIDEO_FBCTL_t event = {
@@ -82,13 +82,13 @@ void splash() {
   }
 }
 void clean() {
-  /*for (int x = 0; x * SIDE <= w; x ++) {
+    for (int x = 0; x * SIDE <= w; x ++) {
     for (int y = 0; y * SIDE <= h; y++) {
       if ((x & 1) ^ (y & 1)) {
         //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
 		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0x000000); // white
       }
     }
-  }*/
+  }
   color=0;
 }
