@@ -15,6 +15,9 @@ int main() {
   color=0xffffff;
   //splash();
   display();
+  uint32_t a[x * y];
+  a[0]=1;
+  printf("%d\n",a[0]);
   while (1) {
     read_keyy();
      //splash();
