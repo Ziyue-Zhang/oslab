@@ -34,15 +34,21 @@ void read_keyy() {
   if (event.keycode != _KEY_NONE && event.keydown) {
     if(strcmp(key_names[event.keycode], "1") == 0) {
         color=(color+0xf)%(0xffffff+1);
-        splash();
+        //splash();
+        clean();
+        display();
         }
     else if(strcmp(key_names[event.keycode], "2") == 0){
         color=(color-0xff00)%(0xffffff+1);
-        splash();
+        //splash();
+        clean();
+        display();
         }
     else if(strcmp(key_names[event.keycode], "3") == 0) {
         color=(color+0xff00)%(0xffffff+1);
-        splash();
+        //splash();
+        clean();
+        display();
     }
     else if(strcmp(key_names[event.keycode], "UP") == 0) {
         if(py > 0)
