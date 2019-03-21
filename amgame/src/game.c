@@ -138,7 +138,7 @@ void display() {
     for (int y = 0; y * SIDE <= h; y++) {
       if (x == rx && y == ry) {
         //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
-		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0x00ff00);
+		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xff0000);
       }
       else if (x == px && y == py) {
         //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
