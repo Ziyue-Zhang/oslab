@@ -7,7 +7,7 @@ void read_keyy();
 void clean();
 void display();
 void reset();
-int color, mw, mh, x, y, px, py;
+int color, mw, mh, x, y, px, py, rx, ry;
 void draw_rectt(int x, int y, int w, int h, uint32_t color) ;
 int main() {
   // Operating system is a C program
@@ -20,7 +20,7 @@ int main() {
     read_keyy();
      //splash();
      //display();
-     if(px == mw - 1 && py == mh -1) {
+     if(px == rx && py == ry) {
         printf("You win!\n");
         reset();
      }
@@ -99,6 +99,8 @@ void init_screen() {
   mh = h / SIDE;
   px = 0;
   py = 0;
+  rx = rand() % mw;
+  ry = rand() % mh;
 }
 
 void draw_rectt(int x, int y, int w, int h, uint32_t color) {
@@ -134,7 +136,11 @@ void clean() {
 void display() {
     for (int x = 0; x * SIDE <= w; x ++) {
     for (int y = 0; y * SIDE <= h; y++) {
-      if (x == px && y == py) {
+      if (x == rx && y == ry) {
+        //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
+		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0x00ff00);
+      }
+      else if (x == px && y == py) {
         //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
 		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, color);
       }
@@ -144,5 +150,7 @@ void display() {
 void reset() {
     px=py=0;
     clean();
+    rx = rand() % mw;
+    ry = rand() % mh;
     display();
 }
