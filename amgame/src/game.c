@@ -152,6 +152,8 @@ void display() {
 void reset() {
     px=py=0;
     clean();
+            rx = rand() % mw;
+        ry = rand() % mh;
     while(!rx && !ry) {
         rx = rand() % mw;
         ry = rand() % mh;
