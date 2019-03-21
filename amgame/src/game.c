@@ -6,6 +6,7 @@ void splash();
 void read_keyy();
 void clean();
 void display();
+void reset();
 int color, mw, mh, x, y, px, py;
 void draw_rectt(int x, int y, int w, int h, uint32_t color) ;
 int main() {
@@ -19,6 +20,10 @@ int main() {
     read_keyy();
      //splash();
      //display();
+     if(px == mw - 1 && py == mh -1) {
+        printf("You win!\n");
+        reset();
+     }
   }
   return 0;
 }
@@ -135,4 +140,9 @@ void display() {
       }
     }
   }
+}
+void reset() {
+    px=py=0;
+    clean();
+    display();
 }
