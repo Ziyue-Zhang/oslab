@@ -32,7 +32,7 @@ void read_keyy() {
   };
   _io_read(_DEV_INPUT, _DEVREG_INPUT_KBD, &event, sizeof(event));
   if (event.keycode != _KEY_NONE && event.keydown) {
-    /*if(strcmp(key_names[event.keycode], "1") == 0) {
+    if(strcmp(key_names[event.keycode], "1") == 0) {
         color=(color+0xf)%(0xffffff+1);
         //splash();
         clean();
@@ -49,8 +49,8 @@ void read_keyy() {
         //splash();
         clean();
         display();
-    }*/
-    if(strcmp(key_names[event.keycode], "UP") == 0) {
+    }
+    else if(strcmp(key_names[event.keycode], "UP") == 0) {
         if(py > 0)
         py--;
         clean();
