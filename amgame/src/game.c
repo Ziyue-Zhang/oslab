@@ -99,8 +99,10 @@ void init_screen() {
   mh = h / SIDE;
   px = 0;
   py = 0;
-  rx = rand() % mw;
-  ry = rand() % mh;
+  while(!rx && !ry) {
+    rx = rand() % mw;
+    ry = rand() % mh;
+  }
 }
 
 void draw_rectt(int x, int y, int w, int h, uint32_t color) {
@@ -150,7 +152,9 @@ void display() {
 void reset() {
     px=py=0;
     clean();
-    rx = rand() % mw;
-    ry = rand() % mh;
+    while(!rx && !ry) {
+        rx = rand() % mw;
+        ry = rand() % mh;
+    }
     display();
 }
