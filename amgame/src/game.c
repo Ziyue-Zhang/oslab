@@ -33,6 +33,7 @@ int main() {
       printf("You win!\n");
       reset();
   }
+  printf("1fps\n");
   next_frame += 1000 / FPS; // 计算下一帧的时间
 }
   return 0;
