@@ -1,6 +1,6 @@
 #include <game.h>
 #include <klib.h>
-
+#define FPS 30
 void init_screen();
 void splash();
 void read_keyy();
@@ -16,7 +16,7 @@ int main() {
   color=0xffffff;
   //splash();
   display();
-  while (1) {
+  /*while (1) {
     read_keyy();
      //splash();
      //display();
@@ -24,7 +24,17 @@ int main() {
         printf("You win!\n");
         reset();
      }
+  }*/
+  int next_frame = 0;
+  while (1) {
+  while (uptime() < next_frame) ; // 等待一帧的到来
+  read_keyy();
+  if(px == rx && py == ry) {
+      printf("You win!\n");
+      reset();
   }
+  next_frame += 1000 / FPS; // 计算下一帧的时间
+}
   return 0;
 }
 
