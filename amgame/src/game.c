@@ -33,6 +33,10 @@ int main() {
       printf("You win!\n");
       reset();
   }
+  else if((px == x1 && py == y1) || (px == x2 && py == y2)) {
+      printf("You lost!\n");
+      reset();
+  }
   //printf("1fps\n");
   next_frame += 1000 / FPS; // 计算下一帧的时间
 }
