@@ -7,6 +7,7 @@ void read_keyy();
 void clean();
 void display();
 void reset();
+void move();
 int color, mw, mh, x, y, px, py, rx, ry, x1, y1, x2, y2;
 void draw_rectt(int x, int y, int w, int h, uint32_t color) ;
 int main() {
@@ -29,6 +30,7 @@ int main() {
   while (1) {
   while (uptime() < next_frame) ; // 等待一帧的到来
   read_keyy();
+  move();
   if(px == rx && py == ry) {
       printf("You win!\n");
       reset();
@@ -199,3 +201,31 @@ void reset() {
     }
     display();
 }
+void move() {
+    rand();
+    int t1 = rand() % 4;
+    //int t2 = rand() % 4;
+    do {
+        switch (t1){
+        case 0:
+            if(y1 > 0)
+                y1--;
+            break;
+        case 1:
+            if(x1 > 0)
+                x1--;
+            break;
+        case 2:
+            if(x1 < mw - 1)
+                x1++;
+            break;
+        case 3:
+            if(y1 < mh - 1)
+                y1++;
+            break;
+        default:;
+        }
+    }while((x1 == rx && y1 == ry) || (x1 == x2 && y1 == y2));
+}
+
+
