@@ -226,6 +226,7 @@ void move() {
         default:;
         }
     }while((x1 == rx && y1 == ry) || (x1 == x2 && y1 == y2));
+    display();
 }
 
 
