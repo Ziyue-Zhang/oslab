@@ -118,7 +118,7 @@ void init_screen() {
     x1 = rand() % mw;
     y1 = rand() % mh;
   }
-  while(!x2 && !y2) {
+  while((!x2 && !y2) || ((x2 == rx) && (y2 == ry)) || ((x2 == x1) && (y2 == y1))) {
     x2 = rand() % mw;
     y2 = rand() % mh;
   }
