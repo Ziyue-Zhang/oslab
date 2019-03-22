@@ -1,6 +1,6 @@
 #include <game.h>
 #include <klib.h>
-#define FPS 20
+#define FPS 10
 void init_screen();
 void splash();
 void read_keyy();
@@ -204,7 +204,7 @@ void reset() {
 void move() {
     rand();
     int t1 = rand() % 4;
-    //int t2 = rand() % 4;
+    int t2 = rand() % 4;
     do {
         switch (t1){
         case 0:
@@ -226,6 +226,27 @@ void move() {
         default:;
         }
     }while((x1 == rx && y1 == ry) || (x1 == x2 && y1 == y2));
+    do {
+        switch (t2){
+        case 0:
+            if(y2 > 0)
+                y2--;
+            break;
+        case 1:
+            if(x2 > 0)
+                x2--;
+            break;
+        case 2:
+            if(x2 < mw - 1)
+                x2++;
+            break;
+        case 3:
+            if(y2 < mh - 1)
+                y2++;
+            break;
+        default:;
+        }
+    }while((x2 == rx && y2 == ry) || (x1 == x2 && y1 == y2));
     clean();
     display();
 }
