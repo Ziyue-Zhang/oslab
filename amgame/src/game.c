@@ -160,6 +160,14 @@ void display() {
       if (x == rx && y == ry) {
         //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
 		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xff0000);
+	  }
+      else if (x == x1 && y == y1) {
+        //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
+		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0x00ff00);
+      }
+      else if (x == x2 && y == y2) {
+        //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
+		draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0x0000ff);
       }
       else if (x == px && y == py) {
         //draw_rectt(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
@@ -176,6 +184,14 @@ void reset() {
     while(!rx && !ry) {
         rx = rand() % mw;
         ry = rand() % mh;
+    }
+    while((!x1 && !y1) || ((x1 == rx) && (y1 == ry))) {
+    x1 = rand() % mw;
+    y1 = rand() % mh;
+    }
+    while((!x2 && !y2) || ((x2 == rx) && (y2 == ry)) || ((x2 == x1) && (y2 == y1))) {
+    x2 = rand() % mw;
+    y2 = rand() % mh;
     }
     display();
 }
