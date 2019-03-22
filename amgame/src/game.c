@@ -1,6 +1,6 @@
 #include <game.h>
 #include <klib.h>
-#define FPS 12
+#define FPS 20
 void init_screen();
 void splash();
 void read_keyy();
