@@ -114,7 +114,7 @@ void init_screen() {
     rx = rand() % mw;
     ry = rand() % mh;
   }
-  while(!x1 && !y1) {
+  while((!x1 && !y1) || ((x1 == rx) && (y1 == ry))) {
     x1 = rand() % mw;
     y1 = rand() % mh;
   }
