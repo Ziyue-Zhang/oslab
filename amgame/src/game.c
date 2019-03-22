@@ -7,7 +7,7 @@ void read_keyy();
 void clean();
 void display();
 void reset();
-int color, mw, mh, x, y, px, py, rx, ry;
+int color, mw, mh, x, y, px, py, rx, ry, x1, y1, x2, y2;
 void draw_rectt(int x, int y, int w, int h, uint32_t color) ;
 int main() {
   // Operating system is a C program
@@ -103,6 +103,14 @@ void init_screen() {
     rx = rand() % mw;
     ry = rand() % mh;
   }
+  while(!x1 && !y1) {
+    x1 = rand() % mw;
+    y1 = rand() % mh;
+  }
+  while(!x2 && !y2) {
+    x2 = rand() % mw;
+    y2 = rand() % mh;
+  }
 }
 
 void draw_rectt(int x, int y, int w, int h, uint32_t color) {
@@ -152,8 +160,8 @@ void display() {
 void reset() {
     px=py=0;
     clean();
-            rx = rand() % mw;
-        ry = rand() % mh;
+    rx = rand() % mw;
+    ry = rand() % mh;
     while(!rx && !ry) {
         rx = rand() % mw;
         ry = rand() % mh;
