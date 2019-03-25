@@ -35,7 +35,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
   coroutines[cunt].st = true;
   cu_func = func;
   cu_arg = arg;
-  __stack = coroutines[cunt].__stack + sizeof(coroutines[cunt]);
+  __stack = coroutines[cunt].stack + sizeof(coroutines[cunt].stack);
   asm volatile("mov " SP ", %0; mov %1, " SP :
                  "=g"(__stack_backup) :
                  "g"(__stack + sizeof(__stack)));  
