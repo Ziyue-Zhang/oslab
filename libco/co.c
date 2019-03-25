@@ -21,7 +21,8 @@ void co_init() {
 }
 
 struct co* co_start(const char *name, func_t func, void *arg) {
-  coroutines[cunt].
+  coroutines[cunt].num = cunt;
+  coroutines[cunt].st = true;
   func(arg); // Test #2 hangs
   return NULL;
 }
