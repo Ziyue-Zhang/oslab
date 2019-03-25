@@ -41,8 +41,10 @@ struct co* co_start(const char *name, func_t func, void *arg) {
                  "g"(__stack));  
   coroutines[cunt].stack_backup = __stack_backup;
   
-  func(arg); // Test #2 hangs
+  current = &coroutines[cunt];
   
+  func(arg); // Test #2 hangs
+   
   __stack_backup = coroutines[cunt].stack_backup;
   asm volatile("mov %0," SP : : "g"(__stack_backup));
   ++cunt;
@@ -50,6 +52,17 @@ struct co* co_start(const char *name, func_t func, void *arg) {
 }
 
 void co_yield() {
+  int val = setjmp(current->buf);
+  if (val == 0) {
+    int next = rand() % cunt;
+    while(k == current->num || !coroutines[next].st) {
+        next = rand() % cunt;
+        current = &coroutines[next];
+        longjump(current->buf, 1);
+    }
+  } else {
+    return;
+  }
 }
 
 void co_wait(struct co *thd) {
