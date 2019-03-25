@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <setjmp.h>
+#include <stdbool.h>
 #include "co.h"
 #define MAX_CO 100
 typedef unsigned char uint8_t;
