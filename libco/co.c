@@ -4,7 +4,7 @@
 #include "co.h"
 #define MAX_CO 100
 typedef unsigned char uint8_t;
-uint8_t *__stack[4096];
+uint8_t *__stack;
 void *__stack_backup;
 
 #if defined(__i386__)
