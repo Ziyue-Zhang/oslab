@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <setjmp.h>
 #include <stdbool.h>
 #include "co.h"
@@ -58,7 +59,7 @@ void co_yield() {
     while(next == current->num || !coroutines[next].st) {
         next = rand() % cunt;
         current = &coroutines[next];
-        longjump(current->buf, 1);
+        longjmp(current->buf, 1);
     }
   } else {
     return;
