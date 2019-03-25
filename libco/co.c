@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include "co.h"
-
+#define MAX_CO 100
 struct co {
+    char *name;
+    int num;
+    jmp_buf buf;
+    uint8_t stack[4096];
+    void *__stack_backup;
 };
+struct co coroutines[MAX_CO];
 
 void co_init() {
 }
