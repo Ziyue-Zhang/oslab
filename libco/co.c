@@ -18,7 +18,7 @@ struct co {
     int num;
     jmp_buf buf;
     uint8_t stack[4096];
-    void *__stack_backup;
+    void *stack_backup;
 };
 struct co coroutines[MAX_CO];
 struct co *current;
@@ -38,7 +38,9 @@ struct co* co_start(const char *name, func_t func, void *arg) {
   __stack = coroutines[cunt].stack + sizeof(coroutines[cunt].stack);
   asm volatile("mov " SP ", %0; mov %1, " SP :
                  "=g"(__stack_backup) :
-                 "g"(__stack + sizeof(__stack)));  
+                 "g"(__stack));  
+  coroutines[cunt].stack_backup = __stack_backup;
+  
   func(arg); // Test #2 hangs
   ++cunt;
   return NULL;
