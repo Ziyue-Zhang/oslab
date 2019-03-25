@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <sys/types.h>
+#include <setjmp.h>
 #include "co.h"
 #define MAX_CO 100
 struct co {
