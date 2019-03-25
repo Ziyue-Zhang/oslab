@@ -8,7 +8,7 @@ uint8_t *__stack;
 void *__stack_backup;
 
 #if defined(__i386__)
-  define SP "%%esp"
+  #define SP "%%esp"
 #elif defined(__x86_64__)
   #define SP "%%rsp"
 #endif
