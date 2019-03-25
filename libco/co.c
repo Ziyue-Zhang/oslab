@@ -55,7 +55,7 @@ void co_yield() {
   int val = setjmp(current->buf);
   if (val == 0) {
     int next = rand() % cunt;
-    while(k == current->num || !coroutines[next].st) {
+    while(next == current->num || !coroutines[next].st) {
         next = rand() % cunt;
         current = &coroutines[next];
         longjump(current->buf, 1);
