@@ -43,7 +43,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
   
   func(arg); // Test #2 hangs
   
-  __stack_backup = coroutinesp[cunt].stact_backup;
+  __stack_backup = coroutines[cunt].stact_backup;
   asm volatile("mov %0," SP : : "g"(__stack_backup));
   ++cunt;
   return NULL;
