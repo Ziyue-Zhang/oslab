@@ -58,7 +58,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
       
     current->st = 0;        //current may change
     int temp = current->num;
-    //printf("temp\n");
+    printf("temp\n");
     
     current = &coroutines[0];
     longjmp(current->buf, 1);
@@ -79,7 +79,7 @@ void co_yield() {
     while(next == current->num || !coroutines[next].st) {
         next = rand() % (cunt + 1);
     }
-    printf("%d\n", next);
+    //printf("%d\n", next);
     current = &coroutines[next];
     longjmp(current->buf, 1);
   } else {
