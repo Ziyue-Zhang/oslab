@@ -58,7 +58,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
      //printf("reach here\n");  //printf this sentence * cunt
     current->st = 0;        //current may change
     int temp = current->num;
-    printf("%d\n",temp);
+    //printf("%d\n",temp);
     
     current = &coroutines[0];
     longjmp(current->buf, 1);
