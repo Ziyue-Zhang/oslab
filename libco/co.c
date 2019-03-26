@@ -56,14 +56,15 @@ void co_yield() {
   printf("nmsl\n");
   int val = setjmp(current->buf);
   if (val == 0) {
+  printf("nmsl\n");
     int next = rand() % cunt;
     while(next == current->num || !coroutines[next].st) {
         next = rand() % cunt;
-        current = &coroutines[next];
-        longjmp(current->buf, 1);
     }
+    current = &coroutines[next];
+    longjmp(current->buf, 1);
   } else {
-  printf("nmsl\n");
+  //printf("nmsl\n");
     return;
   }
 }
