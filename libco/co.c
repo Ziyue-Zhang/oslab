@@ -87,7 +87,7 @@ void co_yield() {
 }
 
 void co_wait(struct co *thd) {
-    setjump(current->buf);
+    setjmp(current->buf);
     if(!thd->st) {
     int next = rand() % cunt;
     while(next == current->num || !coroutines[next].st) {
