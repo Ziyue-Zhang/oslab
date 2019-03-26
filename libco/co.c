@@ -55,7 +55,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     /*char * temp=(char *)cu_arg;
     printf("%s\n", temp);*/
     cu_func(cu_arg);
-     printf("nmsl\n"); 
+     printf("reach here\n"); 
     current->st = 0;        //current may change
     int temp = current->num;
     printf("%d\n",temp);
@@ -67,8 +67,8 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     asm volatile("mov %0," SP : : "g"(__stack_backup)); 
     
   }
-  else
-    printf("return from co_yield\n");
+  /*else
+    printf("return from co_yield\n");*/
   return &coroutines[cunt];
 }
 
@@ -92,7 +92,7 @@ void co_yield() {
 void co_wait(struct co *thd) {
     //printf("%d\n",cunt);
     setjmp(current->buf);
-    if(thd->st) {
+    if(thd->st) {               //still need to execute
         int next = rand() % cunt + 1;
         while(next == current->num || !coroutines[next].st) {
            next = rand() % cunt + 1;
