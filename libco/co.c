@@ -48,7 +48,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     coroutines[cunt].stack_backup = __stack_backup;
     
     current = &coroutines[cunt];
-    printf("nmsl\n");
+   
     func(arg); // Test #2 hangs
       
     current->st = 0;
@@ -60,6 +60,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
 }
 
 void co_yield() {
+ printf("nmsl\n");
   int val = setjmp(current->buf);
   if (val == 0) {
     int next = rand() % cunt;
