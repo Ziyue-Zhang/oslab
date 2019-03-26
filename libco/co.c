@@ -63,8 +63,8 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     current = &coroutines[0];
     longjmp(current->buf, 1);
     
-    //__stack_backup = coroutines[temp].stack_backup;
-    //asm volatile("mov %0," SP : : "g"(__stack_backup));
+    __stack_backup = coroutines[temp].stack_backup;
+    asm volatile("mov %0," SP : : "g"(__stack_backup));
     
     
   }
@@ -91,9 +91,9 @@ void co_wait(struct co *thd) {
     //printf("%d\n",cunt);
     setjmp(current->buf);
     if(!thd->st) {
-        int next = rand() % (cunt + 1);
+        int next = rand() % cunt + 1;
         while(next == current->num || !coroutines[next].st) {
-           next = rand() % (cunt + 1);
+           next = rand() % cunt + 1;
         }
         current = &coroutines[next];
         longjmp(current->buf, 1);        
