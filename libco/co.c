@@ -32,6 +32,7 @@ void co_init() {
     cunt = 0;
     coroutines[cunt].st = true;
     coroutines[cunt].num = cunt;
+    current = &coroutines[cunt];
     srand(time(NULL));
 }
 
