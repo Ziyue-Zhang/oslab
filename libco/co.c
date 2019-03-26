@@ -31,6 +31,7 @@ void co_init() {
     cunt = 0;
     coroutines[cunt].st = true;
     coroutines[cunt].num = cunt;
+    srand(time(NULL));
 }
 
 struct co* co_start(const char *name, func_t func, void *arg) {
