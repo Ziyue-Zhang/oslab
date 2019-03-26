@@ -56,6 +56,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     asm volatile("mov %0," SP : : "g"(__stack_backup));
     
   }
+  printf("nmsl\n");
   return &coroutines[cunt - 1];
 }
 
