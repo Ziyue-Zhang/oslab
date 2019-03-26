@@ -49,7 +49,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
   __stack_backup = coroutines[cunt].stack_backup;
   asm volatile("mov %0," SP : : "g"(__stack_backup));
   ++cunt;
-  return NULL;
+  return &coroutines[cunt - 1];
 }
 
 void co_yield() {
