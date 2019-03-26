@@ -50,12 +50,14 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     coroutines[cunt].stack_backup = __stack_backup;
     
     current = &coroutines[cunt];
-    /*printf("%d\n",cunt);
-    char * temp=(char *)cu_arg;
+    printf("%d\n",cunt);
+    /*char * temp=(char *)cu_arg;
     printf("%s\n", temp);*/
     cu_func(cu_arg);
       
-    current->st = 0;
+    current->st = 0;        //current may change
+    int temp = current->num;
+    printf("temp\n");
     
     current = &coroutines[0];
     longjmp(current->buf, 1);
