@@ -41,7 +41,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
   coroutines[cunt].st = true;
   cu_func = func;
   cu_arg = arg;
-  int val = setjmp(coroutines[0].buf);
+  int val = setjmp(coroutines[0].buf);      //if we don't use it, will never return to this function.
   if(!val) {
     __stack = coroutines[cunt].stack + sizeof(coroutines[cunt].stack);
     asm volatile("mov " SP ", %0; mov %1, " SP :
@@ -58,6 +58,9 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     current->st = 0;
     __stack_backup = coroutines[cunt].stack_backup;
     asm volatile("mov %0," SP : : "g"(__stack_backup));
+    
+    current = &coroutines[0];
+    longjmp(current->buf, 1)
     
   }
   return &coroutines[cunt - 1];
