@@ -87,14 +87,15 @@ void co_yield() {
 }
 
 void co_wait(struct co *thd) {
+    printf("%d\n",cunt);
     setjmp(current->buf);
     if(!thd->st) {
-    int next = rand() % cunt;
-    while(next == current->num || !coroutines[next].st) {
-        next = rand() % cunt;
-    }
-    current = &coroutines[next];
-    longjmp(current->buf, 1);        
+        int next = rand() % cunt;
+        while(next == current->num || !coroutines[next].st) {
+           next = rand() % cunt;
+        }
+        current = &coroutines[next];
+        longjmp(current->buf, 1);        
     }
 //printf("wait\n");
 }
