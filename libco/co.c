@@ -50,13 +50,12 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     current = &coroutines[cunt];
     
     func(arg); // Test #2 hangs
-    
+      printf("nmsl\n");
     current->st = 0;
     __stack_backup = coroutines[cunt].stack_backup;
     asm volatile("mov %0," SP : : "g"(__stack_backup));
     
   }
-  printf("nmsl\n");
   return &coroutines[cunt - 1];
 }
 
