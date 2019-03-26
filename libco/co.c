@@ -57,7 +57,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     cu_func(cu_arg);
       
     current->st = 0;        //current may change
-    int temp = current->num;
+    //int temp = current->num;
     //printf("temp\n");
     
     current = &coroutines[0];
