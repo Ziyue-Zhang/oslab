@@ -24,8 +24,8 @@ struct co {
 }__attribute__((aligned(16)));
 struct co coroutines[MAX_CO];
 struct co *current;
-//func_t cu_func;
-//void *cu_arg;
+func_t cu_func;
+void *cu_arg;
 int cunt;
 
 void co_init() {
@@ -39,8 +39,8 @@ struct co* co_start(const char *name, func_t func, void *arg) {
   ++cunt;
   coroutines[cunt].num = cunt;
   coroutines[cunt].st = true;
-  //cu_func = func;
-  //cu_arg = arg;
+  cu_func = func;
+  cu_arg = arg;
   int val = setjmp(coroutines[0].buf);
   if(!val) {
     __stack = coroutines[cunt].stack + sizeof(coroutines[cunt].stack);
@@ -53,7 +53,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     printf("%d\n",cunt);
     char * temp=(char *)arg;
     printf("%s\n", temp);
-    func(arg); // Test #2 hangs
+    cu_func(cu_arg);
       
     current->st = 0;
     __stack_backup = coroutines[cunt].stack_backup;
