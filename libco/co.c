@@ -51,6 +51,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     
     current = &coroutines[cunt];
     printf("%d\n",cunt);
+    printf("%c\n", arg);
     func(arg); // Test #2 hangs
       
     current->st = 0;
