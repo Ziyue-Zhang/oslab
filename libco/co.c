@@ -21,7 +21,7 @@ struct co {
     jmp_buf buf;
     uint8_t stack[4096];
     void *stack_backup;
-};
+}__attribute__((aligned(16)));
 struct co coroutines[MAX_CO];
 struct co *current;
 //func_t cu_func;
