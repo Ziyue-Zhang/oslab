@@ -50,9 +50,9 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     coroutines[cunt].stack_backup = __stack_backup;
     
     current = &coroutines[cunt];
-    printf("%d\n",cunt);
+    /*printf("%d\n",cunt);
     char * temp=(char *)cu_arg;
-    printf("%s\n", temp);
+    printf("%s\n", temp);*/
     cu_func(cu_arg);
       
     current->st = 0;
