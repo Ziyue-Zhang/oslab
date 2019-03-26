@@ -85,5 +85,6 @@ void co_yield() {
 }
 
 void co_wait(struct co *thd) {
+printf("wait\n");
 }
 
