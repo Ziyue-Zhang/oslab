@@ -63,6 +63,7 @@ void co_yield() {
         longjmp(current->buf, 1);
     }
   } else {
+  printf("nmsl\n");
     return;
   }
 }
