@@ -55,7 +55,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     /*char * temp=(char *)cu_arg;
     printf("%s\n", temp);*/
     cu_func(cu_arg);
-     printf("reach here\n"); 
+     //printf("reach here\n");  //printf this sentence * cunt
     current->st = 0;        //current may change
     int temp = current->num;
     printf("%d\n",temp);
