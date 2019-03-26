@@ -53,6 +53,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
 }
 
 void co_yield() {
+  printf("nmsl\n");
   int val = setjmp(current->buf);
   if (val == 0) {
     int next = rand() % cunt;
