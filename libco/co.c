@@ -60,10 +60,11 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     //printf("%d\n",temp);
     
     current = &coroutines[0];
-    longjmp(current->buf, 1);
-	printf("change the esp\n");    
+    //longjmp(current->buf, 1);
+	    
     __stack_backup = coroutines[temp].stack_backup;
     asm volatile("mov %0," SP : : "g"(__stack_backup)); 
+    longjmp(current->buf, 1);
     
   }
   /*else
