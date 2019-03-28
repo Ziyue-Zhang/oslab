@@ -63,7 +63,7 @@ struct co* co_start(const char *name, func_t func, void *arg) {
     //longjmp(current->buf, 1);  
     __stack_backup = coroutines[temp].stack_backup;
     asm volatile("mov %0," SP : : "g"(__stack_backup)); 
-	printf("change esp\n");    
+	//printf("change esp\n");    
     longjmp(current->buf, 1);  
     
   }
