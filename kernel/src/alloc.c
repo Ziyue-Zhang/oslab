@@ -61,10 +61,10 @@ Space AllocBoundTag(Space *pav, int n) {
 	return p;
 }
 
-void reclaimBoundTag(Space *pav, Space so) {
+void reclaimBoundTag(Space *pav, Space sp) {
 	Space pre = (sp - 1)->uplink;
 	Space next = sp + sp->size;
-	int pTag = pre_>tag;
+	int pTag = pre->tag;
 	int nTag = next->tag;
 	if(pTag == 1 && nTag == 1) {
 		Space foot = FootLoc(sp);
@@ -74,7 +74,7 @@ void reclaimBoundTag(Space *pav, Space so) {
 		}
 		else {
 			sp->rlink = *pav;
-			sp_.llink = (*pav)->llink;
+			sp->llink = (*pav)->llink;
 			(*pre).llink = sp;
 			sp->llink->rlink = sp;
 			*pav = sp;
@@ -94,12 +94,12 @@ void reclaimBoundTag(Space *pav, Space so) {
 		sp->size ++ next->size;
 		Space foot =FootLoc(sp);
 		sp->tag = foor->tag = 0;
-		foor->uplink = sp;
+		foot->uplink = sp;
 	}
 	else {
 		pre->rlink = next->rlink;
 		pre->size += sp->size + next->size;
-		Space foot = FootLOc(pre);
+		Space foot = FootLoc(pre);
 		foot->uplink = pre;
 	}
 	for(int i = 0;i < usCount; i++){
