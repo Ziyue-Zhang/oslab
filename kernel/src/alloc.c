@@ -3,6 +3,7 @@
 #include <lock.h>
 
 static uintptr_t pm_start, pm_end;
+intptr_t allock_lock;
 
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
@@ -12,7 +13,7 @@ static void pmm_init() {
 static void *kalloc(size_t size) {
   spin_lock(&alloc_lock);
   pm_start += size;
-  spin_unlock(&alloc_lock);
+  unlock(&alloc_lock);
   return (void *)pm_start;
   //return NULL;
 }
