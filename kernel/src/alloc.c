@@ -28,7 +28,7 @@ Space AllocBoundTag(Space *pav, int n) {
 		printf("This memoty is null.\n");
 		return NULL;
 	}
-	for(p; p != NULL && p->size < n && p->rlink != *pav; p = p->rlink ) {
+	for(; p != NULL && p->size < n && p->rlink != *pav; p = p->rlink ) {
 		if( p == NULL || p->size < n) {
 			printf("wrong\n");
 			return NULL;
@@ -51,7 +51,7 @@ Space AllocBoundTag(Space *pav, int n) {
 				*pav = NULL;
 			else {
 				Space foot = FootLoc(p);
-				fooot->tag = p->tag = 1;
+				foot->tag = p->tag = 1;
 				p->llink->rlink = p->rlink;
 				p->rlink->llink = p->llink;
 			}
