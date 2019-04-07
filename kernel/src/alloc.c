@@ -11,10 +11,10 @@ static void pmm_init() {
 
 static void *kalloc(size_t size) {
   spin_lock(&alloc_lock);
-  start += size;
-  void *ret = start;
+  pm_start += size;
+  void *ret = pm_start;
   spin_unlock(&alloc_lock);
-  return start;
+  return pm_start;
   //return NULL;
 }
 
