@@ -10,12 +10,18 @@ static void pmm_init() {
   pm_end   = (uintptr_t)_heap.end;
 }
 
+void * my_alloc(size_t size) {
+	pm_start += size;
+	return (void *)pm_start;
+}
+
 static void *kalloc(size_t size) {
   lock(&alloc_lock);
-  pm_start += size;
+  void *ret = my_alloc(size);
   unlock(&alloc_lock);
-  return (void *)pm_start;
+  return ret;
   //return NULL;
+
 }
 
 static void kfree(void *ptr) {
