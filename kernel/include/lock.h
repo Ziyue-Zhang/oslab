@@ -8,10 +8,10 @@ void sti() {
 }
 void lock(intptr_t *lk) {
 	cli();
-	while (atomic_xchg(lk, 1));
+	while (_atomic_xchg(lk, 1));
 }
 void unlock(intptr_t *lk) {
-	atomic_xchg(lk, 0);
+	_atomic_xchg(lk, 0);
 	sti();
 }
 	
