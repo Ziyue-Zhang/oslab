@@ -13,7 +13,7 @@ static void *kalloc(size_t size) {
   spin_lock(&alloc_lock);
   pm_start += size;
   spin_unlock(&alloc_lock);
-  return pm_start;
+  return (void *)pm_start;
   //return NULL;
 }
 
