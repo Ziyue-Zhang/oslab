@@ -1,14 +1,72 @@
 #include <common.h>
 #include <klib.h>
 #include <lock.h>
-#include <unistd.h>
+
+#define MAXSIZE 1000
+#define ALLOC_MIN 2<<7
+#define FootLoc(p) (p+(p->size) - 1)
 
 static uintptr_t pm_start, pm_end;
 intptr_t alloc_lock;
 
+typedef struct WORD{
+	union {
+		struct WORD *llink;
+		struct WORD *uplink;
+	};
+	int tag;
+	int size;
+	struct WORD *rlink;
+}*Space;
+
+Space user[MAXSIZE] = {NULL};
+int usCount = 0;
+
+Space AllocBoundTag(Space *pav, int n) {
+	Space p =  *pav;
+	if(p == NULL) {
+		printf("This memoty is null.\n");
+		return NULL;
+	}
+	for(p; p != NULL && p->size < n && p->rlink != *pav; p = p->rlink ) {
+		if( p == NULL || p->size < n) {
+			printf("wrong\n");
+			return NULL;
+		}
+		*pav = p->rlink;
+		if(p->size - n > ALLOC_MIN) {
+			p->size -= n;
+			Space foot = FootLoc(p);
+			foor->uplink = p;
+			foot->tag =0;
+			p = foot + 1;
+			p->size = n;
+			foot = FootLoc(p);
+			p->tag = 1;
+			foot->tag = 1;
+			foot->uplink = p;
+		}
+		else {
+			if(p == *pav)
+				*pav = NULL;
+			else {
+				Space foot = FootLOc(p);
+				fooot->tag = p->tag = 1;
+				p->llink->rlink = p->rlink;
+				p->rlink->llink = p->llink;
+			}
+		}
+	}
+	user[usCOunt++] = p;
+	return p;
+}
+
+
+
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
   pm_end   = (uintptr_t)_heap.end;
+  alloc_lock = 0;
 }
 
 void * my_alloc(size_t size) {
