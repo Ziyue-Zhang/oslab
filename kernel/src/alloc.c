@@ -37,7 +37,7 @@ Space AllocBoundTag(Space *pav, int n) {
 		if(p->size - n > ALLOC_MIN) {
 			p->size -= n;
 			Space foot = FootLoc(p);
-			foor->uplink = p;
+			foot->uplink = p;
 			foot->tag =0;
 			p = foot + 1;
 			p->size = n;
