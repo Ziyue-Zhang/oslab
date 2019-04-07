@@ -10,7 +10,12 @@ static void pmm_init() {
 }
 
 static void *kalloc(size_t size) {
-  return NULL;
+  spin_lock(&alloc_lock);
+  start += size;
+  void *ret = start;
+  spin_unlock(&alloc_lock);
+  return start;
+  //return NULL;
 }
 
 static void kfree(void *ptr) {
