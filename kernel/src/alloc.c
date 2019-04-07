@@ -61,7 +61,7 @@ Space AllocBoundTag(Space *pav, int n) {
 	return p;
 }
 
-void reclaimBoundTag(SPace *pav, Space so) {
+void reclaimBoundTag(Space *pav, Space so) {
 	Space pre = (sp - 1)->uplink;
 	Space next = sp + sp->size;
 	int pTag = pre_>tag;
