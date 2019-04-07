@@ -1,6 +1,7 @@
 #include <common.h>
 #include <klib.h>
 #include <lock.h>
+#include <unistd.h>
 
 static uintptr_t pm_start, pm_end;
 intptr_t alloc_lock;
