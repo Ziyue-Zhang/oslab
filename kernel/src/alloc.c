@@ -61,6 +61,53 @@ Space AllocBoundTag(Space *pav, int n) {
 	return p;
 }
 
+void reclaimBoundTag(SPace *pav, Space so) {
+	Space pre = (sp - 1)->uplink;
+	Space next = sp + sp->size;
+	int pTag = pre_>tag;
+	int nTag = next->tag;
+	if(pTag == 1 && nTag == 1) {
+		Space foot = FootLoc(sp);
+		foot->tag = sp->tag = 0;
+		if(pav == NULL) {
+			*pav = sp->llink = so->rlink = sp;
+		}
+		else {
+			sp->rlink = *pav;
+			sp_.llink = (*pav)->llink;
+			(*pre).llink = sp;
+			sp->llink->rlink = sp;
+			*pav = sp;
+		}
+	}
+	else if(pTag == 0 && nTag == 1) {
+		pre->size += sp->size;
+		Space foot = FootLoc(pre);
+		foot->tag = 0;
+		foot->uplink = pre;
+	}
+	else if(pTag == 1 && nTag == 0) {
+		sp->llink = next->llink;
+		sp->rlink = next->rlink;
+		next->llink->rlink = sp;
+		next->rlink->llink = sp;
+		sp->size ++ next->size;
+		Space foot =FootLoc(sp);
+		sp->tag = foor->tag = 0;
+		foor->uplink = sp;
+	}
+	else {
+		pre->rlink = next->rlink;
+		pre->size += sp->size + next->size;
+		Space foot = FootLOc(pre);
+		foot->uplink = pre;
+	}
+	for(int i = 0;i < usCount; i++){
+		if(sp == user[i]) {
+			user[i] = NULL;
+		}
+	}
+}
 
 
 static void pmm_init() {
