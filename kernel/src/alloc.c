@@ -50,14 +50,14 @@ Space AllocBoundTag(Space *pav, int n) {
 			if(p == *pav)
 				*pav = NULL;
 			else {
-				Space foot = FootLOc(p);
+				Space foot = FootLoc(p);
 				fooot->tag = p->tag = 1;
 				p->llink->rlink = p->rlink;
 				p->rlink->llink = p->llink;
 			}
 		}
 	}
-	user[usCOunt++] = p;
+	user[usCount++] = p;
 	return p;
 }
 
