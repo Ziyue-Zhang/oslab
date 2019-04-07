@@ -70,7 +70,7 @@ void reclaimBoundTag(Space *pav, Space sp) {
 		Space foot = FootLoc(sp);
 		foot->tag = sp->tag = 0;
 		if(pav == NULL) {
-			*pav = sp->llink = so->rlink = sp;
+			*pav = sp->llink = sp->rlink = sp;
 		}
 		else {
 			sp->rlink = *pav;
@@ -91,9 +91,9 @@ void reclaimBoundTag(Space *pav, Space sp) {
 		sp->rlink = next->rlink;
 		next->llink->rlink = sp;
 		next->rlink->llink = sp;
-		sp->size ++ next->size;
+		sp->size += next->size;
 		Space foot =FootLoc(sp);
-		sp->tag = foor->tag = 0;
+		sp->tag = foot->tag = 0;
 		foot->uplink = sp;
 	}
 	else {
