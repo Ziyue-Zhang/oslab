@@ -6,12 +6,12 @@ void cli() {
 void sti() {
 	asm volatile ("sti");
 }
-void lock(lock_t *m) {
+void lock(intptr_t *lk) {
 	cli();
-	while (atomic_xchg(&lk->locked, 1));
+	while (atomic_xchg(lk, 1));
 }
-void unlock(lock_t *lk) {
-	atomic_xchg(&lk->locked, 0);
+void unlock(intptr_t *lk) {
+	atomic_xchg(lk, 0);
 	sti();
 }
 	
