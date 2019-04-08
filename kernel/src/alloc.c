@@ -109,19 +109,30 @@ void reclaimBoundTag(Space *pav, Space sp) {
 	}
 }*/
 typedef struct node {
-	bool flag;
+	unsigned char flag;
 	uint32_t size;
     struct node *next;
+	struct node *pre;
 	void *start;
 } mem;
 
-static mem pool[1000];
-static mem *head, *free;
+static mem pool[MAXSIZE];
+static mem *head, *tail, *free;
+int free_num;
+
+void mem_init(){
+	free_num = 1;
+	pool[0]->pre = NULL;
+	pool[0]->next = pool[1];
+	pool[0]->size = (uintptr_t)_heap.end - (uintptr_t)_heap.start;
+	pool[0]->start = _heap.start;
+}
+
 
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
   pm_end   = (uintptr_t)_heap.end;
-  printf("%d\n", pm_end-pm_start);
+//printf("%d\n", pm_end-pm_start);
   alloc_lock = 0;
 }
 
