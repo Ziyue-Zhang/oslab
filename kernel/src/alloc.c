@@ -9,7 +9,7 @@
 static uintptr_t pm_start, pm_end;
 intptr_t alloc_lock;
 
-typedef struct WORD{
+/*typedef struct WORD{
 	union {
 		struct WORD *llink;
 		struct WORD *uplink;
@@ -107,8 +107,16 @@ void reclaimBoundTag(Space *pav, Space sp) {
 			user[i] = NULL;
 		}
 	}
-}
+}*/
+typedef struct node {
+	bool flag;
+	uint32_t size;
+    struct node *next;
+	void *start;
+} mem;
 
+static mem pool[1000];
+static mem *head, *free;
 
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
