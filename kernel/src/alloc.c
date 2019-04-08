@@ -113,6 +113,7 @@ void reclaimBoundTag(Space *pav, Space sp) {
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
   pm_end   = (uintptr_t)_heap.end;
+  printf("%d/n", pm_start-pm_end);
   alloc_lock = 0;
 }
 
