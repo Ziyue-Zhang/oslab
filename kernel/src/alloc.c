@@ -173,11 +173,11 @@ void * my_alloc(size_t size) {
 		i++;
 		p = p->next;
 	}
-	printf("%d\n",p->size);
 	if(!p){
 		printf("we don't have enough memory\n");
 		return NULL;
 	}
+	printf("%d\n",p->size);
 	void *ret=p->start;
 	if(flag){
 		if(p == free){
