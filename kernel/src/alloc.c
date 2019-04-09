@@ -156,7 +156,7 @@ void * my_alloc(size_t size) {
 	/*pm_start += size;
 	return (void *)pm_start;*/
 	if(size == 0){
-		printf("Are you kidding?\n")
+		printf("Are you kidding?\n");
 		return NULL;
 	}
 	if(!free_num || !total){
@@ -268,7 +268,7 @@ static void *kalloc(size_t size) {
 }
 
 static void kfree(void *ptr) {
-	my_free(void *ptr);
+	my_free(ptr);
 }
 
 MODULE_DEF(pmm) {
