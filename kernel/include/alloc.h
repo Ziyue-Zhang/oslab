@@ -13,8 +13,7 @@ static Header *freep = NULL;
 void *malloc(unsigned nbytes) {
 	Header *p, *prevp;
 	Header *morecore(unsigned);
-	unsigned nunite;
-	nunits = (nbytes+sizeof(Header)-1)/sizeof(header)+1;
+	unsigned nunits = (nbytes+sizeof(Header)-1)/sizeof(header)+1;
     if((prevp=freep)==NULL) {
 		base.s.ptr = freeptr = prevptr = &base;
 		base.s.size = 0;
