@@ -197,6 +197,7 @@ void * my_alloc(size_t size) {
 		printf("we don't have enough memory\n");
 		return NULL;
 	}
+	return NULL;
 }
 
 static void my_free(void *ptr) {
