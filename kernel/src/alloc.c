@@ -189,6 +189,7 @@ void * my_alloc(size_t size) {
 			temp->pre=NULL;
 			temp->size=p->size-size;
 			temp->start=p->start+size;
+			free=temp;
 			p->next=head;
 			head->pre=p;
 			p->size=size;
