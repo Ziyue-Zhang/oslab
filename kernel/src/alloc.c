@@ -197,7 +197,7 @@ void * my_alloc(size_t size) {
 			free=temp;
 			p->next=head;
 			if(!head)
-				printf("nmsl\n");
+				head->pre=p;
 			if(head)
 				head->pre=p;
 			p->size=size;
