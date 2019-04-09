@@ -181,6 +181,7 @@ void * my_alloc(size_t size) {
 	void *ret=p->start;
 	if(flag){
 		if(p == free){
+			printf("nmsl\n");
 			mem *temp=tail;
 			tail = tail->pre;
 			tail->next = NULL;
