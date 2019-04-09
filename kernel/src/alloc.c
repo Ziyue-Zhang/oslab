@@ -155,6 +155,10 @@ static void pmm_init() {
 void * my_alloc(size_t size) {
 	/*pm_start += size;
 	return (void *)pm_start;*/
+	if(size == 0){
+		printf("Are you kidding?\n")
+		return NULL;
+	}
 	if(!free_num || !total){
 		printf("memory is full!\n");
 		return NULL;
@@ -192,7 +196,9 @@ void * my_alloc(size_t size) {
 			temp->start=p->start+size;
 			free=temp;
 			p->next=head;
-			head->pre=p;
+			printf("nb\n");
+			if(head)
+				head->pre=p;
 			p->size=size;
 			head=p;
 		}
@@ -208,7 +214,9 @@ void * my_alloc(size_t size) {
 			temp->start=p->start+size;
 			p->pre=NULL;
 			p->next=head;
-			head->pre=p;
+			printf("sb\n");
+			if(head)
+				head->pre=p;
 			p->size=size;
 			head=p;
 		}
@@ -219,7 +227,8 @@ void * my_alloc(size_t size) {
 			free->pre=NULL;
 			p->pre=NULL;
 			p->next=head;
-			head->pre=p;
+			if(head)
+				head->pre=p;
 			head=p;
 		}
 		else{
@@ -227,7 +236,8 @@ void * my_alloc(size_t size) {
 			p->next->pre=p->pre;
 			p->pre=NULL;
 			p->next=head;
-		  head->pre=p;
+			if(head)
+		  	head->pre=p;
 			head=p;
 		}
 	}
@@ -235,8 +245,18 @@ void * my_alloc(size_t size) {
 	return ret;
 }
 
-/*static void my_free(void *ptr) {
-}*/
+static void my_free(void *ptr) {
+	mem * p = head;
+	while(p){
+		if(p->start == ptr)
+			break;
+		p=p->next;
+	}
+	if(!p){
+		printf("Don't free again!");
+	}
+
+}
 
 static void *kalloc(size_t size) {
   lock(&alloc_lock);
@@ -248,6 +268,7 @@ static void *kalloc(size_t size) {
 }
 
 static void kfree(void *ptr) {
+	my_free(void *ptr);
 }
 
 MODULE_DEF(pmm) {
