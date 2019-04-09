@@ -135,7 +135,7 @@ void mem_init(){
 		pool[i].start = NULL;
 	}
 	head = NULL; 
-	tail = pool[MAXSIZE-1];
+	tail = &pool[MAXSIZE-1];
 	free = pool;
 }
 
@@ -154,10 +154,10 @@ void * my_alloc(size_t size) {
 		printf("memory is full!\n");
 		return NULL;
 	}
-	bool flag = false;
+	int flag = 0;
 	if(free_num == MAXSIZE){
 		printf("too many fragments!\n");
-		flag = false;
+		flag = 0;
 		return NULL;
 	}
 	assert(free);
