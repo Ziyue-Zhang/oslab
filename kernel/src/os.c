@@ -1,6 +1,5 @@
 #include <common.h>
 #include <klib.h>
-#include <lock.h>
 
 extern void *kalloc();
 extern void kfree();
