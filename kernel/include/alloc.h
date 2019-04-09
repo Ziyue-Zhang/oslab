@@ -61,7 +61,7 @@ void ffree(void *ap)
 	}
 	else
 		bp->s.ptr = p->s.ptr;
-	if(p + =->size == bp) {
+	if(p + p->s.size == bp) {
 		p->s.size += bp->s.size;
 		p->s.ptr = bp->s.ptr;
 	}
