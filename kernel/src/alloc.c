@@ -196,9 +196,7 @@ void * my_alloc(size_t size) {
 			temp->start=p->start+size;
 			free=temp;
 			p->next=head;
-			if(!head)
-				head->pre=p;
-			if(head)
+			//if(head)
 				head->pre=p;
 			p->size=size;
 			head=p;
