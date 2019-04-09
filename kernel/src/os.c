@@ -15,6 +15,7 @@ static void hello() {
 static void os_run() {
   hello();
   _intr_write(1);
+  printf("nmsl\n");
   while (1) {
     _yield();
   }
