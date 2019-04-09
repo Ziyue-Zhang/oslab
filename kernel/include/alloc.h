@@ -10,9 +10,11 @@ union header {
 typedef union header Header;
 static Header base;
 static Header *freep = NULL;
+void ffree(void *ap)
+void *mmalloc(unsigned nbytes) {
+static Header *morecore(unsigned nu) {
 void *mmalloc(unsigned nbytes) {
 	Header *p, *prevp;
-	Header *morecore(unsigned);
 	unsigned nunits = (nbytes+sizeof(Header)-1)/sizeof(Header)+1;
     if((prevp=freep)==NULL) {
 		base.s.ptr = freep->s.ptr = prevp->s.ptr = &base;
