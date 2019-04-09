@@ -1,5 +1,6 @@
 #include <common.h>
 #include <klib.h>
+int temp=0;
 
 static void os_init() {
   pmm->init();
@@ -15,8 +16,9 @@ static void hello() {
 static void os_run() {
   hello();
   _intr_write(1);
-  printf("nmsl\n");
   while (1) {
+    printf("%d",temp);
+    temp++;
     _yield();
   }
 }
