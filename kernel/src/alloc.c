@@ -126,7 +126,7 @@ void mem_init(){
 	pool[0].pre = NULL;
 	pool[0].next = &pool[1];
 	pool[0].size = (uintptr_t)_heap.end - (uintptr_t)_heap.start;
-	printf("%d\n",pool[0].size);
+	//printf("%d\n",pool[0].size);
 	pool[0].start = _heap.start;
 	for(int i = 1; i < MAXSIZE; i++){
 		pool[i].pre = &pool[i-1];
@@ -173,6 +173,7 @@ void * my_alloc(size_t size) {
 		i++;
 		p = p->next;
 	}
+	printf("%d\n",p->size);
 	if(!p){
 		printf("we don't have enough memory\n");
 		return NULL;
