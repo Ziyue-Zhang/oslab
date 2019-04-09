@@ -38,7 +38,7 @@ static void os_run() {
     temp++;
     void * a = pmm->alloc(temp);
     pmm->free(a);
-    if(temp>500)
+    if(temp>100)
       break;
     unlock(&sb);
     _yield();
