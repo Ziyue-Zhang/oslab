@@ -14,11 +14,11 @@ void ffree(void *ap);
 void *mmalloc(unsigned nbytes);
 static Header *morecore(unsigned nu);
 
-void *sbrk(int size){
+char *sbrk(int size){
 	if(_heap.start + size > _heap.end)
-		return (void*)-1;
+		return (char*)-1;
 	else
-		return (void*) _heap.start;
+		return (char*) _heap.start;
 }
 void *mmalloc(unsigned nbytes) {
 	Header *p, *prevp;
