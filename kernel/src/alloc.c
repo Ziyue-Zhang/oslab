@@ -205,23 +205,23 @@ void * my_alloc(size_t size) {
 			p->size=size;
 			head=p;
 		}
+	}
+	else{
+		if(p==free){
+			free=free->next;
+			free->pre=NULL;
+			p->pre=NULL;
+			p->next=head;
+			head->pre=p;
+			head=p;
+		}
 		else{
-			if(p==free){
-				free=free->next;
-				free->pre=NULL;
-				p->pre=NULL;
-				p->next=head;
-			  head->pre=p;
-				head=p;
-			}
-			else{
-				p->pre->next=p->next;
-				p->next->pre=p->pre;
-				p->pre=NULL;
-				p->next=head;
-			  head->pre=p;
-				head=p;
-			}
+			p->pre->next=p->next;
+			p->next->pre=p->pre;
+			p->pre=NULL;
+			p->next=head;
+		  head->pre=p;
+			head=p;
 		}
 	}
 	return ret;
