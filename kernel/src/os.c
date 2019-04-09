@@ -1,6 +1,9 @@
 #include <common.h>
 #include <klib.h>
 #include <lock.h>
+
+extern void *kalloc();
+extern void kfree();
 int temp=0;
 intptr_t sb;
 static void os_init() {
