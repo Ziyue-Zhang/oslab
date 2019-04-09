@@ -22,6 +22,7 @@ static void os_run() {
     printf("%d\n",temp);
     temp++;
     void * a = malloc(temp);
+    free(a);
     if(temp>500)
       break;
     unlock(&sb);
