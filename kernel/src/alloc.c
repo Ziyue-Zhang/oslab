@@ -119,7 +119,7 @@ typedef struct node {
 
 static mem pool[MAXSIZE];
 static mem *head, *tail, *free;
-int free_num;
+int free_num, total;
 
 void mem_init(){
 	free_num = 1;
@@ -148,13 +148,14 @@ static void pmm_init() {
   pm_end   = (uintptr_t)_heap.end;
 //printf("%d\n", pm_end-pm_start);
   alloc_lock = 0;
+	total = MAXSIZE;
 	mem_init();
 }
 
 void * my_alloc(size_t size) {
 	/*pm_start += size;
 	return (void *)pm_start;*/
-	if(!free_num){
+	if(!free_num || !total){
 		printf("memory is full!\n");
 		return NULL;
 	}
@@ -230,6 +231,7 @@ void * my_alloc(size_t size) {
 			head=p;
 		}
 	}
+	--total;
 	return ret;
 }
 
