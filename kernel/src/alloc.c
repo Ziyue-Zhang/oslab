@@ -156,7 +156,7 @@ void * my_alloc(size_t size) {
 	/*pm_start += size;
 	return (void *)pm_start;*/
 	if(!head)
-		printf("nmsl\n");
+		head->pre=NULL;
 	if(size == 0){
 		printf("Are you kidding?\n");
 		return NULL;
