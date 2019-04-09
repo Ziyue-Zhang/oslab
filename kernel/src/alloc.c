@@ -176,7 +176,7 @@ void * my_alloc(size_t size) {
 			tail->next = NULL;
       temp->next=p->next;
 			(p->next)->pre=temp;
-			temp->prev=NULL;
+			temp->pre=NULL;
 			temp->size=p->size-size;
 			temp->start=p->start+size;
 			p->next=head;
@@ -186,9 +186,9 @@ void * my_alloc(size_t size) {
 		else {
 			mem *temp=tail;
 			tail = tail->pre;
-			tail->mext=NULL;
+			tail->next=NULL;
 			temp->next=p->next;
-			temp->prev=NULL;
+			temp->pre=NULL;
 			temp->size=p->size-size;
 			temp->start=p->start+size;
 		}
