@@ -13,7 +13,7 @@ static Header *freep = NULL;
 void *mmalloc(unsigned nbytes) {
 	Header *p, *prevp;
 	Header *morecore(unsigned);
-	unsigned nunits = (nbytes+sizeof(Header)-1)/sizeof(header)+1;
+	unsigned nunits = (nbytes+sizeof(Header)-1)/sizeof(Header)+1;
     if((prevp=freep)==NULL) {
 		base.s.ptr = freep->s.ptr = prevp->s.ptr = &base;
 		base.s.size = 0;
@@ -45,7 +45,7 @@ static Header *morecore(unsigned nu) {
 		return NULL;
 	up = (Header *) cp;
 	up->s.size=nu;
-	free((void *)(up+1));
+	ffree((void *)(up+1));
 	return freep;
 }
 void ffree(void *ap)
