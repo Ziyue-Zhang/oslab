@@ -15,6 +15,12 @@ void ffree(void *ap);
 void *mmalloc(unsigned nbytes);
 static Header *morecore(unsigned nu);
 
+void *sbrk(int size){
+	if(_heap.start + size > _heap.end)
+		return (void*)-1;
+	else
+		return (void*) _heap.start;
+}
 void *mmalloc(unsigned nbytes) {
 	Header *p, *prevp;
 	unsigned nunits = (nbytes+sizeof(Header)-1)/sizeof(Header)+1;
