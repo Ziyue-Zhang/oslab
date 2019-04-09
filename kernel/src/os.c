@@ -38,7 +38,7 @@ static void os_run() {
     temp++;
     void * a = pmm->alloc(temp);
     pmm->free(a);
-    assert(temp <200);
+    assert(temp <50);
     unlock(&sb);
     _yield();
   }

@@ -155,6 +155,8 @@ static void pmm_init() {
 void * my_alloc(size_t size) {
 	/*pm_start += size;
 	return (void *)pm_start;*/
+	if(!head)
+		printf("nmsl\n");
 	if(size == 0){
 		printf("Are you kidding?\n");
 		return NULL;
@@ -196,7 +198,6 @@ void * my_alloc(size_t size) {
 			temp->start=p->start+size;
 			free=temp;
 			p->next=head;
-			printf("nb\n");
 			if(head)
 				head->pre=p;
 			p->size=size;
@@ -214,7 +215,6 @@ void * my_alloc(size_t size) {
 			temp->start=p->start+size;
 			p->pre=NULL;
 			p->next=head;
-			printf("sb\n");
 			if(head)
 				head->pre=p;
 			p->size=size;
