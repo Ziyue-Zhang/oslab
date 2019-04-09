@@ -227,8 +227,8 @@ void * my_alloc(size_t size) {
 	return ret;
 }
 
-static void my_free(void *ptr) {
-}
+/*static void my_free(void *ptr) {
+}*/
 
 static void *kalloc(size_t size) {
   lock(&alloc_lock);
