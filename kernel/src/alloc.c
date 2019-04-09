@@ -1,6 +1,7 @@
 #include <common.h>
 #include <klib.h>
 #include <lock.h>
+#include <alock.h>
 
 #define MAXSIZE 1000
 #define ALLOC_MIN 2<<7
