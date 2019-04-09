@@ -109,9 +109,8 @@ void reclaimBoundTag(Space *pav, Space sp) {
 	}
 }*/
 typedef struct node {
-	unsigned char flag;
 	uint32_t size;
-    struct node *next;
+  struct node *next;
 	struct node *pre;
 	void *start;
 } mem;
@@ -122,10 +121,22 @@ int free_num;
 
 void mem_init(){
 	free_num = 1;
-	pool[0]->pre = NULL;
-	pool[0]->next = pool[1];
-	pool[0]->size = (uintptr_t)_heap.end - (uintptr_t)_heap.start;
-	pool[0]->start = _heap.start;
+	pool[0].pre = NULL;
+	pool[0].next = pool[1];
+	pool[0].size = (uintptr_t)_heap.end - (uintptr_t)_heap.start;
+	pool[0].start = _heap.start;
+	for(int i = 1; i < MAXSIZE; i++){
+		pool[i].pre = &pool[i-1];
+		if(i == MAXSIZE-1)
+			pool[i].next=NULL;
+		else
+		  pool[i].next = &pool[i+1];
+		pool[i].size = 0;
+		pool[i].start = NULL;
+	}
+	head = NULL; 
+	tail = pool[MAXSIZE-1];
+	free = pool;
 }
 
 
@@ -137,8 +148,58 @@ static void pmm_init() {
 }
 
 void * my_alloc(size_t size) {
-	pm_start += size;
-	return (void *)pm_start;
+	/*pm_start += size;
+	return (void *)pm_start;*/
+	if(!free_num){
+		printf("memory is full!\n");
+		return NULL;
+	}
+	bool flag = false;
+	if(free_num == MAXSIZE){
+		printf("too many fragments!\n");
+		flag = false;
+		return NULL;
+	}
+	assert(free);
+	mem *p=free;
+	int i = 0;
+	while(p || i < free_num){
+		if(p->size>size)
+			break;
+		i++;
+		p = p->next;
+	}
+	if(flag){
+		if(p == free){
+			mem *temp=tail;
+			tail = tail->pre;
+			tail->next = NULL;
+      temp->next=p->next;
+			(p->next)->pre=temp;
+			temp->prev=NULL;
+			temp->size=p->size-size;
+			temp->start=p->start+size;
+			p->next=head;
+			p->size=size;
+			head=p;
+		}
+		else {
+			mem *temp=tail;
+			tail = tail->pre;
+			tail->mext=NULL;
+			temp->next=p->next;
+			temp->prev=NULL;
+			temp->size=p->size-size;
+			temp->start=p->start+size;
+		}
+	}
+	if(!p){
+		printf("we don't have enough memory\n")
+		return NULL;
+	}
+}
+
+static void my_free(void *ptr) {
 }
 
 static void *kalloc(size_t size) {
