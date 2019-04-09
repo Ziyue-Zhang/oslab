@@ -17,7 +17,7 @@ static void os_run() {
   hello();
   _intr_write(1);
   while (1) {
-    printf("%d",temp);
+    printf("%d\n",temp);
     temp++;
     _yield();
   }
