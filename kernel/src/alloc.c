@@ -1,6 +1,6 @@
 #include <common.h>
 #include <klib.h>
-#include <lock.h>
+//#include <lock.h>
 
 #define MAXSIZE 1000
 #define ALLOC_MIN 2<<7
@@ -8,6 +8,8 @@
 
 static uintptr_t pm_start, pm_end;
 intptr_t alloc_lock;
+extern void lock();
+extern void unlock();
 
 /*typedef struct WORD{
 	union {
