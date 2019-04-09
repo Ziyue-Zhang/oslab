@@ -2,7 +2,7 @@
 #include <klib.h>
 #include <lock.h>
 int temp=0;
-int intptr_t sb;
+intptr_t sb;
 static void os_init() {
   pmm->init();
 }
@@ -21,7 +21,7 @@ static void os_run() {
     lock(&sb);
     printf("%d\n",temp);
     temp++;
-    malloc(temp);
+    void * a = malloc(temp);
     if(temp>500)
       break;
     unlock(&sb);
