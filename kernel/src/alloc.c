@@ -194,7 +194,7 @@ void * my_alloc(size_t size) {
 		}
 	}
 	if(!p){
-		printf("we don't have enough memory\n")
+		printf("we don't have enough memory\n");
 		return NULL;
 	}
 }
