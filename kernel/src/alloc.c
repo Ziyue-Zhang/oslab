@@ -169,6 +169,11 @@ void * my_alloc(size_t size) {
 		i++;
 		p = p->next;
 	}
+	if(!p){
+		printf("we don't have enough memory\n");
+		return NULL;
+	}
+	void *ret=p->start;
 	if(flag){
 		if(p == free){
 			mem *temp=tail;
@@ -180,6 +185,7 @@ void * my_alloc(size_t size) {
 			temp->size=p->size-size;
 			temp->start=p->start+size;
 			p->next=head;
+			head->pre=p;
 			p->size=size;
 			head=p;
 		}
@@ -188,16 +194,37 @@ void * my_alloc(size_t size) {
 			tail = tail->pre;
 			tail->next=NULL;
 			temp->next=p->next;
-			temp->pre=NULL;
+			temp->pre=p->pre;
+			p->next->pre=temp;
+			p->pre->next=temp;
 			temp->size=p->size-size;
 			temp->start=p->start+size;
+			p->pre=NULL;
+			p->next=head;
+			head->pre=p;
+			p->size=size;
+			head=p;
+		}
+		else{
+			if(p==free){
+				free=free->next;
+				free->pre=NULL;
+				p->pre=NULL;
+				p->next=head;
+			  head->pre=p;
+				head=p;
+			}
+			else{
+				p->pre->next=p->next;
+				p->next->pre=p->pre;
+				p->pre=NULL;
+				p->next=head;
+			  head->pre=p;
+				head=p;
+			}
 		}
 	}
-	if(!p){
-		printf("we don't have enough memory\n");
-		return NULL;
-	}
-	return NULL;
+	return ret;
 }
 
 static void my_free(void *ptr) {
