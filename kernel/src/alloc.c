@@ -158,7 +158,7 @@ void * my_alloc(size_t size) {
 		printf("memory is full!\n");
 		return NULL;
 	}
-	int flag = 0;
+	int flag = 1;
 	if(free_num == MAXSIZE){
 		printf("too many fragments!\n");
 		flag = 0;
@@ -181,7 +181,6 @@ void * my_alloc(size_t size) {
 	void *ret=p->start;
 	if(flag){
 		if(p == free){
-			printf("nmsl\n");
 			mem *temp=tail;
 			tail = tail->pre;
 			tail->next = NULL;
