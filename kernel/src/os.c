@@ -1,7 +1,8 @@
 #include <common.h>
 #include <klib.h>
+#include <lock.h>
 int temp=0;
-
+int intptr_t sb;
 static void os_init() {
   pmm->init();
 }
@@ -17,8 +18,13 @@ static void os_run() {
   hello();
   _intr_write(1);
   while (1) {
+    lock(&sb);
     printf("%d\n",temp);
     temp++;
+    malloc(temp);
+    if(temp>500)
+      break;
+    unlock(&sb);
     _yield();
   }
 }
