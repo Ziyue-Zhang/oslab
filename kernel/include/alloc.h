@@ -1,4 +1,3 @@
-#include <unistd.h>
 #define NALLOC 1024
 typedef long Align;
 union header {
