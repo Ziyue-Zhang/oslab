@@ -21,8 +21,8 @@ static void os_run() {
     lock(&sb);
     printf("%d\n",temp);
     temp++;
-    void * a = malloc(temp);
-    free(a);
+    void * a = kalloc(temp);
+    kfree(a);
     if(temp>500)
       break;
     unlock(&sb);
