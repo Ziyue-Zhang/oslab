@@ -15,7 +15,7 @@ void *malloc(unsigned nbytes) {
 	Header *morecore(unsigned);
 	unsigned nunits = (nbytes+sizeof(Header)-1)/sizeof(header)+1;
     if((prevp=freep)==NULL) {
-		base.s.ptr = freeptr = prevptr = &base;
+		base.s.ptr = freep = prevp = &base;
 		base.s.size = 0;
 	}
 	for (p = prevp->s.ptr;;prevp = p, p=p->s.ptr) {
@@ -37,7 +37,7 @@ void *malloc(unsigned nbytes) {
 }
 static Header *morecore(unsigned nu) {
 	char *cp, *sbrk(int);
-	Header *ip;
+	Header *up;
 	if(nu < NALLOC)
 		nu = NALLOC;
 	cp = sbrk(nu * sizeof(Header));
@@ -53,7 +53,7 @@ void free(void *ap)
 	Header *bp, *p;
 	bp = (Header *)ap - 1;
 	for(p = freep; !(bp > p && bp < p->s.ptr); p = p->s.ptr)
-		if(p >= p->s/ptr && (bp > p || bp < p->s.ptr))
+		if(p >= p->s.ptr && (bp > p || bp < p->s.ptr))
 			break;
 	if(bp +bp->size == p->s.ptr) {
 		bp->s.size += p->s.ptr->s.size;
