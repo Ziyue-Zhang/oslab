@@ -15,8 +15,7 @@ void unlock(intptr_t *lk) {
 	_atomic_xchg(lk, 0);
 	sti();
 }
-extern void *kalloc();
-extern void kfree();
+
 int temp=0;
 intptr_t sb;
 static void os_init() {
@@ -37,8 +36,8 @@ static void os_run() {
     lock(&sb);
     printf("%d\n",temp);
     temp++;
-    void * a = kalloc(temp);
-    kfree(a);
+    void * a = pmm->alloc(temp);
+    pmm->free(a);
     if(temp>500)
       break;
     unlock(&sb);
