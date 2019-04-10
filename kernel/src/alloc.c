@@ -339,7 +339,7 @@ static void my_free(void *ptr) {
 			}	
 		}
 		else{
-			temp*q=free->next;
+			mem*q=free->next;
 			while(q){
 				if(p->start<q->start)
 					break;
