@@ -264,7 +264,7 @@ static void my_free(void *ptr) {
 			++total;
 			++free_num;
 		}
-		else if(p->start<free->start{
+		else if(p->start<free->start){
 			if(p->start+p->size != free->start){
 				p->next=free;
 				free->pre=p;
