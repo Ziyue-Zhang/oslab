@@ -196,7 +196,7 @@ void * my_alloc(size_t size) {
 			temp->start=p->start+size;
 			free=temp;
 			p->next=head;
-			//if(head)
+			if(head)
 				head->pre=p;
 			p->size=size;
 			head=p;
@@ -253,7 +253,145 @@ static void my_free(void *ptr) {
 	if(!p){
 		printf("Don't free again!");
 	}
-
+	if(p == head){
+		head=head->next;
+		if(head)
+			head->pre = NULL;
+		if(!free) {
+			p->next=free;
+			p->pre=NULL;
+			free=p;
+			++total;
+			++free_num;
+		}
+		else if(p->start<free->start{
+			if(p->start+p->size != free->start){
+				p->next=free;
+				free->pre=p;
+				p->pre=NULL;
+				free=p;
+				++total;
+				++free_num;
+			}
+			else{
+				free->start=p->start;
+				free->size+=p->size;
+				p->start=NULL;
+				p->size=0;
+				p->next=NULL;
+				p->pre=tail;
+				tail->next=p;
+				tail=p;
+				++total;
+			}
+		}
+	}
+	else{
+		p->pre->next=p->next;
+		if(p->next)
+			p->next->pre=p->pre;
+		if(!free) {
+			p->next=free;
+			p->pre=NULL;
+			free=p;
+			++total;
+			++free_num;
+		}
+		else if(p->start<free->start){
+			if(p->start+p->size != free->start){
+				p->next=free;
+				free->pre=p;
+				p->pre=NULL;
+				free=p;
+				++total;
+				++free_num;
+			}
+			else{
+				free->start=p->start;
+				free->size+=p->size;
+				p->start=NULL;
+				p->size=0;
+				p->next=NULL;
+				p->pre=tail;
+				tail->next=p;
+				tail=p;
+				++total;
+			}
+		}
+		else if(p->start>tail->start){
+			if(tail->start+tail->size!=p->start){
+				tail->next=p;
+				p->pre=tail;
+				p->next=NULL;
+				tail=p;
+				++total;
+				++free_num;
+			}
+			else{
+				tail->size+=p->size;
+				tail->next=p;
+				p->pre=tail;
+				p->size=0;
+				p->start=NULL;
+				p->next=NULL;
+				tail=p;
+				++total;
+			}	
+		}
+		else{
+			temp*q=free->next;
+			while(q){
+				if(p->start<q->start)
+					break;
+				q=q->next;
+			}
+			if(q->pre->start+q->pre->size==p->start && p->start+p->size==q->start){
+				q->pre->size+=p->size+q->size;
+				q->pre->next=q->next;
+				q->next->pre=q->pre;
+				p->size=0;
+				p->start=NULL;
+				q->size=0;
+				q->start=NULL;
+				tail->next=p;
+				p->pre=tail;
+				q->next=NULL;
+				q->pre=p;
+				++total;
+				free_num-=1;
+				tail=q;
+			}
+			else if(q->pre->start+q->pre->size==p->start){
+				q->pre->size+=p->size;
+				p->size=0;
+				p->start=NULL;
+				p->next=NULL;
+				p->pre=tail;
+				tail->next=p;
+				tail=p;
+				++total;
+			}
+			else if(p->start+p->size==q->start){
+				q->size+=p->size;
+				q->start=p->start;
+								p->size=0;
+				p->start=NULL;
+				p->next=NULL;
+				p->pre=tail;
+				tail->next=p;
+				tail=p;
+				++total;
+			}
+			else{
+				q->pre->next=p;
+				p->pre=q->pre;
+				p->next=q;
+				q->pre=p;
+				++total;
+				++free_num;
+			}
+		}
+	}
 }
 
 static void *kalloc(size_t size) {
