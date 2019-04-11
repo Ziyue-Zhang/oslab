@@ -34,12 +34,12 @@ static void os_run() {
   _intr_write(1);
   while (1) {
     //lock(&sb);
-    /*temp++;
+    temp++;
     //printf("%d\n",temp);
     void * a = pmm->alloc(temp);
     pmm->free(a);
-    assert(temp <1000);
-    //unlock(&sb);*/
+    assert(temp <100000);
+    //unlock(&sb);
     _yield();
   }
 }
