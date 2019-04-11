@@ -35,7 +35,7 @@ static void os_run() {
   while (1) {
     //lock(&sb);
     temp++;
-    printf("%d\n",temp);
+    //printf("%d\n",temp);
     void * a = pmm->alloc(temp);
     pmm->free(a);
     assert(temp <500);
