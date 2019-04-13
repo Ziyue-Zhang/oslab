@@ -17,7 +17,7 @@ void unlock(intptr_t *lk) {
 }
 
 int temp=0;
-//intptr_t sb;
+intptr_t sb;
 static void os_init() {
   pmm->init();
 }
@@ -33,13 +33,13 @@ static void os_run() {
   hello();
   _intr_write(1);
   while (1) {
-    //lock(&sb);
+    lock(&sb);
     temp++;
     //printf("%d\n",temp);
     void * a = pmm->alloc(temp);
     pmm->free(a);
-    assert(temp <100000);
-    //unlock(&sb);
+    assert(temp <10000);
+    unlock(&sb);
     _yield();
   }
 }
