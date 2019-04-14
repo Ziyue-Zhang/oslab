@@ -345,10 +345,16 @@ void my_free(void *ap)
 {
 	Header *bp, *p;
 	bp = (Header *)ap - 1;
-	for(p = freep; !(bp > p && bp < p->next); p = p->next) //insert to fit block
+	int cunt=0
+	for(p = freep; !(bp > p && bp < p->next); p = p->next) {//insert to fit block
 		if(p >= p->next && (bp > p || bp < p->next))
-			break;		//which is at the end of list
-			
+			break;		//which is at the end or the start of the list
+		if(p==freep)
+			cunt++
+		if(cunt==2)
+			printf("nmsl\n");
+	}
+
 	if(bp +bp->size == p->next) {	//merge whith next
 		bp->size += p->next->size;
 		bp->next = p->next->next;
