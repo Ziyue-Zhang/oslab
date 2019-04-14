@@ -345,11 +345,16 @@ void my_free(void *ap)
 {
 	Header *bp, *p;
 	bp = (Header *)ap - 1;
+	int cunt == 0;
 	for(p = freep; !(bp > p && bp < p->next); p = p->next) {//insert to fit block
 		if(p >= p->next && (bp > p || bp < p->next))
 			break;		//which is at the end or the start of the list
-	//int temp =(int)p;
-	//printf("%d\n",temp);
+		if(p==freep)
+			cunt++
+		if(cunt==2){
+			printf("Don't free again!\n")
+			return;
+		}
 	}
 
 	if(bp +bp->size == p->next) {	//merge whith next
