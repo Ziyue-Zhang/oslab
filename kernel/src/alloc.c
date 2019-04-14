@@ -384,7 +384,7 @@ static void *kalloc(size_t size) {
 }
 
 static void kfree(void *ptr) {
-	my_free(ptr);
+	//my_free(ptr);
 }
 
 MODULE_DEF(pmm) {
