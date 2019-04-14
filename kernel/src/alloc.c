@@ -345,12 +345,12 @@ void my_free(void *ap)
 {
 	Header *bp, *p;
 	bp = (Header *)ap - 1;
-	int cunt=0
+	int cunt=0;
 	for(p = freep; !(bp > p && bp < p->next); p = p->next) {//insert to fit block
 		if(p >= p->next && (bp > p || bp < p->next))
 			break;		//which is at the end or the start of the list
 		if(p==freep)
-			cunt++
+			cunt++;
 		if(cunt==2)
 			printf("nmsl\n");
 	}
