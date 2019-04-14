@@ -132,10 +132,9 @@ void * my_alloc(size_t size) {
 			head=p;
 		}
 		--free_num;
-		printf("nmsl\n");
 	}
 	--total;
-	printf("%d\n",free_num);
+	//printf("%d\n",free_num);
 	return ret;
 }
 
@@ -261,6 +260,7 @@ static void my_free(void *ptr) {
 			++free_num;
 		}
 	}
+	assert(!tail->size);
 	//printf("%d\n",total);
 	//printf("%d\n",free_num);
 }
