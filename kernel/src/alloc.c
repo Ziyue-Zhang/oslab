@@ -274,7 +274,7 @@ static void pmm_init() {
   pm_end   = (uintptr_t)_heap.end;
 //printf("%d\n", pm_end-pm_start);
   alloc_lock = 0;
-  mem_init();
+  //mem_init();
 }
 
 static void *kalloc(size_t size) {
