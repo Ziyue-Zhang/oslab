@@ -56,7 +56,7 @@ void * my_alloc(size_t size) {
 	}
 	int flag = 1;	
 	if(tail->size != 0){	//all lists are used
-		asssert(total == free_num);
+		assert(total == free_num);
 		flag = 0;
 	}
 	assert(free);
