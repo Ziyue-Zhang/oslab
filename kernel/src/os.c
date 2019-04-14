@@ -23,10 +23,12 @@ static void os_init() {
 }
 
 static void hello() {
+  lock(&sb)
   for (const char *ptr = "Hello from CPU #"; *ptr; ptr++) {
     _putc(*ptr);
   }
   _putc("12345678"[_cpu()]); _putc('\n');
+  unlock(&sb);
 }
 
 static void os_run() {
