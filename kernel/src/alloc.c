@@ -260,7 +260,8 @@ static void my_free(void *ptr) {
 			++free_num;
 		}
 	}
-	assert(!tail->size);
+	if(tail)
+		assert(!tail->size);
 	//printf("%d\n",total);
 	//printf("%d\n",free_num);
 }
