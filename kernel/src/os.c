@@ -30,7 +30,9 @@ static void hello() {
 }
 
 static void os_run() {
+  lock(&sb);
   hello();
+  unlock(&sb);
   _intr_write(1);
   while (1) {
     //lock(&sb);
