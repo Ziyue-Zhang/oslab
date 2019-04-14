@@ -149,7 +149,7 @@ static void my_free(void *ptr) {
 		p=p->next;
 	}
 	if(!p){
-		printf("Wrong address!");
+		printf("Don't free this address again!");
 		assert(p);
 	}
 	if(p == head){
