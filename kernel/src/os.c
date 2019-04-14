@@ -39,8 +39,9 @@ static void os_run() {
     temp++;
     printf("%d\n",temp);
     void*a;
-    for(int i=1024;i<1024*1024;i+=1024)
-   a = pmm->alloc(i);
+    for(int i=1024;i<1024*500;i+=1024)
+      a = pmm->alloc(i);
+    printf("nmsl\n");
     pmm->free(a);
     //pmm->free(a);
     /*lock(&sb2);

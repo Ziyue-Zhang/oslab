@@ -379,7 +379,7 @@ void my_free(void *ap)
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
   pm_end   = (uintptr_t)_heap.end;
-  printf("%d\n", pm_end-pm_start);
+  //printf("%d\n", pm_end-pm_start);
   alloc_lock = 0;
 }
 
