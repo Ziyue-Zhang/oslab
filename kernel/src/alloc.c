@@ -140,7 +140,7 @@ void * my_alloc(size_t size) {
 	return ret;
 }
 
-/*static void my_free(void *ptr) {
+static void my_free(void *ptr) {
 	mem * p = head;
 	while(p){
 		if(p->start == ptr)
@@ -308,7 +308,7 @@ static Header *enlarge(unsigned nu) {
 		nu = NALLOC;
 	p = sbrk(nu * sizeof(Header));
 	if(p == (char *) -1) {
-		printf("Cannot enlarge because the heap is full")
+		printf("Cannot enlarge because the heap is full");
 		return NULL;
 	}
 	up = (Header *) p;
@@ -325,7 +325,7 @@ void *my_alloc(unsigned nbytes) {
 	for (p = pre->next;;pre = p, p=p->next) {
 		if(p->size>=nu) {	//this block is fit
 			if(p->size==nu)
-				prevp->next=p->next;
+				pre->next=p->next;
 			else {
 				p->size-=nu;
 				p+=p->size;
@@ -355,7 +355,7 @@ void my_free(void *ap)
 	else
 		bp->next = p->next;
 
-	if(p + p->s.size == bp) {	//merge with p
+	if(p + p->size == bp) {	//merge with p
 		p->size += bp->size;
 		p->next = bp->next;
 	}
