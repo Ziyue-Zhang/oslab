@@ -309,6 +309,7 @@ static Header *enlarge(unsigned nu) {
 	p = sbrk(nu * sizeof(Header));
 	if(p == (char *) -1) {
 		printf("Cannot enlarge because the heap is full");
+		assert(0);
 		return NULL;
 	}
 	up = (Header *) p;
