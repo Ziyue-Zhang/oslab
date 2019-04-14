@@ -23,19 +23,19 @@ static void os_init() {
 }
 
 static void hello() {
-  lock(&sb1);    //we need to give a lock
+  //lock(&sb1);    //to print hello
   for (const char *ptr = "Hello from CPU #"; *ptr; ptr++) {
     _putc(*ptr);
   }
   _putc("12345678"[_cpu()]); _putc('\n');
-  unlock(&sb1);
+  //unlock(&sb1);
 }
 
 static void os_run() {
   hello();
   _intr_write(1);
   while (1) {
-    //lock(&sb2);
+    lock(&sb2);
     temp++;
     printf("%d\n",temp);
     void * a = pmm->alloc(temp);
@@ -43,7 +43,7 @@ static void os_run() {
     //pmm->free(a);
     /*lock(&sb2);
     assert(temp <100000);*/
-    //lock(&sb2);
+    lock(&sb2);
     _yield();
   }
 }
