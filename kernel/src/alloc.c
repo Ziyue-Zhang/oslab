@@ -190,7 +190,7 @@ static void my_free(void *ptr) {
 			++total;
 		}
 	}
-	else if(!tail->size && p->start>tail->start){
+	else if(tail->size && p->start>tail->start){
 		if(tail->start+tail->size!=p->start){
 			tail->next=p;
 			p->pre=tail;
