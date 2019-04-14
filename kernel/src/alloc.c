@@ -9,7 +9,7 @@ intptr_t alloc_lock;
 extern void lock();
 extern void unlock();
 
-typedef struct node {
+/*typedef struct node {
 	uint32_t size;
   	struct node *next;
 	struct node *pre;
@@ -41,12 +41,12 @@ void mem_init(){
 	tail = &pool[MAXSIZE-1];
 	assert(!tail->next);
 	free = pool;
-}
+}*/
 
 void * my_alloc(size_t size) {
-	/*pm_start += size;
-	return (void *)pm_start;*/
-	if(size == 0){
+	pm_start += size;
+	return (void *)pm_start;
+	/*if(size == 0){
 		printf("Are you kidding?\n");
 		return NULL;
 	}
@@ -138,10 +138,10 @@ void * my_alloc(size_t size) {
 	}
 	--total;
 	//printf("%d\n",free_num);
-	return ret;
+	return ret;*/
 }
 
-static void my_free(void *ptr) {
+/*static void my_free(void *ptr) {
 	mem * p = head;
 	while(p){
 		if(p->start == ptr)
@@ -267,14 +267,13 @@ static void my_free(void *ptr) {
 		assert(!tail->size);
 	//printf("%d\n",total);
 	//printf("%d\n",free_num);
-}
+}*/
 
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
   pm_end   = (uintptr_t)_heap.end;
 //printf("%d\n", pm_end-pm_start);
   alloc_lock = 0;
-  total = MAXSIZE;
   mem_init();
 }
 
@@ -288,7 +287,7 @@ static void *kalloc(size_t size) {
 }
 
 static void kfree(void *ptr) {
-	my_free(ptr);
+	//my_free(ptr);
 }
 
 MODULE_DEF(pmm) {
