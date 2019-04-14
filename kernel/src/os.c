@@ -17,33 +17,31 @@ void unlock(intptr_t *lk) {
 }
 
 int temp=0;
-intptr_t sb;
+intptr_t sb1,sb2;
 static void os_init() {
   pmm->init();
 }
 
 static void hello() {
-  lock(&sb);
+  lock(&sb1);    //we need to give a lock
   for (const char *ptr = "Hello from CPU #"; *ptr; ptr++) {
     _putc(*ptr);
   }
   _putc("12345678"[_cpu()]); _putc('\n');
-  unlock(&sb);
+  unlock(&sb1);
 }
 
 static void os_run() {
- //lock(&sb);
   hello();
-  //unlock(&sb);
   _intr_write(1);
   while (1) {
-    //lock(&sb);
-    //temp++;
+    //lock(&sb2);
+    temp++;
     //printf("%d\n",temp);
-    /*void * a = pmm->alloc(temp);
+    void * a = pmm->alloc(temp);
     pmm->free(a);
-    assert(temp <1000);*/
-    //unlock(&sb);
+    assert(temp <1000000);
+    //unlock(&sb2);
     _yield();
   }
 }

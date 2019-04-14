@@ -45,7 +45,7 @@ void *mmalloc(unsigned nbytes) {
 	}
 }
 static Header *morecore(unsigned nu) {
-	char *cp, *sbrk(int);
+	char *cp;
 	Header *up;
 	if(nu < NALLOC)
 		nu = NALLOC;

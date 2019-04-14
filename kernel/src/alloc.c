@@ -2,13 +2,12 @@
 #include <klib.h>
 //#include <lock.h>
 
-#define MAXSIZE 10000
-
 static uintptr_t pm_start, pm_end;
 intptr_t alloc_lock;
 extern void lock();
 extern void unlock();
 
+//this method is true with array. There isn't any array in real system, so i need to write a new one.
 /*typedef struct node {
 	uint32_t size;
   	struct node *next;
@@ -41,12 +40,12 @@ void mem_init(){
 	tail = &pool[MAXSIZE-1];
 	assert(!tail->next);
 	free = pool;
-}*/
+}
 
 void * my_alloc(size_t size) {
 	pm_start += size;
 	return (void *)pm_start;
-	/*if(size == 0){
+	if(size == 0){
 		printf("Are you kidding?\n");
 		return NULL;
 	}
@@ -138,7 +137,7 @@ void * my_alloc(size_t size) {
 	}
 	--total;
 	//printf("%d\n",free_num);
-	return ret;*/
+	return ret;
 }
 
 /*static void my_free(void *ptr) {
@@ -269,12 +268,109 @@ void * my_alloc(size_t size) {
 	//printf("%d\n",free_num);
 }*/
 
+
+
+/*Referred to R&K*/
+#define NALLOC 1024
+typedef long Align;
+typedef union header {
+	struct {
+		union header *next;
+		unsigned size;//real size = size*sizeof(Header), this method can calculate easily.
+	};
+	Align x;
+}Header;
+
+static Header base;
+static Header *freep = NULL;
+void my_free(void *ap);
+void *my_alloc(unsigned nbytes);
+static Header *enlarge(unsigned nu);
+
+void list_init() {
+	base.next=freep=&base;
+	base.size=0;
+}
+
+char *sbrk(int size){
+	if(pm_start + size > pm_end)
+		return (char*)-1;
+	else {
+		pm_start += size;
+		return (char*) (pm_start - size);
+	}
+}
+
+static Header *enlarge(unsigned nu) {
+	char *p;
+	Header *up;
+	if(nu < NALLOC)
+		nu = NALLOC;
+	p = sbrk(nu * sizeof(Header));
+	if(p == (char *) -1) {
+		printf("Cannot enlarge because the heap is full")
+		return NULL;
+	}
+	up = (Header *) p;
+	up->size = nu;
+	my_free((void *)(up+1));
+	return freep;
+}
+void *my_alloc(unsigned nbytes) {
+	Header *p, *pre;
+	unsigned nu = (nbytes+sizeof(Header)-1)/sizeof(Header)+1;	//allign and then count the size of it
+    if(!freep)
+		list_init();
+	pre=freep;
+	for (p = pre->next;;pre = p, p=p->next) {
+		if(p->size>=nu) {	//this block is fit
+			if(p->size==nu)
+				prevp->next=p->next;
+			else {
+				p->size-=nu;
+				p+=p->size;
+				p->size=nu;
+			}
+			freep=pre;
+			return (void*) (p+1);
+		}
+		if(p==freep)	//if we cannot find a block, creat a new one
+			if((p=enlarge(nu))==NULL)
+				return NULL;
+	}
+}
+
+void my_free(void *ap)
+{
+	Header *bp, *p;
+	bp = (Header *)ap - 1;
+	for(p = freep; !(bp > p && bp < p->next); p = p->next) //insert to fit block
+		if(p >= p->next && (bp > p || bp < p->next))
+			break;		//which is at the end of list
+
+	if(bp +bp->size == p->next) {	//merge whith next
+		bp->size += p->next->size;
+		bp->next = p->next->next;
+	}
+	else
+		bp->next = p->next;
+
+	if(p + p->s.size == bp) {	//merge with p
+		p->size += bp->size;
+		p->next = bp->next;
+	}
+	else
+		p->next = bp;
+	freep = p;
+}
+
+
+
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
   pm_end   = (uintptr_t)_heap.end;
-//printf("%d\n", pm_end-pm_start);
+  //printf("%d\n", pm_end-pm_start);
   alloc_lock = 0;
-  //mem_init();
 }
 
 static void *kalloc(size_t size) {
@@ -287,7 +383,7 @@ static void *kalloc(size_t size) {
 }
 
 static void kfree(void *ptr) {
-	//my_free(ptr);
+	my_free(ptr);
 }
 
 MODULE_DEF(pmm) {
