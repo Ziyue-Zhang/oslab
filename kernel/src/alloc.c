@@ -298,6 +298,7 @@ char *sbrk(int size){
 	else {
 		printf("%d\n",pm_start);
 		pm_start += size;
+		printf("%d\n",pm_start);
 		return (char*) (pm_start - size);
 	}
 }
