@@ -39,7 +39,7 @@ void mem_init(){
 	}
 	head = NULL; 
 	tail = &pool[MAXSIZE-1];
-	assert(!tail->next)
+	assert(!tail->next);
 	free = pool;
 }
 
