@@ -169,7 +169,7 @@ static void my_free(void *ptr) {
 		++total;
 		++free_num;
 			if(tail)
-		assert(!tail->size);s
+		assert(!tail->size);
 	}
 	else if(p->start<free->start){
 		if(p->start+p->size != free->start){
