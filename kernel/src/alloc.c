@@ -11,7 +11,7 @@ extern void unlock();
 
 typedef struct node {
 	uint32_t size;
-  struct node *next;
+  	struct node *next;
 	struct node *pre;
 	void *start;
 } mem;
@@ -38,17 +38,9 @@ void mem_init(){
 	}
 	head = NULL; 
 	tail = &pool[MAXSIZE-1];
+	if(!tail->next)
+	printf("nmsl\n");
 	free = pool;
-}
-
-
-static void pmm_init() {
-  pm_start = (uintptr_t)_heap.start;
-  pm_end   = (uintptr_t)_heap.end;
-//printf("%d\n", pm_end-pm_start);
-  alloc_lock = 0;
-	total = MAXSIZE;
-	mem_init();
 }
 
 void * my_alloc(size_t size) {
@@ -293,6 +285,15 @@ static void my_free(void *ptr) {
 	}
 	printf("%d\n",total);
 	//printf("%d\n",free_num);
+}
+
+static void pmm_init() {
+  pm_start = (uintptr_t)_heap.start;
+  pm_end   = (uintptr_t)_heap.end;
+//printf("%d\n", pm_end-pm_start);
+  alloc_lock = 0;
+	total = MAXSIZE;
+	mem_init();
 }
 
 static void *kalloc(size_t size) {
