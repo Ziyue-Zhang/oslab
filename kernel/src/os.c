@@ -40,8 +40,8 @@ static void os_run() {
     //printf("%d\n",temp);
     void * a = pmm->alloc(temp);
     pmm->free(a);
-    pmm->free(a);
-    assert(temp <10);
+    //pmm->free(a);
+    //assert(temp <10);
     //unlock(&sb2);
     _yield();
   }
