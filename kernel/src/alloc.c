@@ -352,7 +352,7 @@ void my_free(void *ap)
 		if(p==freep)
 			cunt++;
 		if(cunt==2){
-			printf("Don't free again!\n")
+			printf("Don't free again!\n");
 			return;
 		}
 	}
