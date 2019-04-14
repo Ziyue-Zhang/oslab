@@ -54,6 +54,9 @@ void * my_alloc(size_t size) {
 		printf("memory is full!\n");
 		return NULL;
 	}
+	if(!tail || !free){
+		assert(0);
+	}
 	int flag = 1;	
 	if(tail->size != 0){	//all lists are used
 		printf("total:%d free_num:%d\n",total,free_num);
