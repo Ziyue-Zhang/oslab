@@ -350,7 +350,7 @@ void my_free(void *ap)
 		if(p >= p->next && (bp > p || bp < p->next))
 			break;		//which is at the end or the start of the list
 		if(p==freep)
-			cunt++
+			cunt++;
 		if(cunt==2){
 			printf("Don't free again!\n")
 			return;
