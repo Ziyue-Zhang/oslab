@@ -39,7 +39,6 @@ static void os_run() {
     temp++;
     //printf("%d\n",temp);
     void*a = pmm->alloc(temp);
-    printf("nmsl\n");
     pmm->free(a);
     //pmm->free(a);
     /*lock(&sb2);
