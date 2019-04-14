@@ -36,9 +36,9 @@ static void os_run() {
     lock(&sb);
     temp++;
     //printf("%d\n",temp);
-    void * a = pmm->alloc(temp);
-    pmm->free(a);
-    assert(temp <1000000);
+    //void * a = pmm->alloc(temp);
+    //pmm->free(a);
+    //assert(temp <1000000);
     unlock(&sb);
     _yield();
   }
