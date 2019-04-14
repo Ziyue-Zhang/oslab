@@ -23,12 +23,12 @@ static void os_init() {
 }
 
 static void hello() {
-  //lock(&sb1);    //to print hello
+  lock(&sb1);    //to print hello
   for (const char *ptr = "Hello from CPU #"; *ptr; ptr++) {
     _putc(*ptr);
   }
   _putc("12345678"[_cpu()]); _putc('\n');
-  //unlock(&sb1);
+  unlock(&sb1);
 }
 
 static void os_run() {
@@ -43,7 +43,7 @@ static void os_run() {
     //pmm->free(a);
     /*lock(&sb2);
     assert(temp <100000);*/
-    lock(&sb2);
+    unlock(&sb2);
     _yield();
   }
 }
