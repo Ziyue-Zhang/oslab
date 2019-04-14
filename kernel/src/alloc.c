@@ -74,7 +74,7 @@ void * my_alloc(size_t size) {
 		assert(p);
 		return NULL;
 	}
-	printf("%d\n",total);
+	//printf("%d\n",total);
 	void *ret=p->start;
 	if(flag){
 		if(p == free){
@@ -132,9 +132,10 @@ void * my_alloc(size_t size) {
 			head=p;
 		}
 		--free_num;
+		printf("nmsl\n");
 	}
 	--total;
-	printf("%d\n",total);
+	printf("%d\n",free_num);
 	return ret;
 }
 
