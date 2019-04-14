@@ -35,15 +35,15 @@ static void os_run() {
   hello();
   _intr_write(1);
   while (1) {
-    lock(&sb2);
+    /*lock(&sb2);
     temp++;
     //printf("%d\n",temp);
     void*a = pmm->alloc(temp);
     pmm->free(a);
     //pmm->free(a);
-    /*lock(&sb2);
-    assert(temp <100000);*/
-    unlock(&sb2);
+    lock(&sb2);
+    assert(temp <100000);
+    unlock(&sb2);*/
     _yield();
   }
 }
