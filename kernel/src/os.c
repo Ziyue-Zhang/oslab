@@ -33,13 +33,13 @@ static void os_run() {
   hello();
   _intr_write(1);
   while (1) {
-    lock(&sb);
-    temp++;
+    //lock(&sb);
+    //temp++;
     //printf("%d\n",temp);
     //void * a = pmm->alloc(temp);
     //pmm->free(a);
     //assert(temp <1000000);
-    unlock(&sb);
+    //unlock(&sb);
     _yield();
   }
 }
