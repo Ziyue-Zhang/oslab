@@ -308,7 +308,7 @@ static Header *enlarge(unsigned nu) {
 		nu = NALLOC;
 	p = sbrk(nu * sizeof(Header));
 	if(p == (char *) -1) {
-		printf("Cannot enlarge because the heap is full");
+		printf("Cannot enlarge because the heap is full\n");
 		assert(0);
 		return NULL;
 	}
@@ -348,7 +348,7 @@ void my_free(void *ap)
 	for(p = freep; !(bp > p && bp < p->next); p = p->next) //insert to fit block
 		if(p >= p->next && (bp > p || bp < p->next))
 			break;		//which is at the end of list
-
+			
 	if(bp +bp->size == p->next) {	//merge whith next
 		bp->size += p->next->size;
 		bp->next = p->next->next;
