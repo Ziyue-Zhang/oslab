@@ -1,13 +1,13 @@
 #define NALLOC 1024
 typedef long Align;
-union header {
+typedef union header {
 	struct {
-		union header *ptr;
+		union header *next;
 		unsigned size;
 	}s;
 	Align x;
-};
-typedef union header Header;
+}Header;
+
 static Header base;
 static Header *freep = NULL;
 void ffree(void *ap);
@@ -24,13 +24,13 @@ void *mmalloc(unsigned nbytes) {
 	Header *p, *prevp;
 	unsigned nunits = (nbytes+sizeof(Header)-1)/sizeof(Header)+1;
     if((prevp=freep)==NULL) {
-		base.s.ptr = freep->s.ptr = prevp->s.ptr = &base;
+		base.s.next = freep->s.next = prevp->s.next = &base;
 		base.s.size = 0;
 	}
-	for (p = prevp->s.ptr;;prevp = p, p=p->s.ptr) {
+	for (p = prevp->s.next;;prevp = p, p=p->s.next) {
 		if(p->s.size>=nunits) {
 			if(p->s.size==nunits)
-				prevp->s.ptr=p->s.ptr;
+				prevp->s.next=p->s.next;
 			else {
 				p->s.size-=nunits;
 				p+=p->s.size;
@@ -61,20 +61,20 @@ void ffree(void *ap)
 {
 	Header *bp, *p;
 	bp = (Header *)ap - 1;
-	for(p = freep; !(bp > p && bp < p->s.ptr); p = p->s.ptr)
-		if(p >= p->s.ptr && (bp > p || bp < p->s.ptr))
+	for(p = freep; !(bp > p && bp < p->s.next); p = p->s.next)
+		if(p >= p->s.next && (bp > p || bp < p->s.next))
 			break;
-	if(bp +bp->s.size == p->s.ptr) {
-		bp->s.size += p->s.ptr->s.size;
-		bp->s.ptr = p->s.ptr->s.ptr;
+	if(bp +bp->s.size == p->s.next) {
+		bp->s.size += p->s.next->s.size;
+		bp->s.next = p->s.next->s.next;
 	}
 	else
-		bp->s.ptr = p->s.ptr;
+		bp->s.next = p->s.next;
 	if(p + p->s.size == bp) {
 		p->s.size += bp->s.size;
-		p->s.ptr = bp->s.ptr;
+		p->s.next = bp->s.next;
 	}
 	else
-		p->s.ptr = bp;
+		p->s.next = bp;
 	freep = p;
 }
