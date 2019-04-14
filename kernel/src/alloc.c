@@ -296,6 +296,7 @@ char *sbrk(int size){
 	if(pm_start + size > pm_end)
 		return (char*)-1;
 	else {
+		printf("%d\n",pm_start);
 		pm_start += size;
 		return (char*) (pm_start - size);
 	}
