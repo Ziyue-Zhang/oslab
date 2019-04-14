@@ -292,7 +292,7 @@ void list_init() {
 	base.size=0;
 }
 
-char *sbrk(int size){
+char *sbrk(int size){	//we have written it in PA
 	if(pm_start + size > pm_end)
 		return (char*)-1;
 	else {
@@ -337,7 +337,7 @@ void *my_alloc(unsigned nbytes) {
 			return (void*) (p+1);
 		}
 		if(p==freep)	//if we cannot find a block, creat a new one
-			if((p=enlarge(nu))==NULL)
+			if((p=enlarge(nu))==NULL)//if we can't enlarge, we will assert in sbrk
 				return NULL;
 	}
 }
@@ -393,7 +393,9 @@ static void *kalloc(size_t size) {
 }
 
 static void kfree(void *ptr) {
+	lock(&alloc_lock);
 	my_free(ptr);
+	unlock(&alloc_lock);
 }
 
 MODULE_DEF(pmm) {
