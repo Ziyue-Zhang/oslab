@@ -22,6 +22,7 @@ int free_num, total;
 
 void mem_init(){
 	free_num = 1;
+	total = MAXSIZE;
 	pool[0].pre = NULL;
 	pool[0].next = &pool[1];
 	pool[0].size = (uintptr_t)_heap.end - (uintptr_t)_heap.start;
@@ -38,8 +39,7 @@ void mem_init(){
 	}
 	head = NULL; 
 	tail = &pool[MAXSIZE-1];
-	if(!tail->next)
-	printf("nmsl\n");
+	assert(!tail->next)
 	free = pool;
 }
 
@@ -54,16 +54,15 @@ void * my_alloc(size_t size) {
 		printf("memory is full!\n");
 		return NULL;
 	}
-	int flag = 1;
-	if(free_num == MAXSIZE){
-		printf("too many fragments!\n");
+	int flag = 1;	
+	if(tail->size != 0){	//all lists are used
+		asssert(total == free_num);
 		flag = 0;
-		return NULL;
 	}
 	assert(free);
 	mem *p=free;
 	int i = 0;
-	while(p || i < free_num){
+	while(p && i < free_num){
 		if(p->size>size)
 			break;
 		i++;
@@ -71,6 +70,7 @@ void * my_alloc(size_t size) {
 	}
 	if(!p){
 		printf("we don't have enough memory\n");
+		assert(p);
 		return NULL;
 	}
 	//printf("%d\n",p->size);
@@ -80,7 +80,7 @@ void * my_alloc(size_t size) {
 			mem *temp=tail;
 			tail = tail->pre;
 			tail->next = NULL;
-      temp->next=p->next;
+      		temp->next=p->next;
 			(p->next)->pre=temp;
 			temp->pre=NULL;
 			temp->size=p->size-size;
