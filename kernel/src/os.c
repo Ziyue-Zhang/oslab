@@ -41,8 +41,9 @@ static void os_run() {
     void * a = pmm->alloc(temp);
     pmm->free(a);
     //pmm->free(a);
+    lock(&sb2);
     assert(temp <100000);
-    //unlock(&sb2);
+    unlock(&sb2);
     _yield();
   }
 }
