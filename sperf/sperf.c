@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
     printf("error!\n");
     return -1;
   }
-  pid = fork();
+  int pid = fork();
   if(pid==0){
     printf("This is son\n");
   }
