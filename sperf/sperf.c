@@ -1,7 +1,6 @@
 #include <stdio.h>
 int fildes[2];
 int main(int argc, char *argv[]) {
-  int pipe(fildes);
   for(int i = 1; i < argc; ++i){
 	  printf("%s\n", argv[i]);
   } 
