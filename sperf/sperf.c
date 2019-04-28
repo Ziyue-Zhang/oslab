@@ -3,7 +3,7 @@
 #include <string.h>
 #include <fcntl.h>
 int fildes[2];
-char mem[100000];
+char mem[1000];
 int main(int argc, char *argv[]) {
   char **myarg = (char **)malloc((argc+2)*sizeof(char *));
   myarg[0]="strace";
@@ -27,9 +27,9 @@ int main(int argc, char *argv[]) {
   else{
     printf("this is father\n");
     dup2(fildes[0], STDIN_FILENO);;
-    while(fgets(mem, 100000, stdin)){
+    while(fgets(mem, 1000, stdin)){
       printf("nmsl\n");
-      //printf("%s", mem);
+      printf("%s", mem);
     }
   }
   return 0;
