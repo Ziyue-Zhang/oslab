@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
   int pid = fork();
   if(pid==0){
     printf("This is son\n");
+    close(fildes[0]);
     dup2(fildes[1],STDERR_FILENO);
     int fd = open("/dev/null", O_WRONLY);
     dup2(fd, STDOUT_FILENO);
@@ -26,6 +27,7 @@ int main(int argc, char *argv[]) {
   }
   else{
     printf("this is father\n");
+    close(fildes[1]);
     dup2(fildes[0], STDIN_FILENO);;
     while(fgets(mem, 1000, stdin)){
       printf("nmsl\n");
