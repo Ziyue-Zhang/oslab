@@ -28,7 +28,8 @@ int main(int argc, char *argv[]) {
   else{
     printf("this is father\n");
     close(fildes[1]);
-    dup2(fildes[0], STDIN_FILENO);;
+    dup2(fildes[0], STDIN_FILENO);
+    sleep(2);
     while(fgets(mem, 1000, stdin)){
       printf("nmsl\n");
       printf("%s", mem);
