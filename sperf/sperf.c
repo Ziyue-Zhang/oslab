@@ -15,18 +15,18 @@ int main(int argc, char *argv[]) {
   int pid = fork();
   if(pid==0){
     printf("This is son\n");
-    dup2(fildes[1],STDERR_FILENO);
     int fd = open("/dev/null", O_WRONLY);
     dup2(fd, STDOUT_FILENO);
+     dup2(fildes[1],STDERR_FILENO);
     execve("/usr/bin/strace", myarg, NULL);
     printf("can you see me?\n");
   }
   else{
     printf("this is father\n");
-    dup2(fildes[0], STDIN_FILENO);
+    /*dup2(fildes[0], STDIN_FILENO);
     while(fgets(mem, 100000, stdin)){
       printf("%s", mem);
-    }
+    }*/
   }
   return 0;
 }
