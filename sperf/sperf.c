@@ -40,7 +40,7 @@ void analysis(char *str){
   for(int j=cunt-1;j>=0;j--){
     res2=res2*10.0+temp[j]-'0';
   }
-  printf("%.1lf\n",res1+res2);
+  printf("lf\n",res1+res2);
 }
 
 int main(int argc, char *argv[]) {
