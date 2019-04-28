@@ -44,10 +44,9 @@ int main(int argc, char *argv[]) {
       analysis(mem); 
       i++;
       if(i%10==0)
-      system("reset");
+      printf("\033[2J");
       usleep(13140);      //to print
     }
-    system("reset");
   }
   return 0;
 }
