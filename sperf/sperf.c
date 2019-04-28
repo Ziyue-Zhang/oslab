@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     printf("this is father\n");
     dup2(fildes[0], STDIN_FILENO);
     while(fgets(mem, 100000, stdin)){
-     // printf("%s", mem);
+      printf("%s", mem);
     }
   }
   return 0;
