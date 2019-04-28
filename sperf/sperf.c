@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     printf("This is son\n");
     dup2(fildes[1],2);
     execve("/usr/bin/strace", myarg,NULL);
-    printf("can you see me?\n")
+    printf("can you see me?\n");
   }
   else{
     printf("this is father\n");
