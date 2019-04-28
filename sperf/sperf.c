@@ -17,15 +17,16 @@ int main(int argc, char *argv[]) {
     for(int i = 1; i < argc; ++i){
 	  myarg[i + 1] = argv[i];
     } 
-     for(int i = 0; i <= argc; ++i){
-	  printf("%s",myarg[i]);
-    } 
+    myarg[argc+1]=NULL;
+     /*for(int i = 0; i <= argc; ++i){
+	  printf("%s ",myarg[i]);
+    } */
     printf("This is son\n");
     close(fildes[0]);
     dup2(fildes[1],STDERR_FILENO);
     int fd = open("/dev/null", O_WRONLY);
     dup2(fd, STDOUT_FILENO);
-    execve("/usr/bin/strace", myarg, NULL);
+    execvp("strace", myarg);
     printf("can you see me?\n");
   }
   else{
