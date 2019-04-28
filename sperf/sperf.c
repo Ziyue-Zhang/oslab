@@ -2,9 +2,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 int fildes[2];
-char *myarg[100]={"strace", "-T"};
 char mem[100000];
 int main(int argc, char *argv[]) {
+  char **myarg = (char **)malloc((argc+2)*sizeof(char *));
+  myarg[0]="strace";
+  myarg[1]="-T";
   for(int i = 1; i < argc; ++i){
 	  myarg[i + 1] = argv[i];
   } 
