@@ -8,7 +8,7 @@ char mem[10000];
 void analysis(char *str){
   int len=strlen(str)-1;
   printf("%c",str[len]);
-  if(str[len]!='>'){
+  if(str[len-1]!='>'){
     sleep(10);
     return;
   }
