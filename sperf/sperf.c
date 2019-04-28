@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     close(fildes[0]);
     printf("This is son\n");
     FILE * fd = fopen("/dev/null", O_WRONLY);
-    dup2(fileno(fd), STDOUT_FILENO);
+    dup2(fileno(fd), "a");
     fclose(fd);
     dup2(fildes[1],STDERR_FILENO);
     close(fildes[1]);
