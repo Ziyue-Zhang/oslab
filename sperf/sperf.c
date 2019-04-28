@@ -43,9 +43,9 @@ int main(int argc, char *argv[]) {
       printf("%s",mem);
       analysis(mem); 
       i++;
-      if(i%10==0)
-      system("reset");
       usleep(13140);      //to print
+      if(i%10==0)
+        system("reset");
     }
   }
   return 0;
