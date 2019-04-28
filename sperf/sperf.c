@@ -3,7 +3,7 @@
 #include <string.h>
 #include <fcntl.h>
 int fildes[2];
-char mem[100000];
+char mem[10000];
 void analysis(char *str){
 
 }
@@ -37,10 +37,10 @@ int main(int argc, char *argv[]) {
     //printf("this is father\n");
     close(fildes[1]);
     dup2(fildes[0], STDIN_FILENO);
-    while(fgets(mem, 100000, stdin)){
+    while(fgets(mem, 10000, stdin)){
       printf("%s",mem);
       analysis(mem);
-      usleep(400000);      //avoid this programe stop
+      usleep(13140);      //to print
     }
   }
   return 0;
