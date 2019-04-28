@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
@@ -40,7 +41,7 @@ int main(int argc, char *argv[]) {
     while(fgets(mem, 10000, stdin)){
       printf("%s",mem);
       analysis(mem);
-      printf("\033[2J");
+      system(“cls”);
       usleep(13140);      //to print
     }
   }
