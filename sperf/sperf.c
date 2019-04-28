@@ -37,11 +37,11 @@ int main(int argc, char *argv[]) {
     //printf("this is father\n");
     close(fildes[1]);
     dup2(fildes[0], STDIN_FILENO);
-    sleep(2);
+    usleep(40000);
     while(fgets(mem, 100000, stdin)){
       printf("%s",mem);
       analysis(mem);
-      usleep(2000);
+      usleep(40000);
     }
   }
   return 0;
