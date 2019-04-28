@@ -38,9 +38,13 @@ int main(int argc, char *argv[]) {
     //printf("this is father\n");
     close(fildes[1]);
     dup2(fildes[0], STDIN_FILENO);
+    int i=0;
     while(fgets(mem, 10000, stdin)){
       printf("%s",mem);
       analysis(mem); 
+      i++;
+      if(i%10==0)
+      system("reset");
       usleep(13140);      //to print
     }
     system("reset");
