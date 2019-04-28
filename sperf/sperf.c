@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
      /*for(int i = 0; i <= argc; ++i){
 	  printf("%s ",myarg[i]);
     } */
-    printf("This is son\n");
+    //printf("This is son\n");
     close(fildes[0]);
     dup2(fildes[1],STDERR_FILENO);
     int fd = open("/dev/null", O_WRONLY);
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     printf("can you see me?\n");
   }
   else{
-    printf("this is father\n");
+    //printf("this is father\n");
     close(fildes[1]);
     dup2(fildes[0], STDIN_FILENO);
     while(fgets(mem, 1000, stdin)){
