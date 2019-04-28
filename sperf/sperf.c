@@ -5,18 +5,18 @@
 int fildes[2];
 char mem[1000];
 int main(int argc, char *argv[]) {
-  char **myarg = (char **)malloc((argc+2)*sizeof(char *));
-  myarg[0]="strace";
-  myarg[1]="-T";
-  for(int i = 1; i < argc; ++i){
-	  myarg[i + 1] = argv[i];
-  } 
   if(pipe(fildes)!=0){
     printf("error!\n");
     return -1;
   }
   int pid = fork();
   if(pid==0){
+     char **myarg = (char **)malloc((argc+2)*sizeof(char *));
+    myarg[0]="strace";
+    myarg[1]="-T";
+    for(int i = 1; i < argc; ++i){
+	  myarg[i + 1] = argv[i];
+    } 
     printf("This is son\n");
     close(fildes[0]);
     dup2(fildes[1],STDERR_FILENO);
