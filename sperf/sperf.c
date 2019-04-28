@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <unistd.h>
 int fildes[2];
+char *myarg[100]={"strace", "-T"};
 int main(int argc, char *argv[]) {
   for(int i = 1; i < argc; ++i){
-	  printf("%s\n", argv[i]);
+	  myarg[i + 1] = argv[i];
   } 
   if(pipe(fildes)!=0){
     printf("error!\n");
@@ -12,9 +13,18 @@ int main(int argc, char *argv[]) {
   int pid = fork();
   if(pid==0){
     printf("This is son\n");
+    dup2(fildes[1],2);
+    execeve("/usr/bin/strace", myarg,NULL);
+    printf("can you see me?\n")
   }
   else{
     printf("this is father\n");
+    char str[1000000];
+    while(1){
+      int num = read(fildes[0],str,sizeof(str));
+      for(int i = 0; i < num; i++);
+        printf("%c", str[i]);
+    }
   }
   return 0;
 }
