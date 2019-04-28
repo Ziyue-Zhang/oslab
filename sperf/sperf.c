@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <fcntl.h>
 int fildes[2];
 char *myarg[100]={"strace", "-T"};
 int main(int argc, char *argv[]) {
@@ -13,7 +14,9 @@ int main(int argc, char *argv[]) {
   int pid = fork();
   if(pid==0){
     printf("This is son\n");
-    //dup2(fildes[1],2);
+    dup2(fildes[1],STDERR_FILENO);
+    int fd = open("/dev/null", O_WRONLY);
+    dup2(fd, STDOUT_FILENO);
     execve("/usr/bin/strace", myarg, NULL);
     printf("can you see me?\n");
   }
