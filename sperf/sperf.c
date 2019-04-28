@@ -3,7 +3,11 @@
 #include <string.h>
 #include <fcntl.h>
 int fildes[2];
-char mem[1000];
+char mem[100000];
+void analysis(char *str){
+
+}
+
 int main(int argc, char *argv[]) {
   if(pipe(fildes)!=0){
     printf("error!\n");
@@ -33,8 +37,11 @@ int main(int argc, char *argv[]) {
     //printf("this is father\n");
     close(fildes[1]);
     dup2(fildes[0], STDIN_FILENO);
-    while(fgets(mem, 1000, stdin)){
+    sleep(2);
+    while(fgets(mem, 100000, stdin)){
       printf("%s",mem);
+      analysis(mem);
+      sleep(2);
     }
   }
   return 0;
