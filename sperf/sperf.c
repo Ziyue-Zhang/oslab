@@ -7,6 +7,7 @@ int fildes[2];
 char mem[10000];
 void analysis(char *str){
   int len=strlen(str)-1;
+  printf("%c",str[len]);
   if(str[len]!='>'){
     sleep(10);
     return;
