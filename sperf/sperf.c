@@ -62,7 +62,7 @@ void analysis(char *str){
 
 void pirnt(){
   system("reset");
-  for(int i; i < cunt; i++){
+  for(int i=0; i < cunt; i++){
     printf("name:%s\ttime:%.6lf\t%.2lf%%\n", func[i].name,func[i].time,func[2].time*100.0/total);
   }
 }
@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
     while(fgets(mem, 10000, stdin)){
       printf("%s",mem);
       analysis(mem); 
-      ptint();
+      print();
       usleep(40000);      //to print
       /*if(i%10==0)
         system("reset");*/
