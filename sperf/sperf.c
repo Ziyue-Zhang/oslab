@@ -60,7 +60,7 @@ void analysis(char *str){
   add(name, res1+res2);
 }
 
-void pirnt(){
+void print(){
   system("reset");
   for(int i=0; i < cunt; i++){
     printf("name:%s\ttime:%.6lf\t%.2lf%%\n", func[i].name,func[i].time,func[2].time*100.0/total);
