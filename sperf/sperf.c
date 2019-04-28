@@ -64,7 +64,7 @@ void print(){
 	printf("\033[2J");
 	printf("\033[0;0H");
   for(int i=0; i < cunt; i++){
-    printf("name:%+20s\ttime:%.6lf\t%.2lf%%\n", func[i].name,func[i].time,func[i].time*100.0/total);
+    printf("name:%-20s\ttime:%.6lf\t%.2lf%%\n", func[i].name,func[i].time,func[i].time*100.0/total);
   }
 }
 int main(int argc, char *argv[]) {
