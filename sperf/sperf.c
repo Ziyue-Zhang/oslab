@@ -5,13 +5,42 @@
 #include <fcntl.h>
 int fildes[2];
 char mem[10000];
+char name[80];
+
 void analysis(char *str){
   int len=strlen(str)-1;
-  printf("%c",str[len]);
-  if(str[len-1]!='>'){
-    sleep(10);
+  if(str[len-1]!='>' || str[0]=='+'){
     return;
   }
+  int i=0;
+  for(;str[i]!='(';i++)
+    name[i]=str[i];
+  name[i]='\0';
+  i = len;
+  while(i){
+    if('0'<=str[i] && str[i]<='9')
+      break;
+    i--;
+  }
+  int cunt=0;
+  char temp[80];
+  for(;str[i]!='.';i--,cunt++){
+    temp[cunt]=str[i];
+  }
+  double res1=0,res2=0;
+  for(int j=0;j<cunt;j++){
+    res1+=temp[j]-'0';
+    res1/=10.0;
+  }
+  cunt=0;
+  i--;
+  for(;str[i]!='<';i--,cunt++){
+    temp[cunt]=str[i];
+  }
+  for(int j=cunt-1;j>=0;j--){
+    res2=res2*10.0+temp[j]-'0';
+  }
+  printf("%.1lf\n",res1+res2);
 }
 
 int main(int argc, char *argv[]) {
