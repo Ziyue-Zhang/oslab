@@ -30,8 +30,8 @@ int main(int argc, char *argv[]) {
   else{
     close(fildes[1]);
     printf("this is father\n");
-    close(fildes[0]);
     dup2(fildes[0], STDIN_FILENO);
+    close(fildes[0]);
     while(fgets(mem, 100000, stdin)){
       printf("%s", mem);
     }
