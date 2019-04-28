@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	  myarg[i + 1] = argv[i];
     } 
      for(int i = 0; i < argc; ++i){
-	  printf("%s",argv[i]);
+	  printf("%s",myarg[i]);
     } 
     printf("This is son\n");
     close(fildes[0]);
