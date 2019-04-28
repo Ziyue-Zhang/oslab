@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     char str[1000000];
     while(1){
       int num = read(fildes[0],str,sizeof(str));
-      for(int i = 0; i < num; i++);
+      for(int i = 0; i < num; i++)
         printf("%c", str[i]);
     }
   }
