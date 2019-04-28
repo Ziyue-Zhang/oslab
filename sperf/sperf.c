@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     while(fgets(mem, 10000, stdin)){
       printf("%s",mem);
       analysis(mem);
-      system(“cls”);
+      system("reset"); 
       usleep(13140);      //to print
     }
   }
