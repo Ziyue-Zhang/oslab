@@ -6,7 +6,11 @@
 int fildes[2];
 char mem[10000];
 void analysis(char *str){
-
+  int len=strlen(str)-1;
+  if(str[len]!='>'){
+    sleep(10);
+    return;
+  }
 }
 
 int main(int argc, char *argv[]) {
