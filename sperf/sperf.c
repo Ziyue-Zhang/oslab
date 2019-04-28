@@ -11,11 +11,14 @@ int main(int argc, char *argv[]) {
   }
   int pid = fork();
   if(pid==0){
-     char **myarg = (char **)malloc((argc+2)*sizeof(char *));
+    char **myarg = (char **)malloc((argc+2)*sizeof(char *));
     myarg[0]="strace";
     myarg[1]="-T";
     for(int i = 1; i < argc; ++i){
 	  myarg[i + 1] = argv[i];
+    } 
+     for(int i = 0; i < argc; ++i){
+	  printf("%s",argv[i]);
     } 
     printf("This is son\n");
     close(fildes[0]);
