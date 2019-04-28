@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     printf("this is father\n");
     dup2(fildes[0], STDIN_FILENO);
     while(fhets(mem, 100000, stdin)){
-      printf("%s", buf);
+      printf("%s", men);
     }
   }
   return 0;
