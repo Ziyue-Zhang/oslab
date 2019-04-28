@@ -26,12 +26,11 @@ int main(int argc, char *argv[]) {
     printf("can you see me?\n");
   }
   else{
-    sleep(10);
     printf("this is father\n");
     close(fildes[1]);
     dup2(fildes[0], STDIN_FILENO);
     while(fgets(mem, 1000, stdin)){
-      printf("nmsl\n");
+      printf("aaa\n");
       printf("%s", mem);
     }
   }
