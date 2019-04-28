@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
     while(fgets(mem, 100000, stdin)){
       printf("%s",mem);
       analysis(mem);
-      usleep(40000);      //avoid this programe stop
+      usleep(400000);      //avoid this programe stop
     }
   }
   return 0;
