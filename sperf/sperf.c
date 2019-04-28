@@ -3,10 +3,26 @@
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
+struct Node{
+  char name[80];
+  double time;
+}func[3000];
 int fildes[2];
 char mem[10000];
 char name[80];
-
+int cunt;
+double total;
+void add(char *str, double time){
+  total+=time;
+  for(int i=0;i<cunt;i++){
+    if(strcmp(str,func[i].name)==0){
+      func[i].time+=time;
+      return;
+    }
+  }
+  strcpy(func[cunt].name,str);
+  func[cunt++].time=time;
+}
 void analysis(char *str){
   int len=strlen(str)-1;
   if(str[len-1]!='>' || str[0]=='+'){
@@ -22,28 +38,36 @@ void analysis(char *str){
       break;
     i--;
   }
-  int cunt=0;
+  int cunt0=0;
   char temp[80];
-  for(;str[i]!='.';i--,cunt++){
-    temp[cunt]=str[i];
+  for(;str[i]!='.';i--,cunt0++){
+    temp[cunt0]=str[i];
   }
   double res1=0,res2=0;
-  for(int j=0;j<cunt;j++){
+  for(int j=0;j<cunt0;j++){
     res1+=temp[j]-'0';
     res1/=10.0;
   }
-  cunt=0;
+  cunt0=0;
   i--;
-  for(;str[i]!='<';i--,cunt++){
-    temp[cunt]=str[i];
+  for(;str[i]!='<';i--,cunt0++){
+    temp[cunt0]=str[i];
   }
-  for(int j=cunt-1;j>=0;j--){
+  for(int j=cunt0-1;j>=0;j--){
     res2=res2*10.0+temp[j]-'0';
   }
-  printf("%lf\n",res1+res2);
+  //printf("%lf\n",res1+res2);
+  add(name, res1+res2);
 }
 
+void pirnt(){
+  system("reset");
+  //for(int i)
+}
 int main(int argc, char *argv[]) {
+  printf("\033[0;0H");
+  cunt=0;
+  total=0;
   if(pipe(fildes)!=0){
     printf("error!\n");
     return -1;
@@ -72,12 +96,10 @@ int main(int argc, char *argv[]) {
     //printf("this is father\n");
     close(fildes[1]);
     dup2(fildes[0], STDIN_FILENO);
-    int i=0;
     while(fgets(mem, 10000, stdin)){
       printf("%s",mem);
       analysis(mem); 
-      i++;
-      usleep(13140);      //to print
+      usleep(40000);      //to print
       /*if(i%10==0)
         system("reset");*/
     }
