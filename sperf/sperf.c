@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
   if(pid==0){
     printf("This is son\n");
     dup2(fildes[1],2);
-    execeve("/usr/bin/strace", myarg,NULL);
+    execve("/usr/bin/strace", myarg,NULL);
     printf("can you see me?\n")
   }
   else{
