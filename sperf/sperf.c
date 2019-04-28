@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
   if(pid==0){
     close(fildes[0]);
     printf("This is son\n");
-    FILE * fd = fopen("/dev/null", O_WRONLY);
-    dup2(fileno(fd), "a");
+    FILE * fd = fopen("/dev/null", "a");
+    dup2(fileno(fd), STDOUT_FILENO);
     fclose(fd);
     dup2(fildes[1],STDERR_FILENO);
     close(fildes[1]);
