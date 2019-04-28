@@ -40,10 +40,10 @@ int main(int argc, char *argv[]) {
     dup2(fildes[0], STDIN_FILENO);
     while(fgets(mem, 10000, stdin)){
       printf("%s",mem);
-      analysis(mem);
-      system("reset"); 
+      analysis(mem); 
       usleep(13140);      //to print
     }
+    system("reset");
   }
   return 0;
 }
