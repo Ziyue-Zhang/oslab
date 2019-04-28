@@ -3,6 +3,7 @@
 #include <fcntl.h>
 int fildes[2];
 char *myarg[100]={"strace", "-T"};
+char mem[100000];
 int main(int argc, char *argv[]) {
   for(int i = 1; i < argc; ++i){
 	  myarg[i + 1] = argv[i];
@@ -22,12 +23,10 @@ int main(int argc, char *argv[]) {
   }
   else{
     printf("this is father\n");
-    /*char str[1000000];
-    while(1){
-      int num = read(fildes[0],str,1000000);
-      for(int i = 0; i < num; i++)
-        printf("%c", str[i]);
-    }*/
+    dup2(fildes[0], STDIN_FILENO);
+    while(fhets(mem, 100000, stdin)){
+      printf("%s", buf);
+    }
   }
   return 0;
 }
