@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     close(fildes[1]);
     dup2(fildes[0], STDIN_FILENO);
     while(fgets(mem, 1000, stdin)){
-      printf("%s\n",mem);
+      printf("%s",mem);
     }
   }
   return 0;
