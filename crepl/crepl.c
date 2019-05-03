@@ -28,12 +28,12 @@ int main(int argc, char *argv[]) {
      sprintf(name,"__expr_wrap_%d",cnt);
      cnt++;
      FILE *fp=fopen("/tmp/a.c", "a");
-     printf("nmsl\n");
      if(!fp)
        assert(0);
      fprintf(fp,"%s", expr);
      fclose(fp);
      system("gcc /tmp/a.c -shared -fPIC -o /tmp/a.so -ldl");
+     printf("nmsl\n");
      void *so = dlopen("/tmp/a.so", RTLD_LAZY);
      int (*func)()=dlsym(so,name);
      int value=func();
