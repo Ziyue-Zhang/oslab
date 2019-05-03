@@ -33,9 +33,10 @@ int main(int argc, char *argv[]) {
      fprintf(fp,"%s", expr);
      fclose(fp);
      system("gcc /tmp/a.c -shared -fPIC -o /tmp/a.so -ldl");
-     printf("nmsl\n");
      void *so = dlopen("/tmp/a.so", RTLD_LAZY);
+     printf("nmsl\n");
      int (*func)()=dlsym(so,name);
+     printf("nmsl\n");
      int value=func();
      printf(">> %s = %d.\n", str, value);
      dlclose(so);
