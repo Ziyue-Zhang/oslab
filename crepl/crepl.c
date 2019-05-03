@@ -24,11 +24,11 @@ int main(int argc, char *argv[]) {
      expr[0]='\0';  //clear
      name[0]='\0';
      str[strlen(str)-1]='\0';
-     printf("nmsl\n");
      sprintf(expr,"int __expr_wrap_%d() { return (%s);}\n", cnt, str);
      sprintf(name,"__expr_wrap_%d",cnt);
      cnt++;
      FILE *fp=fopen("/tmp/a.c", "a");
+     printf("nmsl\n");
      if(!fp)
        assert(0);
      fprintf(fp,"%s", expr);
