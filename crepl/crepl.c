@@ -34,9 +34,9 @@ int main(int argc, char *argv[]) {
      fprintf(fp,"%s", expr);
      fclose(fp);
      if(sizeof(void *)==8)
-      system("gcc /tmp/a.c -m32 -shared -fPIC -o /tmp/a.so -ldl");
-     else
       system("gcc /tmp/a.c -shared -fPIC -o /tmp/a.so -ldl");
+     else
+      system("gcc /tmp/a.c -m32 -shared -fPIC -o /tmp/a.so -ldl");
      void *so = dlopen("/tmp/a.so", RTLD_LAZY);
      int (*func)()=dlsym(so,name);
      int value=func();
