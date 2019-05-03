@@ -38,6 +38,7 @@ int main(int argc, char *argv[]) {
      int (*func)()=dlsym(so,name);
      printf("nmsl\n");
      int value=func();
+     printf("nmsl\n");
      printf(">> %s = %d.\n", str, value);
      dlclose(so);
    }
