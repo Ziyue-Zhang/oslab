@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
+#include <stdlib.h>
 #define N 10000
 int cnt;
 char str[N];
@@ -28,6 +29,7 @@ int main(int argc, char *argv[]) {
        assert(0);
      fprintf(fp,"%s", expr);
      fclose(fp);
+     system("gcc /tmp/a.c -shared -fPIC -o /tmp/a.so -ldl");
    }
   }
   return 0;
