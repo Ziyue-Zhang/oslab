@@ -11,7 +11,7 @@ char name[N];
 int main(int argc, char *argv[]) {
   cnt=0;
   FILE *fp=fopen("/tmp/a.c", "w");  //clear it
-  remove("/tmp/a.so");
+  remove("/tmp/a.so");  //delete it, 32bit can't use 64bit .so
   fclose(fp);
   while(fgets(str, N, stdin)){
    if(str[0]=='i'&&str[1]=='n'&&str[2]=='t'){
