@@ -1,6 +1,7 @@
 #include <dlfcn.h>
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 #define N 10000
 int cnt;
 char str[N];
@@ -19,7 +20,8 @@ int main(int argc, char *argv[]) {
    }
    else {
      expr[0]='\0';  //clear
-     sprintf(expr,"int __expr_wrap_%d() { return (%s);}", cnt, str);
+     str[strlen(str)-1]='\0';
+     sprintf(expr,"int __expr_wrap_%d() { return (%s);}\n", cnt, str);
      cnt++;
      FILE *fp=fopen("/tmp/a.c", "a");
      if(!fp)
