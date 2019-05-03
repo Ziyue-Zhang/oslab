@@ -1,5 +1,6 @@
 #include <dlfcn.h>
 #include <stdio.h>
+#include <assert.h>
 #define N 10000
 int cnt;
 char str[N];
