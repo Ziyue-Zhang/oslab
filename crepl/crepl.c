@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
   while(fgets(str, N, stdin)){
    if(str[0]=='i'&&str[1]=='n'&&str[2]=='t'){
      int i=0;
-     for(int j=4;str[j]!=' ';j++,i++){
+     for(int j=4;str[j]!=' ' && str[j]!='(';j++,i++){
        fun[num].name[i]=str[j];
      }
      fun[num].name[i]='\0';
