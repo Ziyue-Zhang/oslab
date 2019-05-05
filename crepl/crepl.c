@@ -46,6 +46,8 @@ int main(int argc, char *argv[]) {
    }
    else {
      bool flag=false;
+	 if(str[0]='\n')
+		 flag=true;
      for(int i=0;i<strlen(str);i++){
       if((str[i]>='a'&&str[i]<='z')||(str[i]>='A'&&str[i]<='Z')||str[i]=='_') {
        if(str[i+1]=='\n'||str[i+1]=='\0'){
