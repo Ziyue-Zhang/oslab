@@ -19,7 +19,6 @@ int main(int argc, char *argv[]) {
   fclose(fp);
   printf(">> ");
   while(fgets(str, N, stdin)){
-   printf(">> \n");
    if(str[0]=='i'&&str[1]=='n'&&str[2]=='t'){
      int i=0;
      for(int j=4;str[j]!=' ' && str[j]!='(';j++,i++){
@@ -65,6 +64,7 @@ int main(int argc, char *argv[]) {
      printf("  %s = %d.\n", str, value);
      dlclose(so);
    }
+   printf(">> \n");
   }
   return 0;
 }
