@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
       }
      }
      num++;
-     if(true){
+     if(flag){
       printf("Error:You have defined this function\n");
       continue;
      }
