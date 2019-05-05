@@ -3,18 +3,38 @@
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #define N 10000
-int cnt;
+int cnt,num;
 char str[N];
 char expr[N];
 char name[N];
+struct Node{
+  char name[80];
+}fun[10000];
 int main(int argc, char *argv[]) {
-  cnt=0;
+  cnt=num=0;
   FILE *fp=fopen("/tmp/a.c", "w");  //clear it
   remove("/tmp/a.so");  //delete it, 32bit can't use 64bit .so
   fclose(fp);
   while(fgets(str, N, stdin)){
    if(str[0]=='i'&&str[1]=='n'&&str[2]=='t'){
+     int i=0;
+     for(int j=4;str[j]!=' ';j++,i++){
+       fun[num].name[i]=str[j];
+     }
+     fun[num].name[i]='\0';
+     bool flag=false;
+     for(i=0;i<num;i++){
+      if(strcmp(fun[num].name,fun[i].name)==0){
+        flag=true;
+      }
+     }
+     num++;
+     if(true){
+      printf("Error:You have defined this function\n");
+      continue;
+     }
      FILE *fp=fopen("/tmp/a.c", "a");
      if(!fp)
        assert(0);
