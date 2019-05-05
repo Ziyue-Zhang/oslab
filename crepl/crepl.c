@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
   remove("/tmp/a.so");  //delete it, 32bit can't use 64bit .so
   fclose(fp);
   while(fgets(str, N, stdin)){
+   printf(">> \n");
    if(str[0]=='i'&&str[1]=='n'&&str[2]=='t'){
      int i=0;
      for(int j=4;str[j]!=' ' && str[j]!='(';j++,i++){
@@ -60,7 +61,7 @@ int main(int argc, char *argv[]) {
      void *so = dlopen("/tmp/a.so", RTLD_LAZY);
      int (*func)()=dlsym(so,name);
      int value=func();
-     printf(">> %s = %d.\n", str, value);
+     printf("  %s = %d.\n", str, value);
      dlclose(so);
    }
   }
