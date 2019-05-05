@@ -54,6 +54,7 @@ int main(int argc, char *argv[]) {
          flag=true;
          break;
        }       
+      }
      }
      if(flag){
      printf("  Compile Error.\n");
