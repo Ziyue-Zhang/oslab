@@ -48,11 +48,19 @@ int main(int argc, char *argv[]) {
      bool flag=false;
      for(int i=0;i<strlen(str);i++){
       if((str[i]>='a'&&str[i]<='z')||(str[i]>='A'&&str[i]<='Z')||str[i]=='_') {
-       if((str[i+1]>='a'&&str[i+1]<='z')||(str[i+1]>='A'&&str[i+1]<='Z')||str[i+1]=='('||str[i+1]=='_'){
+       if(str[i+1]=='\0'){
+		   flag = true;
+		   break;
        }
-       else{
-         flag=true;
-         break;
+       else if(str[i+1]==' '){
+         int j=i+1;
+		 while(str[j]==' '){
+			 j++;
+		 }
+		 if(str[j]!='('){
+			flag=true;
+			break;
+		 }
        }       
       }
      }
