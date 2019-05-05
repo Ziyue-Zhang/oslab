@@ -42,9 +42,7 @@ int main(int argc, char *argv[]) {
        assert(0);
      fprintf(fp,"%s", str);
      fclose(fp);
-   }
-   else if(('a'<=str[0] && str[0]<='z')||('A'<=str[0] && str[0]<='Z')){
-     printf("Compile Error\n");
+     printf("  Added: %s",str);
    }
    else {
      expr[0]='\0';  //clear
