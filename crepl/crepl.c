@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
      printf("  (%s) = %d.\n", str, value);
      dlclose(so);
    }
-   printf(">> \n");
+   printf(">> ");
   }
   return 0;
 }
