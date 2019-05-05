@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
   FILE *fp=fopen("/tmp/a.c", "w");  //clear it
   remove("/tmp/a.so");  //delete it, 32bit can't use 64bit .so
   fclose(fp);
+  printf(">> \n");
   while(fgets(str, N, stdin)){
    printf(">> \n");
    if(str[0]=='i'&&str[1]=='n'&&str[2]=='t'){
