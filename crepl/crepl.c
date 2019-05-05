@@ -45,6 +45,7 @@ int main(int argc, char *argv[]) {
      printf("  Added: %s",str);
    }
    else {
+	   printf("nmsl\n");
      bool flag=false;
      for(int i=0;i<strlen(str);i++){
       if((str[i]>='a'&&str[i]<='z')||(str[i]>='A'&&str[i]<='Z')||str[i]=='_') {
