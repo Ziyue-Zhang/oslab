@@ -19,6 +19,23 @@ int main(int argc, char *argv[]) {
   fclose(fp);
   printf(">> ");
   while(fgets(str, N, stdin)){
+   bool flag=false;
+   for(int i=0;i<strlen(str);i++){
+     if((str[i]>='a'&&str[i]<='z')||(str[i]>='A'&&str[i]<='Z')) {
+       if((str[i+1]>='a'&&str[i+1]<='z')||(str[i+1]>='A'&&str[i+1]<='Z')||str[i+1]=='('){
+
+       }
+       else{
+         flag=true;
+         break;
+       }       
+     }
+   }
+   if(flag){
+     printf("  Compile Error.\n");
+     printf(">> ");
+     continue;
+   }
    if(str[0]=='i'&&str[1]=='n'&&str[2]=='t'){
      int i=0;
      for(int j=4;str[j]!=' ' && str[j]!='(';j++,i++){
@@ -33,7 +50,7 @@ int main(int argc, char *argv[]) {
      }
      num++;
      if(flag){
-      printf("Error:You have defined this function\n");
+      printf("Error:You have defined this function.\n");
       printf(">> ");
       continue;
      }
