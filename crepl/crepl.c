@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
      num++;
      if(flag){
       printf("Error:You have defined this function\n");
+      printf(">> ");
       continue;
      }
      FILE *fp=fopen("/tmp/a.c", "a");
@@ -41,6 +42,9 @@ int main(int argc, char *argv[]) {
        assert(0);
      fprintf(fp,"%s", str);
      fclose(fp);
+   }
+   else if(('a'<=str[0] && str[0]<='z')||('A'<=str[0] && str[0]<='Z')){
+     printf("Compile Error\n");
    }
    else {
      expr[0]='\0';  //clear
@@ -61,7 +65,7 @@ int main(int argc, char *argv[]) {
      void *so = dlopen("/tmp/a.so", RTLD_LAZY);
      int (*func)()=dlsym(so,name);
      int value=func();
-     printf("  %s = %d.\n", str, value);
+     printf("  (%s) = %d.\n", str, value);
      dlclose(so);
    }
    printf(">> \n");
