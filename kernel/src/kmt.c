@@ -4,42 +4,42 @@ typedef struct task task_t;
 typedef struct spinlock spinlock_t;
 typedef struct semaphore sem_t;
 
- static void init(){
+ static void kmt_init(){
 
  }
- static int create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
+ static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
 	 return 0;
  }
- static void teardown(task_t *task){
+ static void kmt_teardown(task_t *task){
 
  }
- static void spin_init(spinlock_t *lk, const char *name){
+ static void kmt_spin_init(spinlock_t *lk, const char *name){
 
  }
- static void spin_lock(spinlock_t *lk){
+ static void kmt_spin_lock(spinlock_t *lk){
 
  }
- static void spin_unlock(spinlock_t *lk){
+ static void kmt_spin_unlock(spinlock_t *lk){
 
  }
- static void sem_init(sem_t *sem, const char *name, int value){
+ static void kmt_sem_init(sem_t *sem, const char *name, int value){
 
  }
- static void sem_wait(sem_t *sem){
+ static void kmt_sem_wait(sem_t *sem){
 
  }
- static void sem_signal(sem_t *sem){
-	 
+ static void kmt_sem_signal(sem_t *sem){
+
  }
 
-typedef struct {
-  void (*init)();
-  int (*create)(task_t *task, const char *name, void (*entry)(void *arg), void *arg);
-  void (*teardown)(task_t *task);
-  void (*spin_init)(spinlock_t *lk, const char *name);
-  void (*spin_lock)(spinlock_t *lk);
-  void (*spin_unlock)(spinlock_t *lk);
-  void (*sem_init)(sem_t *sem, const char *name, int value);
-  void (*sem_wait)(sem_t *sem);
-  void (*sem_signal)(sem_t *sem);
-} MODULE(kmt);
+MODULE_DEF(kmt){
+  .init = kmt_init;
+  .create = kmt_create;
+  .teardown = kmt_teardown;
+  .spin_init = kmt_spin_init;
+  .spin_lock = kmt_spin_lock;
+  .spin_unlock = kmt_spin_unlock;
+  .sem_init = kmt_sem_init;
+  .sem_wait = kmt_sem_wait;
+  .sem_signal = kmt_sem_signal;
+};
