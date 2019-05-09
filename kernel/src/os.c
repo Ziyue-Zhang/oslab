@@ -20,6 +20,9 @@ int temp=0;
 intptr_t sb1=0,sb2=0;
 static void os_init() {
   pmm->init();
+  kmt->init();
+  _vme_init(pmm->alloc, pmm->free);
+  dev->init();
 }
 
 static void hello() {
