@@ -14,9 +14,9 @@ void panic(char *str){
 void pushcli(void){
   int eflags = get_efl();
   cli();
-  //if(mycpu[_cup()].ncli == 0)
+  if(mycpu[_cpu()].ncli == 0)
     mycpu[_cpu()].intena = eflags & FL_IF;
-  mycpu[_cup()].ncli += 1;
+  mycpu[_cpu()].ncli += 1;
 }
 
 void popcli(void){
