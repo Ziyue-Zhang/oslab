@@ -67,7 +67,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 
  }
  static void kmt_spin_init(spinlock_t *lk, const char *name){
-   lk = (spinlock_t *)pmm->alloc(sizeof(sinplock_t));
+   lk = (spinlock_t *)pmm->alloc(sizeof(spinlock_t));
    lk->name = name;
    lk->locked = 0;
    lk->cpu = -1;    //this lock isn't on cpu 0,so we can't use 0
