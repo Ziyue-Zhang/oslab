@@ -12,7 +12,7 @@ struct task {
     char stack[4096];
 };
 struct spinlock {
-    unsigned int locked;
+    int locked;
     const char *name;       //use const
     int cpu;
     unsigned int pcs[10];
