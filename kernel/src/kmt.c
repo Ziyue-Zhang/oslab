@@ -15,7 +15,7 @@ void pushcli(void){
   int eflags = get_efl();
   cli();
   if(mycpu[_cup()].ncli == 0)
-    mycpu[_cup()].intena = eflags & FL_IF;
+    mycpu[_cpu()].intena = eflags & FL_IF;
   mycpu[_cup()].ncli += 1;
 }
 
