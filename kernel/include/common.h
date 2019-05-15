@@ -15,7 +15,7 @@ struct spinlock {
     int locked;
     const char *name;       //use const
     int cpu;
-    unsigned int pcs[10];
+    //unsigned int pcs[10];
 };
 struct semaphore {};
 struct Mycpu {
