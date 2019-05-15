@@ -12,10 +12,10 @@ struct task {
     char stack[4096];
 };
 struct spinlock {
-    uint locked;
+    unsigned int locked;
     char *name;
     int cpu;
-    uint pcs[10];
+    unsigned int pcs[10];
 };
 struct semaphore {};
 struct Mycpu {
