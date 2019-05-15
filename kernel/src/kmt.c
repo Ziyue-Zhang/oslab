@@ -10,12 +10,6 @@ void panic(char *str){
   printf("%s\n", str);
   _halt(1);
 }
-void cli() {
-	asm volatile ("cli");
-}
-void sti() {
-	asm volatile ("sti");
-}
 
 void pushcli(void){
   int eflags = get_efl();
