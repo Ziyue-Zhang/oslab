@@ -29,7 +29,7 @@ void popcli(void){
     panic("popcli - interruptible");
   if(mycpu[_cup()].ncli < 0)
     panic("popcli");
-  if(mycpu[_cup()].ncli == 0 && mycpu[_cup()].intena)
+  if(mycpu[_cpu()].ncli == 0 && mycpu[_cup()].intena)
     sti();
 }
 int holding(struct spinlock *lock){
