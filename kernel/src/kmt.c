@@ -6,6 +6,8 @@ typedef struct task task_t;
 typedef struct spinlock spinlock_t;
 typedef struct semaphore sem_t;
 
+
+int ncpu;
 void panic(char *str){
   printf("%s\n", str);
   _halt(1);
@@ -52,8 +54,14 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  static void kmt_sem_signal(sem_t *sem);
 
  static void kmt_init(){
-	os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
-  os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
+   ncpu = _ncpu();
+   for(int i = 0; i < 8;i++){
+     mycpu[i].intena=1;   //interruptible
+     mycpu[i].ncli=0;
+   }
+
+	 os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
+   os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
 	 return 0;
