@@ -1,6 +1,7 @@
 #include <common.h>
 #include <klib.h>
 #include <am.h>
+#include <x86.h>
 typedef struct task task_t;
 typedef struct spinlock spinlock_t;
 typedef struct semaphore sem_t;
