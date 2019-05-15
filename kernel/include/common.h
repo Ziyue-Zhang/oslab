@@ -4,8 +4,22 @@
 #include <kernel.h>
 #include <nanos.h>
 
-struct task {};
-struct spinlock {};
+#define INT_MAX 2147483647
+#define INT_MIN (-INT_MAX - 1)
+struct task {
+    const char *name;
+    _Context context;
+    char stack[4096];
+};
+struct spinlock {
+    uint locked;
+    char *name;
+    int cpu;
+    uint pcs[10];
+};
 struct semaphore {};
-
+struct Mycpu {
+    int ncli;
+    int intena;
+}mycpu[8];
 #endif

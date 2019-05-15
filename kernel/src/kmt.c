@@ -1,9 +1,51 @@
 #include <common.h>
 #include <klib.h>
+#include <am.h>
 typedef struct task task_t;
 typedef struct spinlock spinlock_t;
 typedef struct semaphore sem_t;
 
+void panic(char *str){
+  printf("%s\n", str);
+  _halt(1);
+}
+void cli() {
+	asm volatile ("cli");
+}
+void sti() {
+	asm volatile ("sti");
+}
+
+void pushcli(void){
+  int eflags = get_efl();
+  cli();
+  if(mycpu[_cup()].ncli == 0)
+    mycpu[_cup()].intena = eflags & FL_IF;
+  mycpu[_cup()].ncli += 1;
+}
+
+void popcli(void){
+  if(get_efl()&FL_IF)
+    panic("popcli - interruptible");
+  if(mycpu[_cup()].ncli < 0)
+    panic("popcli");
+  if(mycpu[_cup()].ncli == 0 && mycpu[_cup()].intena)
+    sti();
+}
+int holding(struct spinlock *lock){
+  int r;
+  pushcli();
+  r = lock->locked && lock->cpu == _cup();
+  popcli();
+  return r;
+}
+
+_Context *kmt_context_save (_Event ev, _Context *context){
+  return NULL;
+}
+_Context *kmt_context_switch (_Event ev, _Context *context){
+  return NULL;
+}
  static void kmt_init();
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg);
  static void kmt_teardown(task_t *task);
@@ -15,7 +57,8 @@ typedef struct semaphore sem_t;
  static void kmt_sem_signal(sem_t *sem);
 
  static void kmt_init(){
-	 
+	os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
+  os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
 	 return 0;
@@ -24,7 +67,10 @@ typedef struct semaphore sem_t;
 
  }
  static void kmt_spin_init(spinlock_t *lk, const char *name){
-
+   lk = (spinlock_t *)pmm->alloc(sizeof(sipnlock_t));
+   lk->name = name;
+   lk->locked = 0;
+   lk->cpu = -1;    //this lock isn't on cpu 0,so we can't use 0
  }
  static void kmt_spin_lock(spinlock_t *lk){
 
