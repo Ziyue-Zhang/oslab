@@ -22,15 +22,15 @@ void pushcli(void){
 void popcli(void){
   if(get_efl()&FL_IF)
     panic("popcli - interruptible");
-  if(mycpu[_cup()].ncli < 0)
+  if(mycpu[_cpu()].ncli < 0)
     panic("popcli");
-  if(mycpu[_cpu()].ncli == 0 && mycpu[_cup()].intena)
+  if(mycpu[_cpu()].ncli == 0 && mycpu[_cpu()].intena)
     sti();
 }
 int holding(struct spinlock *lock){
   int r;
   pushcli();
-  r = lock->locked && lock->cpu == _cup();
+  r = lock->locked && lock->cpu == _cpu();
   popcli();
   return r;
 }
