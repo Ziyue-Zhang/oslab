@@ -68,10 +68,20 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    lk->cpu = -1;    //this lock isn't on cpu 0,so we can't use 0
  }
  static void kmt_spin_lock(spinlock_t *lk){
-
+  pushcli(); 
+  if(holding(lk))
+    panic("acquire");
+  while(xchg(&lk->locked, 1) != 0);
+  __sync_synchronize();
+  lk->cpu = _cpu();
  }
  static void kmt_spin_unlock(spinlock_t *lk){
-
+  if(!holding(lk))
+    panic("release");
+  lk->cpu = -1;
+  __sync_synchronize();
+  asm volatile("movl $0, %0" : "+m" (lk->locked) : );
+  popcli();
  }
  static void kmt_sem_init(sem_t *sem, const char *name, int value){
 
