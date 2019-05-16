@@ -75,10 +75,9 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  static void kmt_sem_signal(sem_t *sem);
 
  static void kmt_init(){
-   cli();
    ncpu = _ncpu();
    printf("cpu num:%d\n",ncpu);
-   kmt->spin_init(&LK, "nmsl");
+   kmt->spin_init(&LK, "lock");
    for(int i = 0; i < 8;i++){
      mycpu[i].intena=1;   //interruptible
      mycpu[i].ncli=0;
@@ -86,11 +85,10 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    }
 	 os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
    os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
-    for(int i=0;i<LENGTH(tasks);i++){ //init tasks
+    for(int i=0;i<LENGTH(tasks_st);i++){ //init tasks
       tasks_st[i].state=0;
       tasks_st[i].cpu=i%ncpu;
    }
-   sti();
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
    task->name=name;
