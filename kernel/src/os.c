@@ -80,7 +80,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
 
 static void os_on_irq(int seq, int event, handler_t handler) {
   if(!head){
-    head=(struct handle*)pmm->alloc(sizeof(handle));
+    head=(handle*)pmm->alloc(sizeof(handle));
     head->next=NULL;
     head->seq=seq;
     head->event=event;
