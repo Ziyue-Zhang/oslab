@@ -80,6 +80,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
 }
 
 static void os_on_irq(int seq, int event, handler_t handler) {
+  printf("nmsl\n");
   if(!head){
     head=(handle*)pmm->alloc(sizeof(handle));
     head->next=NULL;
