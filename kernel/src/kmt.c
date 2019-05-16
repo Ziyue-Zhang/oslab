@@ -77,14 +77,12 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  static void kmt_init(){
    ncpu = _ncpu();
    printf("cpu num:%d\n",ncpu);
-   printf("nmsl\n");
    kmt->spin_init(&LK, "nmsl");
    for(int i = 0; i < 8;i++){
      mycpu[i].intena=1;   //interruptible
      mycpu[i].ncli=0;
      current_task[i]=NULL;
    }
-   printf("nmsl\n");
 	 os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
    os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
     for(int i=0;i<LENGTH(tasks);i++){ //init tasks
