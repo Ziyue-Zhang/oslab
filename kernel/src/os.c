@@ -88,8 +88,67 @@ static void os_on_irq(int seq, int event, handler_t handler) {
   }
   else{
     handle *p = head;
-    while(p && p->seq<seq){
+    handle *pre=p;
+    while(p->next && p->seq<seq){
+      pre=p;
       p=p->next;
+    }
+    if(p==head){
+      if(!p->next){
+        if(p->seq<seq){
+          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          temp->next=NULL;
+          temp->seq=seq;
+          temp->event=event;
+          temp->handler=handler;
+          p->next=temp;
+        }
+        else {
+          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          temp->next=head;
+          temp->seq=seq;
+          temp->event=event;
+          temp->handler=handler;
+          head=temp;
+        }
+      }
+      else{
+        handle *temp=(handle*)pmm->alloc(sizeof(handle));
+        temp->next=head;
+        temp->seq=seq;
+        temp->event=event;
+        temp->handler=handler;
+        head=temp;
+      }
+    }
+
+    else{
+      if(!p->next){
+        if(p->seq<seq){
+          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          temp->next=NULL;
+          temp->seq=seq;
+          temp->event=event;
+          temp->handler=handler;
+          p->next=temp;
+        }
+        else {
+          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          temp->next=p;
+          temp->seq=seq;
+          temp->event=event;
+          temp->handler=handler;
+          pre->next=temp;
+        }
+      }
+      else{
+          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          temp->next=p;
+          temp->seq=seq;
+          temp->event=event;
+          temp->handler=handler;
+          pre->next=temp;
+      }
     }
   }
 }
