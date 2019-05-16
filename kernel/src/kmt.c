@@ -13,7 +13,7 @@ struct task_st{
 };
 
 struct task *current_task[8];
-task_t *tasks[28];
+struct task *tasks[28];
 struct task_st tasks_st[28];
 #define current (current_task[_cpu()])
 
