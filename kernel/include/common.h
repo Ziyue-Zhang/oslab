@@ -28,10 +28,10 @@ struct task_st{
     int state;
     int cpu;
 };
-type struct handle{
+struct handle{
     struct handle *nxt;
     int seq;
     int event;
     handler_t handler;
-}hndl;
+};
 #endif
