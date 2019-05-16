@@ -67,6 +67,9 @@ static void os_run() {
 
 static _Context *os_trap(_Event ev, _Context *context) {
   _Context *ret = NULL;
+  while(!head){
+    _yield();
+  }
   handle *handler = head;
   while(handler){
     if (handler->event == _EVENT_NULL || handler->event == ev.event) {
@@ -75,7 +78,6 @@ static _Context *os_trap(_Event ev, _Context *context) {
     handler=handler->next;
     }
   }
-  assert(ret);
   return ret;
 }
 
