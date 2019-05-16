@@ -60,7 +60,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     } else {
       current++;
     }
-  } while (current->cpu != _cpu());
+  } while ((current - tasks) % _ncpu() != _cpu());
 
   printf("\n[cpu-%d] Schedule: %s\n", _cpu(), current->name);
 
