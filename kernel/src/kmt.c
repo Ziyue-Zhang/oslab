@@ -45,7 +45,7 @@ int holding(struct spinlock *lock){
 
 
 _Context *kmt_context_save (_Event ev, _Context *context){
-  if (current) current->context = *ctx;
+  if (current) current->context = *context;
     return NULL;
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
