@@ -55,7 +55,7 @@ _Context *kmt_context_save (_Event ev, _Context *context){
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
   do {
-    if (!current || current + 1 == tasks[LENGTH(tasks)]) {
+    if (!current || current == tasks[LENGTH(tasks)-1]) {
       current = tasks[0];
     } else {
       current++;
