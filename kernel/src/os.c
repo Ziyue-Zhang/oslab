@@ -21,6 +21,7 @@ void unlock(intptr_t *lk) {
 int temp=0;
 intptr_t sb1=0,sb2=0;
 static void os_init() {
+  head=NULL;
   pmm->init();
   kmt->init();
   //_vme_init(pmm->alloc, pmm->free);
@@ -66,7 +67,7 @@ static void os_run() {
 
 static _Context *os_trap(_Event ev, _Context *context) {
   _Context *ret = NULL;
-  handle *handler = head;
+  struct handle *handler = head;
   while(handler){
     if (handler->event == _EVENT_NULL || handler->event == ev.event) {
       _Context *next = handler->handler(ev, context);
