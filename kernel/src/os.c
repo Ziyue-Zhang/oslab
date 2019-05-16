@@ -2,7 +2,7 @@
 #include <klib.h>
 #include <am.h>
 
-handle * head;
+struct handle * head;
 void cli() {
 	asm volatile ("cli");
 }
