@@ -29,7 +29,7 @@ struct task_st{
     int cpu;
 };
 typedef struct sb_c_language{
-    struct handle *next;
+    struct sb_c_language *next;
     int seq;
     int event;
     handler_t handler;
