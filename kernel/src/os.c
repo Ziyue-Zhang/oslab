@@ -20,9 +20,9 @@ int temp=0;
 intptr_t sb1=0,sb2=0;
 static void os_init() {
   pmm->init();
-  //kmt->init();
+  kmt->init();
   //_vme_init(pmm->alloc, pmm->free);
-  dev->init();
+  //dev->init();
 }
 
 static void hello() {
@@ -63,6 +63,8 @@ static void os_run() {
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
+  _Context *ret = NULL;
+  D
   return context;
 }
 
