@@ -24,4 +24,8 @@ struct Mycpu {
     int ncli;
     int intena;
 }mycpu[8];
+struct task_st{
+    int state;
+    int cpu;
+};
 #endif
