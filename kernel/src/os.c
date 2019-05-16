@@ -88,7 +88,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
   }
   else{
     handle *p = head;
-    while(p && p-seq<seq){
+    while(p && p->seq<seq){
       p=p->next;
     }
   }
