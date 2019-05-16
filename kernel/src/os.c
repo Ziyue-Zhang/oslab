@@ -65,8 +65,15 @@ static void os_run() {
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
-  //_Context *ret = NULL;
-  return context;
+  _Context *ret = NULL;
+  handle *handler = head;
+  while(handler){
+    if (handler->event == _EVENT_NULL || handler->event == ev.event) {
+      _Context *next = handler->handler(ev, context);
+      if (next) ret = next;
+    handler=handler->next;
+  }
+  return ret;
 }
 
 static void os_on_irq(int seq, int event, handler_t handler) {
