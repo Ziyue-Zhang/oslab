@@ -14,8 +14,8 @@ struct task {
 };
 struct task_st{
     int state;
-     int cpu;
-}
+    int cpu;
+};
 struct spinlock {
     int locked;
     const char *name;       //use const
