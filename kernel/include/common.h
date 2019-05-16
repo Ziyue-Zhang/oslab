@@ -28,10 +28,10 @@ struct task_st{
     int state;
     int cpu;
 };
-struct handle{
+typedef struct sb_c_language{
     struct handle *next;
     int seq;
     int event;
     handler_t handler;
-};
+}handle;
 #endif

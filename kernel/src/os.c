@@ -2,7 +2,7 @@
 #include <klib.h>
 #include <am.h>
 
-struct handle * head;
+handle * head;
 void cli() {
 	asm volatile ("cli");
 }
@@ -67,7 +67,7 @@ static void os_run() {
 
 static _Context *os_trap(_Event ev, _Context *context) {
   _Context *ret = NULL;
-  struct handle *handler = head;
+  handle *handler = head;
   while(handler){
     if (handler->event == _EVENT_NULL || handler->event == ev.event) {
       _Context *next = handler->handler(ev, context);
@@ -79,6 +79,16 @@ static _Context *os_trap(_Event ev, _Context *context) {
 }
 
 static void os_on_irq(int seq, int event, handler_t handler) {
+  if(!head){
+    head=(struct handle*)pmm->alloc(sizeof(handle));
+    head->next=NULL;
+    head->seq=seq;
+    head->event=event;
+    head->handler=handler;
+  }
+  else{
+    
+  }
 }
 
 MODULE_DEF(os) {
