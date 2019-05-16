@@ -1,6 +1,8 @@
 #include <common.h>
 #include <klib.h>
 #include <am.h>
+
+hndl *hndl_head;
 void cli() {
 	asm volatile ("cli");
 }
