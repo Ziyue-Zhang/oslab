@@ -2,11 +2,17 @@
 #include <klib.h>
 #include <am.h>
 #include <x86.h>
+#define LENGTH(arr) ((sizeof(arr) / sizeof(arr[0])))
+
 typedef struct task task_t;
 typedef struct spinlock spinlock_t;
 typedef struct semaphore sem_t;
 
+struct task *current_task[8];
+task_t *tasks[28];
+#define current (current_task[_cpu()])
 
+spinlock_t LK;
 int ncpu;
 void panic(char *str){
   printf("%s\n", str);
@@ -37,11 +43,23 @@ int holding(struct spinlock *lock){
   return r;
 }
 
+
 _Context *kmt_context_save (_Event ev, _Context *context){
-  return NULL;
+  if (current) current->context = *ctx;
+    return NULL;
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
-  return NULL;
+  do {
+    if (!current || current + 1 == &tasks[LENGTH(tasks)]) {
+      current = &tasks[0];
+    } else {
+      current++;
+    }
+  } while (current->cpu != _cpu());
+
+  printf("\n[cpu-%d] Schedule: %s\n", _cpu(), current->name);
+
+  return &current->context;
 }
  static void kmt_init();
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg);
@@ -55,16 +73,33 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 
  static void kmt_init(){
    ncpu = _ncpu();
+   printf("cpu num:%d\n",ncpu);
+   kmt->spin_init(&LK, "nmsl");
    for(int i = 0; i < 8;i++){
      mycpu[i].intena=1;   //interruptible
      mycpu[i].ncli=0;
+     current_task[i]=NULL;
    }
-
 	 os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
    os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
+    for(int i=0;i<LENGTH(tasks);i++){ //init tasks
+      tasks[i].state=0;
+      tasks[i].id=i;
+      tasks[i].cpu=i%ncpu;
+   }
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
-	 return 0;
+   int i;
+   for(i=0;i<LENGTH(tasks);i++){
+     if(tasks[i].state==0){
+       tasks[i]=task;
+       break;
+     }
+   }
+   
+    _Area stack = (_Area) { task->stack, task + 1 };
+    task->context = *_kcontext(stack, entry, (void *)arg);
+   return 0;
  }
  static void kmt_teardown(task_t *task){
 

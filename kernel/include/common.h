@@ -9,6 +9,10 @@
 struct task {
     const char *name;
     _Context context;
+    int cpu;
+    int state;
+    int id;
+    long long align;    //align
     char stack[4096];
 };
 struct spinlock {
