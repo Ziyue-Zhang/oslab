@@ -7,6 +7,10 @@
 typedef struct task task_t;
 typedef struct spinlock spinlock_t;
 typedef struct semaphore sem_t;
+struct task_st{
+    int state;
+    int cpu;
+};
 
 struct task *current_task[8];
 task_t *tasks[28];
