@@ -1,6 +1,7 @@
 #include <common.h>
 #include <klib.h>
 #include <am.h>
+#include<x86.h>
 #define LENGTH(arr) ((sizeof(arr) / sizeof(arr[0])))
 
 extern _Context *kcontext();
