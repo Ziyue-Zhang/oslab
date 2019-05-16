@@ -102,7 +102,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
      }
    }
    _Area stack = (_Area) { task->stack, task + 1 };
-   task->context = *_kcontext(stack, entry, (void *)arg);
+   task->context = *kcontext(stack, entry, (void *)arg);
    return 0;
  }
  static void kmt_teardown(task_t *task){
