@@ -29,7 +29,7 @@ struct task_st{
     int cpu;
 };
 struct handle{
-    struct handle *nxt;
+    struct handle *next;
     int seq;
     int event;
     handler_t handler;
