@@ -9,12 +9,13 @@
 struct task {
     const char *name;
     _Context context;
-    int cpu;
-    int state;
-    int id;
     long long align;    //align
     char stack[4096];
 };
+struct task_st{
+    int state;
+     int cpu;
+}
 struct spinlock {
     int locked;
     const char *name;       //use const
