@@ -89,6 +89,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
       tasks_st[i].state=0;
       tasks_st[i].cpu=i%ncpu;
    }
+   printf("nmsl\n");
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
    task->name=name;
