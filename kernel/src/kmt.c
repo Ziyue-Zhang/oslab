@@ -60,7 +60,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     } else {
       current++;
     }
-  } while ((current - tasks) % _ncpu() != _cpu());
+  } while (current->cpu != _cpu());
 
   printf("\n[cpu-%d] Schedule: %s\n", _cpu(), current->name);
 
@@ -96,6 +96,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    task->name=name;
    for(int i=0;i<LENGTH(tasks);i++){
      if(tasks_st[i].state==0){
+       task->cpu=i%_ncpu();
        tasks[i]=task;
        break;
      }

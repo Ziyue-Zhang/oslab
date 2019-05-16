@@ -9,6 +9,7 @@
 struct task {
     const char *name;
     _Context context;
+    int cpu;
     long long align;    //align
     char stack[4096];
 };
