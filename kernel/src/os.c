@@ -72,7 +72,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
     if (handler->event == _EVENT_NULL || handler->event == ev.event) {
       _Context *next = handler->handler(ev, context);
       if (next) ret = next;
-    handler=handler->next;
+        handler=handler->next;
     }
   }
   assert(ret);
@@ -80,7 +80,6 @@ static _Context *os_trap(_Event ev, _Context *context) {
 }
 
 static void os_on_irq(int seq, int event, handler_t handler) {
-  printf("nmsl\n");
   if(!head){
     head=(handle*)pmm->alloc(sizeof(handle));
     head->next=NULL;
