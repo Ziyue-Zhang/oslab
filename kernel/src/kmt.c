@@ -1,8 +1,9 @@
 #include <common.h>
 #include <klib.h>
 #include <am.h>
-#include <x86-qemu.h>
 #define LENGTH(arr) ((sizeof(arr) / sizeof(arr[0])))
+
+extern _Context *kcontext();
 
 typedef struct task task_t;
 typedef struct spinlock spinlock_t;
