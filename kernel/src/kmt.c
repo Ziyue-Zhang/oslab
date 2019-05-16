@@ -83,13 +83,13 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
      mycpu[i].ncli=0;
      current_task[i]=NULL;
    }
+   printf("nmsl\n");
 	 os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
    os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
     for(int i=0;i<LENGTH(tasks);i++){ //init tasks
       tasks_st[i].state=0;
       tasks_st[i].cpu=i%ncpu;
    }
-   printf("nmsl\n");
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
    task->name=name;
