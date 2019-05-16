@@ -63,7 +63,7 @@ static void os_run() {
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
-  _Context *ret = NULL;
+  //_Context *ret = NULL;
   return context;
 }
 
