@@ -73,6 +73,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
       _Context *next = handler->handler(ev, context);
       if (next) ret = next;
     handler=handler->next;
+    }
   }
   return ret;
 }
