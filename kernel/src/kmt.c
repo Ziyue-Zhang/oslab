@@ -83,9 +83,9 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 	 os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
    os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
     for(int i=0;i<LENGTH(tasks);i++){ //init tasks
-      tasks[i]->state=0;
-      tasks[i]->id=i;
-      tasks[i]->cpu=i%ncpu;
+      tasks[i].state=0;
+      tasks[i].id=i;
+      tasks[i].cpu=i%ncpu;
    }
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
