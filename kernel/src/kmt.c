@@ -76,7 +76,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
       current = tasks[0];
     } else {
       int i = rand()%28;
-      current=task[i];
+      current=tasks[i];
       if(current)
       printf("current:%s\n",current->name);
     }
