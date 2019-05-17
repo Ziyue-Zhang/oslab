@@ -56,6 +56,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   printf("task:%d\n",task_cnt);
   do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
+      assert(!tasks[0])
       current = tasks[0];
     } else {
       current++;
