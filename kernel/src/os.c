@@ -24,7 +24,7 @@ static void os_init() {
   head=NULL;
   pmm->init();
   kmt->init();
-  //_vme_init(pmm->alloc, pmm->free);
+  _vme_init(pmm->alloc, pmm->free);
   //dev->init();
 }
 
@@ -66,7 +66,7 @@ static void os_run() {
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
-  //printf("nmsl\n");
+  printf("nmsl\n");
   _Context *ret = NULL;
   handle *handler = head;
   while(handler){
@@ -76,8 +76,8 @@ static _Context *os_trap(_Event ev, _Context *context) {
         handler=handler->next;
     }
   }
-  if(!head)
-    return context;
+  //if(!head)
+    //return context;
   return ret;
 }
 
