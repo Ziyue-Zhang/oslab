@@ -23,7 +23,7 @@ void unlock(intptr_t *lk) {
 int temp=0;
 intptr_t sb1=0,sb2=0;
 
-void func(void *arg) {
+/*void func(void *arg) {
   int cur = (intptr_t)arg;
   //while (1) {
     printf("%d ", cur);
@@ -31,8 +31,8 @@ void func(void *arg) {
    // _yield();
     for (int volatile i = 0; i < 10000; i++);
   //}
-}
-void func2(void *arg) {
+}*/
+void func(void *arg) {
   int cur = (intptr_t)arg;
   while (1) {
 
