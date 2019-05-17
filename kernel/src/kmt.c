@@ -83,8 +83,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
      mycpu[i].ncli=0;
      current_task[i]=NULL;
    }
+    printf("ajshgd\n");
    os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
-   printf("ajshgd\n");
    os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
     for(int i=0;i<LENGTH(tasks_st);i++){ //init tasks
       tasks_st[i].state=0;
