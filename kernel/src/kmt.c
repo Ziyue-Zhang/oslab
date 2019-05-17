@@ -77,8 +77,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     } else {
       int i = rand()%28;
       current=tasks[i];
-      if(current)
-      printf("current:%s\n",current->name);
+      //if(current)
+      //printf("current:%s\n",current->name);
     }
     //printf("nmsl\n");
     //assert(current);
