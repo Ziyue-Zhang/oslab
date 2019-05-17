@@ -23,7 +23,12 @@ void unlock(intptr_t *lk) {
 int temp=0;
 intptr_t sb1=0,sb2=0;
 
-
+static void create_threads() {
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-1", func, 1);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-2", func, 2);
+}
 
 static void os_init() {
   head=NULL;
