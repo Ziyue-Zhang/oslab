@@ -77,6 +77,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
      printf("sb1\n");
     if (handler->event == _EVENT_NULL || handler->event == ev.event) {
       _Context *next = handler->handler(ev, context);
+      printf("sb2\n");
       if (next) 
         ret = next;
     }
