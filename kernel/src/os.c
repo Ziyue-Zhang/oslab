@@ -25,14 +25,14 @@ intptr_t sb1=0,sb2=0;
 
 void func(void *arg) {
   int cur = (intptr_t)arg;
-  while (1) {
+  //while (1) {
     //if(cur==3){
     printf("%d ", cur);
     printf("%d\n",_cpu());
     //}
-    _yield();
+   // _yield();
     for (int volatile i = 0; i < 10000; i++);
-  }
+  //}
 }
 static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),

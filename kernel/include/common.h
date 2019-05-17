@@ -19,7 +19,11 @@ struct spinlock {
     int cpu;
     //unsigned int pcs[10];
 };
-struct semaphore {};
+struct semaphore {
+    int value;
+    char name[80];
+    
+};
 struct Mycpu {
     int ncli;
     int intena;
