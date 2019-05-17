@@ -85,7 +85,7 @@ static void os_run() {
     lock(&sb2);
     assert(temp <100000);
     unlock(&sb2);*/
-    printf("nmsl\n");
+    printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
     _yield();
     printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
   }
