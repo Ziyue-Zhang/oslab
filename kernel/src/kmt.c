@@ -47,14 +47,6 @@ int holding(struct spinlock *lock){
   return r;
 }
 
-void func(void *arg) {
-  int cur = (intptr_t)arg;
-  while (1) {
-    printf("%c ", "123456789a"[cur]);
-    for (int volatile i = 0; i < 10000; i++);
-  }
-}
-
 _Context *kmt_context_save (_Event ev, _Context *context){
   if (current) current->context = *context;
     return NULL;
