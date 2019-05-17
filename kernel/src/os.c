@@ -12,12 +12,12 @@ void sti() {
 	asm volatile ("sti");
 }
 void lock(intptr_t *lk) {
-	cli();
+	//cli();
 	while (_atomic_xchg(lk, 1));
 }
 void unlock(intptr_t *lk) {
 	_atomic_xchg(lk, 0);
-	sti();
+	//sti();
 }
 
 int temp=0;
@@ -30,7 +30,6 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
-  printf("create\n");
   _vme_init(pmm->alloc, pmm->free);
   //dev->init();
 }
