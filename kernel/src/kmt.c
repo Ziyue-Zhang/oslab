@@ -123,6 +123,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    task->context = *kcontext(stack, entry, (void *)arg);
    tasks[i]=task;
    //printf("%d\n",i);
+   if(i==1)
+   printf("%s\n",tasks[0]->name);
    printf("create %s in cpu%d\n",tasks[i]->name,tasks[i]->cpu);
    return 0;
  }
