@@ -80,7 +80,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //printf("nmsl\n");
     assert(current);
     //printf("%d %d\n", current->cpu, _cpu());
-    //printf("%s\n",current->name);
+    printf("%s\n",tasks[0]->name);
   } while (current->cpu != _cpu());
   //if(current!=NULL)
     //printf("%d\n",current->cpu);
