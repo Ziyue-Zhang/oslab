@@ -69,20 +69,19 @@ static void os_run() {
     assert(temp <100000);
     unlock(&sb2);*/
     _yield();
-    printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
+    //printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
   }
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
-  printf("%d\n",handle_cnt);
-  printf("nmsl\n");
+  //printf("%d\n",handle_cnt);
   _Context *ret = NULL;
   handle *handler = head;
   while(handler){
-     printf("inhandler\n");
+     //printf("inhandler\n");
     if (handler->event == _EVENT_NULL || handler->event == ev.event) {
       _Context *next = handler->handler(ev, context);
-      printf("finishhandle\n");
+      //printf("finishhandle\n");
       if (next) 
         ret = next;
     }
