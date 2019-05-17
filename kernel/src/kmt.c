@@ -76,6 +76,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
       current = tasks[0];
     } else {
       current++;
+      printf("current:%s\n"current->name);
     }
     //printf("nmsl\n");
     assert(current);
