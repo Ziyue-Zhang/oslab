@@ -3,6 +3,8 @@
 #include <am.h>
 
 handle * head;
+handle pool[200];
+int handle_cnt;
 void cli() {
 	asm volatile ("cli");
 }
@@ -22,6 +24,7 @@ int temp=0;
 intptr_t sb1=0,sb2=0;
 static void os_init() {
   head=NULL;
+  handle_cnt=0;
   pmm->init();
   kmt->init();
   _vme_init(pmm->alloc, pmm->free);
@@ -83,7 +86,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
 
 static void os_on_irq(int seq, int event, handler_t handler) {
   if(!head){
-    head=(handle*)pmm->alloc(sizeof(handle));
+    head=&pool[handle_cnt],handle_cnt+=1;
     head->next=NULL;
     head->seq=seq;
     head->event=event;
@@ -99,7 +102,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
     if(p==head){
       if(!p->next){
         if(p->seq<seq){
-          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          handle *temp==&pool[handle_cnt],handle_cnt+=1;
           temp->next=NULL;
           temp->seq=seq;
           temp->event=event;
@@ -107,7 +110,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
           p->next=temp;
         }
         else {
-          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          handle *temp==&pool[handle_cnt],handle_cnt+=1;
           temp->next=head;
           temp->seq=seq;
           temp->event=event;
@@ -116,7 +119,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
         }
       }
       else{
-        handle *temp=(handle*)pmm->alloc(sizeof(handle));
+        handle *temp==&pool[handle_cnt],handle_cnt+=1;
         temp->next=head;
         temp->seq=seq;
         temp->event=event;
@@ -128,7 +131,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
     else{
       if(!p->next){
         if(p->seq<seq){
-          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          handle *temp==&pool[handle_cnt],handle_cnt+=1;
           temp->next=NULL;
           temp->seq=seq;
           temp->event=event;
@@ -136,7 +139,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
           p->next=temp;
         }
         else {
-          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          handle *temp==&pool[handle_cnt],handle_cnt+=1;
           temp->next=p;
           temp->seq=seq;
           temp->event=event;
@@ -145,7 +148,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
         }
       }
       else{
-          handle *temp=(handle*)pmm->alloc(sizeof(handle));
+          handle *temp==&pool[handle_cnt],handle_cnt+=1;
           temp->next=p;
           temp->seq=seq;
           temp->event=event;
