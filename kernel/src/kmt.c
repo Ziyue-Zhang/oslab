@@ -76,9 +76,11 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 
  static void kmt_init(){
    ncpu = _ncpu();
+   cli();
    printf("cpu num:%d\n",ncpu);
    kmt->spin_init(&LK, "lock");
    printf("nmsl\n");
+   sti();
    for(int i = 0; i < 8;i++){
      mycpu[i].intena=1;   //interruptible
      mycpu[i].ncli=0;
