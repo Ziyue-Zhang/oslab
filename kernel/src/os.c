@@ -22,12 +22,16 @@ void unlock(intptr_t *lk) {
 
 int temp=0;
 intptr_t sb1=0,sb2=0;
+
+
+
 static void os_init() {
   head=NULL;
   handle_cnt=0;
   pmm->init();
   kmt->init();
   _vme_init(pmm->alloc, pmm->free);
+  printf("create\n")
   //dev->init();
 }
 
