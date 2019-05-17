@@ -133,7 +133,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    lk->cpu = -1;    //this lock isn't on cpu 0,so we can't use 0
  }
  static void kmt_spin_lock(spinlock_t *lk){
-   printf("%s\n",lk->name);
+   printf("%s in cpu%d\n",lk->name,_cpu());
   pushcli(); 
   if(holding(lk))
     panic("acquire");
