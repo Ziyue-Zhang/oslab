@@ -70,7 +70,6 @@ static void hello() {
 static void os_run() {
   hello();
   _intr_write(1);
-  printf("nmsl\n");
   while (1) {
     /*lock(&sb2);
     temp++;
@@ -81,6 +80,7 @@ static void os_run() {
     lock(&sb2);
     assert(temp <100000);
     unlock(&sb2);*/
+    printf("nmsn\n")
     _yield();
     printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
   }
