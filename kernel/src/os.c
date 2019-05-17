@@ -42,7 +42,31 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-3", func, (void *)3);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-4", func, (void *)4);             
+              "test-thread-4", func, (void *)4); 
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-5", func, (void *)5);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-6", func, (void *)6);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-7", func, (void *)7);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-8", func, (void *)8);                 
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-9", func, (void *)9);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-10", func, (void *)10);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-11", func, (void *)11);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-12", func, (void *)12); 
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-13", func, (void *)13);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-14", func, (void *)14);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-15", func, (void *)15);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-16", func, (void *)16); 
 }
 
 static void os_init() {
