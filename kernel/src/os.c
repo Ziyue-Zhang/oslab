@@ -29,12 +29,15 @@ static void os_init() {
 }
 
 static void hello() {
-  lock(&sb1);    //to print hello
+  //lock(&sb1);    //to print hello
   for (const char *ptr = "Hello from CPU #"; *ptr; ptr++) {
     _putc(*ptr);
   }
   _putc("12345678"[_cpu()]); _putc('\n');
-  unlock(&sb1);
+  while(1){
+    _yield();
+  }
+  //unlock(&sb1);
 }
 
 /*void echo_task(void *name){
@@ -76,8 +79,8 @@ static _Context *os_trap(_Event ev, _Context *context) {
         handler=handler->next;
     }
   }
-  if(!ret)
-    return context;
+ //if(!ret)
+    //return context;
   return ret;
 }
 
