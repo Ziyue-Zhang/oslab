@@ -42,7 +42,7 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
-  _vme_init(pmm->alloc, pmm->free);
+  //_vme_init(pmm->alloc, pmm->free);
   create_threads();
   //dev->init();
 }
