@@ -31,7 +31,7 @@ static void os_init() {
   pmm->init();
   kmt->init();
   _vme_init(pmm->alloc, pmm->free);
-  printf("create\n")
+  printf("create\n");
   //dev->init();
 }
 
