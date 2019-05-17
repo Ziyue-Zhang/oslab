@@ -105,6 +105,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    int i;
    for(i=0;i<LENGTH(tasks);i++){
      if(tasks_st[i].state==0){
+       tasks_st[i].state=1;
        break;
      }
    }
