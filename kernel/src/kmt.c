@@ -79,7 +79,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 
  static void kmt_init(){
    ncpu = _ncpu();
-   task_cnt=0
+   task_cnt=0;
    printf("cpu num:%d\n",ncpu);
    kmt->spin_init(&LK, "lock");
    for(int i = 0; i < 8;i++){
