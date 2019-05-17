@@ -98,7 +98,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
    ++task_cnt;
-   task->name=name;
+   strcpy(task->name, name);
    for(int i=0;i<LENGTH(tasks);i++){
      if(tasks_st[i].state==0){
        task->cpu=i%_ncpu();
@@ -114,7 +114,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 
  }
  static void kmt_spin_init(spinlock_t *lk, const char *name){
-   lk->name = name;
+   strcpy(lk->name, name);
    lk->locked = 0;
    lk->cpu = -1;    //this lock isn't on cpu 0,so we can't use 0
  }
