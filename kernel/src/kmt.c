@@ -17,6 +17,7 @@ struct task_st tasks_st[28];
 
 spinlock_t LK;
 int ncpu;
+int task_cnt;
 void panic(char *str){
   printf("%s\n", str);
   _halt(1);
@@ -52,7 +53,7 @@ _Context *kmt_context_save (_Event ev, _Context *context){
     return NULL;
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
-  printf("nmsl\n");
+  printf("task:%d\n",task_cnt);
   do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
       current = tasks[0];
@@ -78,6 +79,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 
  static void kmt_init(){
    ncpu = _ncpu();
+   task_cnt=0
    printf("cpu num:%d\n",ncpu);
    kmt->spin_init(&LK, "lock");
    for(int i = 0; i < 8;i++){
@@ -94,6 +96,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    printf("nmsll\n");
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
+   ++task_cnt;
    task->name=name;
    for(int i=0;i<LENGTH(tasks);i++){
      if(tasks_st[i].state==0){
