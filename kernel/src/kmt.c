@@ -25,7 +25,7 @@ struct task_st tasks_st[28];
  static void kmt_sem_wait(sem_t *sem);
  static void kmt_sem_signal(sem_t *sem);
 
-spinlock_t LK;
+spinlock_t LK,LK2;
 int ncpu;
 int task_cnt;
 void panic(char *str){
@@ -68,7 +68,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   if(!task_cnt){
     return context;
   }
-  kmt_spin_lock(&LK);
+  kmt_spin_lock(&LK2);
   do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
       assert(tasks[0]);
@@ -83,7 +83,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //printf("%d\n",current->cpu);
 
   printf("[cpu-%d] Schedule: %s\n", _cpu(), current->name);
-  kmt_spin_unlock(&LK);
+  kmt_spin_unlock(&LK2);
   return &current->context;
 }
 
@@ -92,6 +92,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    task_cnt=0;
    printf("cpu num:%d\n",ncpu);
    kmt->spin_init(&LK, "lock");
+   kmt->spin_init(&LK2, "lock2");
    for(int i = 0; i < 8;i++){
      mycpu[i].intena=1;   //interruptible
      mycpu[i].ncli=0;
