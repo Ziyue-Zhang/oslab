@@ -59,6 +59,7 @@ int holding(struct spinlock *lock){
 
 _Context *kmt_context_save (_Event ev, _Context *context){
   kmt_spin_lock(&LK);
+  printf("nmsl\n");
   if (current) 
     current->context = *context;
   kmt_spin_unlock(&LK);
