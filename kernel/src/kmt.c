@@ -95,7 +95,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    kmt->spin_init(&LK, "lock");
    kmt->spin_init(&LK2, "lock2");
    for(int i = 0; i < 8;i++){
-     mycpu[i].intena=1;   //interruptible
+     mycpu[i].intena=0;   //interruptible
      mycpu[i].ncli=0;
      current_task[i]=NULL;
    }
