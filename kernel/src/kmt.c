@@ -77,7 +77,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     } else {
       current++;
     }
-    printf("nmsl\n");
+    //printf("nmsl\n");
     assert(current);
   } while (current->cpu != _cpu());
   //if(current!=NULL)
