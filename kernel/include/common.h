@@ -7,7 +7,7 @@
 #define INT_MAX 2147483647
 #define INT_MIN (-INT_MAX - 1)
 struct task {
-    const char *name;
+    char *name;
     _Context context;
     int cpu;
     long long align;    //align
@@ -15,7 +15,7 @@ struct task {
 };
 struct spinlock {
     int locked;
-    const char *name;       //use const
+    char *name;       
     int cpu;
     //unsigned int pcs[10];
 };
