@@ -60,8 +60,8 @@ int holding(struct spinlock *lock){
 _Context *kmt_context_save (_Event ev, _Context *context){
   kmt_spin_lock(&LK);
   if (current) current->context = *context;
+    kmt_spin_unlock(&LK);
     return NULL;
-  kmt_spin_unlock(&LK);
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
   kmt_spin_lock(&LK);
