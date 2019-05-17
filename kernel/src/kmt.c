@@ -53,7 +53,9 @@ _Context *kmt_context_save (_Event ev, _Context *context){
     return NULL;
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
-  printf("task:%d\n",task_cnt);
+  if(!tasl_cnt){
+    return context;
+  }
   do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
       assert(tasks[0]);
