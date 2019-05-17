@@ -24,7 +24,7 @@ struct task_st tasks_st[28];
  static void kmt_sem_init(sem_t *sem, const char *name, int value);
  static void kmt_sem_wait(sem_t *sem);
  static void kmt_sem_signal(sem_t *sem);
- 
+
 spinlock_t LK;
 int ncpu;
 int task_cnt;
@@ -58,13 +58,13 @@ int holding(struct spinlock *lock){
 }
 
 _Context *kmt_context_save (_Event ev, _Context *context){
-  kmt_spin_lock(LK);
+  kmt_spin_lock(&LK);
   if (current) current->context = *context;
     return NULL;
-  kmt_spin_unlock(LK);
+  kmt_spin_unlock(&LK);
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
-  kmt_spin_lock(LK);
+  kmt_spin_lock(&LK);
   if(!task_cnt){
     return context;
   }
@@ -82,7 +82,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //printf("%d\n",current->cpu);
 
   printf("[cpu-%d] Schedule: %s\n", _cpu(), current->name);
-  kmt_spin_unlock(LK);
+  kmt_spin_unlock(&LK);
   return &current->context;
 }
 
