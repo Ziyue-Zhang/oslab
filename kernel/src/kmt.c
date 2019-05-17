@@ -110,6 +110,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    lk->name = name;
    lk->locked = 0;
    lk->cpu = -1;    //this lock isn't on cpu 0,so we can't use 0
+   printf("sjgdjh\n");
  }
  static void kmt_spin_lock(spinlock_t *lk){
   pushcli(); 
