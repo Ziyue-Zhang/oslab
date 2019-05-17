@@ -10,6 +10,7 @@ struct task {
     char name[80];
     _Context context;
     int cpu;
+    struct task* next; //using in semaphere
     long long align;    //align
     char stack[4096];
 };
@@ -22,7 +23,7 @@ struct spinlock {
 struct semaphore {
     int value;
     char name[80];
-    
+
 };
 struct Mycpu {
     int ncli;

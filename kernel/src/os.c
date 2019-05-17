@@ -120,9 +120,9 @@ static void os_run() {
     lock(&sb2);
     assert(temp <100000);
     unlock(&sb2);*/
-    printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
+    //printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
     _yield();
-    printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
+    //printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
   }
 }
 
