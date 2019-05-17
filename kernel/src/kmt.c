@@ -66,7 +66,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     assert(current);
   } while (current->cpu != _cpu());
   if(current==NULL)
-    printf("nmsl\n");
+    printf("%s\n",current->name);
+  printf("nmsl\n");
   printf("\n[cpu-%d] Schedule: %s\n", _cpu(), current->name);
 
   return &current->context;
