@@ -26,13 +26,21 @@ intptr_t sb1=0,sb2=0;
 void func(void *arg) {
   int cur = (intptr_t)arg;
   //while (1) {
-    //if(cur==3){
     printf("%d ", cur);
     printf("%d\n",_cpu());
-    //}
    // _yield();
     for (int volatile i = 0; i < 10000; i++);
   //}
+}
+void func2(void *arg) {
+  int cur = (intptr_t)arg;
+  while (1) {
+
+    printf("%d ", cur);
+    printf("%d\n",_cpu());
+   _yield();
+    for (int volatile i = 0; i < 10000; i++);
+  }
 }
 static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
@@ -51,7 +59,7 @@ static void create_threads() {
               "test-thread-7", func, (void *)7);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-8", func, (void *)8);                 
-  kmt->create(pmm->alloc(sizeof(task_t)),
+  /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-9", func, (void *)9);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-10", func, (void *)10);
@@ -66,7 +74,7 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-15", func, (void *)15);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-16", func, (void *)16); 
+              "test-thread-16", func, (void *)16); */
 }
 
 static void os_init() {
