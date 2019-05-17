@@ -69,6 +69,7 @@ static void os_run() {
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
+  printf("%d\n",handle_cnt);
   printf("nmsl\n");
   _Context *ret = NULL;
   handle *handler = head;
