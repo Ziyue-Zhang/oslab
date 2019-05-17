@@ -37,9 +37,9 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-2", func, (void *)2);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-2", func, (void *)3);
+              "test-thread-3", func, (void *)3);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-2", func, (void *)4);             
+              "test-thread-4", func, (void *)4);             
 }
 
 static void os_init() {
