@@ -34,9 +34,6 @@ static void hello() {
     _putc(*ptr);
   }
   _putc("12345678"[_cpu()]); _putc('\n');
-  while(1){
-    _yield();
-  }
   //unlock(&sb1);
 }
 
@@ -79,8 +76,8 @@ static _Context *os_trap(_Event ev, _Context *context) {
         handler=handler->next;
     }
   }
- //if(!ret)
-    //return context;
+  if(!head)
+    return context;
   return ret;
 }
 
