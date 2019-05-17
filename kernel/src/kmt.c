@@ -148,6 +148,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   __sync_synchronize();
   asm volatile("movl $0, %0" : "+m" (lk->locked) : );
   popcli();
+  printf("unlocked:%s\n",lk->name);
  }
  static void kmt_sem_init(sem_t *sem, const char *name, int value){
 
