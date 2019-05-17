@@ -75,15 +75,17 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
       assert(tasks[0]);
       current = tasks[0];
     } else {
-      current++;
+      int i = rand()%28;
+      current=task[i];
+      if(current)
       printf("current:%s\n",current->name);
     }
     //printf("nmsl\n");
     assert(current);
     //printf("%d %d\n", current->cpu, _cpu());
-    if(tasks[0])
-    printf("%s\n",tasks[0]->name);
-  } while (current->cpu != _cpu());
+    //if(tasks[0])
+    //printf("%s\n",tasks[0]->name);
+  } while (!current || current->cpu != _cpu());
   //if(current!=NULL)
     //printf("%d\n",current->cpu);
 
