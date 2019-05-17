@@ -25,9 +25,9 @@ intptr_t sb1=0,sb2=0;
 
 static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-1", func, 1);
+              "test-thread-1", func, (void *)1);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-2", func, 2);
+              "test-thread-2", func, (void *)2);
 }
 
 static void os_init() {
@@ -36,7 +36,7 @@ static void os_init() {
   pmm->init();
   kmt->init();
   _vme_init(pmm->alloc, pmm->free);
-  printf("create\n");
+  create_threads();
   //dev->init();
 }
 
