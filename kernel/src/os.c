@@ -81,7 +81,6 @@ static _Context *os_trap(_Event ev, _Context *context) {
     handler=handler->next;
     printf("sb\n");
   }
-  printf("sb\n");
   //if(!head)
     //return context;
   return ret;
