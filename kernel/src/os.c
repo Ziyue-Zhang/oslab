@@ -75,9 +75,10 @@ static _Context *os_trap(_Event ev, _Context *context) {
   while(handler){
     if (handler->event == _EVENT_NULL || handler->event == ev.event) {
       _Context *next = handler->handler(ev, context);
-      if (next) ret = next;
-        handler=handler->next;
+      if (next) 
+        ret = next;
     }
+    handler=handler->next;
   }
   //if(!head)
     //return context;
