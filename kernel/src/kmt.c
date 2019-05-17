@@ -141,7 +141,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    lk->cpu = -1;    //this lock isn't on cpu 0,so we can't use 0
  }
  static void kmt_spin_lock(spinlock_t *lk){
-   printf("%s in cpu%d\n",lk->name,_cpu());
+   //printf("%s in cpu%d\n",lk->name,_cpu());
   pushcli(); 
   if(holding(lk))
     panic("acquire");
@@ -156,7 +156,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   __sync_synchronize();
   asm volatile("movl $0, %0" : "+m" (lk->locked) : );
   popcli();
-  printf("unlocked:%s\n",lk->name);
+  //printf("unlocked:%s\n",lk->name);
  }
  static void kmt_sem_init(sem_t *sem, const char *name, int value){
 
