@@ -102,7 +102,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
     if(p==head){
       if(!p->next){
         if(p->seq<seq){
-          handle *temp==&pool[handle_cnt],handle_cnt+=1;
+          handle *temp=&pool[handle_cnt],handle_cnt+=1;
           temp->next=NULL;
           temp->seq=seq;
           temp->event=event;
@@ -110,7 +110,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
           p->next=temp;
         }
         else {
-          handle *temp==&pool[handle_cnt],handle_cnt+=1;
+          handle *temp=&pool[handle_cnt],handle_cnt+=1;
           temp->next=head;
           temp->seq=seq;
           temp->event=event;
@@ -119,7 +119,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
         }
       }
       else{
-        handle *temp==&pool[handle_cnt],handle_cnt+=1;
+        handle *temp=&pool[handle_cnt],handle_cnt+=1;
         temp->next=head;
         temp->seq=seq;
         temp->event=event;
@@ -131,7 +131,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
     else{
       if(!p->next){
         if(p->seq<seq){
-          handle *temp==&pool[handle_cnt],handle_cnt+=1;
+          handle *temp=&pool[handle_cnt],handle_cnt+=1;
           temp->next=NULL;
           temp->seq=seq;
           temp->event=event;
@@ -139,7 +139,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
           p->next=temp;
         }
         else {
-          handle *temp==&pool[handle_cnt],handle_cnt+=1;
+          handle *temp=&pool[handle_cnt],handle_cnt+=1;
           temp->next=p;
           temp->seq=seq;
           temp->event=event;
@@ -148,7 +148,7 @@ static void os_on_irq(int seq, int event, handler_t handler) {
         }
       }
       else{
-          handle *temp==&pool[handle_cnt],handle_cnt+=1;
+          handle *temp=&pool[handle_cnt],handle_cnt+=1;
           temp->next=p;
           temp->seq=seq;
           temp->event=event;
