@@ -65,10 +65,10 @@ _Context *kmt_context_save (_Event ev, _Context *context){
   return NULL;
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
-  kmt_spin_lock(&LK);
   if(!task_cnt){
     return context;
   }
+  kmt_spin_lock(&LK);
   do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
       assert(tasks[0]);
