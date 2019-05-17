@@ -76,11 +76,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 
  static void kmt_init(){
    ncpu = _ncpu();
-   cli();
    printf("cpu num:%d\n",ncpu);
    kmt->spin_init(&LK, "lock");
-   printf("nmsl\n");
-   sti();
    for(int i = 0; i < 8;i++){
      mycpu[i].intena=1;   //interruptible
      mycpu[i].ncli=0;
@@ -110,7 +107,6 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 
  }
  static void kmt_spin_init(spinlock_t *lk, const char *name){
-   lk = (spinlock_t *)pmm->alloc(sizeof(spinlock_t));
    lk->name = name;
    lk->locked = 0;
    lk->cpu = -1;    //this lock isn't on cpu 0,so we can't use 0
