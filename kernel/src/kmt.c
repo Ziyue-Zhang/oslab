@@ -69,7 +69,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   /*if(!task_cnt){
     return context;
   }*/
- // kmt_spin_lock(&LK2);
+  kmt_spin_lock(&LK2);
   do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
       assert(tasks[0]);
@@ -90,7 +90,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //printf("%d\n",current->cpu);
 
   //printf("[cpu-%d] Schedule: %s\n", _cpu(), current->name);
-  //kmt_spin_unlock(&LK2);
+  kmt_spin_unlock(&LK2);
   return &current->context;
 }
 
