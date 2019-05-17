@@ -102,16 +102,17 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
    ++task_cnt;
    strcpy(task->name, name);
-   printf("create %s\n",task->name);
-   for(int i=0;i<LENGTH(tasks);i++){
+   int i;
+   for(i=0;i<LENGTH(tasks);i++){
      if(tasks_st[i].state==0){
-       task->cpu=i%_ncpu();
-       tasks[i]=task;
        break;
      }
    }
+   task->cpu=i%_ncpu();
    _Area stack = (_Area) { task->stack, task + 1 };
    task->context = *kcontext(stack, entry, (void *)arg);
+   tasks[i]=task;
+   printf("create %s in cpu%d\n",tasks[i]->name,tasks[i]->cpu);
    return 0;
  }
  static void kmt_teardown(task_t *task){
