@@ -101,6 +101,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
    ++task_cnt;
    strcpy(task->name, name);
+   printd("%s\n",task->name);
    for(int i=0;i<LENGTH(tasks);i++){
      if(tasks_st[i].state==0){
        task->cpu=i%_ncpu();
