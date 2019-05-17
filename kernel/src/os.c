@@ -26,8 +26,8 @@ intptr_t sb1=0,sb2=0;
 void func(void *arg) {
   int cur = (intptr_t)arg;
   while (1) {
-    printf("%d ", cur);
-    _yield();
+    //printf("%d ", cur);
+    //_yield();
     for (int volatile i = 0; i < 10000; i++);
   }
 }
