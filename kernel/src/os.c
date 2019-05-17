@@ -30,8 +30,8 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
-  _vme_init(pmm->alloc, pmm->free);
   printf("create\n");
+  _vme_init(pmm->alloc, pmm->free);
   //dev->init();
 }
 
