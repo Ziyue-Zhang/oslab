@@ -48,10 +48,13 @@ int holding(struct spinlock *lock){
 }
 
 _Context *kmt_context_save (_Event ev, _Context *context){
+  kmt_spin_lock(&LK);
   if (current) current->context = *context;
     return NULL;
+  kmt_spin_unlock(&LK);
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
+  kmt_spin_lock(&LK);
   if(!task_cnt){
     return context;
   }
@@ -69,7 +72,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //printf("%d\n",current->cpu);
 
   printf("[cpu-%d] Schedule: %s\n", _cpu(), current->name);
- printf("nmsl\n");
+  kmt_spin_unlock(&LK);
   return &current->context;
 }
  static void kmt_init();
