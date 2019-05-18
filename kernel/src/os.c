@@ -25,15 +25,15 @@ intptr_t sb1=0,sb2=0;
 
 
 sem_t empty, full, mutex;
-int cnt;
+int cunt;
 const int maxk=6;
 static void producer(void *arg){
   while(1){
     for(volatile int i = 0;i < 1000000; i++);
     kmt->sem_wait(&empty);
     kmt->sem_wait(&mutex);
-    cnt++;
-    printf("%d ", cnt);
+    cunt++;
+    printf("%d ", cunt);
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&full);
   }
@@ -43,8 +43,8 @@ static void consumer(void *arg){
     for(volatile int i = 0;i < 1000000; i++);
     kmt->sem_wait(&full);
     kmt->sem_wait(&mutex);
-    cnt--;
-    printf("%d", cnt);
+    cunt--;
+    printf("%d", cunt);
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&empty);
   }
