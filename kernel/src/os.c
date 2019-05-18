@@ -130,12 +130,6 @@ static void os_init() {
   kmt->init();
   kmt->spin_init(&alc, "alloc");
   kmt->spin_init(&tp, "ostrap");
-  _vme_init(pmm->alloc, pmm->free);
-  dev->init();
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
   kmt->create(pmm->alloc(sizeof(task_t)),
               "idle1", idle, (void *)1);
   kmt->create(pmm->alloc(sizeof(task_t)),
@@ -144,6 +138,12 @@ static void os_init() {
               "idle3", idle, (void *)3);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "idle4", idle, (void *)4); 
+  _vme_init(pmm->alloc, pmm->free);
+  dev->init();
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
   //create_threads();
 }
 
