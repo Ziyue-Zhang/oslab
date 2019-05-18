@@ -6,12 +6,7 @@
 handle * head;
 handle pool[200];
 int handle_cnt;
-void cli() {
-	asm volatile ("cli");
-}
-void sti() {
-	asm volatile ("sti");
-}
+
 void lock(intptr_t *lk) {
 	//cli();
 	while (_atomic_xchg(lk, 1));
