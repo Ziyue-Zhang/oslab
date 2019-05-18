@@ -168,9 +168,9 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    current->next=sem->head;
    sem->head=current;
    kmt_spin_unlock(&LK2);
-   kmt_spin_unlock(sem->lock);
+   kmt_spin_unlock(&sem->lock);
    _yield();
-   kmt_spin_lock(sem->lock);
+   kmt_spin_lock(&sem->lock);
  }
  static void wakeup(sem_t *sem){
    if(!sem->head){
@@ -189,11 +189,11 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    kmt_spin_init(&sem->lock,name);
  }
  static void kmt_sem_wait(sem_t *sem){
-   kmt_spin_lock(sem->lock);
+   kmt_spin_lock(&sem->lock);
    sem->value--;
    if(sem->value<0)
      block(sem);
-   kmt_spin_unlock(sem->lock);
+   kmt_spin_unlock(&sem->lock);
  }
  static void kmt_sem_signal(sem_t *sem){
    kmt_spin_lock(sem->lock);
