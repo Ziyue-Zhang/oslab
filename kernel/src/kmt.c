@@ -163,11 +163,11 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   //printf("unlocked:%s\n",lk->name);
  }
  static void block(sem_t *sem){
-   kmt_spin_lock(&LK2)
+   kmt_spin_lock(&LK2);
    current->state=SLEEP;
    current->next=sem->head;
    sem->head=current;
-   kmt_spin_unlock(&LK2)
+   kmt_spin_unlock(&LK2);
    kmt_spin_unlock(sem->lock);
    _yield();
    kmt_spin_lock(sem->lock);
@@ -176,11 +176,11 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    if(!sem->head){
      painc("wake\n");
    }
-   kmt_spin_lock(&LK2)
+   kmt_spin_lock(&LK2);
    task_st *temp=sem->head;
    temp->state=RUN;
    sem->head=sem->head->next;
-   kmt_spin_unlock(&LK2)  
+   kmt_spin_unlock(&LK2);  
  }
  static void kmt_sem_init(sem_t *sem, const char *name, int value){
    sem->value=value;
