@@ -17,7 +17,7 @@ struct task {
     int id;
     int state;
     struct task* next; //using in semaphere
-    long long align;    //align
+    //long long align;    //align
     char stack[4096];
 };
 struct spinlock {
