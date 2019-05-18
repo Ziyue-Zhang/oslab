@@ -23,7 +23,7 @@ void unlock(intptr_t *lk) {
 
 int temp=0;
 intptr_t sb1=0,sb2=0;
-
+spinlock_t sb;
 
 sem_t empty, full, mutex;
 int cunt;
@@ -115,6 +115,7 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
+  kmt->spin_init(&sb, "nmsl");
   _vme_init(pmm->alloc, pmm->free);
   dev->init();
   create_threads();
@@ -160,6 +161,7 @@ static void os_run() {
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
+  kmt->spin_lock(&sb);
   //printf("%d\n",handle_cnt);
   _Context *ret = NULL;
   handle *handler = head;
@@ -175,6 +177,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
   }
   //if(!head)
     //return context;
+  kmt->spin_unlock(&sb);
   return ret;
 }
 
