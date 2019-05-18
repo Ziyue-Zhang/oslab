@@ -1,6 +1,7 @@
 #include <common.h>
 #include <klib.h>
 #include <am.h>
+#include<devices.h>
 
 handle * head;
 handle pool[200];
