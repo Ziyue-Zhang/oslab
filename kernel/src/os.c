@@ -23,7 +23,7 @@ void unlock(intptr_t *lk) {
 
 int temp=0;
 intptr_t sb1=0,sb2=0;
-spinlock_t sb;
+spinlock_t tp, alc;
 
 sem_t empty, full, mutex;
 int cunt;
@@ -75,13 +75,13 @@ static void create_threads() {
               "test-thread-3", func, (void *)3);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-4", func, (void *)4); 
-  kmt->sem_init(&empty, "buffer-empty", maxk);
+  /*kmt->sem_init(&empty, "buffer-empty", maxk);
   kmt->sem_init(&full, "buffer-full", 0);
   kmt->sem_init(&mutex, "mutex", 1);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-producer", producer, "xxx");
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-consumer", consumer, "yyy");
+              "test-thread-consumer", consumer, "yyy");*/
 
   /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-5", func, (void *)5);
@@ -115,7 +115,8 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
-  kmt->spin_init(&sb, "nmsl");
+  kmt->spin_init(&alc, "alloc");
+  kmt->spin_init(&tp, "ostrap");
   _vme_init(pmm->alloc, pmm->free);
   dev->init();
   create_threads();
@@ -161,7 +162,7 @@ static void os_run() {
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
-  kmt->spin_lock(&sb);
+  kmt->spin_lock(&tp);
   //printf("%d\n",handle_cnt);
   _Context *ret = NULL;
   handle *handler = head;
@@ -177,7 +178,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
   }
   //if(!head)
     //return context;
-  kmt->spin_unlock(&sb);
+  kmt->spin_unlock(&tp);
   return ret;
 }
 
