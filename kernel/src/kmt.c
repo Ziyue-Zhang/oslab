@@ -162,7 +162,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   popcli();
   //printf("unlocked:%s\n",lk->name);
  }
- static void block(*sem_t sem){
+ static void block(sem_t *sem){
    kmt_spin_lock(&LK2)
    current->state=SLEEP;
    current->next=sem->head;
@@ -172,7 +172,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    _yield();
    kmt_spin_lock(sem->lock);
  }
- static void wakeup(*sem_t sem){
+ static void wakeup(sem_t *sem){
    if(!sem->head){
      painc("wake\n");
    }
