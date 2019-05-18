@@ -64,6 +64,7 @@ _Context *kmt_context_save (_Event ev, _Context *context){
   if (current) {
     assert(current->state==RUN);
     current->context = *context;
+  }
   kmt_spin_unlock(&LK);
   return NULL;
 }
