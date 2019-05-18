@@ -43,7 +43,7 @@ void func(void *arg) {
   }
 }
 static void create_threads() {
-  kmt->create(pmm->alloc(sizeof(task_t)),
+  /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-1", func, (void *)1);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-2", func, (void *)2);
@@ -122,7 +122,7 @@ static void os_run() {
     unlock(&sb2);*/
     //printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
     _yield();
-    //printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
+    printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
   }
 }
 
