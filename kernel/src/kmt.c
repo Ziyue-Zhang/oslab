@@ -89,7 +89,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   //if(current!=NULL)
     //printf("%d\n",current->cpu);
 
-  //printf("[cpu-%d] Schedule: %s\n", _cpu(), current->name);
+  printf("id:%d [cpu-%d] Schedule: %s\n", current->id, _cpu(), current->name);
   kmt_spin_unlock(&LK2);
   return &current->context;
 }
@@ -122,6 +122,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
        break;
      }
    }
+   task->id=i;
    task->cpu=i%_ncpu();
    _Area stack = (_Area) { task->stack, task + 1 };
    task->context = *kcontext(stack, entry, (void *)arg);

@@ -6,10 +6,14 @@
 
 #define INT_MAX 2147483647
 #define INT_MIN (-INT_MAX - 1)
+#define FREE 0
+#define RUN 1
+#define SLEEP 2
 struct task {
     char name[80];
     _Context context;
     int cpu;
+    int id;
     struct task* next; //using in semaphere
     long long align;    //align
     char stack[4096];
