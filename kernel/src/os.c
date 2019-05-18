@@ -80,7 +80,7 @@ static void create_threads() {
               "test-thread-consumer", consumer, "yyy");
   kmt->sem_init(&empty, "buffer-empty", maxk);
   kmt->sem_init(&full, "buffer-full", 0);
-  kmt->sem_init(&empty, "mutex", 1); 
+  kmt->sem_init(&mutex "mutex", 1); 
   /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-5", func, (void *)5);
   kmt->create(pmm->alloc(sizeof(task_t)),
