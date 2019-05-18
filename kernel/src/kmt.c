@@ -74,7 +74,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   }
   kmt_spin_lock(&LK);
   do {
-    /*if (!current || current == tasks[LENGTH(tasks)-1]) {
+    if (!current || current == tasks[LENGTH(tasks)-1]) {
       assert(tasks[0]);
       current = tasks[0];
     } else {
@@ -82,9 +82,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
       current=tasks[i];
       //if(current)
       //printf("current:%s\n",current->name);
-    }*/
-          int i = rand()%LENGTH(tasks);
-      current=tasks[i];
+    }
     //printf("nmsl\n");
     //assert(current);
     //printf("%d %d\n", current->cpu, _cpu());
