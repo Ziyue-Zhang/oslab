@@ -57,11 +57,11 @@ static void consumer(void *arg){
   }
 }*/
 void func(void *arg) {
-  //int cur = (intptr_t)arg;
+  int cur = (intptr_t)arg;
   while (1) {
 
-    //printf("%d ", cur);
-    //printf("%d\n",_cpu());
+    printf("%d ", cur);
+    printf("%d\n",_cpu());
    _yield();
     for (int volatile i = 0; i < 10000; i++);
   }
@@ -83,7 +83,7 @@ static void create_threads() {
   kmt->sem_init(&full, "buffer-full", 0);
   kmt->sem_init(&mutex, "mutex", 1); */
 
-  /*kmt->create(pmm->alloc(sizeof(task_t)),
+  kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-5", func, (void *)5);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-6", func, (void *)6);
@@ -106,7 +106,7 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-15", func, (void *)15);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-16", func, (void *)16); */
+              "test-thread-16", func, (void *)16); 
   
 }
 
@@ -115,9 +115,9 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
-  //_vme_init(pmm->alloc, pmm->free);
+  _vme_init(pmm->alloc, pmm->free);
   create_threads();
-  //dev->init();
+  dev->init();
 }
 
 static void hello() {
@@ -129,7 +129,7 @@ static void hello() {
   //unlock(&sb1);
 }
 
-void echo_task(void *name){
+/*void echo_task(void *name){
   device_t *tty = dev_lookup(name);
   while(1){
     char line[128], text[128];
@@ -138,7 +138,7 @@ void echo_task(void *name){
     line[nread - 1] = '\0';
     sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text, 8+strlen(line));
   }
-}
+}*/
 
 static void os_run() {
   hello();
