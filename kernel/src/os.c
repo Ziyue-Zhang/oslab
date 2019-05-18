@@ -127,7 +127,11 @@ static void os_init() {
               "idle4", idle, (void *)4); 
   _vme_init(pmm->alloc, pmm->free);
   dev->init();
-  create_threads();
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
+  //create_threads();
 }
 
 static void hello() {
@@ -138,8 +142,8 @@ static void hello() {
   _putc("12345678"[_cpu()]); _putc('\n');
   //unlock(&sb1);
 }
-
-/*void echo_task(void *name){
+extern ssize_t tty_write();
+void echo_task(void *name){
   device_t *tty = dev_lookup(name);
   while(1){
     char line[128], text[128];
@@ -148,7 +152,7 @@ static void hello() {
     line[nread - 1] = '\0';
     sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text, 8+strlen(line));
   }
-}*/
+}
 
 static void os_run() {
   hello();
