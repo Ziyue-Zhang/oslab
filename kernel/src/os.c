@@ -33,7 +33,10 @@ static void producer(void *arg){
     kmt->sem_wait(&empty);
     kmt->sem_wait(&mutex);
     cunt++;
-    //printf("%d ", cunt);
+    if(cunt<0)
+      printf("-%d ", -cunt);
+    else
+      printf("%d ", cunt);
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&full);
   }
