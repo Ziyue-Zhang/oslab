@@ -23,15 +23,32 @@ void unlock(intptr_t *lk) {
 int temp=0;
 intptr_t sb1=0,sb2=0;
 
-/*void func(void *arg) {
-  int cur = (intptr_t)arg;
-  //while (1) {
-    printf("%d ", cur);
-    printf("%d\n",_cpu());
-   // _yield();
-    for (int volatile i = 0; i < 10000; i++);
-  //}
-}*/
+
+sem_t empty, full, mutex;
+int cnt;
+const int maxk=6;
+static void producer(void *arg){
+  while(1){
+    for(volatile int i = 0;;i < 1000000; i++);
+    kmt->sem_wait(&empty);
+    kmt->sem_wait(&mutex);
+    cnt++;
+    printf("%d ", cnt);
+    kmt->sem_signal(&mutex);
+    kmt->sem_signal(&full);
+  }
+}
+static void consumer(void *arg){
+  while(1){
+    for(volatile int i = 0;;i < 1000000; i++);
+    kmt->sem_wait(&full);
+    kmt->sem_wait(&mutex);
+    cnt--;
+    printf("%d ", cnt);
+    kmt->sem_signal(&mutex);
+    kmt->sem_signal(&empty);
+  }
+}
 void func(void *arg) {
   //int cur = (intptr_t)arg;
   while (1) {
@@ -52,6 +69,13 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-4", func, (void *)4); 
   kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-producer", producer, "xxx");
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-consumer", consumer, "yyy");
+  kmt->sem_init(&empty, "buffer-empty", maxk);
+  kmt->sem_init(&full, "buffer-full", 0);
+  kmt->sem_init(&empty, "mutex", 1); 
+  /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-5", func, (void *)5);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-6", func, (void *)6);
@@ -74,7 +98,8 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-15", func, (void *)15);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-16", func, (void *)16); 
+              "test-thread-16", func, (void *)16); */
+  
 }
 
 static void os_init() {
