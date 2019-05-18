@@ -29,10 +29,10 @@ int tkfree[28];
 spinlock_t LK,LK2;
 int ncpu;
 int task_cnt;
-/*void panic(char *str){
+void panic(char *str){
   printf("%s\n", str);
   _halt(1);
-}*/
+}
 
 void pushcli(void){
   int eflags = get_efl();
@@ -174,7 +174,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  }
  static void wakeup(sem_t *sem){
    if(!sem->head){
-     panic("wake\n");
+     panic("wake");
    }
    kmt_spin_lock(&LK2);
    task_t *temp=sem->head;
