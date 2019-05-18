@@ -13,6 +13,7 @@ typedef struct semaphore sem_t;
 struct task *current_task[8];
 struct task *tasks[28];
 struct task_st tasks_st[28];
+int tkfree[28];
 #define current (current_task[_cpu()])
 
  static void kmt_init();
@@ -109,8 +110,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
    os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
     for(int i=0;i<LENGTH(tasks_st);i++){ //init tasks
-      tasks_st[i].state=0;
-      tasks_st[i].cpu=i%ncpu;
+      tkfree[i]=0;
    }
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
@@ -118,8 +118,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    strcpy(task->name, name);
    int i;
    for(i=0;i<LENGTH(tasks);i++){
-     if(tasks_st[i].state==0){
-       tasks_st[i].state=1;
+     if(tkfree[i]==0){
+       tkfree[i]=1;
        break;
      }
    }
@@ -165,7 +165,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    kmt_spin_init(&sem->lock,name);
  }
  static void kmt_sem_wait(sem_t *sem){
-
+   sem->value--;
  }
  static void kmt_sem_signal(sem_t *sem){
 
