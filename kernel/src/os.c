@@ -61,6 +61,11 @@ void func(void *arg) {
     for (int volatile i = 0; i < 10000; i++);
   }
 }
+void idle(void *arg){
+  while(1){
+    -yield();
+  }
+}
 static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-1", func, (void *)1);
@@ -112,6 +117,14 @@ static void os_init() {
   kmt->init();
   kmt->spin_init(&alc, "alloc");
   kmt->spin_init(&tp, "ostrap");
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle1", idle, (void *)1);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle2", idle, (void *)2);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle3", idle, (void *)3);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle4", idle, (void *)4); 
   _vme_init(pmm->alloc, pmm->free);
   dev->init();
   create_threads();
