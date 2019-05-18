@@ -33,11 +33,11 @@ intptr_t sb1=0,sb2=0;
   //}
 }*/
 void func(void *arg) {
-  //int cur = (intptr_t)arg;
+  int cur = (intptr_t)arg;
   while (1) {
 
-    //printf("%d ", cur);
-    //printf("%d\n",_cpu());
+    printf("%d ", cur);
+    printf("%d\n",_cpu());
    _yield();
     for (int volatile i = 0; i < 10000; i++);
   }
@@ -122,7 +122,7 @@ static void os_run() {
     unlock(&sb2);*/
     //printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
     _yield();
-    printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
+    //printf("nnnnnnnnnnnmmmmmmmmmmmmmsssssssssssslllllllll\n");
   }
 }
 
