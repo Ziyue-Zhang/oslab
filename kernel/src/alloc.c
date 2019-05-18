@@ -384,8 +384,9 @@ static void pmm_init() {
 }
 
 static void *kalloc(size_t size) {
-  lock(&alloc_lock);
+  kmt->spin_lock(&alc);
   void *ret = my_alloc(size);
+	kmt->spin_unlock(&alc);
   unlock(&alloc_lock);
   return ret;
   //return NULL;
@@ -393,7 +394,7 @@ static void *kalloc(size_t size) {
 }
 
 static void kfree(void *ptr) {
-	lock(&alloc_lock);
+	kmt->spin_lock(&alc);
 	my_free(ptr);
 	unlock(&alloc_lock);
 }
