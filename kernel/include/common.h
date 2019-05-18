@@ -14,6 +14,7 @@ struct task {
     _Context context;
     int cpu;
     int id;
+    int state;
     struct task* next; //using in semaphere
     long long align;    //align
     char stack[4096];
