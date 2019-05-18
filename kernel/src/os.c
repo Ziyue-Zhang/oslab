@@ -24,7 +24,7 @@ int temp=0;
 intptr_t sb1=0,sb2=0;
 
 
-sem_t empty, full, mutex;
+/*sem_t empty, full, mutex;
 int cunt;
 const int maxk=6;
 static void producer(void *arg){
@@ -54,7 +54,7 @@ static void consumer(void *arg){
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&empty);
   }
-}
+}*/
 void func(void *arg) {
   //int cur = (intptr_t)arg;
   while (1) {
@@ -74,13 +74,14 @@ static void create_threads() {
               "test-thread-3", func, (void *)3);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-4", func, (void *)4); 
-  kmt->create(pmm->alloc(sizeof(task_t)),
+  /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-producer", producer, "xxx");
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-consumer", consumer, "yyy");
   kmt->sem_init(&empty, "buffer-empty", maxk);
   kmt->sem_init(&full, "buffer-full", 0);
-  kmt->sem_init(&mutex, "mutex", 1); 
+  kmt->sem_init(&mutex, "mutex", 1); */
+
   /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-5", func, (void *)5);
   kmt->create(pmm->alloc(sizeof(task_t)),
@@ -127,7 +128,7 @@ static void hello() {
   //unlock(&sb1);
 }
 
-/*void echo_task(void *name){
+void echo_task(void *name){
   device_t *tty = dev_lookup(name);
   while(1){
     char line[128], text[128];
@@ -136,7 +137,7 @@ static void hello() {
     line[nread - 1] = '\0';
     sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text, 8+strlen(line));
   }
-}*/
+}
 
 static void os_run() {
   hello();
