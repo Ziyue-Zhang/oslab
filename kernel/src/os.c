@@ -63,7 +63,7 @@ void func(void *arg) {
 }
 void idle(void *arg){
   while(1){
-    -yield();
+    _yield();
   }
 }
 static void create_threads() {
