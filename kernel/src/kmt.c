@@ -151,7 +151,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   pushcli(); 
   if(holding(lk))
     panic("acquire");
-  while(_atomic_xchg(&lk->locked, 1) != 0);
+  while(_atomic_xchg(&lk->locked, 1) != 0)printf("nmsl");
   __sync_synchronize();
   lk->cpu = _cpu();
  }
