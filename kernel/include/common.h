@@ -27,7 +27,8 @@ struct spinlock {
 struct semaphore {
     int value;
     char name[80];
-
+    struct task *head;
+    struct spinlock lock;
 };
 struct Mycpu {
     int ncli;
