@@ -88,7 +88,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   } while (!current || current->cpu != _cpu());
   //if(current!=NULL)
     //printf("%d\n",current->cpu);
-
+  if(current->id%2!=_cpu())
+    assert(0);
   printf("id:%d [cpu-%d] Schedule: %s\n", current->id, _cpu(), current->name);
   kmt_spin_unlock(&LK2);
   return &current->context;
