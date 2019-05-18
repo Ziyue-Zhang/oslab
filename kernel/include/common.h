@@ -25,7 +25,7 @@ struct spinlock {
     //unsigned int pcs[10];
 };
 struct semaphore {
-    int value;
+    volatile int value;
     char name[80];
     struct task *head;
     struct spinlock lock;

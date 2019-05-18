@@ -159,7 +159,10 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   //printf("unlocked:%s\n",lk->name);
  }
  static void kmt_sem_init(sem_t *sem, const char *name, int value){
-
+   sem->value=value;
+   strcpy(sem->name,name);
+   sem->head=NULL;
+   kmt_spin_init(&sem->lock,name);
  }
  static void kmt_sem_wait(sem_t *sem){
 
