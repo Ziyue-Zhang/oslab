@@ -110,7 +110,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save); 
    os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
     for(int i=0;i<LENGTH(tasks_st);i++){ //init tasks
-      tkfree[i]=0;
+      tkfree[i]=FREE;
    }
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
@@ -125,6 +125,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    }
    task->id=i;
    task->cpu=i%_ncpu();
+   task->next=NULL;
+   task->state=RUN;
    _Area stack = (_Area) { task->stack, task + 1 };
    task->context = *kcontext(stack, entry, (void *)arg);
    tasks[i]=task;
