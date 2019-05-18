@@ -75,15 +75,15 @@ static void create_threads() {
               "test-thread-3", func, (void *)3);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-4", func, (void *)4); 
-  /*kmt->create(pmm->alloc(sizeof(task_t)),
+  kmt->sem_init(&empty, "buffer-empty", maxk);
+  kmt->sem_init(&full, "buffer-full", 0);
+  kmt->sem_init(&mutex, "mutex", 1);
+  kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-producer", producer, "xxx");
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-consumer", consumer, "yyy");
-  kmt->sem_init(&empty, "buffer-empty", maxk);
-  kmt->sem_init(&full, "buffer-full", 0);
-  kmt->sem_init(&mutex, "mutex", 1); */
 
-  kmt->create(pmm->alloc(sizeof(task_t)),
+  /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-5", func, (void *)5);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-6", func, (void *)6);
@@ -106,7 +106,7 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-15", func, (void *)15);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-16", func, (void *)16); 
+              "test-thread-16", func, (void *)16); */
   
 }
 
@@ -116,8 +116,8 @@ static void os_init() {
   pmm->init();
   kmt->init();
   _vme_init(pmm->alloc, pmm->free);
-  create_threads();
   dev->init();
+  create_threads();
 }
 
 static void hello() {

@@ -9,6 +9,7 @@
 #define FREE 0
 #define RUN 1
 #define SLEEP 2
+#define DEAD 3
 struct task {
     char name[80];
     _Context context;
