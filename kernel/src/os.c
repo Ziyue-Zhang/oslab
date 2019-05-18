@@ -51,7 +51,23 @@ static void consumer(void *arg){
     kmt->sem_signal(&empty);
   }
 }*/
-void func(void *arg) {
+extern ssize_t tty_write();
+void echo_task(void *name){
+  device_t *tty = dev_lookup(name);
+  while(1){
+    char line[128], text[128];
+    sprintf(text, "(%s) $ ", name); tty_write(tty, 0, text, 5+strlen(name));
+    int nread = tty->ops->read(tty, 0 ,line, sizeof(line));
+    line[nread - 1] = '\0';
+    sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text, 8+strlen(line));
+  }
+}
+void idle(void *arg){
+  while(1){
+    _yield();
+  }
+}
+/*void func(void *arg) {
   int cur = (intptr_t)arg;
   while (1) {
 
@@ -61,11 +77,7 @@ void func(void *arg) {
     for (int volatile i = 0; i < 10000; i++);
   }
 }
-void idle(void *arg){
-  while(1){
-    _yield();
-  }
-}
+
 static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-1", func, (void *)1);
@@ -75,15 +87,15 @@ static void create_threads() {
               "test-thread-3", func, (void *)3);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-4", func, (void *)4); 
-  /*kmt->sem_init(&empty, "buffer-empty", maxk);
+  kmt->sem_init(&empty, "buffer-empty", maxk);
   kmt->sem_init(&full, "buffer-full", 0);
   kmt->sem_init(&mutex, "mutex", 1);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-producer", producer, "xxx");
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-consumer", consumer, "yyy");*/
+              "test-thread-consumer", consumer, "yyy");
 
-  /*kmt->create(pmm->alloc(sizeof(task_t)),
+  kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-5", func, (void *)5);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-6", func, (void *)6);
@@ -106,9 +118,9 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-15", func, (void *)15);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-16", func, (void *)16); */
+              "test-thread-16", func, (void *)16); 
   
-}
+}*/
 
 static void os_init() {
   head=NULL;
@@ -141,17 +153,6 @@ static void hello() {
   }
   _putc("12345678"[_cpu()]); _putc('\n');
   //unlock(&sb1);
-}
-extern ssize_t tty_write();
-void echo_task(void *name){
-  device_t *tty = dev_lookup(name);
-  while(1){
-    char line[128], text[128];
-    sprintf(text, "(%s) $ ", name); tty_write(tty, 0, text, 5+strlen(name));
-    int nread = tty->ops->read(tty, 0 ,line, sizeof(line));
-    line[nread - 1] = '\0';
-    sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text, 8+strlen(line));
-  }
 }
 
 static void os_run() {
