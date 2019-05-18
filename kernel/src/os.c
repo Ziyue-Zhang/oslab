@@ -57,7 +57,7 @@ static void consumer(void *arg){
   }
 }*/
 void func(void *arg) {
-  //int cur = (intptr_t)arg;
+  int cur = (intptr_t)arg;
   while (1) {
 
    printf("%d ", cur);
