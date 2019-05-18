@@ -25,7 +25,7 @@ int temp=0;
 intptr_t sb1=0,sb2=0;
 
 
-/*sem_t empty, full, mutex;
+sem_t empty, full, mutex;
 int cunt;
 const int maxk=6;
 static void producer(void *arg){
@@ -55,7 +55,7 @@ static void consumer(void *arg){
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&empty);
   }
-}*/
+}
 void func(void *arg) {
   //int cur = (intptr_t)arg;
   while (1) {
