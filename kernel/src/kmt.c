@@ -174,10 +174,10 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  }
  static void wakeup(sem_t *sem){
    if(!sem->head){
-     painc("wake\n");
+     panic("wake\n");
    }
    kmt_spin_lock(&LK2);
-   task_st *temp=sem->head;
+   task_t *temp=sem->head;
    temp->state=RUN;
    sem->head=sem->head->next;
    kmt_spin_unlock(&LK2);  
@@ -196,11 +196,11 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    kmt_spin_unlock(&sem->lock);
  }
  static void kmt_sem_signal(sem_t *sem){
-   kmt_spin_lock(sem->lock);
+   kmt_spin_lock(&sem->lock);
    sem->value++;
    if(sem->value<=0)
      wakeup(sem);
-   kmt_spin_unlock(sem->lock);
+   kmt_spin_unlock(&sem->lock);
  }
 
 MODULE_DEF(kmt){
