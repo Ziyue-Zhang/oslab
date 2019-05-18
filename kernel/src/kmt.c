@@ -67,10 +67,10 @@ _Context *kmt_context_save (_Event ev, _Context *context){
   return NULL;
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
-  /*if(!task_cnt){
+  if(!task_cnt){
     return context;
-  }*/
-  kmt_spin_lock(&LK2);
+  }
+  kmt_spin_lock(&LK);
   do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
       assert(tasks[0]);
@@ -86,13 +86,13 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //printf("%d %d\n", current->cpu, _cpu());
     //if(tasks[0])
     //printf("%s\n",tasks[0]->name);
-  } while (!current || current->cpu != _cpu());
+  } while (!current || current->cpu != _cpu() || current->cpu==SLEEP);
   //if(current!=NULL)
     //printf("%d\n",current->cpu);
   //if(current->id%2!=_cpu())
     //assert(0);
   //printf("id:%d [cpu-%d] Schedule: %s\n", current->id, _cpu(), current->name);
-  kmt_spin_unlock(&LK2);
+  kmt_spin_unlock(&LK);
   return &current->context;
 }
 
@@ -100,8 +100,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    ncpu = _ncpu();
    task_cnt=0;
    printf("cpu num:%d\n",ncpu);
-   kmt->spin_init(&LK, "lock");
-   kmt->spin_init(&LK2, "lock2");
+   kmt->spin_init(&LK, "lock_task");
+   kmt->spin_init(&LK2, "lock_sem");
    for(int i = 0; i < 8;i++){
      mycpu[i].intena=0;   //interruptible
      mycpu[i].ncli=0;
@@ -114,6 +114,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    }
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
+   kmt_spin_lock(&LK);
    ++task_cnt;
    strcpy(task->name, name);
    int i;
@@ -132,6 +133,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    tasks[i]=task;
    //printf("%d\n",i);
    printf("create %s in cpu%d\n",tasks[i]->name,tasks[i]->cpu);
+   kmt_spin_unlock(&LK);
    return 0;
  }
  static void kmt_teardown(task_t *task){
@@ -160,6 +162,26 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   popcli();
   //printf("unlocked:%s\n",lk->name);
  }
+ static void block(*sem_t sem){
+   kmt_spin_lock(&LK2)
+   current->state=SLEEP;
+   current->next=sem->head;
+   sem->head=current;
+   kmt_spin_unlock(&LK2)
+   kmt_spin_unlock(sem->lock);
+   _yield();
+   kmt_spin_lock(sem->lock);
+ }
+ static void wakeup(*sem_t sem){
+   if(!sem->head){
+     painc("wake\n");
+   }
+   kmt_spin_lock(&LK2)
+   task_st *temp=sem->head;
+   temp->state=RUN;
+   sem->head=sem->head->next;
+   kmt_spin_unlock(&LK2)  
+ }
  static void kmt_sem_init(sem_t *sem, const char *name, int value){
    sem->value=value;
    strcpy(sem->name,name);
@@ -167,10 +189,18 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    kmt_spin_init(&sem->lock,name);
  }
  static void kmt_sem_wait(sem_t *sem){
+   kmt_spin_lock(sem->lock);
    sem->value--;
+   if(sem->value<0)
+     block(sem);
+   kmt_spin_unlock(sem->lock);
  }
  static void kmt_sem_signal(sem_t *sem){
-
+   kmt_spin_lock(sem->lock);
+   sem->value++;
+   if(sem->value<=0)
+     wakeup(sem);
+   kmt_spin_unlock(sem->lock);
  }
 
 MODULE_DEF(kmt){
