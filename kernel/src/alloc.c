@@ -6,6 +6,7 @@ static uintptr_t pm_start, pm_end;
 intptr_t alloc_lock;
 extern void lock();
 extern void unlock();
+extern spinlock_t alc;
 
 //this method is true with array. There isn't any array in real system, so i need to write a new one.
 /*typedef struct node {
