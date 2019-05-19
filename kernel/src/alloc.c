@@ -335,7 +335,7 @@ void *my_alloc(unsigned nbytes) {
 				p->size=nu;
 			}
 			freep=pre;
-			memset(void*) (p+1),0,sizeof(Header)*(nu-1));
+			memset((void*) (p+1),0,sizeof(Header)*(nu-1));
 			return (void*) (p+1);
 		}
 		if(p==freep)	//if we cannot find a block, creat a new one
