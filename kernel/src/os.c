@@ -20,7 +20,7 @@ int temp=0;
 intptr_t sb1=0,sb2=0;
 spinlock_t tp, alc;
 
-/*sem_t empty, full, mutex;
+sem_t empty, full, mutex;
 int cunt;
 const int maxk=6;
 static void producer(void *arg){
@@ -50,8 +50,8 @@ static void consumer(void *arg){
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&empty);
   }
-}*/
-extern ssize_t tty_write();
+}
+/*extern ssize_t tty_write();
 void echo_task(void *name){
   device_t *tty = dev_lookup(name);
   while(1){
@@ -61,7 +61,7 @@ void echo_task(void *name){
     line[nread - 1] = '\0';
     sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text, 8+strlen(line));
   }
-}
+}*/
 void idle(void *arg){
   while(1){
     for (int volatile i = 0; i < 100000; i++);
@@ -77,17 +77,9 @@ void idle(void *arg){
    _yield();
     for (int volatile i = 0; i < 10000; i++);
   }
-}
+}*/
 
 static void create_threads() {
-  kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-1", func, (void *)1);
-  kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-2", func, (void *)2);
-  kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-3", func, (void *)3);
-  kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-4", func, (void *)4); 
   kmt->sem_init(&empty, "buffer-empty", maxk);
   kmt->sem_init(&full, "buffer-full", 0);
   kmt->sem_init(&mutex, "mutex", 1);
@@ -96,6 +88,14 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-consumer", consumer, "yyy");
 
+  /*kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-1", func, (void *)1);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-2", func, (void *)2);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-3", func, (void *)3);
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "test-thread-4", func, (void *)4); 
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-5", func, (void *)5);
   kmt->create(pmm->alloc(sizeof(task_t)),
@@ -119,9 +119,9 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-15", func, (void *)15);
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-16", func, (void *)16); 
+              "test-thread-16", func, (void *)16); */
   
-}*/
+}
 
 static void os_init() {
   head=NULL;
@@ -140,11 +140,11 @@ static void os_init() {
               "idle4", idle, (void *)4); 
   _vme_init(pmm->alloc, pmm->free);
   dev->init();
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
+  /*kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
-  //create_threads();
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");*/
+  create_threads();
 }
 
 static void hello() {
