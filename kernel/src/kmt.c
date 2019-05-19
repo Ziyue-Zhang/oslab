@@ -59,7 +59,7 @@ int holding(struct spinlock *lock){
 }
 
 _Context *kmt_context_save (_Event ev, _Context *context){
-  //kmt_spin_lock(&LK);
+  kmt_spin_lock(&LK);
   //printf("nmsl\n");
   if (current) {
     /*if(current->state==SLEEP){
@@ -69,14 +69,14 @@ _Context *kmt_context_save (_Event ev, _Context *context){
     //assert(current->state==RUN);
     current->context = *context;
   }
-  //kmt_spin_unlock(&LK);
+  kmt_spin_unlock(&LK);
   return NULL;
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
   if(!task_cnt){
     return context;
   }
-  //kmt_spin_lock(&LK);
+  kmt_spin_lock(&LK);
   do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
       assert(tasks[0]);
@@ -101,7 +101,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //assert(0);
   //printf("id:%d [cpu-%d] Schedule: %s\n", current->id, _cpu(), current->name);
    //printf("%s\n",current->name);
- // kmt_spin_unlock(&LK);
+  kmt_spin_unlock(&LK);
   return &current->context;
 }
 
