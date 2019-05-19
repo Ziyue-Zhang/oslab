@@ -92,7 +92,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //printf("%d %d\n", current->cpu, _cpu());
     //if(tasks[0])
     if(current->state>=SLEEP)
-    printf("%s\n",current->name);
+    printf("sleep%s\n",current->name);
     //printf("%s\n",tasks[0]->name);
   } while (!current || current->cpu != _cpu() || current->state>=SLEEP);
   //if(current!=NULL)
@@ -198,7 +198,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    kmt_spin_init(&sem->lock,name);
  }
  static void kmt_sem_wait(sem_t *sem){
-   printf("wait %s\n",sem->name);
+   //printf("wait %s\n",sem->name);
    kmt_spin_lock(&sem->lock);
    sem->value--;
    if(sem->value<0)
