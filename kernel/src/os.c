@@ -29,7 +29,7 @@ static void producer(void *arg){
     kmt->sem_wait(&empty);
     kmt->sem_wait(&mutex);
     cunt++;
-      printf("%d cpu%d ", cunt, _cpu());
+      printf("%d ", cunt);
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&full);
   }
