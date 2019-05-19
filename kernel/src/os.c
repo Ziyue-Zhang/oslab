@@ -20,7 +20,7 @@ int temp=0;
 intptr_t sb1=0,sb2=0;
 spinlock_t tp, alc;
 
-/*sem_t empty, full, mutex;
+sem_t empty, full, mutex;
 int cunt;
 const int maxk=6;
 static void producer(void *arg){
@@ -44,7 +44,7 @@ static void consumer(void *arg){
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&empty);
   }
-}*/
+}
 /*extern ssize_t tty_write();
 void echo_task(void *name){
   device_t *tty = dev_lookup(name);
