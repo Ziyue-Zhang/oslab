@@ -30,6 +30,7 @@ static void producer(void *arg){
     kmt->sem_wait(&mutex);
     cunt++;
       printf("%d\n", cunt);
+    printf("nmsl\n");
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&full);
   }
