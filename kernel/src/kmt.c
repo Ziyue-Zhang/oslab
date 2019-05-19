@@ -94,7 +94,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //if(current->state>=SLEEP)
     //printf("sleep%s\n",current->name);
     //printf("%s\n",tasks[0]->name);
-  } while (!current || current->cpu != _cpu() || current->state>=SLEEP);
+  } while (!current || current->cpu != _cpu() || current->state==SLEEP);
   //if(current!=NULL)
     //printf("%d\n",current->cpu);
   //if(current->id%2!=_cpu())
