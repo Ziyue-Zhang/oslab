@@ -62,10 +62,10 @@ _Context *kmt_context_save (_Event ev, _Context *context){
   kmt_spin_lock(&LK);
   //printf("nmsl\n");
   if (current) {
-    if(current->state==SLEEP){
+    /*if(current->state==SLEEP){
       printf("%s\n",current->name);
       assert(0);
-    }
+    }*/
     //assert(current->state==RUN);
     current->context = *context;
   }
@@ -98,8 +98,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   //if(current->id%2!=_cpu())
     //assert(0);
   //printf("id:%d [cpu-%d] Schedule: %s\n", current->id, _cpu(), current->name);
-   if(current->state==SLEEP)
-    assert(0);
+   printf("%s\n",current->name);
   kmt_spin_unlock(&LK);
   return &current->context;
 }
