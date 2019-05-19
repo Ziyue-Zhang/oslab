@@ -170,7 +170,7 @@ static void os_run() {
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
-  kmt->spin_lock(&tp);
+  //kmt->spin_lock(&tp);
   //printf("%d\n",handle_cnt);
   _Context *ret = NULL;
   handle *handler = head;
@@ -186,7 +186,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
   }
   //if(!head)
     //return context;
-  kmt->spin_unlock(&tp);
+  //kmt->spin_unlock(&tp);
   return ret;
 }
 
