@@ -196,6 +196,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    kmt_spin_init(&sem->lock,name);
  }
  static void kmt_sem_wait(sem_t *sem){
+   printf("wait %s\n",sem->name);
    kmt_spin_lock(&sem->lock);
    sem->value--;
    if(sem->value<0)
