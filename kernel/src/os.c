@@ -29,8 +29,7 @@ static void producer(void *arg){
     kmt->sem_wait(&empty);
     kmt->sem_wait(&mutex);
     cunt++;
-      printf("%d\n", cunt);
-    printf("nmsl\n");
+      printf("%d \n", cunt);
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&full);
   }
@@ -41,8 +40,7 @@ static void consumer(void *arg){
     kmt->sem_wait(&full);
     kmt->sem_wait(&mutex);
     cunt--;
-      printf("%d\n", cunt);
-    printf("nmsl\n");
+      printf("%d \n", cunt);
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&empty);
   }
