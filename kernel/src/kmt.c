@@ -61,7 +61,7 @@ int holding(struct spinlock *lock){
 _Context *kmt_context_save (_Event ev, _Context *context){
   kmt_spin_lock(&LK);
   //printf("nmsl\n");
-  if (current) {
+  if (current && current->state!=SLEEP) {
     /*if(current->state==SLEEP){
       printf("%s\n",current->name);
       assert(0);
