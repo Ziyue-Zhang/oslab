@@ -14,9 +14,16 @@ int main(int argc, char *argv[]) {
   int cluster_sector_num=(int)copy[0xd];
   int sector_num = *(int *)&copy[0x20];
   int bit_num = sector_bit * sector_num;
+
+  int cluster_start=*(int *)&copy[0x2c];
+  //int fat_start = *(short *)&copy[0xe];
+  //int fat_num=*(int *)&copy[0x10];
+  //int fat_sector_num=*(int *)&copy[0x24];
+
   printf("%d\n",sector_bit);
   printf("%d\n",cluster_sector_num);
   printf("%d\n",sector_num);
   printf("%d\n", bit_num);
+  printf("%d\n", cluster_start);
   return 0;
 }
