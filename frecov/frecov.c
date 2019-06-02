@@ -11,9 +11,11 @@ int main(int argc, char *argv[]) {
     printf("nmsl\n");
   copy=(char *)mmap(NULL, 2<<29, PROT_READ, MAP_SHARED, fd, 0); //512mb
   short sector_bit=*(short *)&copy[0xb];
-  int sector_cluster_num=(int)copy[0xd];
-  
+  int cluster_sector_num=(int)copy[0xd];
+  int sector_num = *(int *)&copy[0x20];
+
   printf("%d\n",sector_bit);
-  printf("%d\n",sector_cluster_num);
+  printf("%d\n",cluster_sector_num);
+  printf("%d\n",sector_num);
   return 0;
 }
