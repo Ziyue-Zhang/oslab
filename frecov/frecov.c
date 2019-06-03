@@ -38,6 +38,6 @@ int main(int argc, char *argv[]) {
     if(copy[i]=='B'&&copy[i]=='M'&&copy[i]=='P')
       cunt++;
   }
-  printf("cunt\n");
+  printf("%d\n", cunt);
   return 0;
 }
