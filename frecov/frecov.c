@@ -33,7 +33,11 @@ int main(int argc, char *argv[]) {
   printf("%d\n", end);
   printf("%d\n", cluster_start);
   printf("%d\n", start);
-
- 
+  int cunt=0;
+  for(int i=start;i<end;i++){
+    if(copy[i]=='B'&&copy[i]=='M'&&copy[i]=='P')
+      cunt++;
+  }
+  printf("cunt\n");
   return 0;
 }
