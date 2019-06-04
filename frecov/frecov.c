@@ -30,15 +30,15 @@ int main(int argc, char *argv[]) {
   printf("%d\n",sector_bit);
   printf("%d\n",cluster_sector_num);
   printf("%d\n",sector_num);
-  printf("%d\n", end);
+  printf("%08x\n", end);
   printf("%d\n", cluster_start);
   printf("%d\n", start);
   int cunt=0;
   for(int i=start;i<end;i++){
     if(copy[i]=='B'&&copy[i+1]=='M'&&copy[i+2]=='P'){
       int base=i-8;
-      int high_c=*(short *)&copy[base+0x14];
-      int short_c=*(short *)&copy[base+0x1a]; 
+      int high_c=*(unsigned short *)&copy[base+0x14];
+      int short_c=*(unsigned short *)&copy[base+0x1a]; 
       int file_cluster= (high_c<<16)+short_c;
       printf("%08x\n",file_cluster);
       cunt++;
