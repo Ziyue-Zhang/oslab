@@ -7,6 +7,8 @@
 
 char *copy;
 char shortname[16];
+//int print_sha1sum(char *name, int size, int start){
+//}
 
 int main(int argc, char *argv[]) {
   int fd = open("filesystem/fs.img", O_RDONLY);
@@ -37,11 +39,15 @@ int main(int argc, char *argv[]) {
   for(int i=start;i<end;i++){
     if(copy[i]=='B'&&copy[i+1]=='M'&&copy[i+2]=='P'){
       int base=i-8;
+      if(copy[base]==0xe5)    //have been delete
+        continue;
       int high_c=*(unsigned short *)&copy[base+0x14];
       int short_c=*(unsigned short *)&copy[base+0x1a]; 
       int file_cluster= (high_c<<16)+short_c;
-      printf("%08x\n",file_cluster);
-      cunt++;
+      int file_address = start+(file_cluster-cluster_start)*cluster_sector_num*sector_bit;
+      int file_size=*(int *)&copy[base+0x1c];
+
+      
     }
   }
   printf("%d\n", cunt);
