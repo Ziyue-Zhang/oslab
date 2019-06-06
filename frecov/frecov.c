@@ -59,8 +59,8 @@ int findname(int x){
   }
   memset(filename, 0, sizeof(filename));    //now we can recover long name
   int finish=0;
-  int i=0;
-  for(int j=x-32;j>=tempp;j-=32){
+  int i=0,j=0;
+  for(j=x-32;j>=tempp;j-=32){
     temp=j+0x1;
     for(int k=0;k<5;k++){    //first part
       filename[i]=copy[temp];
@@ -97,7 +97,10 @@ int findname(int x){
     if(finish)
       break;    
   }
-  return 1;
+  if(j!=tempp)
+    return 0;
+  else
+    return 1;
 }
 
 int main(int argc, char *argv[]) {
