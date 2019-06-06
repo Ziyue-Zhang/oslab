@@ -57,7 +57,46 @@ int findname(int x){
     if(copy[tempp+i]!=(char)0xff)
       return 0;
   }
-  printf("nmsl\n");
+  memset(filename, 0, sizeof(filename));    //now we can recover long name
+  int finish=0;
+  int i=0;
+  for(int j=x-32;j>=tempp;j-=32){
+    temp=j+0x1;
+    for(int k=0;k<5;k++){    //first part
+      filename[i]=copy[temp];
+      if(copy[temp]==0x0&&copy[temp+1]==0x0){
+        finish=1;
+        break;
+      }
+      i++, temp+=2;
+    }
+    if(finish)
+      break;
+    
+    temp=j+0xe;
+    for(int k=0;k<6;k++){    //second part
+      filename[i]=copy[temp];
+      if(copy[temp]==0x0&&copy[temp+1]==0x0){
+        finish=1;
+        break;
+      }
+      i++, temp+=2;
+    }
+    if(finish)
+      break;
+
+    temp=j+0x1c;
+    for(int k=0;k<2;k++){    //third part
+      filename[i]=copy[temp];
+      if(copy[temp]==0x0&&copy[temp+1]==0x0){
+        finish=1;
+        break;
+      }
+      i++, temp+=2;
+    }
+    if(finish)
+      break;    
+  }
   return 1;
 }
 
@@ -86,7 +125,6 @@ int main(int argc, char *argv[]) {
   printf("%08x\n", end);
   printf("%d\n", cluster_start);
   printf("%d\n", start);*/
-  int cunt=0;
   for(int i=start;i<end;i++){
     if(copy[i]=='B'&&copy[i+1]=='M'&&copy[i+2]=='P'){
       int base=i-8;
@@ -102,13 +140,12 @@ int main(int argc, char *argv[]) {
 
       if(!findname(base))
         continue;
-      cunt++;
-      //int file_address = start+(file_cluster-cluster_start)*cluster_sector_num*sector_bit;
-      //int file_size=*(int *)&copy[base+0x1c];
-
       
+      int file_address = start+(file_cluster-cluster_start)*cluster_sector_num*sector_bit;
+      int file_size=*(int *)&copy[base+0x1c];
+
+      print_sha1sum(file_size, file_address);
     }
   }
-  printf("%d\n", cunt);
   return 0;
 }
