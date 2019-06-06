@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
   printf("%08x\n", end);
   printf("%d\n", cluster_start);
   printf("%d\n", start);*/
-
+  int cunt=0;
   for(int i=start;i<end;i++){
     if(copy[i]=='B'&&copy[i+1]=='M'&&copy[i+2]=='P'){
       int base=i-8;
@@ -100,13 +100,15 @@ int main(int argc, char *argv[]) {
       if(file_cluster<cluster_start)      //wrong cluster
         continue;
 
-      findname(base);
-      
+      if(!findname(base))
+        continue;
+      cunt++;
       //int file_address = start+(file_cluster-cluster_start)*cluster_sector_num*sector_bit;
       //int file_size=*(int *)&copy[base+0x1c];
 
       
     }
+    printf("%d\n", cunt);
   }
   return 0;
 }
