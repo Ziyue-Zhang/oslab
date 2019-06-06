@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
 
       
     }
-    printf("%d\n", cunt);
   }
+  printf("%d\n", cunt);
   return 0;
 }
