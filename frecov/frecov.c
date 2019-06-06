@@ -16,7 +16,7 @@ void print_sha1sum(int size, int start){
   memset(sha,0,sizeof(sha));
   printf("%s\n",filename);
   strcpy(sha, "sha1sum ");
-  strcpy(sha, filename);
+  strcat(sha, filename);
   system(sha);
 }
 int judge(int x){
