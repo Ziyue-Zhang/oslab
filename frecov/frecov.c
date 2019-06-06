@@ -14,7 +14,7 @@ void print_sha1sum(int size, int start){
   write(fd, copy+start, size);
   close(fd);
   memset(sha,0,sizeof(sha));
-  printf("%s\n",filename);
+  //printf("%s\n",filename);
   strcpy(sha, "sha1sum ");
   strcat(sha, filename);
   system(sha);
@@ -101,7 +101,7 @@ int findname(int x){
 }
 
 int main(int argc, char *argv[]) {
-  int fd = open("filesystem/fs.img", O_RDONLY);
+  int fd = open(argv[1], O_RDONLY);
   if(fd==-1)
     printf("nmsl\n");
   
