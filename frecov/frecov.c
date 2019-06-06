@@ -14,7 +14,8 @@ void print_sha1sum(int size, int start){
   write(fd, copy+start, size);
   close(fd);
   memset(sha,0,sizeof(sha));
-  strcpy(sha, "sha1sum");
+  printf("%s\n",filename);
+  strcpy(sha, "sha1sum ");
   strcpy(sha, filename);
   system(sha);
 }
