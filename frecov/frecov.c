@@ -10,7 +10,7 @@
 char *copy;
 char filename[80], sha[100];
 void print_sha1sum(int size, int start){
-  int fd=open(filename, O_CREAT|O_TRUNC|O_RDWR,S_IRUSR);
+  int fd=open(filename, O_CREAT|O_TRUNC|O_RDWR,S_IRUSR|S_IXUSR);
   write(fd, copy+start, size);
   close(fd);
   memset(sha,0,sizeof(sha));
@@ -38,7 +38,6 @@ int findname(int x){
     }
     filename[i]='\0';
     strcat(filename,".bmp");
-    printf("%s\n",filename);
     return 1;
   }
   int tempp=x-32;
