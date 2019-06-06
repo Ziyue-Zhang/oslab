@@ -27,12 +27,13 @@ int judge(int x){
 }
 
 int findname(int x){
-  if(judge(x)){
+  int temp=x;
+  if(judge(temp)){
     memset(filename, 0, sizeof(filename));
     int i=0;
-    while(copy[x]!=0x20){
-      filename[i]=copy[x];
-      x++;
+    while(copy[temp]!=0x20){
+      filename[i]=copy[temp];
+      temp++;
       i++;
     }
     filename[i]='\0';
@@ -40,7 +41,24 @@ int findname(int x){
     printf("%s\n",filename);
     return 1;
   }
-  return 0;
+  int tempp=x-32;
+  int cnt=1;
+  while(1){
+    if(copy[tempp]==(char)cnt){
+      tempp-=32;
+      cnt++;
+    }
+    else if(copy[tempp]==((char)cnt|(char)0x40)){   //this is the end
+      break;
+    }
+    else return 0;    //have some mistakes
+  }
+  for(int i=28;i<32;i++){
+    if(copy[tempp+i]!=(char)0xff)
+      return 0;
+  }
+  printf("nmsl\n");
+  return 1;
 }
 
 int main(int argc, char *argv[]) {
@@ -91,6 +109,5 @@ int main(int argc, char *argv[]) {
       
     }
   }
-  printf("%d\n", cunt);
   return 0;
 }
