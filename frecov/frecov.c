@@ -105,6 +105,7 @@ int main(int argc, char *argv[]) {
     printf("nmsl\n");
   
   copy=(char *)mmap(NULL, 2<<29, PROT_READ, MAP_SHARED, fd, 0); //512mb
+  close(fd);
   short sector_bit=*(short *)&copy[0xb];
   int cluster_sector_num=(int)copy[0xd];
   int sector_num = *(int *)&copy[0x20];
