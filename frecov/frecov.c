@@ -9,7 +9,7 @@
 
 char *copy;
 char filename[80], sha[100];
-int print_sha1sum(int size, int start){
+void print_sha1sum(int size, int start){
   int fd=open(filename, O_CREAT|O_TRUNC|O_RDWR);
   write(fd, copy+start, size);
   close(fd);
@@ -40,7 +40,7 @@ int findname(int x){
     printf("%s\n",filename);
     return 1;
   }
-
+  return 0;
 }
 
 int main(int argc, char *argv[]) {
