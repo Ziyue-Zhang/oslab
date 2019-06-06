@@ -4,6 +4,8 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 char *copy;
 char filename[80], sha[100];
@@ -23,6 +25,7 @@ int judge(int x){
   }
   return 1;
 }
+
 int findname(int x){
   if(judge(x)){
     emset(filename, 0, sizeof(filename));
@@ -39,6 +42,7 @@ int findname(int x){
   }
 
 }
+
 int main(int argc, char *argv[]) {
   int fd = open("filesystem/fs.img", O_RDONLY);
   if(fd==-1)
