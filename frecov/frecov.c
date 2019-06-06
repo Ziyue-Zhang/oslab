@@ -28,7 +28,7 @@ int judge(int x){
 
 int findname(int x){
   if(judge(x)){
-    emset(filename, 0, sizeof(filename));
+    memset(filename, 0, sizeof(filename));
     int i=0;
     while(copy[x]!=0x20){
       filename[i]=copy[x];
