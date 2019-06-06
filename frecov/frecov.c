@@ -6,10 +6,39 @@
 #include <stdio.h>
 
 char *copy;
-char shortname[16];
-//int print_sha1sum(char *name, int size, int start){
-//}
+char filename[80], sha[100];
+int print_sha1sum(int size, int start){
+  int fd=open(filename, O_CREAT|O_TRUNC|O_RDWR);
+  write(fd, copy+start, size);
+  close(fd);
+  memset(sha,0,sizeof(sha));
+  strcpy(sha, "sha1sum ");
+  strcpy(sha, filename);
+  system(sha);
+}
+int judge(int x){
+  for(int i=x;i<x+8;i++){
+    if(copy[i]=='~')
+      return 0;
+  }
+  return 1;
+}
+int findname(int x){
+  if(judge(x)){
+    emset(filename, 0, sizeof(filename));
+    int i=0;
+    while(copy[x]!=0x20){
+      filename[i]=copy[x];
+      x++;
+      i++;
+    }
+    filename[i]='\0';
+    strcat(filename,".bmp");
+    printf("%s\n",filename);
+    return 1;
+  }
 
+}
 int main(int argc, char *argv[]) {
   int fd = open("filesystem/fs.img", O_RDONLY);
   if(fd==-1)
@@ -29,23 +58,31 @@ int main(int argc, char *argv[]) {
 
   int start=(fat_start+fat_num*fat_sector_num+(cluster_start-2)*cluster_sector_num)*sector_bit;
 
-  printf("%d\n",sector_bit);
+  /*printf("%d\n",sector_bit);
   printf("%d\n",cluster_sector_num);
   printf("%d\n",sector_num);
   printf("%08x\n", end);
   printf("%d\n", cluster_start);
-  printf("%d\n", start);
+  printf("%d\n", start);*/
+
   int cunt=0;
   for(int i=start;i<end;i++){
     if(copy[i]=='B'&&copy[i+1]=='M'&&copy[i+2]=='P'){
       int base=i-8;
       if(copy[base]==0xe5)    //have been delete
         continue;
+
       int high_c=*(unsigned short *)&copy[base+0x14];
       int short_c=*(unsigned short *)&copy[base+0x1a]; 
       int file_cluster= (high_c<<16)+short_c;
-      int file_address = start+(file_cluster-cluster_start)*cluster_sector_num*sector_bit;
-      int file_size=*(int *)&copy[base+0x1c];
+
+      if(file_cluster<cluster_start)      //wrong cluster
+        continue;
+
+      findname(base);
+      
+      //int file_address = start+(file_cluster-cluster_start)*cluster_sector_num*sector_bit;
+      //int file_size=*(int *)&copy[base+0x1c];
 
       
     }
