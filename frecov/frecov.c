@@ -87,7 +87,6 @@ int main(int argc, char *argv[]) {
   printf("%d\n", cluster_start);
   printf("%d\n", start);*/
 
-  int cunt=0;
   for(int i=start;i<end;i++){
     if(copy[i]=='B'&&copy[i+1]=='M'&&copy[i+2]=='P'){
       int base=i-8;
