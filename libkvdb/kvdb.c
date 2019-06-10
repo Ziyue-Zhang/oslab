@@ -16,6 +16,17 @@ void file_lock(int fd){
     lock2.l_pid=getpid();
     fcntl(fd, F_SETLKW, &lock2);
 }
+
+void file_unlock(int fd){
+    struct flock lock;
+    lock.l_type=F_UNLCK;
+    lock.l_whence=SEEK_SET;
+    lock.l_start=0;
+    lock.l_len=0;
+    lock.l_pid=getpid();
+    fcntl(fd, F_SETLKW, &lock);
+}
+
 int kvdb_open(kvdb_t *db, const char *filename){
     pthread_mutex_lock(&(db->lock));
     FILE* fpp;

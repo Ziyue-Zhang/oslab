@@ -6,10 +6,18 @@
 #include<sys/file.h>
 #include<unistd.h>
 
+#define mb *1024*1024
+
+struct block{
+    char key[128];
+    char value[16 mb];
+};
+
 struct kvdb {
     char filename[200];
     pthread_mutex_t lock;
     FILE *fp;
+    struct block data[64];
 };
 typedef struct kvdb kvdb_t;
 
