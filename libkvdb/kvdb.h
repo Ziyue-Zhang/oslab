@@ -3,6 +3,7 @@
 
 #include<pthread.h>
 #include<stdio.h>
+#include<sys/file.h>
 
 struct kvdb {
     char filename[200];
