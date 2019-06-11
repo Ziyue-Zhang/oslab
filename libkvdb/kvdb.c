@@ -68,9 +68,9 @@ int find_id(kvdb_t *db, const char *key){
 }
 char temp_value[16 mb];
 int kvdb_put(kvdb_t *db, const char *key, const char *value){
-    /*pthread_mutex_lock(&(db->lock));
+    pthread_mutex_lock(&(db->lock));
     FILE *fp;
-    fp=fopen(db->filename, "a");
+    fp=fopen(db->filename, "r");
     //file_lock(fileno(fp));
     fwrite(db,sizeof(db),1,fp);
     //file_unlock(fileno(fp));
@@ -78,12 +78,13 @@ int kvdb_put(kvdb_t *db, const char *key, const char *value){
     int id=find_id(db,key);
     if(id>db->num){
         db->num++;
-        pthread_mutex_unlock(&(db->lock));
-        return 1;
     }
+    fp=fopen(db->filename, "rb+");
     memset(temp_value,0,sizeof(temp_value));
-    strcpy(temp_value,db->data[id].value);
-    pthread_mutex_unlock(&(db->lock));*/
+    strcpy(temp_value,value);
+    fseek(fp,sizeof(struct block)*id+128, SEEK_SET);
+    fwrite(temp_value,sizeof(temp_value),1,fp);
+    pthread_mutex_unlock(&(db->lock));
     return 0;
 }
 
