@@ -5,6 +5,7 @@
 #include<stdio.h>
 #include<sys/file.h>
 #include<unistd.h>
+#include<string.h>
 
 #define mb *1024*1024
 
@@ -14,10 +15,12 @@ struct block{
 };
 
 struct kvdb {
+    struct block data[64];
     char filename[200];
     pthread_mutex_t lock;
     FILE *fp;
-    struct block data[64];
+    int open;
+    int num;
 };
 typedef struct kvdb kvdb_t;
 
