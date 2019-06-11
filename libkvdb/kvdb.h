@@ -6,6 +6,7 @@
 #include<sys/file.h>
 #include<unistd.h>
 #include<string.h>
+#include<stdlib.h>
 
 #define mb *1024*1024
 

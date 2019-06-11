@@ -57,7 +57,7 @@ int kvdb_put(kvdb_t *db, const char *key, const char *value){
     fwrite(value,1,strlen(value),fp);
     fwrite("\n",1,1,fp);
     fsync(fd);
-    file_unloock(fd);
+    file_unlock(fd);
     fclose(fp);
     pthread_mutex_unlock(&(db->lock));
     return 0;
