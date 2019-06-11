@@ -50,7 +50,7 @@ int kvdb_open(kvdb_t *db, const char *filename){
         return 0;
 }
 int kvdb_close(kvdb_t *db){
-    if(!open)
+    if(!db->open)
         return -1;
     pthread_mutex_lock(&(db->lock));
     db->open=0;
