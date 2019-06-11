@@ -20,6 +20,55 @@ void file_unlock(int fd){
     fcntl(fd, F_SETLKW, &lock);
 }
 
+char *val=NULL;
+int kvdb_open(kvdb_t *db, const char *filename){
+    if(db->open)        //already open
+        return -1;
+    pthread_mutex_lock(&(db->lock));
+    FILE* fp;
+    fp=fopen(filename, "a+");
+    if(!fp){
+        pthread_mutex_unlock(&(db->lock));
+        return -1;
+    }
+    int len=strlen(filename);
+    strncpy(db->filename,filename,len);
+    db->open=1;
+    fclose(fp);
+    pthread_mutex_unlock(&(db->lock));
+    return 0;
+}
+int kvdb_close(kvdb_t *db){
+    if(!db->open)       //altready close
+        return -1;
+    pthread_mutex_lock(&(db->lock));
+    db->open=0;
+    pthread_mutex_unlock(&(db->lock));
+    return 0;
+}
+int kvdb_put(kvdb_t *db, const char *key, const char *value){
+    pthread_mutex_lock(&(db->lock));
+    FILE* fp=fopen(db->filename,"a+");
+    int fd=fileno(fp);
+    file_lock(fd);
+    fseek(fp,0,SEEK_END);
+    fwrite(key,1,strlen(key),fp);
+    fwrite("\n",1,1,fp);
+    fwrite(value,1,strlen(value),fp);
+    fwrite("\n",1,1,fp);
+    fsync(fd);
+    file_unloock(fd);
+    fclose(fp);
+    pthread_mutex_unlock(&(db->lock));
+    return 0;
+
+}
+char *kvdb_get(kvdb_t *db, const char *key){
+    if(val)
+        free(val);
+    return NULL;
+}
+
 /*int kvdb_open(kvdb_t *db, const char *filename){
     if(db->open)
         return -1;
@@ -99,41 +148,3 @@ char *kvdb_get(kvdb_t *db, const char *key){
     pthread_mutex_unlock(&(db->lock));
     return temp_value;
 }*/
-
-char *val[16 mb];
-int kvdb_open(kvdb_t *db, const char *filename){
-    if(db->open)        //already open
-        return -1;
-    pthread_mutex_lock(&(db->lock));
-    db->open=1;
-    FILE* fp;
-    fp=fopen(filename, "a+");
-    db->fp=fp;
-    int len=strlen(filename);
-    strncpy(db->filename,filename,len);
-    pthread_mutex_unlock(&(db->lock));
-    if(!fp)
-        return -1;
-    else
-        return 0;
-}
-int kvdb_close(kvdb_t *db){
-    if(!db->open)
-        return -1;
-    pthread_mutex_lock(&(db->lock));
-    db->open=0;
-    FILE* fp=db->fp;
-    int fd=fileno(fp);
-    if(!fclose(fp)){
-        pthread_mutex_unlock(&(db->lock));
-        return -1;
-    }
-    pthread_mutex_unlock(&(db->lock));
-    return 0;
-}
-int kvdb_put(kvdb_t *db, const char *key, const char *value){
-    return 0;
-}
-char *kvdb_get(kvdb_t *db, const char *key){
-    return NULL;
-}

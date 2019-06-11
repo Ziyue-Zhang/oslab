@@ -18,7 +18,6 @@ struct kvdb {
     struct block data[64];
     char filename[200];
     pthread_mutex_t lock;
-    FILE *fp;
     int open;
     int num;
 };
