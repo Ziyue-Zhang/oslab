@@ -55,6 +55,7 @@ int kvdb_close(kvdb_t *db){
     pthread_mutex_lock(&(db->lock));
     db->open=0;
     pthread_mutex_unlock(&(db->lock));
+    return 0;
 }
 int find_id(kvdb_t *db, const char *key){
     int tot=db->num;
@@ -83,7 +84,7 @@ int kvdb_put(kvdb_t *db, const char *key, const char *value){
     memset(temp_value,0,sizeof(temp_value));
     strcpy(temp_value,db->data[id].value);
     pthread_mutex_unlock(&(db->lock));*/
-
+    return 0;
 }
 
 char *kvdb_get(kvdb_t *db, const char *key){
