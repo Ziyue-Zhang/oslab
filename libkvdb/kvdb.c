@@ -1,20 +1,13 @@
 #include "kvdb.h"
 
 void file_lock(int fd){
-    struct flock lock1;
-    lock1.l_type=F_RDLCK;
-    lock1.l_whence=SEEK_SET;
-    lock1.l_start=0;
-    lock1.l_len=0;
-    lock1.l_pid=getpid();
-    fcntl(fd, F_SETLKW, &lock1);
-    struct flock lock2;
-    lock2.l_type=F_WRLCK;
-    lock2.l_whence=SEEK_SET;
-    lock2.l_start=0;
-    lock2.l_len=0;
-    lock2.l_pid=getpid();
-    fcntl(fd, F_SETLKW, &lock2);
+    struct flock lock;
+    lock.l_type=F_WRLCK;
+    lock.l_whence=SEEK_SET;
+    lock.l_start=0;
+    lock.l_len=0;
+    lock.l_pid=getpid();
+    fcntl(fd, F_SETLKW, &lock);
 }
 
 void file_unlock(int fd){
@@ -27,7 +20,7 @@ void file_unlock(int fd){
     fcntl(fd, F_SETLKW, &lock);
 }
 
-int kvdb_open(kvdb_t *db, const char *filename){
+/*int kvdb_open(kvdb_t *db, const char *filename){
     if(db->open)
         return -1;
     pthread_mutex_lock(&(db->lock));
@@ -105,4 +98,42 @@ char *kvdb_get(kvdb_t *db, const char *key){
     strcpy(temp_value,db->data[id].value);
     pthread_mutex_unlock(&(db->lock));
     return temp_value;
+}*/
+
+char *val[16 mb];
+int kvdb_open(kvdb_t *db, const char *filename){
+    if(db->open)        //already open
+        return -1;
+    pthread_mutex_lock(&(db->lock));
+    db->open=1;
+    FILE* fp;
+    fp=fopen(filename, "a+");
+    db->fp=fp;
+    int len=strlen(filename);
+    strncpy(db->filename,filename,len);
+    pthread_mutex_unlock(&(db->lock));
+    if(!fp)
+        return -1;
+    else
+        return 0;
+}
+int kvdb_close(kvdb_t *db){
+    if(!db->open)
+        return -1;
+    pthread_mutex_lock(&(db->lock));
+    db->open=0;
+    FILE* fp=db->fp;
+    int fd=fileno(fp);
+    if(!fclose(fp)){
+        pthread_mutex_unlock(&(db->lock));
+        return -1;
+    }
+    pthread_mutex_unlock(&(db->lock));
+    return 0;
+}
+int kvdb_put(kvdb_t *db, const char *key, const char *value){
+    return 0;
+}
+char *kvdb_get(kvdb_t *db, const char *key){
+    return NULL;
 }
