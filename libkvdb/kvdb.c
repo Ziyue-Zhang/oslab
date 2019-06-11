@@ -1,5 +1,5 @@
 #include "kvdb.h"
-
+pthread_mutex_t lock;
 void file_lock(int fd){
     struct flock lock;
     lock.l_type=F_WRLCK;
@@ -24,30 +24,30 @@ char *val=NULL;
 int kvdb_open(kvdb_t *db, const char *filename){
     if(db->open)        //already open
         return -1;
-    pthread_mutex_lock(&(db->lock));
+    pthread_mutex_lock(&lock);
     FILE* fp;
     fp=fopen(filename, "a+");
     if(!fp){
-        pthread_mutex_unlock(&(db->lock));
+        pthread_mutex_unlock(&lock);
         return -1;
     }
     int len=strlen(filename);
     strncpy(db->filename,filename,len);
     db->open=1;
     fclose(fp);
-    pthread_mutex_unlock(&(db->lock));
+    pthread_mutex_unlock(&lock);
     return 0;
 }
 int kvdb_close(kvdb_t *db){
     if(!db->open)       //altready close
         return -1;
-    pthread_mutex_lock(&(db->lock));
+    pthread_mutex_lock(&lock);
     db->open=0;
-    pthread_mutex_unlock(&(db->lock));
+    pthread_mutex_unlock(&lock);
     return 0;
 }
 int kvdb_put(kvdb_t *db, const char *key, const char *value){
-    pthread_mutex_lock(&(db->lock));
+    pthread_mutex_lock(&lock);
     FILE* fp=fopen(db->filename,"a+");
     int fd=fileno(fp);
     file_lock(fd);
@@ -59,14 +59,14 @@ int kvdb_put(kvdb_t *db, const char *key, const char *value){
     fsync(fd);
     file_unlock(fd);
     fclose(fp);
-    pthread_mutex_unlock(&(db->lock));
+    pthread_mutex_unlock(&lock);
     return 0;
 
 }
 char *kvdb_get(kvdb_t *db, const char *key){
     if(val)
         free(val);
-    pthread_mutex_lock(&(db->lock));
+    pthread_mutex_lock(&lock);
     FILE* fp=fopen(db->filename,"a+");
     int fd=fileno(fp);
     file_lock(fd);
@@ -89,14 +89,14 @@ char *kvdb_get(kvdb_t *db, const char *key){
     }
     fsync(fd);
     file_unlock(fd);
-    pthread_mutex_unlock(&(db->lock));
+    pthread_mutex_unlock(&lock);
     return val;
 }
 
 /*int kvdb_open(kvdb_t *db, const char *filename){
     if(db->open)
         return -1;
-    pthread_mutex_lock(&(db->lock));
+    pthread_mutex_lock(&lock);
     db->open=1;
     db->num=0;
     FILE* fpp;
@@ -109,7 +109,7 @@ char *kvdb_get(kvdb_t *db, const char *key){
     
     int len=strlen(filename);
     strncpy(db->filename,filename,len);
-    pthread_mutex_unlock(&(db->lock));
+    pthread_mutex_unlock(&lock);
     if(!fpp)
         return -1;
     else
@@ -118,9 +118,9 @@ char *kvdb_get(kvdb_t *db, const char *key){
 int kvdb_close(kvdb_t *db){
     if(!db->open)
         return -1;
-    pthread_mutex_lock(&(db->lock));
+    pthread_mutex_lock(&lock);
     db->open=0;
-    pthread_mutex_unlock(&(db->lock));
+    pthread_mutex_unlock(&lock);
     return 0;
 }
 int find_id(kvdb_t *db, const char *key){
@@ -134,7 +134,7 @@ int find_id(kvdb_t *db, const char *key){
 }
 char temp_value[16 mb];
 int kvdb_put(kvdb_t *db, const char *key, const char *value){
-    pthread_mutex_lock(&(db->lock));
+    pthread_mutex_lock(&lock);
     FILE *fp;
     fp=fopen(db->filename, "r");
     //file_lock(fileno(fp));
@@ -150,12 +150,12 @@ int kvdb_put(kvdb_t *db, const char *key, const char *value){
     strcpy(temp_value,value);
     fseek(fp,sizeof(struct block)*id+128, SEEK_SET);
     fwrite(temp_value,sizeof(temp_value),1,fp);
-    pthread_mutex_unlock(&(db->lock));
+    pthread_mutex_unlock(&lock);
     return 0;
 }
 
 char *kvdb_get(kvdb_t *db, const char *key){
-    pthread_mutex_lock(&(db->lock));
+    pthread_mutex_lock(&lock);
     FILE *fp;
     fp=fopen(db->filename, "r");
     //file_lock(fileno(fp));
@@ -164,11 +164,11 @@ char *kvdb_get(kvdb_t *db, const char *key){
     fclose(fp);
     int id=find_id(db,key);
     if(id>db->num){
-        pthread_mutex_unlock(&(db->lock));
+        pthread_mutex_unlock(&lock);
         return NULL;
     }
     memset(temp_value,0,sizeof(temp_value));
     strcpy(temp_value,db->data[id].value);
-    pthread_mutex_unlock(&(db->lock));
+    pthread_mutex_unlock(&lock);
     return temp_value;
 }*/
