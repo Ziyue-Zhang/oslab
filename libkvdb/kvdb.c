@@ -66,7 +66,31 @@ int kvdb_put(kvdb_t *db, const char *key, const char *value){
 char *kvdb_get(kvdb_t *db, const char *key){
     if(val)
         free(val);
-    return NULL;
+    pthread_mutex_lock(&(db->lock));
+    FILE* fp=fopen(db->filename,"a+");
+    int fd=fileno(fp);
+    file_lock(fd);
+    
+    fseek(fp,0,SEEK_SET);
+    char keyy[129],valuee[16 mb + 1];
+    while(1){
+        if(!fgets(keyy,sizeof(keyy),fp))
+            break;
+        if(!fgets(valuee,sizeof(valuee),fp))
+            break;
+        int len=strlen(keyy);
+        keyy[len]='\0';
+        len=strlen(valuee);
+        valuee[len]='\0';
+        if(strcmp(keyy,key)==0){
+            free(val);
+            val=strdup(valuee);
+        }
+    }
+    fsync(fd);
+    file_unlock(fd);
+    pthread_mutex_unlock(&(db->lock));
+    return val;
 }
 
 /*int kvdb_open(kvdb_t *db, const char *filename){

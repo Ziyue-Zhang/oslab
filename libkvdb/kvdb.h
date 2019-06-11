@@ -10,17 +10,17 @@
 
 #define mb *1024*1024
 
-struct block{
+/*struct block{
     char key[128];
     char value[16 mb];
-};
+};*/
 
 struct kvdb {
-    struct block data[64];
+    //struct block data[64];
     char filename[200];
     pthread_mutex_t lock;
     int open;
-    int num;
+    //int num;
 };
 typedef struct kvdb kvdb_t;
 
