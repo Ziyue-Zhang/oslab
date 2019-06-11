@@ -28,7 +28,7 @@ void file_unlock(int fd){
 }
 
 int kvdb_open(kvdb_t *db, const char *filename){
-    if(open)
+    if(db->open)
         return -1;
     pthread_mutex_lock(&(db->lock));
     db->open=1;
