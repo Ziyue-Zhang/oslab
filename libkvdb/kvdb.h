@@ -20,6 +20,7 @@ struct kvdb {
     char filename[200];
     pthread_mutex_t lock;
     int open;
+    FILE *fp;
     //int num;
 };
 typedef struct kvdb kvdb_t;

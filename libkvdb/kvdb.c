@@ -31,10 +31,11 @@ int kvdb_open(kvdb_t *db, const char *filename){
         pthread_mutex_unlock(&lock);
         return -1;
     }
+    db->fp=fp;
     int len=strlen(filename);
     strncpy(db->filename,filename,len);
     db->open=1;
-    fclose(fp);
+    //fclose(fp);
     pthread_mutex_unlock(&lock);
     return 0;
 }
@@ -42,13 +43,15 @@ int kvdb_close(kvdb_t *db){
     if(!db->open)       //altready close
         return -1;
     pthread_mutex_lock(&lock);
+    fclose(db->fp);
     db->open=0;
     pthread_mutex_unlock(&lock);
     return 0;
 }
 int kvdb_put(kvdb_t *db, const char *key, const char *value){
     pthread_mutex_lock(&lock);
-    FILE* fp=fopen(db->filename,"a+");
+    //FILE* fp=fopen(db->filename,"a+");
+    FILE*fp=db->fp;
     int fd=fileno(fp);
     file_lock(fd);
     fseek(fp,0,SEEK_END);
@@ -58,7 +61,7 @@ int kvdb_put(kvdb_t *db, const char *key, const char *value){
     fwrite("\n",1,1,fp);
     fsync(fd);
     file_unlock(fd);
-    fclose(fp);
+    //fclose(db->fp);
     pthread_mutex_unlock(&lock);
     return 0;
 
@@ -67,7 +70,8 @@ char *kvdb_get(kvdb_t *db, const char *key){
     if(val)
         free(val);
     pthread_mutex_lock(&lock);
-    FILE* fp=fopen(db->filename,"a+");
+    //FILE* fp=fopen(db->filename,"a+");
+    FILE *fp=db->fp;
     int fd=fileno(fp);
     file_lock(fd);
     
