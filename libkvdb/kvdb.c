@@ -20,8 +20,8 @@ void file_unlock(int fd){
     fcntl(fd, F_SETLKW, &lock);
 }
 int kvdb_open(kvdb_t *db, const char *filename){
-    /*if(db->open)        //already open
-        return -1;*/
+    if(db->open)        //already open
+        return -1;
     pthread_mutex_lock(&big_lock);
     FILE* fp;
     fp=fopen(filename, "a+");
