@@ -124,7 +124,7 @@ char *kvdb_get(kvdb_t *db, const char *key){
         //printf("sb %s\n",keyy);
         int len=strlen(keyy);
         if(keyy[len-1]!='#'){
-            //printf("     %c\n",keyy[len-2]);
+            printf("     %c\n",keyy[len-2]);
             continue;
         }
         keyy[len-1]='\0';
