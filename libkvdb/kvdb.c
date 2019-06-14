@@ -124,14 +124,14 @@ char *kvdb_get(kvdb_t *db, const char *key){
         fscanf(fp,"%s",keyy);
         printf("%s\n",keyy);
         int len=strlen(keyy);
-        if(keyy[len-2]!='#'){
+        if(keyy[len-1]!='#'){
             printf("%c\n",keyy[len-2]);
             continue;
         }
         keyy[len-1]='\0';
         fscanf(fp,"%s",valuee);
         len=strlen(valuee);
-        if(valuee[len-2]!='#')
+        if(valuee[len-1]!='#')
             continue;
         valuee[len-1]='\0';
         //printf("%s\n",keyy);
