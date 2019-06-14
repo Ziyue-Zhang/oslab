@@ -67,9 +67,12 @@ int kvdb_put(kvdb_t *db, const char *key, const char *value){
     int fd=fileno(fp);
     file_lock(fd);
     fseek(fp,0,SEEK_END);
+    fwrite("\n",1,1,fp);
     fwrite(key,1,strlen(key),fp);
+    fwrite("#",1,1,fp);
     fwrite("\n",1,1,fp);
     fwrite(value,1,strlen(value),fp);
+    fwrite("#",1,1,fp);
     fwrite("\n",1,1,fp);
     fsync(fd);
     file_unlock(fd);
@@ -82,8 +85,8 @@ int kvdb_put(kvdb_t *db, const char *key, const char *value){
 
 }
 char *val=NULL;
-char keyy[129];
-char valuee[(1<<24)+1];
+char keyy[130];
+char valuee[(1<<24)+2];
 char *kvdb_get(kvdb_t *db, const char *key){
     if(!db->open) {      //altready close
         return NULL;
@@ -99,7 +102,7 @@ char *kvdb_get(kvdb_t *db, const char *key){
     int fd=fileno(fp);
     file_lock(fd);
     fseek(fp,0,SEEK_SET);
-    while(1){
+    /*while(1){
         if(!fgets(keyy,sizeof(keyy),fp))
             break;
         if(!fgets(valuee,sizeof(valuee),fp))
@@ -107,6 +110,25 @@ char *kvdb_get(kvdb_t *db, const char *key){
         int len=strlen(keyy);
         keyy[len-1]='\0';
         len=strlen(valuee);
+        valuee[len-1]='\0';
+        //printf("%s\n",keyy);
+        //printf("%s\n",valuee);
+        if(strcmp(keyy,key)==0){
+            //printf("%s\n",valuee);
+            free(val);
+            val=strdup(valuee);
+        }
+    }*/
+     while (!feof(fp)){
+        fscanf(fp,"%s",keyy);
+        int len=strlen(keyy);
+        if(keyy[len-2]!='#')
+            continue;
+        keyy[len-1]='\0';
+        fscanf(fp,"%s",valuee);
+        len=strlen(valuee);
+        if(valuee[len-2]!='#')
+            continue;
         valuee[len-1]='\0';
         //printf("%s\n",keyy);
         //printf("%s\n",valuee);
