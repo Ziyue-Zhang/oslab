@@ -120,7 +120,9 @@ char *kvdb_get(kvdb_t *db, const char *key){
         }
     }*/
      while (!feof(fp)){
+        printf("nmsl\n");
         fscanf(fp,"%s",keyy);
+        printf("%s\n",keyy);
         int len=strlen(keyy);
         if(keyy[len-2]!='#')
             continue;
