@@ -122,10 +122,10 @@ char *kvdb_get(kvdb_t *db, const char *key){
      while (!feof(fp)){
         //printf("nmsl\n");
         fscanf(fp,"%s",keyy);
-        printf("%s\n",keyy);
+        printf("sb %s\n",keyy);
         int len=strlen(keyy);
         if(keyy[len-1]!='#'){
-            printf("%c\n",keyy[len-2]);
+            printf("     %c\n",keyy[len-2]);
             continue;
         }
         keyy[len-1]='\0';
@@ -134,8 +134,8 @@ char *kvdb_get(kvdb_t *db, const char *key){
         if(valuee[len-1]!='#')
             continue;
         valuee[len-1]='\0';
-        //printf("%s\n",keyy);
-        //printf("%s\n",valuee);
+        printf("%s\n",keyy);
+        printf("%s\n",valuee);
         if(strcmp(keyy,key)==0){
             //printf("%s\n",valuee);
             free(val);
