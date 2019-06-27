@@ -151,19 +151,21 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
    kmt_spin_lock(&LK);
    strcpy(task->name, name);
+   task->state=RUNNABLE;
+   _Area stack = (_Area) { task->stack, task + 1 };
+   task->context = *kcontext(stack, entry, (void *)arg);
    int i;
-   for(i=0;i<LENGTH(tasks);i++){
-     if(tkfree[i]==0){
-       tkfree[i]=1;
+   for(i=0;i<task_cnt;i++){
+     if(tasks[i]==NULL){
        break;
      }
    }
+   if(i==task_cnt)
+    ++task_cnt;
+   if(task_cnt>28)
+    assert(0);
    task->id=i;
    task->cpu=i%_ncpu();
-   task->next=NULL;
-   task->state=RUNNING;
-   _Area stack = (_Area) { task->stack, task + 1 };
-   task->context = *kcontext(stack, entry, (void *)arg);
    tasks[i]=task;
    //printf("%d\n",i);
    printf("create %s in cpu%d\n",tasks[i]->name,tasks[i]->cpu);
