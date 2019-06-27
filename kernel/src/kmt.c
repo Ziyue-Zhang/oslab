@@ -85,7 +85,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   /*if(!task_cnt){
     return context;
   }*/
-  kmt_spin_lock(&LK);
+  //kmt_spin_lock(&LK);
   /*do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
       assert(tasks[0]);
@@ -115,7 +115,17 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   }
   int id=0;
   if(current) id=current->id;
-  kmt_spin_unlock(&LK);
+  while(1){
+    id=(id+1)%32;
+    if(!tasks[id])
+      continue;
+    //if(tasks[id]->state==RUNNABLE && tasks[id]->cpu==_cpu())
+    if(tasks[id]->state==RUNNABLE)
+      break;
+  }
+  current=tasks[id];
+  current->state=RUNNING;
+  //kmt_spin_unlock(&LK);
   return &current->context;
 }
 
@@ -125,6 +135,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    printf("cpu num:%d\n",ncpu);
    kmt->spin_init(&LK, "lock_task");
    kmt->spin_init(&LK2, "lock_sem");
+   kmt->spin_init(&alc, "alloc");
+   kmt->spin_init(&tp, "ostrap");
    for(int i = 0; i < 8;i++){
      mycpu[i].intena=0;   //interruptible
      mycpu[i].ncli=0;
@@ -138,7 +150,6 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
    kmt_spin_lock(&LK);
-   ++task_cnt;
    strcpy(task->name, name);
    int i;
    for(i=0;i<LENGTH(tasks);i++){
