@@ -11,9 +11,9 @@ typedef struct spinlock spinlock_t;
 typedef struct semaphore sem_t;
 
 struct task *current_task[8];
-struct task *tasks[28];
-struct task_st tasks_st[28];
-int tkfree[28];
+struct task *tasks[32];
+struct task_st tasks_st[32];
+int tkfree[32];
 #define current (current_task[_cpu()])
 
  static void kmt_init();
@@ -162,13 +162,13 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    }
    if(i==task_cnt)
     ++task_cnt;
-   if(task_cnt>28)
+   if(task_cnt>32)
     assert(0);
    task->id=i;
    task->cpu=i%_ncpu();
    tasks[i]=task;
    //printf("%d\n",i);
-   printf("create %s in cpu%d\n",tasks[i]->name,tasks[i]->cpu);
+   //printf("create %s in cpu%d\n",tasks[i]->name,tasks[i]->cpu);
    kmt_spin_unlock(&LK);
    return 0;
  }
@@ -199,31 +199,37 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   popcli();
   //printf("unlocked:%s\n",lk->name);
  }
+  static void kmt_sem_init(sem_t *sem, const char *name, int value){
+   sem->value=value;
+   strcpy(sem->name,name);
+   sem->l=0;
+   sem->r=0;
+   kmt_spin_init(&sem->lock,name);
+ }
  static void block(sem_t *sem){
-   kmt_spin_lock(&LK2);
+   //kmt_spin_lock(&LK2);
    current->state=SLEEP;
-   current->next=sem->head;
-   sem->head=current;
-   kmt_spin_unlock(&LK2);
+   sem->pool[sem->r]=current;
+   sem->r=sem->r+1;
+   if(sem->r==32)
+    sem->r=0;
+   //kmt_spin_unlock(&LK2);
    kmt_spin_unlock(&sem->lock);
    _yield();
-   kmt_spin_lock(&sem->lock);
+   //kmt_spin_lock(&sem->lock);
  }
  static void wakeup(sem_t *sem){
    if(!sem->head){
      panic("wake");
    }
-   kmt_spin_lock(&LK2);
-   task_t *temp=sem->head;
-   temp->state=RUNNING;
-   sem->head=sem->head->next;
-   kmt_spin_unlock(&LK2);  
- }
- static void kmt_sem_init(sem_t *sem, const char *name, int value){
-   sem->value=value;
-   strcpy(sem->name,name);
-   sem->head=NULL;
-   kmt_spin_init(&sem->lock,name);
+   //kmt_spin_lock(&LK2);
+   task_t *temp=sem->pool[sem->l];
+   sem->l=sem->l+1;
+   if(sem->l==32)
+    sem->l=0;
+   temp->state=RUNNABLE;
+   kmt_spin_unlock(&sem->lock);
+   //kmt_spin_unlock(&LK2);  
  }
  static void kmt_sem_wait(sem_t *sem){
    //printf("wait %s\n",sem->name);

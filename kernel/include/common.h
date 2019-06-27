@@ -30,8 +30,9 @@ struct spinlock {
 struct semaphore {
     volatile int value;
     char name[80];
-    struct task *head;
+    struct task *pool[32];
     struct spinlock lock;
+    int l,r;
 };
 struct Mycpu {
     int ncli;
