@@ -54,8 +54,8 @@ void popcli(void){
   if(get_efl()&FL_IF)
     panic("popcli - interruptible");
   mycpu[_cpu()].ncli-=1;
-  if(mycpu[_cpu()].ncli < 0)
-    panic("popcli");
+  /*if(mycpu[_cpu()].ncli < 0)
+    panic("popcli");*/
   if(mycpu[_cpu()].ncli == 0 && mycpu[_cpu()].intena)
     sti();
 }
@@ -132,7 +132,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
  static void kmt_init(){
    ncpu = _ncpu();
    task_cnt=0;
-   printf("cpu num:%d\n",ncpu);
+   //printf("cpu num:%d\n",ncpu);
    kmt->spin_init(&LK, "lock_task");
    kmt->spin_init(&LK2, "lock_sem");
    kmt->spin_init(&alc, "alloc");
