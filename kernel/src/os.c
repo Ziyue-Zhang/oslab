@@ -20,7 +20,7 @@ int temp=0;
 intptr_t sb1=0,sb2=0;
 extern spinlock_t tp;
 
-/*sem_t empty, full, mutex;
+sem_t empty, full, mutex;
 int cunt;
 const int maxk=6;
 static void producer(void *arg){
@@ -44,8 +44,8 @@ static void consumer(void *arg){
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&empty);
   }
-}*/
-extern ssize_t tty_write();
+}
+/*extern ssize_t tty_write();
 void echo_task(void *name){
   device_t *tty = dev_lookup(name);
   while(1){
@@ -55,7 +55,7 @@ void echo_task(void *name){
     line[nread - 1] = '\0';
     sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text, 8+strlen(line));
   }
-}
+}*/
 void idle(void *arg){
   while(1){
     for (int volatile i = 0; i < 100000; i++);
@@ -74,13 +74,13 @@ void idle(void *arg){
 }*/
 
 static void create_threads() {
-  /*kmt->sem_init(&empty, "buffer-empty", maxk);
+  kmt->sem_init(&empty, "buffer-empty", maxk);
   kmt->sem_init(&full, "buffer-full", 0);
   kmt->sem_init(&mutex, "mutex", 1);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-producer", producer, "xxx");
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-consumer", consumer, "yyy");*/
+              "test-thread-consumer", consumer, "yyy");
 
   /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-1", func, (void *)1);
@@ -161,11 +161,11 @@ static void os_init() {
               "idle8", idle, (void *)8);      
   }
   //_vme_init(pmm->alloc, pmm->free);
-  dev->init();
+  /*dev->init();
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");*/
   create_threads();
 }
 
