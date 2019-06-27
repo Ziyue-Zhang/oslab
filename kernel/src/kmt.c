@@ -113,6 +113,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   if(current && current->state==RUNNING){
     current->state=RUNNABLE;
   }
+  int id=0;
+  if(current) id=current->id;
   kmt_spin_unlock(&LK);
   return &current->context;
 }
