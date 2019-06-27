@@ -82,11 +82,11 @@ _Context *kmt_context_save (_Event ev, _Context *context){
   return NULL;
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
-  if(!task_cnt){
+  /*if(!task_cnt){
     return context;
-  }
+  }*/
   kmt_spin_lock(&LK);
-  do {
+  /*do {
     if (!current || current == tasks[LENGTH(tasks)-1]) {
       assert(tasks[0]);
       current = tasks[0];
@@ -103,13 +103,16 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     //if(current->state>=SLEEP)
     //printf("sleep%s\n",current->name);
     //printf("%s\n",tasks[0]->name);
-  } while (!current || current->cpu != _cpu() || current->state==SLEEP);
+  } while (!current || current->cpu != _cpu() || current->state==SLEEP);*/
   //if(current!=NULL)
     //printf("%d\n",current->cpu);
   //if(current->id%2!=_cpu())
     //assert(0);
   //printf("id:%d [cpu-%d] Schedule: %s\n", current->id, _cpu(), current->name);
    //printf("%s\n",current->name);
+  if(current && current->state==RUNNING){
+    current->state=RUNNABLE;
+  }
   kmt_spin_unlock(&LK);
   return &current->context;
 }
