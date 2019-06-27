@@ -75,7 +75,7 @@ _Context *kmt_context_save (_Event ev, _Context *context){
       printf("%s\n",current->name);
       assert(0);
     }*/
-    //assert(current->state==RUN);
+    //assert(current->state==RUNNING);
     current->context = *context;
   }
   //kmt_spin_unlock(&LK);
@@ -145,7 +145,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    task->id=i;
    task->cpu=i%_ncpu();
    task->next=NULL;
-   task->state=RUN;
+   task->state=RUNNING;
    _Area stack = (_Area) { task->stack, task + 1 };
    task->context = *kcontext(stack, entry, (void *)arg);
    tasks[i]=task;
@@ -197,7 +197,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    }
    kmt_spin_lock(&LK2);
    task_t *temp=sem->head;
-   temp->state=RUN;
+   temp->state=RUNNING;
    sem->head=sem->head->next;
    kmt_spin_unlock(&LK2);  
  }
