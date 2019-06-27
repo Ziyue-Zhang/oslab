@@ -53,7 +53,8 @@ void pushcli(void){
 void popcli(void){
   if(get_efl()&FL_IF)
     panic("popcli - interruptible");
-  if(--mycpu[_cpu()].ncli < 0)
+  mycpu[_cpu()].ncli-=1;
+  if(mycpu[_cpu()].ncli < 0)
     panic("popcli");
   if(mycpu[_cpu()].ncli == 0 && mycpu[_cpu()].intena)
     sti();
@@ -67,7 +68,7 @@ int holding(struct spinlock *lock){
 }
 
 _Context *kmt_context_save (_Event ev, _Context *context){
-  kmt_spin_lock(&LK);
+  //kmt_spin_lock(&LK);
   //printf("nmsl\n");
   if (current) {
     /*if(current->state==SLEEP){
@@ -77,7 +78,7 @@ _Context *kmt_context_save (_Event ev, _Context *context){
     //assert(current->state==RUN);
     current->context = *context;
   }
-  kmt_spin_unlock(&LK);
+  //kmt_spin_unlock(&LK);
   return NULL;
 }
 _Context *kmt_context_switch (_Event ev, _Context *context){
