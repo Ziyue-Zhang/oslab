@@ -237,14 +237,16 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    sem->value--;
    if(sem->value<0)
      block(sem);
-   kmt_spin_unlock(&sem->lock);
+   else
+     kmt_spin_unlock(&sem->lock);
  }
  static void kmt_sem_signal(sem_t *sem){
    kmt_spin_lock(&sem->lock);
    sem->value++;
    if(sem->value<=0)
      wakeup(sem);
-   kmt_spin_unlock(&sem->lock);
+   else
+     kmt_spin_unlock(&sem->lock);
  }
 
 MODULE_DEF(kmt){
