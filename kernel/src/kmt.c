@@ -39,7 +39,7 @@ void atm_lock(intptr_t *lk){
   while(_atomic_xchg(lk,1))
     for(int volatile i=0;i<100;i++);
 }
-void atm_unlock(intptr *lk){
+void atm_unlock(intptr_t *lk){
   _atomic_xchg(lk,0);
 }
 void pushcli(void){
