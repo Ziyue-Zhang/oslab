@@ -16,12 +16,12 @@ struct task {
     int cpu;
     int id;
     int state;
-    struct task* next; //using in semaphere
+    //struct task* next; //using in semaphere
     //long long align;    //align
     char stack[4096];
 };
 struct spinlock {
-    int locked;
+    volatile int locked;
     char name[80];      
     int cpu;
     //unsigned int pcs[10];
