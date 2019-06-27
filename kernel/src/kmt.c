@@ -27,6 +27,7 @@ int tkfree[28];
  static void kmt_sem_signal(sem_t *sem);
 
 spinlock_t LK,LK2;
+spinlock_t tp,alc;
 int ncpu;
 int task_cnt;
 void panic(char *str){
