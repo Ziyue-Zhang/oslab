@@ -7,9 +7,10 @@
 #define INT_MAX 2147483647
 #define INT_MIN (-INT_MAX - 1)
 #define FREE 0
-#define RUN 1
+#define RUNNING 1
 #define SLEEP 2
 #define DEAD 3
+#define RUNNABLE 4
 struct task {
     char name[80];
     _Context context;
