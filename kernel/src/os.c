@@ -18,7 +18,7 @@ void unlock(intptr_t *lk) {
 
 int temp=0;
 intptr_t sb1=0,sb2=0;
-spinlock_t tp, alc;
+extern spinlock_t tp;
 
 sem_t empty, full, mutex;
 int cunt;
@@ -122,8 +122,6 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
-  kmt->spin_init(&alc, "alloc");
-  kmt->spin_init(&tp, "ostrap");
   kmt->create(pmm->alloc(sizeof(task_t)),
               "idle1", idle, (void *)1);
   kmt->create(pmm->alloc(sizeof(task_t)),
