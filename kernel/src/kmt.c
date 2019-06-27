@@ -219,7 +219,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    //kmt_spin_lock(&sem->lock);
  }
  static void wakeup(sem_t *sem){
-   if(!sem->head){
+   if(sem->r-sem->l==0){
      panic("wake");
    }
    //kmt_spin_lock(&LK2);
