@@ -34,7 +34,11 @@ void panic(char *str){
   printf("%s\n", str);
   _halt(1);
 }
-
+intptr_t atmlk=0;
+void atm_lock(intptr_t *lk){
+  while(_atomic_xchg(lk,1))
+    for(int volatile i=0;i<100;i++);
+}
 void pushcli(void){
   int eflags = get_efl();
   cli();
