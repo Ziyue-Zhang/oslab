@@ -122,15 +122,45 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
+  if(_ncpu()==1){
+  kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle1", idle, (void *)1);    
+  }
+  else if(_ncpu()==2){
   kmt->create(pmm->alloc(sizeof(task_t)),
               "idle1", idle, (void *)1);
   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle2", idle, (void *)2);    
+  }
+  else if(_ncpu()==4){
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle1", idle, (void *)1);
+   kmt->create(pmm->alloc(sizeof(task_t)),
               "idle2", idle, (void *)2);
-  kmt->create(pmm->alloc(sizeof(task_t)),
+   kmt->create(pmm->alloc(sizeof(task_t)),
               "idle3", idle, (void *)3);
-  kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle4", idle, (void *)4); 
-  _vme_init(pmm->alloc, pmm->free);
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle4", idle, (void *)4);   
+  }
+  else if(_ncpu()==8){
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle1", idle, (void *)1);
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle2", idle, (void *)2);
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle3", idle, (void *)3);
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle4", idle, (void *)4);  
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle5", idle, (void *)5);
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle6", idle, (void *)6);
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle7", idle, (void *)7);
+   kmt->create(pmm->alloc(sizeof(task_t)),
+              "idle8", idle, (void *)8);      
+  }
+  //_vme_init(pmm->alloc, pmm->free);
   /*dev->init();
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
