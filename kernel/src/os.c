@@ -16,11 +16,11 @@ void unlock(intptr_t *lk) {
 	//sti();
 }
 
-/*int temp=0;
+int temp=0;
 intptr_t sb1=0,sb2=0;
 extern spinlock_t tp, alc;
 
-sem_t empty, full, mutex;
+/*sem_t empty, full, mutex;
 int cunt;
 const int maxk=6;
 static void producer(void *arg){
