@@ -18,7 +18,7 @@ void unlock(intptr_t *lk) {
 
 int temp=0;
 intptr_t sb1=0,sb2=0;
-extern spinlock_t tp;
+extern spinlock_t tp, alc;
 
 /*sem_t empty, full, mutex;
 int cunt;
@@ -45,15 +45,16 @@ static void consumer(void *arg){
     kmt->sem_signal(&empty);
   }
 }*/
-/*extern ssize_t tty_write();
+/*
+extern ssize_t tty_write();
 void echo_task(void *name){
   device_t *tty = dev_lookup(name);
   while(1){
     char line[128], text[128];
-    sprintf(text, "(%s) $ ", name); tty_write(tty, 0, text, 5+strlen(name));
+    sprintf(text, "(%s) $ ", name); tty_write(tty, 0, text, strlen(text));
     int nread = tty->ops->read(tty, 0 ,line, sizeof(line));
     line[nread - 1] = '\0';
-    sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text, 8+strlen(line));
+    sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text,strlen(text));
   }
 }*/
 void idle(void *arg){
@@ -122,47 +123,46 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
-  if(_ncpu()==1){
-  kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle1", idle, (void *)1);    
-  }
-  else if(_ncpu()==2){
-  kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle1", idle, (void *)1);
-  kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle2", idle, (void *)2);    
+  if(_ncpu()==8){
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle1", idle, (void *)1);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle2", idle, (void *)2);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle3", idle, (void *)3);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle4", idle, (void *)4);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle5", idle, (void *)5);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle6", idle, (void *)6);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle7", idle, (void *)7);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle8", idle, (void *)8);  
   }
   else if(_ncpu()==4){
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle1", idle, (void *)1);
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle2", idle, (void *)2);
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle3", idle, (void *)3);
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle4", idle, (void *)4);   
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle1", idle, (void *)1);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle2", idle, (void *)2);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle3", idle, (void *)3);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle4", idle, (void *)4);  
   }
-  else if(_ncpu()==8){
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle1", idle, (void *)1);
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle2", idle, (void *)2);
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle3", idle, (void *)3);
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle4", idle, (void *)4);  
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle5", idle, (void *)5);
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle6", idle, (void *)6);
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle7", idle, (void *)7);
-   kmt->create(pmm->alloc(sizeof(task_t)),
-              "idle8", idle, (void *)8);      
+  else if(_ncpu()==2){
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle1", idle, (void *)1);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle2", idle, (void *)2); 
   }
+  else
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle1", idle, (void *)1);
   //_vme_init(pmm->alloc, pmm->free);
-  /*dev->init();
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
+  dev->init();
+  /*kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");*/
@@ -198,6 +198,7 @@ static void os_run() {
 }
 
 static _Context *os_trap(_Event ev, _Context *context) {
+  //kmt->spin_lock(&tp);
   kmt->spin_lock(&tp);
   //printf("%d\n",handle_cnt);
   _Context *ret = NULL;
