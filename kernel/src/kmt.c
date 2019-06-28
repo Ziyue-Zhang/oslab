@@ -100,7 +100,12 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   //kmt_spin_unlock(&LK);
   return &current->context;
 }
-
+void idle(void *arg){
+  while(1){
+    for (int volatile i = 0; i < 100000; i++);
+    //_yield();
+  }
+}
  static void kmt_init(){
    ncpu = _ncpu();
    task_cnt=0;
@@ -119,6 +124,43 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     for(int i=0;i<LENGTH(tasks_st);i++){ //init tasks
       tkfree[i]=FREE;
    }
+   if(_ncpu()==8){
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle1", idle, (void *)1);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle2", idle, (void *)2);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle3", idle, (void *)3);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle4", idle, (void *)4);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle5", idle, (void *)5);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle6", idle, (void *)6);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle7", idle, (void *)7);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle8", idle, (void *)8);  
+  }
+  else if(_ncpu()==4){
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle1", idle, (void *)1);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle2", idle, (void *)2);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle3", idle, (void *)3);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle4", idle, (void *)4);  
+  }
+  else if(_ncpu()==2){
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle1", idle, (void *)1);
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle2", idle, (void *)2); 
+  }
+  else
+    kmt->create(pmm->alloc(sizeof(task_t)),
+                "idle1", idle, (void *)1);
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
   kmt_spin_lock(&LK);

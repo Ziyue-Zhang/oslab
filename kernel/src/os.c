@@ -57,12 +57,6 @@ void echo_task(void *name){
     sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text,strlen(text));
   }
 }*/
-void idle(void *arg){
-  while(1){
-    for (int volatile i = 0; i < 100000; i++);
-    //_yield();
-  }
-}
 /*void func(void *arg) {
   int cur = (intptr_t)arg;
   while (1) {
@@ -123,43 +117,6 @@ static void os_init() {
   handle_cnt=0;
   pmm->init();
   kmt->init();
-  if(_ncpu()==8){
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle1", idle, (void *)1);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle2", idle, (void *)2);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle3", idle, (void *)3);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle4", idle, (void *)4);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle5", idle, (void *)5);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle6", idle, (void *)6);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle7", idle, (void *)7);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle8", idle, (void *)8);  
-  }
-  else if(_ncpu()==4){
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle1", idle, (void *)1);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle2", idle, (void *)2);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle3", idle, (void *)3);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle4", idle, (void *)4);  
-  }
-  else if(_ncpu()==2){
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle1", idle, (void *)1);
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle2", idle, (void *)2); 
-  }
-  else
-    kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle1", idle, (void *)1);
   //_vme_init(pmm->alloc, pmm->free);
   dev->init();
   /*kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
