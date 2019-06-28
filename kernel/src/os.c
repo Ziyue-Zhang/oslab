@@ -68,14 +68,14 @@ void echo_task(void *name){
   }
 }*/
 
-static void create_threads() {
-  kmt->sem_init(&empty, "buffer-empty", maxk);
+//static void create_threads() {
+  /*kmt->sem_init(&empty, "buffer-empty", maxk);
   kmt->sem_init(&full, "buffer-full", 0);
   kmt->sem_init(&mutex, "mutex", 1);
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-producer", producer, "xxx");
   kmt->create(pmm->alloc(sizeof(task_t)),
-              "test-thread-consumer", consumer, "yyy");
+              "test-thread-consumer", consumer, "yyy");*/
 
   /*kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-1", func, (void *)1);
@@ -110,7 +110,7 @@ static void create_threads() {
   kmt->create(pmm->alloc(sizeof(task_t)),
               "test-thread-16", func, (void *)16); */
   
-}
+//}
 
 static void os_init() {
   head=NULL;
@@ -123,7 +123,7 @@ static void os_init() {
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");*/
-  create_threads();
+  //create_threads();
 }
 
 static void hello() {
