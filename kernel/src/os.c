@@ -16,7 +16,7 @@ void unlock(intptr_t *lk) {
 	//sti();
 }
 
-int temp=0;
+/*int temp=0;
 intptr_t sb1=0,sb2=0;
 extern spinlock_t tp, alc;
 
@@ -44,7 +44,7 @@ static void consumer(void *arg){
     kmt->sem_signal(&mutex);
     kmt->sem_signal(&empty);
   }
-}
+}*/
 /*
 extern ssize_t tty_write();
 void echo_task(void *name){
