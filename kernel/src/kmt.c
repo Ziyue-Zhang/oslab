@@ -163,7 +163,7 @@ void idle(void *arg){
                 "idle1", idle, (void *)1);
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
-  kmt_spin_lock(&LK);
+   kmt_spin_lock(&LK);
    
    strcpy(task->name, name);
    task->state=RUNNABLE;
