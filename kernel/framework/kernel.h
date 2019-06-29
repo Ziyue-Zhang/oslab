@@ -51,6 +51,7 @@ typedef struct {
   void (*init)();
 } MODULE(dev);
 
+typedef struct filesystem filesystem_t
 typedef struct {
   void (*init)();
   int (*access)(const char *path, int mode);
