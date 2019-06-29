@@ -62,7 +62,7 @@ struct filesystem {
 
 typedef struct inode inode_t;
 
-typedef struct fsops {
+struct fsops {
   void (*init)(struct filesystem *fs, const char *name, device_t *dev);
   inode_t *(*lookup)(struct filesystem *fs, const char *path, int flags);
   int (*close)(inode_t *inode);
@@ -88,7 +88,7 @@ struct inode {
                    // inode ops也是文件系统的一部分
 };
 
-typedef struct file {
+struct file {
   int refcnt; // 引用计数
   inode_t *inode;
   uint64_t offset;
