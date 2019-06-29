@@ -45,7 +45,7 @@ static void consumer(void *arg){
     kmt->sem_signal(&empty);
   }
 }*/
-/*
+
 extern ssize_t tty_write();
 void echo_task(void *name){
   device_t *tty = dev_lookup(name);
@@ -56,7 +56,7 @@ void echo_task(void *name){
     line[nread - 1] = '\0';
     sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text,strlen(text));
   }
-}*/
+}
 /*void func(void *arg) {
   int cur = (intptr_t)arg;
   while (1) {
@@ -118,11 +118,11 @@ static void os_init() {
   pmm->init();
   kmt->init();
   //_vme_init(pmm->alloc, pmm->free);
-  //dev->init();
-  /*kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
+  dev->init();
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");*/
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
   //create_threads();
 }
 
