@@ -60,6 +60,8 @@ struct filesystem {
   device_t *dev;
 };
 
+typedef struct inode inode_t;
+
 typedef struct fsops {
   void (*init)(struct filesystem *fs, const char *name, device_t *dev);
   inode_t *(*lookup)(struct filesystem *fs, const char *path, int flags);
