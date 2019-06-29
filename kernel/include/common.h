@@ -11,7 +11,7 @@
 #define SLEEP 2
 #define DEAD 3
 #define RUNNABLE 4
-#define NOFILE 16;
+#define NOFILE 16
 
 typedef struct file file_t;
 struct task {
