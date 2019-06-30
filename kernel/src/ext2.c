@@ -13,27 +13,27 @@ struct ext2{
 }ext2_t;
 
 int ext2_init(filesystem_t* fs, const char* name, device_t *dev){
-    ext2_t* efs=(ext2_t*)fs->myfs;
-    memset(efs,0,sizeof(ext2_t));
-    efs->size=4096*1024;
-    efs->block_num=1024;
-    efs->block_size=4096;
-    strcpy(efs->fsname,name);
-    efs->dev=dev;
+    ext2_t* ext2fs=(ext2_t*)fs->myfs;
+    memset(ext2fs,0,sizeof(ext2_t));
+    ext2fs->size=4096*1024;
+    ext2fs->block_num=1024;
+    ext2fs->block_size=4096;
+    strcpy(ext2fs->fsname,name);
+    ext2fs->dev=dev;
 }
 
 int ext_read(filesystem_t *fs, int inode, int lne, char *buf){
-    ext2_t* efs=(ext2_t*)fs->myfs;
+    ext2_t* ext2fs=(ext2_t*)fs->myfs;
     return 1;
 }
 
 int ext_read(filesystem_t *fs, int inode, int lne, char *buf){
-    ext2_t* efs=(ext2_t*)fs->myfs;
+    ext2_t* ext2fs=(ext2_t*)fs->myfs;
     return 1;
 }
 
 int ext_delete(filesystem_t *fs, int inode, int lne, char *buf){
-    ext2_t* efs=(ext2_t*)fs->myfs;
+    ext2_t* ext2fs=(ext2_t*)fs->myfs;
     return 1;
 }
 
