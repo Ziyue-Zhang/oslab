@@ -13,7 +13,7 @@ struct ext2{
 }ext2_t;
 
 int ext2_init(filesystem_t* fs, const char* name, device_t *dev){
-    ext2 *efs=(ext2_t*)fs->myfs;
+    ext2_t* efs=(ext2_t*)fs->myfs;
     memset(efs,0,sizeof(ext2_t));
     efs->size=4096*1024;
     efs->block_num=1024;
