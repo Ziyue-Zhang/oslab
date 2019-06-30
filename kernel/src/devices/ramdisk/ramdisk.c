@@ -3,6 +3,7 @@
 extern char initrd_start, initrd_end;
 
 int rd_init(device_t *dev) {
+printf("nmsl\n");
   rd_t *rd = dev->ptr;
   if (dev->id == 1) {
     rd->start = &initrd_start;
