@@ -1,4 +1,4 @@
-#include <common.h>
+/*#include <common.h>
 #include <klib.h>
 #include <devices.h>
 
@@ -14,6 +14,6 @@ struct ext2{
 int ext2_init(filesystem_t* fs, const char* name, device_t *dev){
     ezt2_t* ext2fs=(ezt2_t*)fs->myfs;
     memset(ext2fs,0,sizeof(ext2_t));
-    
-}
+    size=dev->ptr
+}*/
 
