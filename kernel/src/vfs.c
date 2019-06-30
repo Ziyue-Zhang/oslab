@@ -1,46 +1,62 @@
 #include <devices.h>
 #include <common.h>
 #include <klib.h>
-  void vfs_init(){
-
-  }
-  int vfs_access(const char *path, int mode){
-      return 0;
-  }
-  int vfs_mount(const char *path, filesystem_t *fs){
-      return 0;
-  }
-  int vfs_unmount(const char *path){
-      return 0;
-  }
-  int vfs_mkdir(const char *path){
-      return 0;
-  }
-  int vfs_rmdir(const char *path){
-      return 0;
-  }
-  int vfs_link(const char *oldpath, const char *newpath){
-      return 0;
-  }
-  int vfs_unlink(const char *path){
-      return 0;
-  }
-  int vfs_open(const char *path, int flags){
-      return 0;
-  }
-  ssize_t vfs_read(int fd, void *buf, size_t nbyte){
-      return 0;
-  }
-  ssize_t vfs_write(int fd, void *buf, size_t nbyte){
-      return 0;
-  }
-  off_t vfs_lseek(int fd, off_t offset, int whence){
-      return 0;
-  }
-  int vfs_close(int fd){
-      return 0;
-  }
-  MODULE_DEF(vfs){
+typedef struct vinode{
+  char name[80];
+  char path[200];
+  int manu;
+  int fa;
+  int bro;
+  int son;
+  int use;
+  filesystem_t *fs;  
+}vinode_t;
+typedef struct froot{
+  char name[80];
+  filesystem_t *fs;
+  int son;
+  int use; 
+}froot_t;
+froot_t root[16];
+void vfs_init(){
+}
+int vfs_access(const char *path, int mode){
+  return 0;
+}
+int vfs_mount(const char *path, filesystem_t *fs){
+  return 0;
+}
+int vfs_unmount(const char *path){
+  return 0;
+}
+int vfs_mkdir(const char *path){
+  return 0;
+}
+int vfs_rmdir(const char *path){
+  return 0;
+}
+int vfs_link(const char *oldpath, const char *newpath){
+  return 0;
+}
+int vfs_unlink(const char *path){
+  return 0;
+}
+int vfs_open(const char *path, int flags){
+  return 0;
+}
+ssize_t vfs_read(int fd, void *buf, size_t nbyte){
+  return 0;
+}
+ssize_t vfs_write(int fd, void *buf, size_t nbyte){
+  return 0;
+}
+off_t vfs_lseek(int fd, off_t offset, int whence){
+  return 0;
+}
+int vfs_close(int fd){
+  return 0;
+}
+MODULE_DEF(vfs){
   .init = vfs_init,
   .access = vfs_access,
   .mount = vfs_mount,
