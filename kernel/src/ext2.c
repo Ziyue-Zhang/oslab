@@ -29,7 +29,7 @@ int ext_read(filesystem_t *fs, int inode, int len, char *buf){
         *buf='\0';
     }
     int start=inode*8*4096;
-    ext2fs->dev->ops->read(ext2fs->dev,start,buf,len*ext2fs->block_size);
+    ext2fs->dev->ops->read(ext2fs->dev,start,buf,8*ext2fs->block_size);
     return 1;
 }
 
@@ -39,7 +39,7 @@ int ext_write(filesystem_t *fs, int inode, int len, char *buf){
         ext2fs->block_used[idx]=1;
     }
     int start=inode*8*4096;
-    ext2fs->dev->ops->write(ext2fs->dev,start,buf,len*ext2fs->block_size);
+    ext2fs->dev->ops->write(ext2fs->dev,start,buf,8*ext2fs->block_size);
     return 1;
 }
 
