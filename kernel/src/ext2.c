@@ -34,12 +34,19 @@ int ext_read(filesystem_t *fs, int inode, int len, char *buf){
 
 int ext_write(filesystem_t *fs, int inode, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
+    for(int idx=inode*8,i=0;i<len;i++,idx++){
+        ext2fs->block_used[idx]=1;
+    }
+    int start=inode*8*4096;
+    ext2fs->dev->ops->write(ext2fs->dev,start,buf,len*ext2fs->block_size);
     return 1;
 }
 
 int ext_delete(filesystem_t *fs, int inode, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
-    ext2fs->block_used[inode]=0;
+    for(int idx=inode*8,i=0;i<len;i++,idx++){
+        ext2fs->block_used[idx]=0;
+    }
     return 1;
 }
 
