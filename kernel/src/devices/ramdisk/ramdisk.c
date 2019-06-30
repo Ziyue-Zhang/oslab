@@ -12,7 +12,7 @@ int rd_init(device_t *dev) {
     rd->start = space;
     rd->end   = space + RD_SIZE;
   }
-  printf("%d\n",rd->end-rd->start);
+  //printf("%d\n",rd->end-rd->start);
   return 0;
 }
 
