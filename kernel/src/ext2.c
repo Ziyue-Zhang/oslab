@@ -24,16 +24,16 @@ int ext2_init(filesystem_t* fs, const char* name, device_t *dev){
 
 int ext_read(filesystem_t *fs, int inode, int lne, char *buf){
     ezt2_t* ext2fs=(ezt2_t*)fs->myfs;
-
+    return 1;
 }
 
 int ext_read(filesystem_t *fs, int inode, int lne, char *buf){
     ezt2_t* ext2fs=(ezt2_t*)fs->myfs;
-    
+    return 1;
 }
 
 int ext_delete(filesystem_t *fs, int inode, int lne, char *buf){
     ezt2_t* ext2fs=(ezt2_t*)fs->myfs;
-    
+    return 1;
 }
 
