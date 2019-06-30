@@ -20,6 +20,7 @@ int ext2_init(filesystem_t* fs, const char* name, device_t *dev){
     ext2fs->block_size=4096;
     strcpy(ext2fs->fsname,name);
     ext2fs->dev=dev;
+    return 1;
 }
 
 int ext_read(filesystem_t *fs, int inode, int len, char *buf){
