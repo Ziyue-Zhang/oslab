@@ -102,8 +102,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
 }
 void idle(void *arg){
   while(1){
-    for (int volatile i = 0; i < 10000; i++);
-    _yield();
+    for (int volatile i = 0; i < 100000; i++);
   }
 }
  static void kmt_init(){
