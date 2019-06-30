@@ -23,7 +23,7 @@ int ext2_init(filesystem_t* fs, const char* name, device_t *dev){
     return 1;
 }
 
-int ext_read(filesystem_t *fs, int inode, int len, char *buf){
+int ext2_read(filesystem_t *fs, int inode, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     if(ext2fs->block_used[inode]==0){
         *buf='\0';
@@ -33,7 +33,7 @@ int ext_read(filesystem_t *fs, int inode, int len, char *buf){
     return 1;
 }
 
-int ext_write(filesystem_t *fs, int inode, int len, char *buf){
+int ext2_write(filesystem_t *fs, int inode, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     for(int idx=inode*4,i=0;i<len;i++,idx++){
         ext2fs->block_used[idx]=1;
@@ -43,7 +43,7 @@ int ext_write(filesystem_t *fs, int inode, int len, char *buf){
     return 1;
 }
 
-int ext_delete(filesystem_t *fs, int inode, int len, char *buf){
+int ext2_delete(filesystem_t *fs, int inode, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     for(int idx=inode*4,i=0;i<len;i++,idx++){
         ext2fs->block_used[idx]=0;
