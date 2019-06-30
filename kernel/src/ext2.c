@@ -2,7 +2,7 @@
 #include <klib.h>
 #include <devices.h>
 
-struct ext2{
+typedef struct ext2{
   uint32_t size;
   uint32_t block_num;
   uint32_t block_size;
