@@ -58,6 +58,7 @@ typedef struct fsops fsops_t;
 struct filesystem {
   fsops_t *ops;
   device_t *dev;
+  void * myfs;
 };
 
 typedef struct inode inode_t;
