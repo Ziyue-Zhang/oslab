@@ -7,7 +7,7 @@ typedef struct ext2{
   uint32_t block_num;
   uint32_t block_size;
   char block_used[1024];
-  char block_len[128];
+  char block_len[256];
   device_t *dev;
   char fsname[80];
 }ext2_t;
@@ -28,24 +28,24 @@ int ext_read(filesystem_t *fs, int inode, int len, char *buf){
     if(ext2fs->block_used[inode]==0){
         *buf='\0';
     }
-    int start=inode*8*4096;
-    ext2fs->dev->ops->read(ext2fs->dev,start,buf,8*ext2fs->block_size);
+    int start=inode*4*4096;
+    ext2fs->dev->ops->read(ext2fs->dev,start,buf,4*ext2fs->block_size);
     return 1;
 }
 
 int ext_write(filesystem_t *fs, int inode, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
-    for(int idx=inode*8,i=0;i<len;i++,idx++){
+    for(int idx=inode*4,i=0;i<len;i++,idx++){
         ext2fs->block_used[idx]=1;
     }
-    int start=inode*8*4096;
-    ext2fs->dev->ops->write(ext2fs->dev,start,buf,8*ext2fs->block_size);
+    int start=inode*4*4096;
+    ext2fs->dev->ops->write(ext2fs->dev,start,buf,4*ext2fs->block_size);
     return 1;
 }
 
 int ext_delete(filesystem_t *fs, int inode, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
-    for(int idx=inode*8,i=0;i<len;i++,idx++){
+    for(int idx=inode*4,i=0;i<len;i++,idx++){
         ext2fs->block_used[idx]=0;
     }
     return 1;
