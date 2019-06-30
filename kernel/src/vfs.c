@@ -48,7 +48,7 @@ ssize_t vfs_read(int fd, void *buf, size_t nbyte){
   return 0;
 }
 ssize_t vfs_write(int fd, void *buf, size_t nbyte){
-	ssize_t fs_size = fs_filesz(fd);
+	/*ssize_t fs_size = fs_filesz(fd);
 	ssize_t fs_offset = file_table[fd].open_offset;	
 	size_t n = len;
    	if(fs_offset + len > fs_size)
@@ -62,7 +62,8 @@ ssize_t vfs_write(int fd, void *buf, size_t nbyte){
 	{						
 		ext2_write(buf, fs_offset + file_table[fd].disk_offset, len);
 		return len;
-	}
+	}*/
+    return 0;
 }
 off_t vfs_lseek(int fd, off_t offset, int whence){
   return 0;
