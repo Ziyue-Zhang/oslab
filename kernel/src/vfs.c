@@ -18,7 +18,11 @@ typedef struct froot{
   int use; 
 }froot_t;
 froot_t root[16];
+
 void vfs_init(){
+}
+void vfs_lookup(char path){
+    
 }
 int vfs_access(const char *path, int mode){
   return 0;
