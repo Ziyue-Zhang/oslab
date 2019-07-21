@@ -31,7 +31,7 @@ int ext2_read(filesystem_t *fs, int inode, uint32_t offset, int len, char *buf){
         return 1;
     }
     int start=inode*4096+offset;
-    if(len+offset>ext2fs->block_size);
+    if(len+offset>ext2fs->block_size)
         len=ext2fs->block_size-offset;
     ext2fs->dev->ops->read(ext2fs->dev,start,buf,len);
     return 1;
@@ -44,7 +44,7 @@ int ext2_write(filesystem_t *fs, int inode, uint32_t offset, int len, char *buf)
     }*/
     ext2fs->block_used[inode]=1;
     int start=inode*4096+offset;
-    if(len+offset>ext2fs->block_size);
+    if(len+offset>ext2fs->block_size)
         len=ext2fs->block_size-offset;
     ext2fs->dev->ops->write(ext2fs->dev,start,buf,len);
     return 1;
