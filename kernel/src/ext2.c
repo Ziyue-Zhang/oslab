@@ -15,7 +15,7 @@ typedef struct ext2{
 int ext2_init(filesystem_t* fs, const char* name, device_t *dev){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     memset(ext2fs,0,sizeof(ext2_t));
-    memset(block_used,0,sizeof(block_used));
+    memset(ext2fs->block_used,0,sizeof(ext2fs->block_used));
     ext2fs->size=4096*1024;
     ext2fs->block_num=1024;
     ext2fs->block_size=4096;
