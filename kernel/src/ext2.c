@@ -55,7 +55,7 @@ int ext2_delete(filesystem_t *fs, int inode){
     ext2fs->block_used[inode]=0;
     char buf[4096]={'\0'};
     int start=inode*4096;
-    ext2fs->dev->ops->write(ext2fs->dev,start,buf,block_size-offset);
+    ext2fs->dev->ops->write(ext2fs->dev,start,buf,ext2fs->block_size);
     return 1;
 }
 
