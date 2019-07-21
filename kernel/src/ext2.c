@@ -7,7 +7,6 @@ typedef struct ext2{
   uint32_t block_num;
   uint32_t block_size;
   char block_used[1024];
-  char block_len[256];
   device_t *dev;
   char fsname[80];
 }ext2_t;

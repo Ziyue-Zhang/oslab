@@ -11,18 +11,18 @@ typedef struct vinode{
   int use;
   filesystem_t *fs;  
 }vinode_t;
-typedef struct froot{
+typedef struct fileroot{
   char name[80];
   filesystem_t *fs;
   int son;
   int use; 
-}froot_t;
-froot_t root[16];
+}fileroot_t;
+fileroot_t mount_table[16];
 
 void vfs_init(){
 }
 void vfs_lookup(char path){
-    
+
 }
 int vfs_access(const char *path, int mode){
   return 0;
