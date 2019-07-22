@@ -26,7 +26,7 @@ vinode_t vinode[1024];
 void vinode_free(int idx){
     vinode[idx].use=0;
 }
-void vinode_alloc(int idx){
+int vinode_alloc(int idx){
     for(int i=0;i<VINODE_SIZE;i++){
         if(!vinode[i].use){
             vinode[i].use=1;
