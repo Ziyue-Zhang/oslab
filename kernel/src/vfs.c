@@ -1,10 +1,13 @@
 #include <devices.h>
 #include <common.h>
 #include <klib.h>
-typedef struct vinode{
+
+#define VINODE_SIZE 1024
+
+typedef struct Vinode{
   char name[80];
   char path[200];
-  int manu;
+  int me;
   int fa;
   int bro;
   int son;
@@ -18,8 +21,23 @@ typedef struct fileroot{
   int use; 
 }fileroot_t;
 fileroot_t mount_table[16];
+vinode_t vinode[1024];
 
+void vinode_free(int idx){
+    vinode[idx].use=0;
+}
+void vinode_alloc(int idx){
+    for(int i=0;i<VINODE_SIZE;i++){
+        if(!vinode[i].use){
+            vinode[i].use=1;
+            return i;
+        }
+    }
+    return -1;
+}
 void vfs_init(){
+    memset(mount_table,0,sizeof(mount_table));
+    memset(vinode,0,sizeof(vinode));
 }
 void vfs_lookup(char path){
 
