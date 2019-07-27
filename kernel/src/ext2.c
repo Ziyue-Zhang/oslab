@@ -22,7 +22,14 @@ int ext2_init(filesystem_t* fs, const char* name, device_t *dev){
     ext2fs->dev=dev;
     return 1;
 }
-
+int ext2_alloc(filesystem_t *fs, int inode){
+    ext2_t* ext2fs=(ext2_t*)fs->myfs;
+    ext2fs->block_used[inode]=1;
+}
+int ext2_free(filesystem *fs, int inode){
+    ext2_t* ext2fs=(ext2_t*)fs->myfs;
+    ext2fs->block_used[inode]=0;
+}
 int ext2_read(filesystem_t *fs, int inode, uint32_t offset, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     if(ext2fs->block_used[inode]==0){
