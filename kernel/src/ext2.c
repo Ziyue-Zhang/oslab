@@ -29,7 +29,7 @@ int ext2_alloc(filesystem_t *fs, int inode){
     ext2fs->block_used[inode]=1;
     return 1;
 }
-int ext2_free(filesystem *fs, int inode){
+int ext2_free(filesystem_t *fs, int inode){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     ext2fs->block_used[inode]=0;
     return 1;
