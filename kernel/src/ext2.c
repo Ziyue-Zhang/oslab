@@ -37,7 +37,7 @@ int ext2_free(filesystem_t *fs, int inode){
     return 1;
 }
 
-int ext2_lookup(filesystem *fs, const char *path, int flags){
+int ext2_lookup(filesystem_t *fs, const char *path, int flags){
     return 0;
 }
 
