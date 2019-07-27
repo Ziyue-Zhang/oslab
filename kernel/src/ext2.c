@@ -70,9 +70,9 @@ int ext2_write(filesystem_t *fs, int inode, uint32_t offset, int len, char *buf)
 int ext2_delete(filesystem_t *fs, int inode){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     ext2_free(fs, inode);
-    char buf[4096]={'\0'};
+    const char buf[4096]={'\0'};
     int start=inode*4096;
-    ext2fs->dev->ops->write(ext2fs->dev,start,&buf,ext2fs->block_size);
+    ext2fs->dev->ops->write(ext2fs->dev,start,buf,ext2fs->block_size);
     return 1;
 }
 
