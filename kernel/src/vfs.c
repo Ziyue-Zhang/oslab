@@ -74,7 +74,7 @@ void vfs_init(){
 }
 
 int vfs_lookup(char path){
-    
+    return 0;
 }
 int vfs_access(const char *path, int mode){
   return 0;
