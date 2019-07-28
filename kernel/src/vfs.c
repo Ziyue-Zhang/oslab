@@ -120,6 +120,7 @@ int vinode_lookup(char *path){
         printf("%s\n",name);
         i=j;
     }
+    return 0;
 }
 void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
