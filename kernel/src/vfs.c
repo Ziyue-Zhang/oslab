@@ -5,7 +5,7 @@
 #define VINODE_SIZE 1024
 #define EMPTY 0
 #define FILE 1
-#define LIST 2
+#define DIR 2
 typedef struct Vinode{
   char name[80];
   char path[200];
