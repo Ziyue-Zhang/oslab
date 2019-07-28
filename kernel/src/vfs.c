@@ -105,6 +105,15 @@ int vinode_root(){
 int vinode_dot(){
     return 0;
 }
+int vinode_dotdot(){
+    return 0;
+}
+int vinode_dir(){
+    return 0;
+}
+int vinode_file(){
+    return 0;
+}
 int vinode_lookup(char *path){
     int len=strlen(path);
     int id=0;
