@@ -103,7 +103,22 @@ int vinode_root(){
     return id;
 }
 int vinode_lookup(char *path){
-    return 0;
+    int len=strlen(path);
+    for(int i=0;i<len;i++){
+        int j=i;
+        if(path[j]='/'&&i)
+            j++;
+        char temp[80];
+        int k=0;
+        for(;path[j]!='\0'&&path[j]!='/';k++,j++)
+            temp[k]=path[j];
+        if(path[j]=='/'){
+            temp[k]=='/';
+            k++;
+        }
+        temp[k]='\0';
+        i=j;
+    }
 }
 void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
