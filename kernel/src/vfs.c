@@ -13,8 +13,8 @@
 typedef struct Vinode{
   char name[80];
   char path[200];
-  int me;
-  int fa;
+  int dotdot;
+  int dot;
   int bro;
   int son;
   int type;
@@ -29,6 +29,23 @@ typedef struct fileroot{
 }fileroot_t;
 fileroot_t mount_table[16];
 vinode_t vinode[1024];
+
+void vinode_free(int idx);
+int vinode_alloc(int idx,int type);
+void vfs_init();
+void vfs_lookup(char path);
+int vfs_access(const char *path, int mode);
+int vfs_mount(const char *path, filesystem_t *fs);
+int vfs_unmount(const char *path);
+int vfs_mkdir(const char *path);
+int vfs_rmdir(const char *path);
+int vfs_link(const char *oldpath, const char *newpath);
+int vfs_unlink(const char *path);
+int vfs_open(const char *path, int flags);
+ssize_t vfs_read(int fd, void *buf, size_t nbyte);
+ssize_t vfs_write(int fd, void *buf, size_t nbyte){
+off_t vfs_lseek(int fd, off_t offset, int whence);
+int vfs_close(int fd);
 
 void vinode_free(int idx){
     vinode[idx].type=0;
@@ -46,6 +63,7 @@ void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
     memset(vinode,0,sizeof(vinode));
 }
+
 void vfs_lookup(char path){
 
 }
