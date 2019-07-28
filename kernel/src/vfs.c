@@ -3,7 +3,9 @@
 #include <klib.h>
 
 #define VINODE_SIZE 1024
-
+#define EMPTY 0
+#define FILE 1
+#define LIST 2
 typedef struct Vinode{
   char name[80];
   char path[200];
@@ -11,7 +13,7 @@ typedef struct Vinode{
   int fa;
   int bro;
   int son;
-  int use;
+  int mod;
   filesystem_t *fs;  
 }vinode_t;
 typedef struct fileroot{
@@ -24,12 +26,12 @@ fileroot_t mount_table[16];
 vinode_t vinode[1024];
 
 void vinode_free(int idx){
-    vinode[idx].use=0;
+    vinode[idx].mod=0;
 }
-int vinode_alloc(int idx){
+int vinode_alloc(int idx,int mod){
     for(int i=0;i<VINODE_SIZE;i++){
         if(!vinode[i].use){
-            vinode[i].use=1;
+            vinode[i].use=mod;
             return i;
         }
     }
