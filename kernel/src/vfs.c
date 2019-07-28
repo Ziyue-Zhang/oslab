@@ -81,7 +81,21 @@ int vinode_init(){
     vinode[id].filesystem=VFS;
     vinode[id].fs=NULL;
 
-    vinodes[dot]
+    vinode[dot].dot=-1;
+    vinode[dot].dotdot=dotdot;
+    vinode[dot].nxt=dotdot;
+    vinode[dot].son=id;
+    vinode[dot].link_count=1;
+    vinode[dot].filesystem=VFS;
+    vinode[dot].fs=NULL;
+
+    vinode[dotdot].dot=dotdot;
+    vinode[dotdot].dotdot=-1;
+    vinode[dotdot].nxt=dot;
+    vinode[dotdot].son=id;
+    vinode[dotdot].link_count=1;
+    vinode[dotdot].filesystem=VFS;
+    vinode[dotdot].fs=NULL;
     return id;
 }
 void vfs_init(){
