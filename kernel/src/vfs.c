@@ -102,7 +102,9 @@ int vinode_root(){
     vinode[dotdot].fs=NULL;
     return id;
 }
-
+int vinode_dot(){
+    return 0;
+}
 int vinode_lookup(char *path){
     int len=strlen(path);
     int id=0;
