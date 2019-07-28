@@ -11,11 +11,11 @@
 #define TTY 3
 
 typedef struct Vinode{
-  char name[80];
   char path[200];
+  char name[80];
   int dotdot;
   int dot;
-  int bro;
+  int nxt;
   int son;
   int type;
   int filesystem;       // vfs read/write/lseek must know it
@@ -31,7 +31,7 @@ fileroot_t mount_table[16];
 vinode_t vinode[1024];
 
 void vinode_free(int idx);
-int vinode_alloc(int idx,int type);
+int vinode_alloc(int type);
 void vfs_init();
 void vfs_lookup(char path);
 int vfs_access(const char *path, int mode);
@@ -50,7 +50,7 @@ int vfs_close(int fd);
 void vinode_free(int idx){
     vinode[idx].type=0;
 }
-int vinode_alloc(int idx,int type){
+int vinode_alloc(int type){
     for(int i=0;i<VINODE_SIZE;i++){
         if(!vinode[i].type){
             vinode[i].type=type;
@@ -59,13 +59,22 @@ int vinode_alloc(int idx,int type){
     }
     return -1;
 }
+void vinode_init(){
+    memset(vinode,0,sizeof(vinode));
+    int id=vinode_alloc(DIR);
+    int dot=vinode_alloc(DIR);
+    int dotdot=vinode_alloc(DIR);
+    strcpy(vinode[id].name,"/");
+    strcpy(vinode[id].path,"/");
+
+}
 void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
-    memset(vinode,0,sizeof(vinode));
+   
 }
 
-void vfs_lookup(char path){
-
+int vfs_lookup(char path){
+    
 }
 int vfs_access(const char *path, int mode){
   return 0;
