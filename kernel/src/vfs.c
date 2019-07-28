@@ -106,7 +106,7 @@ int vinode_lookup(char *path){
     int len=strlen(path);
     for(int i=0;i<len;i++){
         int j=i;
-        if(path[j]='/'&&i)
+        if(path[j]=='/'&&i)
             j++;
         char temp[80];
         int k=0;
