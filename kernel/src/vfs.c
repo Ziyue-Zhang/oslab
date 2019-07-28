@@ -17,7 +17,7 @@ typedef struct Vinode{
   int fa;
   int bro;
   int son;
-  int mod;
+  int type;
   int filesystem;       // vfs read/write/lseek must know it
   filesystem_t *fs;  
 }vinode_t;
@@ -31,12 +31,12 @@ fileroot_t mount_table[16];
 vinode_t vinode[1024];
 
 void vinode_free(int idx){
-    vinode[idx].mod=0;
+    vinode[idx].type=0;
 }
-int vinode_alloc(int idx,int mod){
+int vinode_alloc(int idx,int type){
     for(int i=0;i<VINODE_SIZE;i++){
-        if(!vinode[i].mod){
-            vinode[i].mod=mod;
+        if(!vinode[i].type){
+            vinode[i].type=type;
             return i;
         }
     }
