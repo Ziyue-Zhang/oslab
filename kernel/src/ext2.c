@@ -1,4 +1,5 @@
 #include <fs.h>
+#include <devices.h>
 
 int ext2_init(filesystem_t* fs, const char* name, device_t *dev){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
