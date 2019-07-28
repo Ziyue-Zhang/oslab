@@ -113,7 +113,7 @@ int vinode_lookup(char *path){
         for(;path[j]!='\0'&&path[j]!='/';k++,j++)
             name[k]=path[j];
         if(path[j]=='/'){
-            name[k]=='/';
+            name[k]='/';
             k++;
         }
         name[k]='\0';
