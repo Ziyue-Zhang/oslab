@@ -18,6 +18,7 @@ typedef struct Vinode{
   int nxt;
   int son;
   int type;
+  int link_inode;
   int link_count;
   int filesystem;       // vfs read/write/lseek must know it
   filesystem_t *fs;  
@@ -34,7 +35,7 @@ vinode_t vinode[1024];
 void vinode_free(int idx);
 int vinode_alloc(int type);
 void vfs_init();
-int vfs_lookup(char path);
+int vfs_lookup(char *path);
 int vfs_access(const char *path, int mode);
 int vfs_mount(const char *path, filesystem_t *fs);
 int vfs_unmount(const char *path);
@@ -60,7 +61,7 @@ int vinode_alloc(int type){
     }
     return -1;
 }
-int vinode_init(){
+int vinode_root(){
     memset(vinode,0,sizeof(vinode));
     int id=vinode_alloc(DIR);
     strcpy(vinode[id].name,"/");
@@ -77,6 +78,7 @@ int vinode_init(){
     vinode[id].dotdot=dotdot;
     vinode[id].nxt=-1;
     vinode[id].son=dot;
+    vinode[id].link_inode=id;
     vinode[id].link_count=1;
     vinode[id].filesystem=VFS;
     vinode[id].fs=NULL;
@@ -85,6 +87,7 @@ int vinode_init(){
     vinode[dot].dotdot=dotdot;
     vinode[dot].nxt=dotdot;
     vinode[dot].son=id;
+    vinode[dot].link_inode=dot;
     vinode[dot].link_count=1;
     vinode[dot].filesystem=VFS;
     vinode[dot].fs=NULL;
@@ -93,17 +96,21 @@ int vinode_init(){
     vinode[dotdot].dotdot=-1;
     vinode[dotdot].nxt=-1;
     vinode[dotdot].son=id;
+    vinode[dotdot].link_inode=dotdot;
     vinode[dotdot].link_count=1;
     vinode[dotdot].filesystem=VFS;
     vinode[dotdot].fs=NULL;
     return id;
+}
+int vinode_lookup(char *path){
+    return 0;
 }
 void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
    
 }
 
-int vfs_lookup(char path){
+int vfs_lookup(char *path){
     return 0;
 }
 int vfs_access(const char *path, int mode){
