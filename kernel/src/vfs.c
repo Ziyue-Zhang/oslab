@@ -60,14 +60,21 @@ int vinode_alloc(int type){
     }
     return -1;
 }
-void vinode_init(){
+int vinode_init(){
     memset(vinode,0,sizeof(vinode));
     int id=vinode_alloc(DIR);
-    int dot=vinode_alloc(DIR);
-    int dotdot=vinode_alloc(DIR);
     strcpy(vinode[id].name,"/");
     strcpy(vinode[id].path,"/");
-
+    int dot=vinode_alloc(DIR);
+    int dotdot=vinode_alloc(DIR);
+    vinode[id].dot=dot;
+    vinode[id].dotdot=dotdot;
+    vinode[id].nxt=-1;
+    vinode[id].son=dot;
+    vinode[id].link_count=1;
+    vinode[id].filesystem=VFS;
+    vinode[id].fs=NULL;
+    return id;
 }
 void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
