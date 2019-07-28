@@ -117,7 +117,7 @@ int vinode_lookup(char *path){
             k++;
         }
         name[k]='\0';
-        printf("%s\n",name);
+        //printf("%s\n",name);
         i=j;
     }
     return 0;
