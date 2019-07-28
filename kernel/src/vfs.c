@@ -43,7 +43,7 @@ int vfs_link(const char *oldpath, const char *newpath);
 int vfs_unlink(const char *path);
 int vfs_open(const char *path, int flags);
 ssize_t vfs_read(int fd, void *buf, size_t nbyte);
-ssize_t vfs_write(int fd, void *buf, size_t nbyte){
+ssize_t vfs_write(int fd, void *buf, size_t nbyte);
 off_t vfs_lseek(int fd, off_t offset, int whence);
 int vfs_close(int fd);
 
