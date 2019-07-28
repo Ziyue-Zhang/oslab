@@ -18,6 +18,7 @@ typedef struct Vinode{
   int nxt;
   int son;
   int type;
+  int link_count;
   int filesystem;       // vfs read/write/lseek must know it
   filesystem_t *fs;  
 }vinode_t;
