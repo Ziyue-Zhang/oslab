@@ -102,11 +102,13 @@ int vinode_root(){
     vinode[dotdot].fs=NULL;
     return id;
 }
+
 int vinode_lookup(char *path){
     int len=strlen(path);
+    int id=0;
     for(int i=0;i<len;i++){
         int j=i;
-        if(path[j]=='/'&&i)
+        if(path[j]=='/')
             j++;
         char name[80];
         int k=0;
@@ -117,10 +119,18 @@ int vinode_lookup(char *path){
             k++;
         }
         name[k]='\0';
-        //printf("%s\n",name);
         i=j;
+        id=vinode[id].son;
+        while(id!=-1){
+            if(strcmp(vinode[id].name,name)==0)
+                break;
+            id=vinode[id].nxt;
+        }
+        if(id==-1)
+            return -1;
+        //printf("%s\n",name);
     }
-    return 0;
+    return id;
 }
 void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
