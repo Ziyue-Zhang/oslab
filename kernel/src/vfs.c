@@ -33,7 +33,7 @@ vinode_t vinode[1024];
 void vinode_free(int idx);
 int vinode_alloc(int type);
 void vfs_init();
-void vfs_lookup(char path);
+int vfs_lookup(char path);
 int vfs_access(const char *path, int mode);
 int vfs_mount(const char *path, filesystem_t *fs);
 int vfs_unmount(const char *path);
