@@ -6,6 +6,10 @@
 #define EMPTY 0
 #define FILE 1
 #define DIR 2
+#define VFS 1
+#define EXT2 2
+#define TTY 3
+
 typedef struct Vinode{
   char name[80];
   char path[200];
@@ -14,6 +18,7 @@ typedef struct Vinode{
   int bro;
   int son;
   int mod;
+  int filesystem;       // vfs read/write/lseek must know it
   filesystem_t *fs;  
 }vinode_t;
 typedef struct fileroot{

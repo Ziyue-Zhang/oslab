@@ -15,5 +15,5 @@ void unlock(intptr_t *lk) {
 	sti();
 }
 	
-
+#endif
 
