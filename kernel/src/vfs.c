@@ -30,8 +30,8 @@ void vinode_free(int idx){
 }
 int vinode_alloc(int idx,int mod){
     for(int i=0;i<VINODE_SIZE;i++){
-        if(!vinode[i].use){
-            vinode[i].use=mod;
+        if(!vinode[i].mod){
+            vinode[i].mod=mod;
             return i;
         }
     }
