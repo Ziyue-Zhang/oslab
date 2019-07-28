@@ -69,9 +69,9 @@ int vinode_init(){
     int dot=vinode_alloc(DIR);
     int dotdot=vinode_alloc(DIR);
     strcpy(vinode[dot].name,".");
-    strcpy(vinode[dot].path,"/");
+    strcpy(vinode[dot].path,"/.");
     strcpy(vinode[dotdot].name,"..");
-    strcpy(vinode[dotdot].path,"/");
+    strcpy(vinode[dotdot].path,"/..");
 
     vinode[id].dot=dot;
     vinode[id].dotdot=dotdot;
@@ -91,7 +91,7 @@ int vinode_init(){
 
     vinode[dotdot].dot=dotdot;
     vinode[dotdot].dotdot=-1;
-    vinode[dotdot].nxt=dot;
+    vinode[dotdot].nxt=-1;
     vinode[dotdot].son=id;
     vinode[dotdot].link_count=1;
     vinode[dotdot].filesystem=VFS;
