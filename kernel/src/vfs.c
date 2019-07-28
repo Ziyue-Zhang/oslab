@@ -89,7 +89,7 @@ int vinode_init(){
     vinode[dot].filesystem=VFS;
     vinode[dot].fs=NULL;
 
-    vinode[dotdot].dot=dotdot;
+    vinode[dotdot].dot=dot;
     vinode[dotdot].dotdot=-1;
     vinode[dotdot].nxt=-1;
     vinode[dotdot].son=id;
