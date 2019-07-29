@@ -21,5 +21,11 @@ int ext2_lookup(filesystem_t *fs, const char *path, int flags);
 int ext2_read(filesystem_t *fs, int inode, uint32_t offset, int len, char *buf);
 int ext2_write(filesystem_t *fs, int inode, uint32_t offset, int len, char *buf);
 int ext2_delete(filesystem_t *fs, int inode);
+int ext2_inode();
+int ext2_mkdir();
+int ext2_rmdir();
+int ext2_find_file();
+int ext2_read_file();
+int ext2_write_file();
 
 #endif
