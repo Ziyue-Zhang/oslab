@@ -14,6 +14,22 @@ typedef struct ext2{
 	char fsname[80];
 }ext2_t;
 
+typedef struct ext2_inode{
+    char name[20];
+    char *data;
+    int type;
+    int size;
+}ext2_node_t;
+
+typedef struct ext2_dit{
+    char name[20];
+    int inode[16];
+    int dir[16];
+    int inode_size;
+    int dir_size;
+    int type;
+}ext2_dir_t;
+
 int ext2_init(filesystem_t* fs, const char* name, device_t *dev);
 int ext2_alloc(filesystem_t *fs, int inode);
 int ext2_free(filesystem_t *fs, int inode);
