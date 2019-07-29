@@ -69,7 +69,7 @@ typedef struct inode inode_t;
 
 struct fsops {
   void (*init)(struct filesystem *fs, const char *name, device_t *dev);
-  inode_t *(*lookup)(struct filesystem *fs, const char *path, int flags);
+  //inode_t *(*lookup)(struct filesystem *fs, const char *path, int flags);
   int (*lookup)(struct filesystem *fs, const char *path, int flags);
   int (*close)(inode_t *inode);
 };
