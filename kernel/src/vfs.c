@@ -104,16 +104,11 @@ int vinode_root(){
 }
 int vinode_dot(int id){
     int dot=vinode_alloc(DIR);
-    strcpy(vinode[dot].name,".");
-    strcpy(vinode[dot].path,vinode[id].path);
-    strcat(vinode[dot].path,".");
     return dot;
 }
 int vinode_dotdot(){
     int dotdot=vinode_alloc(DIR);
-    strcpy(vinode[dotdot].name,"..");
-    strcpy(vinode[dotdot].path,vinode[id].path);
-    strcat(vinode[dotdot].path,".");
+
     return dotdot;
 }
 int vinode_dir(){
