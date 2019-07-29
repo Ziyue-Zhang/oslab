@@ -76,7 +76,7 @@ int vinode_dir(){
 int vinode_file(){
     return 0;
 }
-int vinode_lookup(char *path){
+int vinode_find(char *path){
     int len=strlen(path);
     int id=0;
     for(int i=0;i<len;i++){
@@ -101,6 +101,39 @@ int vinode_lookup(char *path){
         }
         if(id==-1)
             return -1;
+        //printf("%s\n",name);
+    }
+    return id;
+}
+int vinode_lookup(char *path){
+    int len=strlen(path);
+    int id=0;
+    for(int i=0;i<len;i++){
+        int j=i;
+        if(path[j]=='/')
+            j++;
+        char name[80];
+        int k=0;
+        for(;path[j]!='\0'&&path[j]!='/';k++,j++)
+            name[k]=path[j];
+        if(path[j]=='/'){
+            name[k]='/';
+            k++;
+        }
+        name[k]='\0';
+        i=j;
+        int son_id=vinode[id].son;
+        while(son_id!=-1){
+            if(strcmp(vinode[son_id].name,name)==0)
+                break;
+            son_id=vinode[son_id].nxt;
+        }
+        if(son_id==-1 && vinode[id].filesystem!=VFS)
+            return vinode[id].fs->opendir();
+        else if(son_id==-1 && vinode[id].filesystem==VFS)
+            return -1;
+        else
+            id=son_id;        
         //printf("%s\n",name);
     }
     return id;
