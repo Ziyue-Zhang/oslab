@@ -13,6 +13,10 @@
 #define RUNNABLE 4
 #define NOFILE 16
 
+#define WR_ONLY 1
+#define RD_ONLY 2
+#define WRRD_ONLY 3
+
 typedef struct file file_t;
 struct task {
     char name[80];
@@ -58,7 +62,6 @@ typedef struct fsops fsops_t;
 struct filesystem {
   fsops_t *ops;
   device_t *dev;
-  int * opendir;
   void * myfs;
 };
 

@@ -1,13 +1,5 @@
 #include<vfs.h>
 
-#define VINODE_SIZE 1024
-#define EMPTY 0
-#define FILE 1
-#define DIR 2
-#define VFS 1
-#define EXT2 2
-#define TTY 3
-
 void vinode_free(int idx){
     vinode[idx].type=0;
 }
@@ -81,8 +73,10 @@ int vinode_find(char *path){
     int id=0;
     for(int i=0;i<len;i++){
         int j=i;
-        if(path[j]=='/')
+        if(path[j]=='/'){
+            i++;
             j++;
+        }
         char name[80];
         int k=0;
         for(;path[j]!='\0'&&path[j]!='/';k++,j++)
@@ -110,8 +104,10 @@ int vinode_lookup(char *path){
     int id=0;
     for(int i=0;i<len;i++){
         int j=i;
-        if(path[j]=='/')
+        if(path[j]=='/'){
+            i++;
             j++;
+        }
         char name[80];
         int k=0;
         for(;path[j]!='\0'&&path[j]!='/';k++,j++)
@@ -129,7 +125,7 @@ int vinode_lookup(char *path){
             son_id=vinode[son_id].nxt;
         }
         if(son_id==-1 && vinode[id].filesystem!=VFS)
-            return vinode[id].fs->opendir();
+            return vinode[id].fs->ops->lookup(vinode[id].fs,path+i,RD_ONLY);
         else if(son_id==-1 && vinode[id].filesystem==VFS)
             return -1;
         else

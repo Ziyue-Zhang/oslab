@@ -5,6 +5,14 @@
 #include <common.h>
 #include <klib.h>
 
+#define VINODE_SIZE 1024
+#define EMPTY 0
+#define FILE 1
+#define DIR 2
+#define VFS 1
+#define EXT2 2
+#define TTY 3
+
 typedef struct Vinode{
   char path[200];
   char name[80];
