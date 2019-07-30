@@ -123,7 +123,7 @@ void idle(void *arg){
     for(int i=0;i<LENGTH(tasks_st);i++){ //init tasks
       tkfree[i]=FREE;
    }
-   /*if(_ncpu()==8){
+   if(_ncpu()==8){
     kmt->create(pmm->alloc(sizeof(task_t)),
                 "idle1", idle, (void *)1);
     kmt->create(pmm->alloc(sizeof(task_t)),
@@ -159,7 +159,7 @@ void idle(void *arg){
   }
   else
     kmt->create(pmm->alloc(sizeof(task_t)),
-                "idle1", idle, (void *)1);*/
+                "idle1", idle, (void *)1);
  }
  static int kmt_create(task_t *task, const char *name, void (*entry)(void *arg), void *arg){
    kmt_spin_lock(&LK);
