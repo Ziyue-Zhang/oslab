@@ -15,7 +15,7 @@ void *proc_add(char *name){
     procfs[id].cpu=-1;
     procfs[id].mem=0;
     procfs[id].time=0;
-    procfs[id].inode=id-4;
+    procfs[id].inode=id;
     strcpy(procfs[id].name,name);
     return &procfs[id];
 }
@@ -46,4 +46,15 @@ int proc_init(filesystem_t* fs, const char* name, device_t *dev){
     proc_add("cpuinfo");
     proc_add("meminfo");    
     return 1;
+}
+int proc_dir(filesystem_t* fs, vinode_t *node, int num){
+    if(num<=3){
+        buf->type=DIR;
+        strcpy(buf->name,procfs[num].name);
+    }
+    else{
+        buf->type=FILE;
+        strcpy(buf->name,procfs[num].name);
+    }
+
 }
