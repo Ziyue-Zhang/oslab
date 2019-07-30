@@ -261,6 +261,14 @@ int vinode_lookup(char *path){
     }
     return id;
 }
+
+int fd_alloc(){
+
+}
+int fd_free(int fd);
+int fd_open(int inode){
+    
+}
 void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
    

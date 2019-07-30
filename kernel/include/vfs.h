@@ -13,6 +13,7 @@
 #define VFS 1
 #define EXT2 2
 #define TTY 3
+#define FILE_SIZE 128
 
 typedef struct Vinode{
   char path[200];
@@ -34,8 +35,8 @@ typedef struct fileroot{
   int use; 
 }fileroot_t;
 fileroot_t mount_table[16];
-vinode_t vinode[1024];
-file_t fildes[128];
+vinode_t vinode[VINODE_SIZE];
+file_t fildes[FILE_SIZE];
 
 void vinode_free(int idx);
 int vinode_alloc(int type);
@@ -58,6 +59,7 @@ int vinode_delfile();
 
 int fd_alloc();
 int fd_free(int fd);
+int fd_open(int inode);
 
 void vfs_init();
 int vfs_lookup(char *path);
