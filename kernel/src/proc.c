@@ -56,5 +56,5 @@ int proc_dir(filesystem_t* fs, vinode_t *node, int num){
         bnode->type=FILE;
         strcpy(node->name,procfs[num].name);
     }
-
+    return 1;
 }
