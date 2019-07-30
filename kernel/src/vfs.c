@@ -330,7 +330,7 @@ ssize_t vfs_read(int fd, void *buf, size_t nbyte){
     if(fd<0)
         return 0;
     int id=fildes[fd].inode;
-    if(vinode[id].filesyste==EXT2){
+    if(vinode[id].filesystem==EXT2){
         int len=ext2_read(vinode[id].fs,inode,flides[fd].offset,nbyte,char);
         flides[fd].offset+=len;
     }

@@ -7,14 +7,17 @@
 #include <ext2.h>
 
 #define VINODE_SIZE 1024
+#define FILE_SIZE 128
+
 #define EMPTY 0
 #define FILE 1
 #define DIR 2
 #define LINK 3
+
 #define VFS 1
 #define EXT2 2
 #define TTY 3
-#define FILE_SIZE 128
+
 #define O_RDONLY 0
 #define O_WRONLY 1
 #define O_RDWR 2
