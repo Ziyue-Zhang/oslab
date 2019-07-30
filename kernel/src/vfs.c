@@ -80,10 +80,35 @@ void vinode_setdotdot(int fa_id, int dot, int dotdot, int type, filesystem_t* fs
     vinode[dotdot].fs=fs;
 }
 void vinode_setdir(int id, int dot, int dotdot, int type, filesystem_t* fs){
-
+    strcpy(vinode[id].name,name);
+    strcpy(vinode[id].path,vinode[dot].path);
+    int lne=strlen(vinode[id].path);
+    vinode[id].path[len-1]='\0';
+    strcat(vinode[id].path,name);
+    strcat(vinode[id].path,'/');
+    vinode[id].dot=dot;
+    vinode[id].dotdot=dotdot;
+    vinode[id].nxt=-1;
+    vinode[id].son=-1;
+    vinode[id].link_inode=id;
+    vinode[id].link_count=1;
+    vinode[id].filesystem=type;
+    vinode[id].fs=fs;  
 }
 void vinode_setfile(int id, int dot, int dotdot, int type, filesystem_t* fs){
-
+    strcpy(vinode[id].name,name);
+    strcpy(vinode[id].path,vinode[dot].path);
+    int lne=strlen(vinode[id].path);
+    vinode[id].path[len-1]='\0';
+    strcat(vinode[id].path,name);
+    vinode[id].dot=dot;
+    vinode[id].dotdot=dotdot;
+    vinode[id].nxt=-1;
+    vinode[id].son=-1;
+    vinode[id].link_inode=id;
+    vinode[id].link_count=1;
+    vinode[id].filesystem=type;
+    vinode[id].fs=fs;  
 }
 
 int vinode_dot(int id){
