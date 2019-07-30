@@ -129,7 +129,9 @@ int vinode_adddir(int fa, int type, char *name, int filesystem, filesystem_t *fs
     vinode_setdir(id,dot,dotdot,name,filesystem,fs);
     dot=vinode_adddot();
     dotdot=vinode_adddotdot();
-
+    vinode[id].son=dot;
+    vinode_setdot(id,dot,dotdot,filesystem,fs);
+    vinode_setdotdot(fs,dot,dotdot,filesystem,fs);
     return id;
 }
 int vinode_addfile(int fa, int type, char *name, int filesystem, filesystem_t *fs){
