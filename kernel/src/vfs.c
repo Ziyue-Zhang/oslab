@@ -293,39 +293,41 @@ int vfs_lookup(char *path){
     return vinode_lookup(path);
 }
 int vfs_access(const char *path, int mode){
-  int id=vinode_find(path);
-  if(id==-1)
+    char temp[200];
+    strcpy(temp,path);
+    int id=vinode_find(temp);
+    if(id==-1)
+      return -1;
+    if(vinode[id].mode==mode)
+      return id;
     return -1;
-  if(vinode[id].mode==mode)
-    return id;
-  return -1;
 }
 int vfs_mount(const char *path, filesystem_t *fs){
-  return 0;
+    return 0;
 }
 int vfs_unmount(const char *path){
-  return 0;
+    return 0;
 }
 int vfs_mkdir(const char *path){
-  return 0;
+    return 0;
 }
 int vfs_rmdir(const char *path){
-  return 0;
+    return 0;
 }
 int vfs_link(const char *oldpath, const char *newpath){
-  return 0;
+    return 0;
 }
 int vfs_unlink(const char *path){
-  return 0;
+    return 0;
 }
 int vfs_open(const char *path, int flags){
-  int id=vfs_access(path,flags);
-  if(id==-1)
-    return -1;
-  return fd_open(fd);
+    int id=vfs_access(path,flags);
+    if(id==-1)
+      return -1;
+    return fd_open(fd);
 }
 ssize_t vfs_read(int fd, void *buf, size_t nbyte){
-  return 0;
+    return 0;
 }
 ssize_t vfs_write(int fd, void *buf, size_t nbyte){
 	/*ssize_t fs_size = fs_filesz(fd);
@@ -346,10 +348,10 @@ ssize_t vfs_write(int fd, void *buf, size_t nbyte){
     return 0;
 }
 off_t vfs_lseek(int fd, off_t offset, int whence){
-  return 0;
+    return 0;
 }
 int vfs_close(int fd){
-  return 0;
+    return 0;
 }
 MODULE_DEF(vfs){
   .init = vfs_init,
