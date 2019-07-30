@@ -348,7 +348,7 @@ ssize_t vfs_write(int fd, void *buf, size_t nbyte){
     }
     else if(vinode[id].filesystem==TTY){
         device_t *devtty=dev_lookup(vinode[id].name);
-        len=tty_write(devtty,fildes[fd],buf,nbyte);
+        len=tty_write(devtty,fildes[fd].offset,buf,nbyte);
         fildes[fd].offset+=len;
     }
     return len;
