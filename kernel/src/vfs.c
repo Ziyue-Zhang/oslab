@@ -140,6 +140,7 @@ int vinode_addfile(int fa, int type, char *name, int filesystem, filesystem_t *f
     for(;vinode[p].nxt!=-1;p=vinode[p].nxt);
     vinode[p].nxt=id;
     vinode_setfile(id,dot,dotdot,name,filesystem,fs);
+    return id;
 }
 int vinode_deldir(){
 
