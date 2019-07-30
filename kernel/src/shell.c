@@ -10,7 +10,7 @@ void echo_task(void *name){
     sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text,strlen(text));
   }
 }
-void shell_thread(int tty_id) {
+/*void shell_thread(int tty_id) {
   char buf[128];
   sprintf(buf, "/dev/tty%d", tty_id);
   int stdin = vfs->open(buf, O_RDONLY);
@@ -21,4 +21,4 @@ void shell_thread(int tty_id) {
       ssize_t nread = fs->read(stdin, buf, sizeof(buf));
     }
   }
-}
+}*/
