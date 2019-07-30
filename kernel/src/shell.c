@@ -31,7 +31,7 @@ void command_ls(char *line){
       n+=sprintf(line+n, "%s",vinode[son].name);
       if(vinode[son].nxt==-1)
         break;
-      n+=sprintf(line+n, "\t";
+      n+=sprintf(line+n, "\t");
       son=vinode[son].nxt;
   }
 }
