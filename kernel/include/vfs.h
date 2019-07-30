@@ -4,6 +4,7 @@
 #include <devices.h>
 #include <common.h>
 #include <klib.h>
+#include <ext2.h>
 
 #define VINODE_SIZE 1024
 #define EMPTY 0

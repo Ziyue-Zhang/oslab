@@ -327,31 +327,36 @@ int vfs_open(const char *path, int flags){
     return fd_open(id);
 }
 ssize_t vfs_read(int fd, void *buf, size_t nbyte){
-    return 0;
+    if(fd<0)
+        return 0;
+    int id=fildes[fd].inode;
+    if(vinode[id].filesyste==EXT2){
+        int len=ext2_read(vinode[id].fs,inode,flides[fd].offset,nbyte,char);
+        flides[fd].offset+=len;
+    }
+    return len;
 }
 ssize_t vfs_write(int fd, void *buf, size_t nbyte){
-	/*ssize_t fs_size = fs_filesz(fd);
-	ssize_t fs_offset = file_table[fd].open_offset;	
-	size_t n = len;
-   	if(fs_offset + len > fs_size)
-		n = fs_size - fs_offset;
-	len = fd < 3 ? len : n;
-	if(fd >= 3)
-		file_table[fd].open_offset += len;		
-	if(file_table[fd].write)
-		return file_table[fd].write(buf, fs_offset, len);
-	else 
-	{						
-		ext2_write(buf, fs_offset + file_table[fd].disk_offset, len);
-		return len;
-	}*/
-    return 0;
+    if(fd<0)
+        return 0;
+    int id=fildes[fd].inode;
+    if(vinode[id].filesystem==EXT2){
+        int len=ext2_write(vinode[id].fs,inode,flides[fd].offset,nbyte,char);
+        flides[fd].offset+=len;
+    }
+    else if(vinode[id].filesystem==TTY){
+        device_t *devtty=dev_lookup(vinode[id].name);
+        int len=tty_write(devtty,fildes[fd],buf,nbyte);
+        flides[fd].offset+=len;
+    }
+    return len;
 }
 off_t vfs_lseek(int fd, off_t offset, int whence){
     return 0;
 }
 int vfs_close(int fd){
-    return 0;
+    fd_free(fd);
+    return 1;
 }
 MODULE_DEF(vfs){
   .init = vfs_init,
