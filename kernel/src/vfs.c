@@ -53,7 +53,7 @@ int vinode_setroot(){
     vinode[dotdot].fs=NULL;
     return id;
 }
-void vinode_setdot(int this_id, int dot, int dotdot, int type, filesystem_t* fs){
+void vinode_setdot(int this_id, int dot, int dotdot, int fstype, filesystem_t* fs){
     strcpy(vinode[dot].name,".");
     strcpy(vinode[dot].path,vinode[this_id].path);
     strcat(vinode[dot].path,".");
@@ -63,10 +63,10 @@ void vinode_setdot(int this_id, int dot, int dotdot, int type, filesystem_t* fs)
     vinode[dot].son=this_id;
     vinode[dot].link_inode=dot;
     vinode[dot].link_count=1;
-    vinode[dot].filesystem=type;
+    vinode[dot].filesystem=fstype;
     vinode[dot].fs=fs;
 }
-void vinode_setdotdot(int fa_id, int dot, int dotdot, int type, filesystem_t* fs){
+void vinode_setdotdot(int fa_id, int dot, int dotdot, int fstype, filesystem_t* fs){
     strcpy(vinode[dotdot].name,"..");
     strcpy(vinode[dotdot].path,vinode[fa_id].path);
     strcat(vinode[dotdot].path,"..");
@@ -76,10 +76,10 @@ void vinode_setdotdot(int fa_id, int dot, int dotdot, int type, filesystem_t* fs
     vinode[dotdot].son=fa_id;
     vinode[dotdot].link_inode=dotdot;
     vinode[dotdot].link_count=1;
-    vinode[dotdot].filesystem=type;
+    vinode[dotdot].filesystem=fstype;
     vinode[dotdot].fs=fs;
 }
-void vinode_setdir(int id, int dot, int dotdot, char *name, int type, filesystem_t* fs){
+void vinode_setdir(int id, int dot, int dotdot, char *name, int fstype, filesystem_t* fs){
     strcpy(vinode[id].name,name);
     strcpy(vinode[id].path,vinode[dot].path);
     int len=strlen(vinode[id].path);
@@ -92,10 +92,10 @@ void vinode_setdir(int id, int dot, int dotdot, char *name, int type, filesystem
     vinode[id].son=-1;
     vinode[id].link_inode=id;
     vinode[id].link_count=1;
-    vinode[id].filesystem=type;
+    vinode[id].filesystem=fstype;
     vinode[id].fs=fs;  
 }
-void vinode_setfile(int id, int dot, int dotdot, char *name, int type, filesystem_t* fs){
+void vinode_setfile(int id, int dot, int dotdot, char *name, int fstype, filesystem_t* fs){
     strcpy(vinode[id].name,name);
     strcpy(vinode[id].path,vinode[dot].path);
     int len=strlen(vinode[id].path);
@@ -107,7 +107,7 @@ void vinode_setfile(int id, int dot, int dotdot, char *name, int type, filesyste
     vinode[id].son=-1;
     vinode[id].link_inode=id;
     vinode[id].link_count=1;
-    vinode[id].filesystem=type;
+    vinode[id].filesystem=fstype;
     vinode[id].fs=fs;  
 }
 
@@ -119,11 +119,33 @@ int vinode_adddotdot(){
     int dotdot=vinode_alloc(DIR);
     return dotdot;
 }
-int vinode_adddir(){
-    return 0;
+int vinode_adddir(int fa, int type, char *name, int filesystem, filesystem_t *fs){
+    int id=vinode_alloc(type);
+    int p=vinode[fa].son;
+    int dot=p;
+    int dotdot=vinode[p].nxt;
+    for(;vinode[p].nxt!=-1;p=vinode[p].nxt);
+    vinode[p].nxt=id;
+    vinode_setdir(id,dot,dotdot,name,filesystem,fs);
+    dot=vinode_adddot();
+    dotdot=vinode_adddotdot();
+
+    return id;
 }
-int vinode_addfile(){
-    return 0;
+int vinode_addfile(int fa, int type, char *name, int filesystem, filesystem_t *fs){
+    int id=vinode_alloc(type);
+    int p=vinode[fa].son;
+    int dot=p;
+    int dotdot=vinode[p].nxt;
+    for(;vinode[p].nxt!=-1;p=vinode[p].nxt);
+    vinode[p].nxt=id;
+    vinode_setfile(id,dot,dotdot,name,filesystem,fs);
+}
+int vinode_deldir(){
+
+}
+int vinode_delfile(){
+
 }
 int vinode_find(char *path){
     int len=strlen(path);
