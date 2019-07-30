@@ -271,6 +271,7 @@ int fd_alloc(){
 }
 int fd_free(int fd){
     fildes[fd].refcnt=0;
+    return 0;
 }
 int fd_open(int inode){
     int fd=fd_alloc();
