@@ -45,8 +45,8 @@ int vinode_dir();
 int vinode_file();
 void vinode_setdot(int this_id, int dot, int dotdot, int type, filesystem_t* fs);
 void vinode_setdotdot(int fa_id, int dot, int dotdot, int type, filesystem_t* fs);
-void vinode_setdir(int id, int dot, int dotdot, int type, filesystem_t* fs);
-void vinode_setfile(int id, int dot, int dotdot, int type, filesystem_t* fs);
+void vinode_setdir(int id, int dot, int dotdot, char *name, int type, filesystem_t* fs);
+void vinode_setfile(int id, int dot, int dotdot, char *name, int type, filesystem_t* fs);
 
 void vfs_init();
 int vfs_lookup(char *path);
