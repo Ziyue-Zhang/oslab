@@ -7,7 +7,7 @@ intptr_t alloc_lock;
 extern void lock();
 extern void unlock();
 extern spinlock_t alc;
-extern tot_mem;
+extern uint32_t tot_mem;
 
 //this method is true with array. There isn't any array in real system, so i need to write a new one.
 /*typedef struct node {
