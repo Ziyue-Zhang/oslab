@@ -13,7 +13,7 @@ void *proc_add(char *name){
     proc_num++;
     procfs[id].cpu=-1;
     procfs[id].mem=0;
-    procfs[id].time=0
+    procfs[id].time=0;
     procfs[id].inode=id-4;
     strcpy(procfs[id].name,name);
     return &procfs[id];
@@ -26,4 +26,13 @@ void proc_mem(uint64_t mem_size, int flag){
         use_mem-=mem_size;
     }
 }
-void
+void proc_time(proc_t *old, proc_t *new){
+    if(old){
+        old->cpu=-1;
+    }
+    if(new){
+        new->cpu=_cpu();
+        new->time++;
+        jobs[new->cpu]=new->inode;
+    }
+}
