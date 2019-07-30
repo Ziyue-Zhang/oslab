@@ -290,10 +290,15 @@ void vfs_init(){
 }
 
 int vfs_lookup(char *path){
-    return 0;
+    return vinode_lookup(path);
 }
 int vfs_access(const char *path, int mode){
-  return 0;
+  int id=vinode_find(path);
+  if(id==-1)
+    return -1;
+  if(vinode[id].mode==mode)
+    return id;
+  return -1;
 }
 int vfs_mount(const char *path, filesystem_t *fs){
   return 0;
@@ -314,7 +319,10 @@ int vfs_unlink(const char *path){
   return 0;
 }
 int vfs_open(const char *path, int flags){
-  return 0;
+  int id=vfs_access(path,flags);
+  if(id==-1)
+    return -1;
+  return fd_open(fd);
 }
 ssize_t vfs_read(int fd, void *buf, size_t nbyte){
   return 0;

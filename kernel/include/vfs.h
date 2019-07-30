@@ -23,6 +23,7 @@ typedef struct Vinode{
   int nxt;
   int son;
   int type;
+  int mode;
   int link_inode;
   int link_count;
   int filesystem;       // vfs read/write/lseek must know it
