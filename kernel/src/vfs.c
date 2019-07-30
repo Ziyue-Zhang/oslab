@@ -57,10 +57,10 @@ void vinode_setdot(int this_id, int dot, int dotdot, int type, filesystem_t* fs)
     strcpy(vinode[dot].name,".");
     strcpy(vinode[dot].path,vinode[this_id].path);
     strcat(vinode[dot].path,".");
-    vinode[dot].dot=-1;
+    vinode[dot].dot=dot;
     vinode[dot].dotdot=dotdot;
     vinode[dot].nxt=dotdot;
-    vinode[dot].son=id;
+    vinode[dot].son=this_id;
     vinode[dot].link_inode=dot;
     vinode[dot].link_count=1;
     vinode[dot].filesystem=type;
