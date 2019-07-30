@@ -111,19 +111,18 @@ void vinode_setfile(int id, int dot, int dotdot, char *name, int type, filesyste
     vinode[id].fs=fs;  
 }
 
-int vinode_dot(int id){
+int vinode_adddot(){
     int dot=vinode_alloc(DIR);
     return dot;
 }
-int vinode_dotdot(){
+int vinode_adddotdot(){
     int dotdot=vinode_alloc(DIR);
-
     return dotdot;
 }
-int vinode_dir(){
+int vinode_adddir(){
     return 0;
 }
-int vinode_file(){
+int vinode_addfile(){
     return 0;
 }
 int vinode_find(char *path){
@@ -154,6 +153,9 @@ int vinode_find(char *path){
         if(id==-1)
             return -1;
         //printf("%s\n",name);
+        while(vinode[id].type==LINK){
+            id=vinode[id].link_inode;
+        }
     }
     return id;
 }
@@ -186,8 +188,12 @@ int vinode_lookup(char *path){
             return vinode[id].fs->ops->lookup(vinode[id].fs,path+i,RD_ONLY);
         else if(son_id==-1 && vinode[id].filesystem==VFS)
             return -1;
-        else
-            id=son_id;        
+        else{
+            while(vinode[son_id].type==LINK){
+                son_id=vinode[son_id].link_inode;
+            }
+            id=son_id;  
+        }      
         //printf("%s\n",name);
     }
     return id;

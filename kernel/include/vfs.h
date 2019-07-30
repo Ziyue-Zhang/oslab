@@ -9,6 +9,7 @@
 #define EMPTY 0
 #define FILE 1
 #define DIR 2
+#define LINK 3
 #define VFS 1
 #define EXT2 2
 #define TTY 3
