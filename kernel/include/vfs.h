@@ -55,6 +55,9 @@ int vinode_addfile(int fa, int type, char *name, int filesystem, filesystem_t *f
 int vinode_deldir();
 int vinode_delfile();
 
+int fd_alloc();
+int fd_free(int fd);
+
 void vfs_init();
 int vfs_lookup(char *path);
 int vfs_access(const char *path, int mode);

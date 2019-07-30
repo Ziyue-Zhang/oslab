@@ -1,11 +1,11 @@
 #include<vfs.h>
 
 void vinode_free(int idx){
-    vinode[idx].type=0;
+    vinode[idx].type=EMPTY;
 }
 int vinode_alloc(int type){
     for(int i=0;i<VINODE_SIZE;i++){
-        if(!vinode[i].type){
+        if(vinode[i].type==EMPTY){
             vinode[i].type=type;
             return i;
         }
@@ -125,8 +125,10 @@ int vinode_adddir(int fa, int type, char *name, int filesystem, filesystem_t *fs
     int dot=p;
     int dotdot=vinode[p].nxt;
     for(;vinode[p].nxt!=-1;p=vinode[p].nxt);
+    
     vinode[p].nxt=id;
     vinode_setdir(id,dot,dotdot,name,filesystem,fs);
+    
     dot=vinode_adddot();
     dotdot=vinode_adddotdot();
     vinode[id].son=dot;
@@ -144,11 +146,47 @@ int vinode_addfile(int fa, int type, char *name, int filesystem, filesystem_t *f
     vinode_setfile(id,dot,dotdot,name,filesystem,fs);
     return id;
 }
-int vinode_deldir(){
-    return 0;
+int vinode_delfile(int fa, int this){
+    int p=vinode[fa].son;
+    if(this==p){
+        vinode[fa].son=vinode[p].nxt;
+        vinode_free(this);
+    }
+    else{
+        for(;vinode[p].nxt!=this;p=vinode[p].nxt);
+        vinode[p].nxt=vinode[this].nxt;
+        vinode_free(this);
+    }
+    return 1;
 }
-int vinode_delfile(){
-    return 0;
+int vinode_deldir(int fa, int this){
+    int p=vinode[fa].son;
+    if(this==p){
+        vinode[fa].son=vinode[p].nxt;
+        for(int i=vinode[this].son;i!=-1;i=vinode[i].nxt){
+            if(vinode[i].type==DIR){
+                vinode_deldir(this,i);
+            }
+            else{
+                vinode_delfile(this,i);
+            }
+        }
+        vinode_free(this);
+    }
+    else{
+        for(;vinode[p].nxt!=this;p=vinode[p].nxt);
+        vinode[p].nxt=vinode[this].nxt;
+        for(int i=vinode[this].son;i!=-1;i=vinode[i].nxt){
+            if(vinode[i].type==DIR){
+                vinode_deldir(this,i);
+            }
+            else{
+                vinode_delfile(this,i);
+            }
+        }
+        vinode_free(this);
+    }
+    return 1;
 }
 int vinode_find(char *path){
     int len=strlen(path);

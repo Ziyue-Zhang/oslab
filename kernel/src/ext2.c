@@ -30,7 +30,7 @@ int ext2_lookup(filesystem_t *fs, const char *path, int flags){
     return 0;
 }
 
-int ext2_read(filesystem_t *fs, int inode, uint32_t offset, int len, char *buf){
+int ext2_read(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     if(ext2fs->block_used[inode]==0){
         *buf='\0';
@@ -43,7 +43,7 @@ int ext2_read(filesystem_t *fs, int inode, uint32_t offset, int len, char *buf){
     return 1;
 }
 
-int ext2_write(filesystem_t *fs, int inode, uint32_t offset, int len, char *buf){
+int ext2_write(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     /*for(int idx=inode*4,i=0;i<len;i++,idx++){
         ext2fs->block_used[idx]=1;
