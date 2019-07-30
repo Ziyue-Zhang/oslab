@@ -5,7 +5,7 @@ proc_t procfs[PROC_SIZE];
 int proc_num=0;
 
 void *proc_add(char *name){
-    if(proc_num==PROC_SIZR){
+    if(proc_num==PROC_SIZE){
         return NULL;
     }
     int id=proc_num;
