@@ -65,4 +65,12 @@ int ext2_delete(filesystem_t *fs, int inode){
     return 1;
 }
 
+int ext2_clear(filesystem_t *fs, int inode){
+    ext2_t* ext2fs=(ext2_t*)fs->myfs;
+    const char buf[4096]={'\0'};
+    int start=inode*4096;
+    ext2fs->dev->ops->write(ext2fs->dev,start,buf,ext2fs->block_size);
+    return 1;
+}
+
 
