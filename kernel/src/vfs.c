@@ -283,6 +283,8 @@ int fd_open(int inode){
     return fd;
 }
 void vfs_init(){
+    memset(vinode,0,sizeof(vinode));
+    memset(fildes,0,sizeof(fildes));
     memset(mount_table,0,sizeof(mount_table));
    
 }
