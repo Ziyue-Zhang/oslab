@@ -27,7 +27,6 @@ void command_ls(char *line){
   int id=vinode_find(pwd);
   int son=vinode[id].son;
   int n=0;
-  n+=sprintf(line+n, "\n");
   while(1){
       n+=sprintf(line+n, "%s",vinode[son].name);
       if(vinode[son].nxt==-1)
@@ -35,6 +34,7 @@ void command_ls(char *line){
       n+=sprintf(line+n, "    ");
       son=vinode[son].nxt;
   }
+  n+=sprintf(line+n, "\n");
 }
 void terminal_task(void *name){
   device_t *tty = dev_lookup(name);
