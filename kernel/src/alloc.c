@@ -7,7 +7,7 @@ intptr_t alloc_lock;
 extern void lock();
 extern void unlock();
 extern spinlock_t alc;
-extern uint32_t tot_mem;
+extern uint64_t tot_mem;
 
 //this method is true with array. There isn't any array in real system, so i need to write a new one.
 /*typedef struct node {
@@ -382,7 +382,7 @@ void my_free(void *ap)
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
   pm_end   = (uintptr_t)_heap.end;
-	tot_mem = (uint32_t)(pm_end - pm_start);
+	tot_mem = (pm_end - pm_start);
   //printf("%d\n", pm_end-pm_start);
   alloc_lock = 0;
 }
