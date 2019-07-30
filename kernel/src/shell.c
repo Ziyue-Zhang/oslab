@@ -66,6 +66,9 @@ void terminal_task(void *name){
     if(strncmp(line,"ls",strlen("ls"))==0){
       command_ls(text);
     }
+    else if(strcmp(line,"pwd")==0){
+      command_pwd(text);
+    }
     else
       sprintf(text, "Echo: %s.\n", line); 
     tty_write(tty, 0, text,strlen(text));
