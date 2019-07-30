@@ -1,5 +1,5 @@
 #include<vfs.h>
-extern ssize_t tty_write();
+//extern ssize_t tty_write();
 void shell_task(void *name){
   device_t *tty = dev_lookup(name);
   while(1){
