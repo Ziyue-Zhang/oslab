@@ -189,7 +189,7 @@ int vinode_deldir(int fa, int this){
     return 1;
 }
 int vinode_find(char *path){
-    if(strlen(path==1)&&path[0]=='/')
+    if(strlen(path)==1&&path[0]=='/')
         return 0;
     int len=strlen(path);
     int id=0;
