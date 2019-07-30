@@ -23,6 +23,18 @@ void get_path(char *pwd, char *path){
     strcpy(path1,path);
   }
 }
+void command_ls(char *line){
+  int id=vinode_find(pwd);
+  int son=vinode[id].son;
+  int n=0;
+  while(1){
+      n+=sprintf(line+n, "%s",vinode[son].name);
+      if(vinode[son].nxt==-1)
+        break;
+      n+=sprintf(line+n, "\t";
+      son=vinode[son].nxt;
+  }
+}
 void terminal_task(void *name){
   device_t *tty = dev_lookup(name);
   char line[128], text[128];
@@ -31,6 +43,11 @@ void terminal_task(void *name){
     tty->ops->write(tty, 0, text, strlen(text));
     int nread = tty->ops->read(tty, 0 ,line, sizeof(line));
     line[nread - 1] = '\0';
-    sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text,strlen(text));
+    if(strcmp(line,"ls")==0){
+      command_ls(text);
+    }
+    else
+      sprintf(text, "Echo: %s.\n", line); 
+    tty_write(tty, 0, text,strlen(text));
   }
 }
