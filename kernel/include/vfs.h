@@ -35,6 +35,7 @@ typedef struct fileroot{
 }fileroot_t;
 fileroot_t mount_table[16];
 vinode_t vinode[1024];
+file_t fildes[128];
 
 void vinode_free(int idx);
 int vinode_alloc(int type);
