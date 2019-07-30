@@ -263,11 +263,23 @@ int vinode_lookup(char *path){
 }
 
 int fd_alloc(){
-
+    for(int fd=0;fd<FILE_SIZE;fd++){
+        if(flides[fd].refcnt==0)
+            return fd;
+    }
+    return -1;
 }
-int fd_free(int fd);
+int fd_free(int fd){
+    flides[fd].refcnt=0;
+}
 int fd_open(int inode){
-    
+    int fd=fd_alloc();
+    if(fd==-1)
+        return -1;
+    flides[fd].refcnt++;
+    flides[fd].inode=inode;
+    flides[fd].offset=0;
+    return fd;
 }
 void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
