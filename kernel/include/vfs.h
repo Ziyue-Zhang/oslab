@@ -1,10 +1,10 @@
 #ifndef __VFS_H__
 #define __VFS_H__
 
-//#include <devices.h>
+#include <devices.h>
 #include <common.h>
 #include <klib.h>
-#include <ext2.h>
+//#include <ext2.h>
 
 #define VINODE_SIZE 1024
 #define FILE_SIZE 128
