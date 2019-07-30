@@ -282,6 +282,7 @@ int fd_open(int inode){
     fildes[fd].offset=0;
     return fd;
 }
+
 void vfs_init(){
     memset(vinode,0,sizeof(vinode));
     memset(fildes,0,sizeof(fildes));
@@ -290,7 +291,7 @@ void vfs_init(){
 }
 
 int vfs_lookup(char *path){
-    return vinode_lookup(path);
+    return vinode_find(path);
 }
 int vfs_access(const char *path, int mode){
     char temp[200];
@@ -369,6 +370,7 @@ int vfs_close(int fd){
     fd_free(fd);
     return 1;
 }
+
 MODULE_DEF(vfs){
   .init = vfs_init,
   .access = vfs_access,
