@@ -17,6 +17,7 @@ void get_path(char *pwd, char *path){
   if(path[0]!='/'){
     path1[0]='0';
     strcpy(path1,pwd);
+    strcpy(path1,"/");
     strcpy(path1,path);
   }
   else{
@@ -42,17 +43,45 @@ void command_pwd(char *line){
 }
 
 void command_cd(char *line,char *text){
-  int id=vfs_lookup(pwd);
-  int son=vinode[id].son;
-  int n=0;
-  while(1){
-      n+=sprintf(line+n, "%s",vinode[son].name);
-      if(vinode[son].nxt==-1)
-        break;
-      n+=sprintf(line+n, "    ");
-      son=vinode[son].nxt;
+  int i=0;
+  while(line[i]){
+    if(line[i]==' ')
+      break;
+    i++;
   }
-  n+=sprintf(line+n, "\n");
+  i++;
+  if(strcmp(line+i,".")==0){
+    sprintf(line, "\n");
+    return;
+  }
+  else if(strcmp(line+i,"..")==0){
+    if(strcmp(pwd,"/")==0){
+      sprintf(line, "\n");
+      return;
+    }
+    else{
+      int j=strlen(pwd)-1;
+      while(1){
+        if(pwd[j]=='/')
+          break;
+        j--;
+        pwd[j]='0';
+        sprintf(line, "\n");
+        return;
+      }
+    }
+  }
+  else{
+    char temp[200];
+    strcpy(temp,pwd);
+    get_path(temp, line+i);
+    if(vfs_lookup(temp)!=-1){
+      get_path(pwd, line+i);
+    }
+    pwd[0]='\0';
+    strcpy(pwd,path1);
+    sprintf(line, "\n");
+  }
 }
 
 void terminal_task(void *name){
