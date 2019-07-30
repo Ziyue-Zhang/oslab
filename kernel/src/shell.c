@@ -24,7 +24,7 @@ void get_path(char *pwd, char *path){
   }
 }
 void command_ls(char *line){
-  int id=vinode_find(pwd);
+  int id=vfs_lookup(pwd);
   int son=vinode[id].son;
   int n=0;
   while(1){
@@ -36,6 +36,25 @@ void command_ls(char *line){
   }
   n+=sprintf(line+n, "\n");
 }
+
+void command_pwd(char *line){
+  sprintf(line, "%s\n", pwd);
+}
+
+void command_cd(char *line,char *text){
+  int id=vfs_lookup(pwd);
+  int son=vinode[id].son;
+  int n=0;
+  while(1){
+      n+=sprintf(line+n, "%s",vinode[son].name);
+      if(vinode[son].nxt==-1)
+        break;
+      n+=sprintf(line+n, "    ");
+      son=vinode[son].nxt;
+  }
+  n+=sprintf(line+n, "\n");
+}
+
 void terminal_task(void *name){
   device_t *tty = dev_lookup(name);
   char line[128], text[128];
@@ -44,7 +63,7 @@ void terminal_task(void *name){
     tty->ops->write(tty, 0, text, strlen(text));
     int nread = tty->ops->read(tty, 0 ,line, sizeof(line));
     line[nread - 1] = '\0';
-    if(strcmp(line,"ls")==0){
+    if(strncmp(line,"ls",strlen(ls))==0){
       command_ls(text);
     }
     else
