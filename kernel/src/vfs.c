@@ -143,10 +143,10 @@ int vinode_addfile(int fa, int type, char *name, int filesystem, filesystem_t *f
     return id;
 }
 int vinode_deldir(){
-
+    return 0;
 }
 int vinode_delfile(){
-
+    return 0;
 }
 int vinode_find(char *path){
     int len=strlen(path);
