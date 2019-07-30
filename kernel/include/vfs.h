@@ -91,4 +91,7 @@ ssize_t vfs_write(int fd, void *buf, size_t nbyte);
 off_t vfs_lseek(int fd, off_t offset, int whence);
 int vfs_close(int fd);
 
+extern int ext2_read();
+extern int ext2_write();
+
 #endif
