@@ -1,7 +1,7 @@
 #ifndef __EXT2_H__
 #define __EXT2_H__
 
-#include <devices.h>
+#include <vfs.h>
 #include <common.h>
 #include <klib.h>
 
