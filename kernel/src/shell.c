@@ -27,11 +27,12 @@ void command_ls(char *line){
   int id=vinode_find(pwd);
   int son=vinode[id].son;
   int n=0;
+  n+=sprintf(line+n, "\n");
   while(1){
       n+=sprintf(line+n, "%s",vinode[son].name);
       if(vinode[son].nxt==-1)
         break;
-      n+=sprintf(line+n, "\t");
+      n+=sprintf(line+n, "    ");
       son=vinode[son].nxt;
   }
 }
