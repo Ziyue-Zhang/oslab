@@ -50,8 +50,8 @@ void vinode_setdir(int id, int dot, int dotdot, char *name, int fstype, filesyst
 void vinode_setfile(int id, int dot, int dotdot, char *name, int fstype, filesystem_t* fs);
 int vinode_adddot();
 int vinode_adddotdot();
-int vinode_adddir();
-int vinode_addfile();
+int vinode_adddir(int fa, int type, char *name, int filesystem, filesystem_t *fs);
+int vinode_addfile(int fa, int type, char *name, int filesystem, filesystem_t *fs);
 int vinode_deldir();
 int vinode_delfile();
 
