@@ -67,7 +67,17 @@ void vinode_setdot(int this_id, int dot, int dotdot, int type, filesystem_t* fs)
     vinode[dot].fs=fs;
 }
 void vinode_setdotdot(int fa_id, int dot, int dotdot, int type, filesystem_t* fs){
-
+    strcpy(vinode[dotdot].name,"..");
+    strcpy(vinode[dotdot].path,vinode[fa_id].path);
+    strcat(vinode[dotdot].path,"..");
+    vinode[dotdot].dot=dot;
+    vinode[dotdot].dotdot=dotdot;
+    vinode[dotdot].nxt=-1;
+    vinode[dotdot].son=fa_id;
+    vinode[dotdot].link_inode=dotdot;
+    vinode[dotdot].link_count=1;
+    vinode[dotdot].filesystem=type;
+    vinode[dotdot].fs=fs;
 }
 void vinode_setdir(int id, int dot, int dotdot, int type, filesystem_t* fs){
 
