@@ -49,12 +49,12 @@ int proc_init(filesystem_t* fs, const char* name, device_t *dev){
 }
 int proc_dir(filesystem_t* fs, vinode_t *node, int num){
     if(num<=3){
-        buf->type=DIR;
-        strcpy(buf->name,procfs[num].name);
+        node->type=DIR;
+        strcpy(node->name,procfs[num].name);
     }
     else{
-        buf->type=FILE;
-        strcpy(buf->name,procfs[num].name);
+        bnode->type=FILE;
+        strcpy(node->name,procfs[num].name);
     }
 
 }
