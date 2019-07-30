@@ -25,8 +25,8 @@ int vinode_setroot(){
     strcpy(vinode[dotdot].name,"..");
     strcpy(vinode[dotdot].path,"/..");
 
-    vinode[id].dot=dot;
-    vinode[id].dotdot=dotdot;
+    vinode[id].dot=-1;
+    vinode[id].dotdot=-1;
     vinode[id].nxt=-1;
     vinode[id].son=dot;
     vinode[id].link_inode=id;
@@ -34,7 +34,7 @@ int vinode_setroot(){
     vinode[id].filesystem=VFS;
     vinode[id].fs=NULL;
 
-    vinode[dot].dot=-1;
+    vinode[dot].dot=dot;
     vinode[dot].dotdot=dotdot;
     vinode[dot].nxt=dotdot;
     vinode[dot].son=id;
@@ -44,7 +44,7 @@ int vinode_setroot(){
     vinode[dot].fs=NULL;
 
     vinode[dotdot].dot=dot;
-    vinode[dotdot].dotdot=-1;
+    vinode[dotdot].dotdot=dotdot;
     vinode[dotdot].nxt=-1;
     vinode[dotdot].son=id;
     vinode[dotdot].link_inode=dotdot;
