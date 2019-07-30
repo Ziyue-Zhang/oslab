@@ -189,6 +189,8 @@ int vinode_deldir(int fa, int this){
     return 1;
 }
 int vinode_find(char *path){
+    if(strlen(path==1)&&path[0]=='/')
+        return 0;
     int len=strlen(path);
     int id=0;
     for(int i=0;i<len;i++){
@@ -287,7 +289,7 @@ void vfs_init(){
     memset(vinode,0,sizeof(vinode));
     memset(fildes,0,sizeof(fildes));
     memset(mount_table,0,sizeof(mount_table));
-    printf("nmsl\n");
+    vinode_setroot();
 }
 
 int vfs_lookup(char *path){
