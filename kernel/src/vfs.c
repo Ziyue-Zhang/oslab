@@ -332,7 +332,7 @@ ssize_t vfs_read(int fd, void *buf, size_t nbyte){
     int id=fildes[fd].inode;
     if(vinode[id].filesystem==EXT2){
         int len=ext2_read(vinode[id].fs,id,fildes[fd].offset,nbyte,buf);
-        flides[fd].offset+=len;
+        fildes[fd].offset+=len;
     }
     return len;
 }
@@ -342,12 +342,12 @@ ssize_t vfs_write(int fd, void *buf, size_t nbyte){
     int id=fildes[fd].inode;
     if(vinode[id].filesystem==EXT2){
         int len=ext2_write(vinode[id].fs,id,fildes[fd].offset,nbyte,buf);
-        flides[fd].offset+=len;
+        fildes[fd].offset+=len;
     }
     else if(vinode[id].filesystem==TTY){
         device_t *devtty=dev_lookup(vinode[id].name);
         int len=tty_write(devtty,fildes[fd],buf,nbyte);
-        flides[fd].offset+=len;
+        fildes[fd].offset+=len;
     }
     return len;
 }
