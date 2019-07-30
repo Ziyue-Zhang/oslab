@@ -1,6 +1,6 @@
 #include<vfs.h>
 //extern ssize_t tty_write();
-void shell_task(void *name){
+/*void shell_task(void *name){
   device_t *tty = dev_lookup(name);
   while(1){
     char line[128], text[128];
@@ -9,8 +9,8 @@ void shell_task(void *name){
     line[nread - 1] = '\0';
     sprintf(text, "Echo: %s.\n", line); tty_write(tty, 0, text,strlen(text));
   }
-}
-void tty_task(void *name){
+}*/
+void shell_task(void *name){
   device_t *tty = dev_lookup(name);
   char line[128], text[128];
   while(1){
