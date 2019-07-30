@@ -82,7 +82,7 @@ void vinode_setdotdot(int fa_id, int dot, int dotdot, int type, filesystem_t* fs
 void vinode_setdir(int id, int dot, int dotdot, int type, filesystem_t* fs){
     strcpy(vinode[id].name,name);
     strcpy(vinode[id].path,vinode[dot].path);
-    int lne=strlen(vinode[id].path);
+    int len=strlen(vinode[id].path);
     vinode[id].path[len-1]='\0';
     strcat(vinode[id].path,name);
     strcat(vinode[id].path,'/');
@@ -98,7 +98,7 @@ void vinode_setdir(int id, int dot, int dotdot, int type, filesystem_t* fs){
 void vinode_setfile(int id, int dot, int dotdot, int type, filesystem_t* fs){
     strcpy(vinode[id].name,name);
     strcpy(vinode[id].path,vinode[dot].path);
-    int lne=strlen(vinode[id].path);
+    int len=strlen(vinode[id].path);
     vinode[id].path[len-1]='\0';
     strcat(vinode[id].path,name);
     vinode[id].dot=dot;
