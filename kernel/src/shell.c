@@ -1,4 +1,5 @@
 #include<devices.h>
+#include<vfs.h>
 extern ssize_t tty_write();
 void echo_task(void *name){
   device_t *tty = dev_lookup(name);
