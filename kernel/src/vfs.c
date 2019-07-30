@@ -324,7 +324,7 @@ int vfs_open(const char *path, int flags){
     int id=vfs_access(path,flags);
     if(id==-1)
       return -1;
-    return fd_open(fd);
+    return fd_open(id);
 }
 ssize_t vfs_read(int fd, void *buf, size_t nbyte){
     return 0;
