@@ -47,7 +47,7 @@ static void consumer(void *arg){
 }*/
 
 extern ssize_t tty_write();
-extern echo_task();
+extern void echo_task();
 /*void func(void *arg) {
   int cur = (intptr_t)arg;
   while (1) {
