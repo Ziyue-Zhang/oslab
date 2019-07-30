@@ -63,7 +63,7 @@ void terminal_task(void *name){
     tty->ops->write(tty, 0, text, strlen(text));
     int nread = tty->ops->read(tty, 0 ,line, sizeof(line));
     line[nread - 1] = '\0';
-    if(strncmp(line,"ls",strlen(ls))==0){
+    if(strncmp(line,"ls",strlen("ls"))==0){
       command_ls(text);
     }
     else
