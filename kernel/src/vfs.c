@@ -354,7 +354,16 @@ ssize_t vfs_write(int fd, void *buf, size_t nbyte){
     return len;
 }
 off_t vfs_lseek(int fd, off_t offset, int whence){
-    return 0;
+    switch (whence) 
+    {
+        case SEEK_SET: fildes[fd].offset = offset; break;
+        case SEEK_CUR: fildes[fd].offset += offset; break;
+        case SEEK_END: fildes[fd].offset = vinode[fildes[fd].inode].size + offset; break;
+        default: return -1;
+    }
+    if (vinode[fildes[fd].inode].size < fildes[fd].offset)
+        fildes[fd].offset = vinode[fildes[fd].inode].size;
+    return fildes[fd].offset;
 }
 int vfs_close(int fd){
     fd_free(fd);

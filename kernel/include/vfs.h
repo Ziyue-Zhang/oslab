@@ -22,6 +22,10 @@
 #define O_WRONLY 1
 #define O_RDWR 2
 
+#define SEEK_SET 0
+#define SEEK_CUR 1
+#define SEEK_END 2
+
 typedef struct Vinode{
   char path[200];
   char name[80];
@@ -31,6 +35,7 @@ typedef struct Vinode{
   int son;
   int type;
   int mode;
+  int size;
   int link_inode;
   int link_count;
   int filesystem;       // vfs read/write/lseek must know it
