@@ -11,7 +11,7 @@ typedef struct proc{
     char name[20];
     int inode;
     int cpu;
-    int times;
+    int time;
     int mem;
 }proc_t;
 
