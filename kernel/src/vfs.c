@@ -55,7 +55,7 @@ int vinode_setroot(){
 }
 void vinode_setdot(int this_id, int dot, int dotdot, int type, filesystem_t* fs){
     strcpy(vinode[dot].name,".");
-    strcpy(vinode[dot].path,vinode[id].path);
+    strcpy(vinode[dot].path,vinode[this_id].path);
     strcat(vinode[dot].path,".");
     vinode[dot].dot=-1;
     vinode[dot].dotdot=dotdot;
