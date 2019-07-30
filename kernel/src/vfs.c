@@ -85,7 +85,7 @@ void vinode_setdir(int id, int dot, int dotdot, char *name, int type, filesystem
     int len=strlen(vinode[id].path);
     vinode[id].path[len-1]='\0';
     strcat(vinode[id].path,name);
-    strcat(vinode[id].path,'/');
+    strcat(vinode[id].path,"/");
     vinode[id].dot=dot;
     vinode[id].dotdot=dotdot;
     vinode[id].nxt=-1;
