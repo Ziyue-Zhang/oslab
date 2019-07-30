@@ -3,8 +3,8 @@
 int jobs[4];
 proc_t procfs[PROC_SIZE];
 int proc_num;
-uint64_t use_mem;
-uint64_t tot_mem;
+uint32_t use_mem;
+uint32_t tot_mem;
 
 void *proc_add(char *name){
     if(proc_num==PROC_SIZE){
@@ -19,7 +19,7 @@ void *proc_add(char *name){
     strcpy(procfs[id].name,name);
     return &procfs[id];
 }
-void proc_mem(uint64_t mem_size, int flag){
+void proc_mem(uint32_t mem_size, int flag){
     if(flag==0){
         use_mem+=mem_size;
     }
