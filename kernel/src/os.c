@@ -110,6 +110,7 @@ static void os_init() {
   kmt->init();
   //_vme_init(pmm->alloc, pmm->free);
   dev->init();
+  vfs->init();
   kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty1");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty2");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty3");

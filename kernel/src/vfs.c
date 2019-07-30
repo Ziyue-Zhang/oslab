@@ -287,7 +287,7 @@ void vfs_init(){
     memset(vinode,0,sizeof(vinode));
     memset(fildes,0,sizeof(fildes));
     memset(mount_table,0,sizeof(mount_table));
-   
+    printf("nmsl\n");
 }
 
 int vfs_lookup(char *path){
