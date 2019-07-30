@@ -43,6 +43,8 @@ fileroot_t mount_table[16];
 vinode_t vinode[VINODE_SIZE];
 file_t fildes[FILE_SIZE];
 
+extern ssize_t tty_write(device_t *dev, off_t offset, const void *buf, size_t count);
+
 void vinode_free(int idx);
 int vinode_alloc(int type);
 int vinode_setroot();
