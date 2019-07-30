@@ -61,27 +61,29 @@ int proc_dir(filesystem_t* fs, vinode_t *node, int num){
 ssize_t proc_read(int id, uint64_t offset, char *buf){
     if(!offset)
         return 0;
+    int k=0;
     if(id==2){
-        ret+=sprintf(buf+ret,"\ncpuinfo:\n");
+        k+=sprintf(buf+k,"\ncpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i].inode;
-            ret+=sprintf(buf+ret,"pid:%d\n",j-4);
-            ret+=sprintf(buf+ret,"name:%d\n",procfs[j].name);
-            ret+=sprintf(buf+ret,"cpu_number:%d\n",procfs[j].cpu);
+            k+=sprintf(buf+k,"pid:%d\n",j-4);
+            k+=sprintf(buf+k,"name:%d\n",procfs[j].name);
+            k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);
         }
     }
     else if(id==3){
-        ret+=sprintf(buf+ret,"\nmeminfo:\n");
-        ret+=sprintf(buf+ret,"using mem: %d kb\n",use_mem/1024);
-        ret+=sprintf(buf+ret,"free mem: %d kb\n",(tot_mem-use_mem)/1024);
-        ret+=sprintf(buf+ret,"tot mem: %d kb\n",tot_mem/1024);
+        k+=sprintf(buf+k,"\nmeminfo:\n");
+        k+=sprintf(buf+k,"using mem: %d kb\n",use_mem/1024);
+        k+=sprintf(buf+k,"free mem: %d kb\n",(tot_mem-use_mem)/1024);
+        k+=sprintf(buf+k,"tot mem: %d kb\n",tot_mem/1024);
     }
     else{
-        ret+=sprintf(buf+ret,"\ntaskinfo:\n");
-        ret+=sprintf(buf+ret,"pid:%d\n",j-4);
-        ret+=sprintf(buf+ret,"name:%d\n",procfs[j].name);
-        ret+=sprintf(buf+ret,"cpu_number:%d\n",procfs[j].cpu);
-        ret+=sprintf(buf+ret,"mem:%d\n",procfs[j].mem);
-        ret+=sprintf(buf+ret,"cpu_time:%d\n",procfs[j].time);
+        k+=sprintf(buf+k,"\ntaskinfo:\n");
+        k+=sprintf(buf+k,"pid:%d\n",j-4);
+        k+=sprintf(buf+k,"name:%d\n",procfs[j].name);
+        k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);
+        k+=sprintf(buf+k,"mem:%d\n",procfs[j].mem);
+        k+=sprintf(buf+k,"cpu_time:%d\n",procfs[j].time);
     }
+    return k;
 }
