@@ -79,11 +79,11 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
     }
     else{
         k+=sprintf(buf+k,"\ntaskinfo:\n");
-        k+=sprintf(buf+k,"pid:%d\n",j-4);
-        k+=sprintf(buf+k,"name:%d\n",procfs[j].name);
-        k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);
-        k+=sprintf(buf+k,"mem:%d\n",procfs[j].mem);
-        k+=sprintf(buf+k,"cpu_time:%d\n",procfs[j].time);
+        k+=sprintf(buf+k,"pid:%d\n",id-4);
+        k+=sprintf(buf+k,"name:%d\n",procfs[id].name);
+        k+=sprintf(buf+k,"cpu_number:%d\n",procfs[id].cpu);
+        k+=sprintf(buf+k,"mem:%d\n",procfs[id].mem);
+        k+=sprintf(buf+k,"cpu_time:%d\n",procfs[id].time);
     }
     return k;
 }
