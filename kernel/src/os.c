@@ -47,7 +47,7 @@ static void consumer(void *arg){
 }*/
 
 
-extern void echo_task();
+extern void terminal_task();
 /*void func(void *arg) {
   int cur = (intptr_t)arg;
   while (1) {
@@ -110,10 +110,10 @@ static void os_init() {
   kmt->init();
   //_vme_init(pmm->alloc, pmm->free);
   dev->init();
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty1");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty2");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty3");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty4");
   //create_threads();
 }
 
