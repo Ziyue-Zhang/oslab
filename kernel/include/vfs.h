@@ -14,6 +14,9 @@
 #define EXT2 2
 #define TTY 3
 #define FILE_SIZE 128
+#define O_RDONLY 0
+#define O_WRONLY 1
+#define O_RDWR 2
 
 typedef struct Vinode{
   char path[200];
