@@ -99,5 +99,6 @@ extern int ext2_read();
 extern int ext2_write();
 extern int proc_build();
 extern int proc_init();
+extern int proc_read();
 
 #endif

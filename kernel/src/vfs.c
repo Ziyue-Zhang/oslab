@@ -543,6 +543,10 @@ ssize_t vfs_read(int fd, void *buf, size_t nbyte){
         len=ext2_read(vinode[id].fs,id,fildes[fd].offset,nbyte,buf);
         fildes[fd].offset+=len;
     }
+    else if(vinode[id].filesystem==PROC){
+        len=proc_read(vinode[id].inode, fildes[fd].offset, buf)
+        fildes[fd].offset+=len;
+    }
     return len;
 }
 ssize_t vfs_write(int fd, void *buf, size_t nbyte){
