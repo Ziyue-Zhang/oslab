@@ -111,10 +111,10 @@ static void os_init() {
   //_vme_init(pmm->alloc, pmm->free);
   dev->init();
   vfs->init();
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty1");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty2");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty3");
-  kmt->create(pmm->alloc(sizeof(task_t)), "print", terminal_task, "tty4");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print1", terminal_task, "tty1");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print2", terminal_task, "tty2");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print3", terminal_task, "tty3");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print4", terminal_task, "tty4");
   //create_threads();
 }
 
