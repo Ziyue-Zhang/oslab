@@ -186,7 +186,7 @@ void idle(void *arg){
    task->id=i;
    task->cpu=i%_ncpu();
    tasks[i]=task;
-   tasks->proc=proc_add(name);
+   task->proc=proc_add(name);
    //printf("%d\n",i);
    //printf("create %s in cpu%d\n",tasks[i]->name,tasks[i]->cpu);
    kmt_spin_unlock(&LK);
