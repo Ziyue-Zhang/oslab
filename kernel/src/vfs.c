@@ -328,6 +328,7 @@ int vfs_mkdir(const char *path){
     temp[i+1]='\0';
     int fa=vinode_find(temp);
     int id=vinode_adddir(fa,DIR,name,VFS,NULL);
+    printf("%s\n",vinode[id].path);
     return id;
 }
 int vfs_rmdir(const char *path){
