@@ -25,7 +25,13 @@ void get_path(char *pwd, char *path){
   }
 }
 void command_ls(char *line){
-  int id=vfs_lookup(pwd);
+  path2[0]='\0';
+  strcpy(path2,pwd);
+  if(strcmp(path2,"/")!=0){
+    int i=strlen(path2)-1;
+    path2[i]='\0';
+  }
+  int id=vfs_lookup(path2);
   int son=vinode[id].son;
   int n=0;
   while(1){
