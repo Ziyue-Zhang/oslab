@@ -459,6 +459,28 @@ int vfs_rmdir(const char *path){
     return 0;
 }
 int vfs_link(const char *oldpath, const char *newpath){
+    char temp[200];
+    temp[0]='\0';
+    strcpy(temp,oldpath);
+    int old=vinode_find(temp);
+    if(old==-1){
+        return -1;
+    }
+    temp[0]='\0';
+    strcpy(temp,newpath);
+    int new=vinode_find(temp);
+    if(new==-1){
+        return -1;
+    }
+    vinode[old].link=1;
+    vinode[old].link_inode=new;
+    int id=old;
+    while(1){
+        vinode[id].link_head=old;
+        if(vinode[id].link_inode==id)
+            break;
+        id=vinode[id].link_inode;
+    }
     return 0;
 }
 int vfs_unlink(const char *path){
