@@ -1,4 +1,4 @@
-#include<vfs.h>
+#include<proc.h>
 
 char pwd[200]="/";
 char path1[200];
@@ -287,8 +287,32 @@ void command_cat(char *line, char *text){
     n+=sprintf(text+n, "this is a dir, cat fail!\n",path1);
   }
   else if(vinode[id].filesystem==PROC){
-    proc_read(vinode[id].inode,0,text);
-    n+=sprintf(text+n, "\n");
+    //proc_read(vinode[id].inode,0,text);
+    id=vinode[id].inode;
+    if(strcmp(procfs[id].name,"cpuinfo")==0){
+        n+=sprintf(text+n, "\ncpuinfo:\n");
+        for(int i=0;i<_ncpu();i++){
+            int j=jobs[i];
+            n+=sprintf(text+n, "pid:%d\n",j);
+            n+=sprintf(text+n, "name:%s\n",procfs[j].name);
+            n+=sprintf(text+n, "cpu_number:%d\n\n",procfs[j].cpu);
+        }
+    }
+    else if(strcmp(procfs[id].name,"meminfo")==0){
+        n+=sprintf(text+n, "\nmeminfo:\n");
+       n+=sprintf(text+n, "using mem: %d b\n",use_mem);
+        n+=sprintf(text+n, "free mem: %d b\n",(int)(tot_mem-use_mem));
+        n+=sprintf(text+n, "tot mem: %d b\n",tot_mem);
+    }
+    else{
+        n+=sprintf(text+n, "\ntaskinfo:\n");
+        n+=sprintf(text+n, "pid:%d\n",id);
+        n+=sprintf(text+n, "name:%d\n",procfs[id].name);
+        n+=sprintf(text+n, "cpu_number:%d\n",procfs[id].cpu);
+        n+=sprintf(text+n, "mem:%d\n",procfs[id].mem);
+        n+=sprintf(text+n, "cpu_time:%d\n",procfs[id].time);
+    }
+    //n+=sprintf(text+n, "\n");
   }
 }
 void terminal_task(void *name){
