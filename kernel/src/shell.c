@@ -186,6 +186,51 @@ void command_rmdir(char *line, char *text){
   }
 }
 void command_link(char *line, char *text){
+  int i=0;
+  int n=0;
+  while(line[i]){
+    if(line[i]==' ')
+      break;
+    i++;
+  }
+  if(line[i]=='\0'){
+    sprintf(text, "\n");
+    return;
+  }
+  i++;
+  int j=i;
+  while(line[j]){
+    if(line[j]==' ')
+      break;
+    j++;
+  }
+  char temp[200];
+  strncpy(temp,line+i,j-i);
+  sprintf(text, "%s\n",temp);
+  /*for(int j=i;line[j]!='\0';j++){
+    if(line[j]=='/'){
+      sprintf(text, "dir name can't have '/'!\n");
+      return;
+    }
+  }
+  int j=strlen(line)-1;
+  if(line[j]=='/'){
+    line[j]='\0';
+  }
+  path2[0]='\0';
+  strcpy(path2,pwd);
+  strcat(path2,line+i);
+  //printf("%s\n",path2);
+  int mode=vfs_rmdir(path2);
+  if(mode==0){
+    n+=sprintf(text+n, "remove %s successful!\n",line+i);
+  }
+  else if(mode==1){
+    n+=sprintf(text+n, "Can't find %s, remove it fail!\n",line+i);
+  }
+  else if(mode==2){
+    n+=sprintf(text+n, "%s isn't a dir, remove it fail!\n",line+i);
+  }*/
 }
 void command_unlink(char *line, char *text){
 }
@@ -219,10 +264,10 @@ void terminal_task(void *name){
       command_rmdir(line,text); 
     }
     else if(strncmp(line,"link",strlen("link"))==0){
-      command_rmdir(line,text); 
+      command_link(line,text); 
     }
     else if(strncmp(line,"unlink",strlen("unlink"))==0){
-      command_rmdir(line,text); 
+      command_unlink(line,text); 
     }
     else if(strncmp(line,"echo",strlen("echo"))==0){
       sprintf(text, "%s\n", line+5); 
