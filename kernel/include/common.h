@@ -24,6 +24,7 @@ struct task {
     int cpu;
     int id;
     int state;
+    proc_t * proc;
     //struct task* next; //using in semaphere
     //long long align;    //align
     file_t *fildes[NOFILE];

@@ -391,6 +391,7 @@ static void pmm_init() {
 static void *kalloc(size_t size) {
   kmt->spin_lock(&alc);
   void *ret = my_alloc(size);
+	proc_mem(size,0);
 	kmt->spin_unlock(&alc);
   //unlock(&alloc_lock);
   return ret;
