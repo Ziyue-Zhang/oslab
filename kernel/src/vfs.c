@@ -209,8 +209,10 @@ int vinode_find(char *path){
         }*/
         name[k]='\0';
         i=j;
-        printf("%s\n",name);
+        //printf("%s\n",name);
         id=vinode[id].son;
+        if(id==0)
+            id=vinode[id].son;
         while(id!=-1){
             if(strcmp(vinode[id].name,name)==0)
                 break;
