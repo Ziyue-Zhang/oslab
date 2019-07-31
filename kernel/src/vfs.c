@@ -30,6 +30,7 @@ int vinode_setroot(){
     vinode[id].nxt=-1;
     vinode[id].son=dot;
     vinode[id].link=0;
+    vinode[id].link_head=-1;
     vinode[id].link_inode=id;
     vinode[id].link_count=1;
     vinode[id].filesystem=VFS;
@@ -40,6 +41,7 @@ int vinode_setroot(){
     vinode[dot].nxt=dotdot;
     vinode[dot].son=id;
     vinode[dot].link=0;
+    vinode[dot].link_head=-1;
     vinode[dot].link_inode=dot;
     vinode[dot].link_count=1;
     vinode[dot].filesystem=VFS;
@@ -50,6 +52,7 @@ int vinode_setroot(){
     vinode[dotdot].nxt=-1;
     vinode[dotdot].son=id;
     vinode[dotdot].link=0;
+    vinode[dotdot].link_head=-1;
     vinode[dotdot].link_inode=dotdot;
     vinode[dotdot].link_count=1;
     vinode[dotdot].filesystem=VFS;
@@ -65,6 +68,7 @@ void vinode_setdot(int this_id, int dot, int dotdot, int fstype, filesystem_t* f
     vinode[dot].nxt=dotdot;
     vinode[dot].son=this_id;
     vinode[dot].link=0;
+    vinode[dot].link_head=-1;
     vinode[dot].link_inode=dot;
     vinode[dot].link_count=1;
     vinode[dot].filesystem=fstype;
@@ -79,6 +83,7 @@ void vinode_setdotdot(int fa_id, int dot, int dotdot, int fstype, filesystem_t* 
     vinode[dotdot].nxt=-1;
     vinode[dotdot].son=fa_id;
     vinode[dotdot].link=0;
+    vinode[dotdot].link_head=-1;
     vinode[dotdot].link_inode=dotdot;
     vinode[dotdot].link_count=1;
     vinode[dotdot].filesystem=fstype;
@@ -98,6 +103,7 @@ void vinode_setdir(int id, int dot, int dotdot, char *name, int fstype, filesyst
     vinode[id].nxt=-1;
     vinode[id].son=-1;
     vinode[id].link=0;
+    vinode[id].link_head=-1;
     vinode[id].link_inode=id;
     vinode[id].link_count=1;
     vinode[id].filesystem=fstype;
@@ -114,6 +120,7 @@ void vinode_setfile(int id, int dot, int dotdot, char *name, int fstype, filesys
     vinode[id].nxt=-1;
     vinode[id].son=-1;
     vinode[id].link=0;
+    vinode[id].link_head=-1;
     vinode[id].link_inode=id;
     vinode[id].link_count=1;
     vinode[id].filesystem=fstype;
@@ -382,7 +389,7 @@ int vfs_mkdir(const char *path){
 int vfs_rmdir(const char *path){
     char temp[200];
     strcpy(temp,path);
-    printf("%s\n",path);
+    //printf("%s\n",path);
     int this=vinode_find(temp);
     if(this==-1){
         return 1;
@@ -390,21 +397,65 @@ int vfs_rmdir(const char *path){
     if(vinode[this].type!=DIR){
         return 2;
     }
-    temp[0]='\0';
-    strcpy(temp,vinode[this].path);
-    int i=strlen(temp)-1;
-    if(temp[i]=='/')
-        temp[i]='\0';
-    i=strlen(temp)-1;
-    while(1){
+    if(vinode[this].link==0){
+        temp[0]='\0';
+        strcpy(temp,vinode[this].path);
+        int i=strlen(temp)-1;
         if(temp[i]=='/')
-            break;
-        i--;
-    }
-    temp[i]='\0';
-    int fa=vinode_find(temp);
+           temp[i]='\0';
+        i=strlen(temp)-1;
+        while(1){
+           if(temp[i]=='/')
+               break;
+            i--;
+        }
+        temp[i]='\0';
+        int fa=vinode_find(temp);
     //printf("%d %d\n",fa,this);
-    vinode_deldir(fa, this);
+        vinode_deldir(fa, this);
+    }
+    else{
+        this=vinode[this].link_head;
+        while(1){
+            if(vinode[this].type!=FREE){
+                if(vinode[this].type==DIR){
+                    temp[0]='\0';
+                    strcpy(temp,vinode[this].path);
+                    int i=strlen(temp)-1;
+                    if(temp[i]=='/')
+                    temp[i]='\0';
+                    i=strlen(temp)-1;
+                    while(1){
+                    if(temp[i]=='/')
+                        break;
+                    i--;
+                    }
+                    temp[i]='\0';
+                    int fa=vinode_find(temp);
+                    vinode_deldir(fa, this);
+                }
+                else if(vinode[this].type==FILE){
+                    temp[0]='\0';
+                    strcpy(temp,vinode[this].path);
+                    int i=strlen(temp)-1;
+                    if(temp[i]=='/')
+                    temp[i]='\0';
+                    i=strlen(temp)-1;
+                    while(1){
+                    if(temp[i]=='/')
+                        break;
+                    i--;
+                    }
+                    temp[i]='\0';
+                    int fa=vinode_find(temp);
+                    vinode_delfile(fa, this);
+                }
+            }
+            if(vinode[this].link_inode==this)
+                break;
+            this=vinode[this].link_inode;
+        }
+    }
     return 0;
 }
 int vfs_link(const char *oldpath, const char *newpath){
