@@ -237,8 +237,8 @@ int vinode_find(char *path){
         if(id==-1)
             return -1;
         //printf("%s\n",name);
-        while(vinode[son_id].link_inode!=son_id){
-            son_id=vinode[son_id].link_inode;
+        while(vinode[id].link_inode!=id){
+            id=vinode[id].link_inode;
         }
     }
     return id;
