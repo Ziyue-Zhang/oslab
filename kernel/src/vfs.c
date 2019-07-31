@@ -82,6 +82,8 @@ void vinode_setdotdot(int fa_id, int dot, int dotdot, int fstype, filesystem_t* 
 void vinode_setdir(int id, int dot, int dotdot, char *name, int fstype, filesystem_t* fs){
     strcpy(vinode[id].name,name);
     strcpy(vinode[id].path,vinode[dot].path);
+    printf("%d\n",dot);
+    printf("%s\n",vinode[dot].path);
     int len=strlen(vinode[id].path);
     vinode[id].path[len-1]='\0';
     strcat(vinode[id].path,name);
@@ -327,8 +329,9 @@ int vfs_mkdir(const char *path){
     strcpy(name,temp+i+1);
     temp[i+1]='\0';
     int fa=vinode_find(temp);
+    printf("%s\n",vinode[fa].path);
     int id=vinode_adddir(fa,DIR,name,VFS,NULL);
-    printf("%s\n",vinode[id].path);
+    //printf("%s\n",vinode[id].path);
     return id;
 }
 int vfs_rmdir(const char *path){
