@@ -44,7 +44,7 @@ int ext2_read(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf){
 }
 
 int ext2_write(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf){
-    ext2_t* ext2fs=(ext2_t*)fs;
+    //ext2_t* ext2fs=(ext2_t*)fs;
     /*for(int idx=inode*4,i=0;i<len;i++,idx++){
         ext2fs->block_used[idx]=1;
     }*/
@@ -54,7 +54,7 @@ int ext2_write(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf)
         len=ext2fs->block_size-offset;
     printf("nms\n");
     //ext2fs->dev=dev_lookup("ramdisk0");
-    ext2fs->dev->ops->write(ext2fs->dev,start,buf,len);
+    fs->dev->ops->write(ext2fs->dev,start,buf,len);
     return len;
 }
 

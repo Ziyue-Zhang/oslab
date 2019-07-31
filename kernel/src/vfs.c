@@ -353,9 +353,9 @@ int vfs_dev(const char* name, device_t* dev, size_t size,int (*init)(filesystem_
 	int id = fs_alloc();
 	strcpy(mount_table[id].name, name);
 	mount_table[id].myfs = pmm->alloc(size);
-    char temp[80];
-    strcpy(temp,name);
-	mount_table[id].dev = dev_lookup(temp);
+    //char temp[80];
+    //strcpy(temp,name);
+	mount_table[id].dev = dev;
 	mount_table[id].init = init;
 	return id;
 }
