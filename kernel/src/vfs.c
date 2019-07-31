@@ -390,7 +390,7 @@ int vfs_rmdir(const char *path){
         return 2;
     }
     temp[0]='\0';
-    tsrcpy(temp,vinode[this].path);
+    strcpy(temp,vinode[this].path);
     int i=strlen(temp)-1;
     if(temp[i]=='/')
         temp[i]='\0';
