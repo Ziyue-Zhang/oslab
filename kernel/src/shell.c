@@ -206,7 +206,7 @@ void command_link(char *line, char *text){
   }
   char temp[200];
   strncpy(temp,line+i,j-i);
-  sprintf(text, "%s\n",temp);
+  n+=sprintf(text+n, "%s\n",temp);
   /*for(int j=i;line[j]!='\0';j++){
     if(line[j]=='/'){
       sprintf(text, "dir name can't have '/'!\n");
