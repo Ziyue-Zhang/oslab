@@ -26,6 +26,8 @@ int tkfree[32];
  static void kmt_sem_wait(sem_t *sem);
  static void kmt_sem_signal(sem_t *sem);
 
+extern void *proc_add();
+extern void proc_time();
 spinlock_t LK,LK2;
 spinlock_t tp, alc;
 int ncpu;
@@ -76,6 +78,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
     return context;
   }*/
   //kmt_spin_lock(&LK);
+  task_t *temp1=current;
   if(current && current->state==RUNNING){
     current->state=RUNNABLE;
   }
@@ -98,6 +101,8 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
    //printf("%s\n",current->name);
   current->state=RUNNING;
   //kmt_spin_unlock(&LK);
+  task_t *temp2=current;
+  void proc_time(temp1->proc,temp2->proc);
   return &current->context;
 }
 void idle(void *arg){
@@ -181,6 +186,7 @@ void idle(void *arg){
    task->id=i;
    task->cpu=i%_ncpu();
    tasks[i]=task;
+   tasks->proc=proc_add(name);
    //printf("%d\n",i);
    //printf("create %s in cpu%d\n",tasks[i]->name,tasks[i]->cpu);
    kmt_spin_unlock(&LK);
