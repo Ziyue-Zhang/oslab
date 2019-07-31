@@ -141,7 +141,7 @@ void command_mkdir(char *line, char *text){
   strcpy(path2,pwd);
   strcat(path2,line+i);
 
-  n+=sprintf(line+n, "%s\n",path2);
+  n+=sprintf(text+n, "%s\n",path2);
 }
 void command_rmdir(char *line){
   path2[0]='\0';
