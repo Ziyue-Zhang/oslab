@@ -37,8 +37,9 @@ void proc_time(proc_t *old, proc_t *new){
         jobs[new->cpu]=new->inode;
     }
 }
-int proc_build(char *path){
-    
+int proc_build(int fa){
+
+
 }
 int proc_init(filesystem_t* fs, const char* name, device_t *dev){
     proc_num=0;
@@ -66,7 +67,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
         return 0;
     int k=0;
     if(id==2){
-        k+=sprintf(buf+k,"\ncpuinfo:\n");
+        k+=sprintf(buf+k,"cpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
             int j=procfs[jobs[i]].inode;
             k+=sprintf(buf+k,"pid:%d\n",j-4);
@@ -75,13 +76,13 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
         }
     }
     else if(id==3){
-        k+=sprintf(buf+k,"\nmeminfo:\n");
+        k+=sprintf(buf+k,"meminfo:\n");
         k+=sprintf(buf+k,"using mem: %d b\n",use_mem);
         k+=sprintf(buf+k,"free mem: %d b\n",tot_mem-use_mem);
         k+=sprintf(buf+k,"tot mem: %d b\n",tot_mem);
     }
     else{
-        k+=sprintf(buf+k,"\ntaskinfo:\n");
+        k+=sprintf(buf+k,"taskinfo:\n");
         k+=sprintf(buf+k,"pid:%d\n",id-4);
         k+=sprintf(buf+k,"name:%d\n",procfs[id].name);
         k+=sprintf(buf+k,"cpu_number:%d\n",procfs[id].cpu);
