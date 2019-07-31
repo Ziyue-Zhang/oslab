@@ -286,7 +286,7 @@ void command_cat(char *line, char *text){
   else if(vinode[id].type==DIR){
     n+=sprintf(text+n, "this is a dir, cat fail!\n",path1);
   }
-  else if(vinode[id].type==PROC){
+  else if(vinode[id].filesystem==PROC){
     printf("nmsl\n");
     proc_read(vinode[id].inode,0,text);
   }
