@@ -29,7 +29,7 @@
 typedef struct Vinode{
   char path[200];
   char name[80];
-  //int inode;
+  int inode;
   int dotdot;
   int dot;
   int nxt;
