@@ -293,7 +293,7 @@ void command_cat(char *line, char *text){
     char buf[80];
     de->ops->read(de,start,buf,vinode[id].size);
     printf("%s",buf);*/
-    char temp[40];
+    char temp[4096];
     ext2_read(&mount_table[r0],id,0,vinode[id].size,temp);
     //temp[vinode[id].size]='\0';
     //printf("%d\n",strlen(temp));
