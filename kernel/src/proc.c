@@ -38,6 +38,16 @@ void proc_time(proc_t *old, proc_t *new){
     }
 }
 int proc_build(int fa){
+    for(int i=2;i<proc_num;i++){
+        if(i<4){
+            int id =vinode_adddir(fa,DIR,procfs[i].name,PROC,NULL);
+            vinode[id].inode=i;
+        }
+        else{
+            int id=vinode_addfile(fa,FILE,procfs[i].name,PROC,NULL);
+            vinode[id].inode=i;
+        }
+    }
     return 0;
 
 }
