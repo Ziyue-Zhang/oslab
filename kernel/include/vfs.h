@@ -53,7 +53,14 @@ typedef struct fileroot{
 filesystem_t mount_table[16];
 vinode_t vinode[VINODE_SIZE];
 file_t fildes[FILE_SIZE];
-
+typedef struct ext2{
+	uint32_t size;
+	uint32_t block_num;
+	uint32_t block_size;
+	char block_used[1024];
+	device_t *dev;
+	char fsname[80];
+}ext2_t;
 extern ssize_t tty_write(device_t *dev, off_t offset, const void *buf, size_t count);
 
 void vinode_free(int idx);
@@ -101,6 +108,5 @@ extern int proc_build();
 extern int proc_init();
 extern int proc_read();
 extern int ext2_init();
-typedef struct ext2 ext2_t;
 
 #endif
