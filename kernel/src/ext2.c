@@ -65,6 +65,15 @@ int ext2_delete(filesystem_t *fs, int inode){
     return 1;
 }
 
+int ext2_build(int fa){
+    int id=vinode_addfile(fa, FILE, "a.txt", EXT2, &mount_table[r0]);
+    char buf[80]={"hello\n"};
+    ext2_write(&mount_table[r0],id,0,strlen(buf),buf);
+    id=vinode_addfile(fa, FILE, "hello.cpp", EXT2, &mount_table[r0]);
+    char buf2[200]={"#include<iostream>\nusing namespace std;\nint main(){\n    cout<<\"hello world\"<<endl;\n    return 0;\n}\n"};
+    ext2_write(&mount_table[r0],id,0,strlen(buf2),buf2);
+}
+
 int ext2_clear(filesystem_t *fs, int inode){
     ext2_t* ext2fs=(ext2_t*)fs->myfs;
     const char buf[4096]={'\0'};
@@ -72,5 +81,6 @@ int ext2_clear(filesystem_t *fs, int inode){
     ext2fs->dev->ops->write(ext2fs->dev,start,buf,ext2fs->block_size);
     return 1;
 }
+
 
 
