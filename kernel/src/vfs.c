@@ -365,10 +365,17 @@ void vfs_init(){
     proc_init(NULL,"proc",NULL);
     int proc_file=vinode_adddir(0,DIR,"proc",PROC,NULL);
     int r0=vfs_dev("ramdisk0",dev_lookup("ramdisk0"),sizeof(ext2_t),ext2_init);
-    //int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
-    //int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
+    int r1=vfs_dev("ramdisk1",dev_lookup("ramdisk1"),sizeof(ext2_t),ext2_init);
+    int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
+    int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
 
     proc_build(proc_file);
+    vinode_addfile(dev_file,"ramdisk0",FILE,EXT2,&mount_table[r0]);
+    vinode_addfile(dev_file,"ramdisk1",FILE,EXT2,&mount_table[r1]);
+    vinode_addfile(dev_file,"tty0",FILE,TTY,NULL);
+    vinode_addfile(dev_file,"tty1",FILE,TTY,NULL);
+    vinode_addfile(dev_file,"tty2",FILE,TTY,NULL);
+    vinode_addfile(dev_file,"tty3",FILE,TTY,NULL);
 }
 
 int vfs_lookup(char *path){
