@@ -96,12 +96,18 @@ void command_cd(char *line,char *text){
     //printf("%s\n",pwd);
     //printf("%s\n",line+i);
     //printf("%s\n",path1);
-    if(vfs_lookup(path1)!=-1){
-      pwd[0]='\0';
-      strcpy(pwd,path1);
-      strcat(pwd,"/");
-      sprintf(text, "\n");
-      return;
+    int id=vfs_lookup(path1);
+    if(id!=-1){
+      if(vinode[id].type==DIR){
+        pwd[0]='\0';
+        strcpy(pwd,vinode[id].path);
+        sprintf(text, "\n");
+        return;
+      }
+      else{
+        sprintf(text, "Not a directory\n");
+        return;
+      }
     }
     sprintf(text, "wrong path!\n");
   }
