@@ -76,7 +76,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
     printf("nmsl");
     int k=0;
     if(strcmp(procfs[id].name,"cpuinfo")==0){
-        printf"cpuinfo:\n")
+        printf("cpuinfo:\n")
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
             printf("pid:%d\n",j);
