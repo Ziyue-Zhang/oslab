@@ -347,6 +347,8 @@ void vfs_init(){
     vinode_setroot();
     proc_init(NULL,"proc",NULL);
     vinode_adddir(0,DIR,"proc",PROC,NULL);
+    vinode_adddir(0,DIR,"dev",VFS,NULL);
+    vinode_adddir(0,DIR,"mnt",VFS,NULL);
 }
 
 int vfs_lookup(char *path){
