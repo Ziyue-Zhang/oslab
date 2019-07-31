@@ -453,7 +453,10 @@ int vfs_rmdir(const char *path){
             }
             if(vinode[this].link_inode==this)
                 break;
+            int q=this;
             this=vinode[this].link_inode;
+            vinode[q].link=0;
+            vinode[q].link_inode=q;
         }
     }
     return 0;
