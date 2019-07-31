@@ -35,7 +35,7 @@ void command_ls(char *line){
   int son=vinode[id].son;
   int n=0;
   while(1){
-      if(vinode[son].link_node==son)
+      if(vinode[son].link_inode==son)
         n+=sprintf(line+n, "%s",vinode[son].name);
       else{
         n+=sprintf(line+n, "%s -> %s",vinode[son].name,vinode[vinode[son].link_inode].name);
