@@ -364,6 +364,7 @@ void vfs_init(){
     vinode_setroot();
     proc_init(NULL,"proc",NULL);
     int proc_file=vinode_adddir(0,DIR,"proc",PROC,NULL);
+    int r0=vfs_dec("ramdisk0",dev_lookup("ramdisk0"),sizeof(ext2_t),ext2_init);
     //int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
     //int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
 
