@@ -13,7 +13,7 @@
 #define FILE 1
 #define DIR 2
 
-#define PROC 0
+#define PROC 4
 #define VFS 1
 #define EXT2 2
 #define TTY 3

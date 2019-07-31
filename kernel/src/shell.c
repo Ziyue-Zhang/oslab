@@ -279,6 +279,7 @@ void command_cat(char *line, char *text){
   strcat(path1,temp);
   int id=vinode_find(path1);
   printf("%d\n",id);
+  printf("%d\n",vinode[id].type);
   if(id==-1){
     n+=sprintf(text+n, "wrong path %s, cat fail!\n",path1);
   }
