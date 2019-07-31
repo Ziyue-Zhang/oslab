@@ -143,7 +143,7 @@ void command_mkdir(char *line, char *text){
   vfs_mkdir(path2);
   n+=sprintf(text+n, "make %s successful!\n",line+i);
 }
-void command_rmdir(char *line){
+void command_rmdir(char *line, char *text){
   int i=0;
   int n=0;
   while(line[i]){
