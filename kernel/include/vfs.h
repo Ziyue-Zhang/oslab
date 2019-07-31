@@ -101,6 +101,6 @@ extern int proc_build();
 extern int proc_init();
 extern int proc_read();
 extern int ext2_init();
-extern ext2_t;
+typedef struct ext2 ext2_t;
 
 #endif
