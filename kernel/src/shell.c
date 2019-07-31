@@ -35,7 +35,11 @@ void command_ls(char *line){
   int son=vinode[id].son;
   int n=0;
   while(1){
-      n+=sprintf(line+n, "%s",vinode[son].name);
+      if(vinode[son].link_node==son)
+        n+=sprintf(line+n, "%s",vinode[son].name);
+      else{
+        n+=sprintf(line+n, "%s -> %s",vinode[son].name,vinode[vinode[son].link_inode].name);
+      }
       if(vinode[son].nxt==-1)
         break;
       n+=sprintf(line+n, "    ");
@@ -217,10 +221,10 @@ void command_link(char *line, char *text){
   strcat(path2,temp2);
   int mode=vfs_link(path1,path2);
   if(mode==-2){
-    n+=sprintf(text+n, "wrong oldpath, link fail!\n");
+    n+=sprintf(text+n, "wrong oldpath %s, link fail!\n",path1);
   }
   else if(mode==-1){
-    n+=sprintf(text+n, "wrong newpath, link fail!\n");
+    n+=sprintf(text+n, "wrong newpath %s, link fail!\n",path2);
   }
   else  
     n+=sprintf(text+n, "link %s -> %s successful!\n",path1,path2);
