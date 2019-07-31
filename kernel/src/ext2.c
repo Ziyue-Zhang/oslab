@@ -36,7 +36,7 @@ int ext2_read(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf){
         *buf='\0';
         return 0;
     }*/
-    fs->dev=dev_lookup("ramdisk0");
+    //fs->dev=dev_lookup("ramdisk0");
     int start=inode*4096+offset;
     if(len+offset>4096)
         len=4096-offset;
