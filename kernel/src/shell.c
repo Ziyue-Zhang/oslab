@@ -228,32 +228,35 @@ void command_link(char *line, char *text){
   }
   else  
     n+=sprintf(text+n, "link %s -> %s successful!\n",path1,path2);
-  /*for(int j=i;line[j]!='\0';j++){
-    if(line[j]=='/'){
-      sprintf(text, "dir name can't have '/'!\n");
-      return;
-    }
-  }
-  int j=strlen(line)-1;
-  if(line[j]=='/'){
-    line[j]='\0';
-  }
-  path2[0]='\0';
-  strcpy(path2,pwd);
-  strcat(path2,line+i);
-  //printf("%s\n",path2);
-  int mode=vfs_rmdir(path2);
-  if(mode==0){
-    n+=sprintf(text+n, "remove %s successful!\n",line+i);
-  }
-  else if(mode==1){
-    n+=sprintf(text+n, "Can't find %s, remove it fail!\n",line+i);
-  }
-  else if(mode==2){
-    n+=sprintf(text+n, "%s isn't a dir, remove it fail!\n",line+i);
-  }*/
 }
 void command_unlink(char *line, char *text){
+  int i=0;
+  int n=0;
+  while(line[i]){
+    if(line[i]==' ')
+      break;
+    i++;
+  }
+  if(line[i]=='\0'){
+    sprintf(text, "\n");
+    return;
+  }
+  i++;
+  char temp[200];
+  strcpy(temp,line+i);
+  if(temp[strlen(temp)-1]=='/')
+    temp[strlen(temp)-1]='\0';
+  strcpy(path1,pwd);
+  strcat(path1,temp);
+  int mode=vfs_unlink(path1);
+  if(mode==-1){
+    n+=sprintf(text+n, "wrong path %s, unlink fail!\n",path1);
+  }
+  else if(mode==0){
+    n+=sprintf(text+n, "no link exists, nulink fail!\n");
+  }
+  else  
+    n+=sprintf(text+n, "unlink %s successful!\n",path1);
 }
 void terminal_task(void *name){
   device_t *tty = dev_lookup(name);

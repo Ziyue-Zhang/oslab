@@ -416,7 +416,7 @@ int vfs_rmdir(const char *path){
     }
     else{
         this=vinode[this].link_head;
-        printf("%s\n",vinode[this].name);
+        //printf("%s\n",vinode[this].name);
         while(1){
             if(vinode[this].type!=FREE){
                 if(vinode[this].type==DIR){
