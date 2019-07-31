@@ -317,6 +317,13 @@ int vfs_unmount(const char *path){
 int vfs_mkdir(const char *path){
     char temp[200];
     strcpy(temp, path);
+    int i=strlen(temp)-1;
+    while(1){
+        if(temp[i]=='\')
+            break;
+        i--;
+    }
+    
     int fa=vinode_find(temp);
     int id=vinode_adddir(fa,DIR,NULL,VFS,NULL);
     return id;
