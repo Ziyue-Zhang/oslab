@@ -17,6 +17,7 @@
 #define VFS 1
 #define EXT2 2
 #define TTY 3
+#define 
 
 #define O_RDONLY 0
 #define O_WRONLY 1
@@ -97,5 +98,7 @@ int vfs_close(int fd);
 
 extern int ext2_read();
 extern int ext2_write();
+extern int proc_build();
+extern int proc_init();
 
 #endif

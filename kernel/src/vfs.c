@@ -339,16 +339,17 @@ int fd_open(int inode){
     fildes[fd].offset=0;
     return fd;
 }
-extern int proc_init();
+
 void vfs_init(){
     memset(vinode,0,sizeof(vinode));
     memset(fildes,0,sizeof(fildes));
     memset(mount_table,0,sizeof(mount_table));
-    vinode_setroot();
+    int root=vinode_setroot();
     proc_init(NULL,"proc",NULL);
-    vinode_adddir(0,DIR,"proc",PROC,NULL);
-    vinode_adddir(0,DIR,"dev",VFS,NULL);
-    vinode_adddir(0,DIR,"mnt",VFS,NULL);
+    int proc_file=vinode_adddir(0,DIR,"proc",PROC,NULL);
+    int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
+    int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
+    proc_build()
 }
 
 int vfs_lookup(char *path){

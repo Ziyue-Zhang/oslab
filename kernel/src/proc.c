@@ -37,6 +37,9 @@ void proc_time(proc_t *old, proc_t *new){
         jobs[new->cpu]=new->inode;
     }
 }
+int proc_build(char *path){
+    
+}
 int proc_init(filesystem_t* fs, const char* name, device_t *dev){
     proc_num=0;
     use_mem=0;
