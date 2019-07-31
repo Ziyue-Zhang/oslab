@@ -31,15 +31,15 @@ int ext2_lookup(filesystem_t *fs, const char *path, int flags){
 }
 
 int ext2_read(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf){
-    ext2_t* ext2fs=(ext2_t*)fs->myfs;
+    /*ext2_t* ext2fs=(ext2_t*)fs->myfs;
     if(ext2fs->block_used[inode]==0){
         *buf='\0';
         return 0;
-    }
+    }*/
     int start=inode*4096+offset;
-    if(len+offset>ext2fs->block_size)
-        len=ext2fs->block_size-offset;
-    ext2fs->dev->ops->read(ext2fs->dev,start,buf,len);
+    if(len+offset>4096)
+        len=4096-offset;
+    fs->dev->ops->read(fs->dev,start,buf,len);
     return len;
 }
 
@@ -52,7 +52,6 @@ int ext2_write(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf)
     int start=inode*4096+offset;
     if(len+offset>4096)
         len=4096-offset;
-    printf("nms\n");
     //ext2fs->dev=dev_lookup("ramdisk0");
     fs->dev->ops->write(fs->dev,start,buf,len);
     return len;
@@ -68,14 +67,17 @@ int ext2_delete(filesystem_t *fs, int inode){
 }
 
 int ext2_build(int fa){
-    printf("nmsl\n");
     int id=vinode_addfile(fa, FILE, "a.txt", EXT2, &mount_table[r0]);
     char buf[80]={"hello\n"};
-    ext2_write(&mount_table[r0],id,0,strlen(buf),buf);
+    int len=ext2_write(&mount_table[r0],id,0,strlen(buf),buf);
+    vinode[id].size=len;
+    char temp[80];
+    ext2_read(&mount_table[r0],id,vinode[id].size,temp);
+    printf("%s\n",temp)
     id=vinode_addfile(fa, FILE, "hello.cpp", EXT2, &mount_table[r0]);
-    //char buf2[200]={"#include<iostream>\nusing namespace std;\nint main(){\n    cout<<\"hello world\"<<endl;\n    return 0;\n}\n"};
-    //ext2_write(&mount_table[r0],id,0,strlen(buf2),buf2);
-    printf("%d\n",id);
+    char buf2[200]={"#include<iostream>\nusing namespace std;\nint main(){\n    cout<<\"hello world\"<<endl;\n    return 0;\n}\n"};
+    len=ext2_write(&mount_table[r0],id,0,strlen(buf2),buf2);
+    vinode[id].size=len;
     return fa;
 }
 
