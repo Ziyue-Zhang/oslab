@@ -288,7 +288,7 @@ void command_cat(char *line, char *text){
   }
   else if(vinode[id].filesystem==EXT2){
     printf("%d %d\n",id,vinode[id].size);
-    device_t de=dev_lookup("ramdisk0");
+    device_t *de=dev_lookup("ramdisk0");
     int start=id*4096;
     de->ops->read(de,start,text,vinode[id].size);
   }
