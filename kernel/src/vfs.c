@@ -376,6 +376,7 @@ void vfs_init(){
     vinode_addfile(dev_file,FILE,"tty2",TTY,NULL);
     vinode_addfile(dev_file,FILE,"tty3",TTY,NULL);
     vinode_addfile(dev_file,FILE,"tty4",TTY,NULL);
+    vfs_mount("/dev/ramdisk1","/mnt");
 }
 
 int vfs_lookup(char *path){
@@ -392,9 +393,15 @@ int vfs_access(const char *path, int mode){
     return -1;
 }
 int vfs_mount(const char *path, filesystem_t *fs){
-    return 0;
+    char temp[200];
+    strcpy(temp,path);
+    int id=vinode_find(temp);
+    return id;
 }
 int vfs_unmount(const char *path){
+    char temp[200];
+    strcpy(temp,path);
+    int id=vinode_find(temp);
     return 0;
 }
 int vfs_mkdir(const char *path){

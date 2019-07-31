@@ -6,13 +6,6 @@
 #include <klib.h>
 
 
-typedef struct ext2_inode{
-    char name[20];
-    char *data;
-    int type;
-    int size;
-}ext2_node_t;
-
 typedef struct ext2_dit{
     char name[20];
     int inode[16];

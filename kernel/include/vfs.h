@@ -61,6 +61,15 @@ typedef struct ext2{
 	device_t *dev;
 	char fsname[80];
 }ext2_t;
+typedef struct ext2_inode{
+    char name[20];
+    int inode;
+    int type;
+    int size;
+    int nxt;
+    int son;
+}ext2_node_t;
+
 extern ssize_t tty_write(device_t *dev, off_t offset, const void *buf, size_t count);
 
 void vinode_free(int idx);
