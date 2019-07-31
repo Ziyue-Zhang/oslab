@@ -77,12 +77,12 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
     if(strcmp(procfs[id].name,"cpuinfo")==0){
         printf("cpu\n");
         k+=sprintf(buf+k,"cpuinfo:\n");
-        for(int i=0;i<_ncpu();i++){
+        /*for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
-            k+=sprintf(buf+k,"pid:%d\n",j-4);
+            k+=sprintf(buf+k,"pid:%d\n",j);
             k+=sprintf(buf+k,"name:%d\n",procfs[j].name);
             k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);
-        }
+        }*/
     }
     else if(strcmp(procfs[id].name,"meminfo")==0){
         printf("mem\n");
@@ -93,7 +93,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
     }
     else{
         k+=sprintf(buf+k,"taskinfo:\n");
-        k+=sprintf(buf+k,"pid:%d\n",id-4);
+        k+=sprintf(buf+k,"pid:%d\n",id);
         k+=sprintf(buf+k,"name:%d\n",procfs[id].name);
         k+=sprintf(buf+k,"cpu_number:%d\n",procfs[id].cpu);
         k+=sprintf(buf+k,"mem:%d\n",procfs[id].mem);
