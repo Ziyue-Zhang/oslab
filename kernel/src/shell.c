@@ -277,7 +277,8 @@ void command_cat(char *line, char *text){
     temp[strlen(temp)-1]='\0';
   strcpy(path1,pwd);
   strcat(path1,temp);
-  int id=vfs_lookup(path1);
+  int id=vfs_find(path1);
+  printf("%d\n",id);
   if(id==-1){
     n+=sprintf(text+n, "wrong path %s, cat fail!\n",path1);
   }
