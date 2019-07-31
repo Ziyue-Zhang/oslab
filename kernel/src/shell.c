@@ -324,7 +324,7 @@ void terminal_task(void *name){
       command_unlink(line,text); 
     }
     else if(strncmp(line,"cat",strlen("cat"))==0){
-      command_unlink(line,text); 
+      command_cat(line,text); 
     }
     else if(strncmp(line,"echo",strlen("echo"))==0){
       sprintf(text, "%s\n", line+5); 
