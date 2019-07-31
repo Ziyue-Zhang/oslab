@@ -12,7 +12,6 @@
 #define EMPTY 0
 #define FILE 1
 #define DIR 2
-#define LINK 3
 
 #define PROC 0
 #define VFS 1
@@ -38,6 +37,8 @@ typedef struct Vinode{
   int type;
   int mode;
   int size;
+  int link
+  int link_head;
   int link_inode;
   int link_count;
   int filesystem;       // vfs read/write/lseek must know it

@@ -29,6 +29,7 @@ int vinode_setroot(){
     vinode[id].dotdot=-1;
     vinode[id].nxt=-1;
     vinode[id].son=dot;
+    vinode[id].link=0;
     vinode[id].link_inode=id;
     vinode[id].link_count=1;
     vinode[id].filesystem=VFS;
@@ -38,6 +39,7 @@ int vinode_setroot(){
     vinode[dot].dotdot=dotdot;
     vinode[dot].nxt=dotdot;
     vinode[dot].son=id;
+    vinode[dot].link=0;
     vinode[dot].link_inode=dot;
     vinode[dot].link_count=1;
     vinode[dot].filesystem=VFS;
@@ -47,6 +49,7 @@ int vinode_setroot(){
     vinode[dotdot].dotdot=dotdot;
     vinode[dotdot].nxt=-1;
     vinode[dotdot].son=id;
+    vinode[dotdot].link=0;
     vinode[dotdot].link_inode=dotdot;
     vinode[dotdot].link_count=1;
     vinode[dotdot].filesystem=VFS;
@@ -61,6 +64,7 @@ void vinode_setdot(int this_id, int dot, int dotdot, int fstype, filesystem_t* f
     vinode[dot].dotdot=dotdot;
     vinode[dot].nxt=dotdot;
     vinode[dot].son=this_id;
+    vinode[dot].link=0;
     vinode[dot].link_inode=dot;
     vinode[dot].link_count=1;
     vinode[dot].filesystem=fstype;
@@ -74,6 +78,7 @@ void vinode_setdotdot(int fa_id, int dot, int dotdot, int fstype, filesystem_t* 
     vinode[dotdot].dotdot=dotdot;
     vinode[dotdot].nxt=-1;
     vinode[dotdot].son=fa_id;
+    vinode[dotdot].link=0;
     vinode[dotdot].link_inode=dotdot;
     vinode[dotdot].link_count=1;
     vinode[dotdot].filesystem=fstype;
@@ -92,6 +97,7 @@ void vinode_setdir(int id, int dot, int dotdot, char *name, int fstype, filesyst
     vinode[id].dotdot=dotdot;
     vinode[id].nxt=-1;
     vinode[id].son=-1;
+    vinode[id].link=0;
     vinode[id].link_inode=id;
     vinode[id].link_count=1;
     vinode[id].filesystem=fstype;
@@ -107,6 +113,7 @@ void vinode_setfile(int id, int dot, int dotdot, char *name, int fstype, filesys
     vinode[id].dotdot=dotdot;
     vinode[id].nxt=-1;
     vinode[id].son=-1;
+    vinode[id].link=0;
     vinode[id].link_inode=id;
     vinode[id].link_count=1;
     vinode[id].filesystem=fstype;
@@ -223,7 +230,7 @@ int vinode_find(char *path){
         if(id==-1)
             return -1;
         //printf("%s\n",name);
-        while(vinode[id].type==LINK){
+        while(vinode[id].type==1){
             id=vinode[id].link_inode;
         }
     }
@@ -382,7 +389,12 @@ int vfs_rmdir(const char *path){
     if(vinode[this].type!=DIR){
         return 2;
     }
+    temp[0]='\0';
+    tsrcpy(temp,vinode[this].path);
     int i=strlen(temp)-1;
+    if(temp[i]=='/')
+        temp[i]='\0';
+    i=strlen(temp)-1;
     while(1){
         if(temp[i]=='/')
             break;
