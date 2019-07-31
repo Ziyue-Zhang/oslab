@@ -76,7 +76,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
     else if(strcmp(procfs[id].name,"meminfo")==0){
         printf("\nmeminfo:\n");
         printf("using mem: %d b\n",use_mem);
-        printf("free mem: %d b\n",int(tot_mem-use_mem));
+        printf("free mem: %d b\n",(int)(tot_mem-use_mem));
         printf("tot mem: %d b\n",tot_mem);
     }
     else{
