@@ -73,7 +73,7 @@ struct filesystem {
   void * myfs;
   int use;
   char name[80];
-  void (*init)(struct filesystem *fs, const char *name, device_t *dev);
+  int (*init)(struct filesystem *fs, const char *name, device_t *dev);
 };
 
 typedef struct inode inode_t;
