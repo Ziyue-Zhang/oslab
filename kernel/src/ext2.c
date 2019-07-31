@@ -68,8 +68,8 @@ int ext2_delete(filesystem_t *fs, int inode){
 int ext2_build(int fa){
     printf("nmsl\n");
     int id=vinode_addfile(fa, FILE, "a.txt", EXT2, &mount_table[r0]);
-    //char buf[80]={"hello\n"};
-    //ext2_write(&mount_table[r0],id,0,strlen(buf),buf);
+    char buf[80]={"hello\n"};
+    ext2_write(&mount_table[r0],id,0,strlen(buf),buf);
     id=vinode_addfile(fa, FILE, "hello.cpp", EXT2, &mount_table[r0]);
     //char buf2[200]={"#include<iostream>\nusing namespace std;\nint main(){\n    cout<<\"hello world\"<<endl;\n    return 0;\n}\n"};
     //ext2_write(&mount_table[r0],id,0,strlen(buf2),buf2);
