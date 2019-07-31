@@ -402,7 +402,7 @@ int vfs_unmount(const char *path){
     char temp[200];
     strcpy(temp,path);
     int id=vinode_find(temp);
-    return 0;
+    return id;
 }
 int vfs_mkdir(const char *path){
     char temp[200];
