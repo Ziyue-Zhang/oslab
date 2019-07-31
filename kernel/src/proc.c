@@ -73,21 +73,21 @@ int proc_dir(filesystem_t* fs, vinode_t *node, int num){
 ssize_t proc_read(int id, uint64_t offset, char *buf){
     int k=0;
     if(strcmp(procfs[id].name,"cpuinfo")==0){
-        printf("cpuinfo:\n");
+        /*printf("cpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
             printf("pid:%d\n",j);
             printf("name:%d\n",procfs[j].name);
-            printf("cpu_number:%d\n",procfs[j].cpu);
-        }
+            printf("cpu_number:%d\n\n",procfs[j].cpu);
+        }*/
 
-        /*k+=sprintf(buf+k,"cpuinfo:\n");
+        k+=sprintf(buf+k,"cpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
             k+=sprintf(buf+k,"pid:%d\n",j);
             k+=sprintf(buf+k,"name:%d\n",procfs[j].name);
             k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);
-        }*/
+        }
     }
     else if(strcmp(procfs[id].name,"meminfo")==0){
         printf("mem\n");
