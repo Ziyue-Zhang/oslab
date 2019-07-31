@@ -397,7 +397,7 @@ int vfs_rmdir(const char *path){
     if(vinode[this].type!=DIR){
         return 2;
     }
-    if(vinode[this].link==0){
+    if(vinode[this].link_head==this){
         temp[0]='\0';
         strcpy(temp,vinode[this].path);
         int i=strlen(temp)-1;
