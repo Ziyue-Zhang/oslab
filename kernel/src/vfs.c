@@ -339,14 +339,14 @@ int fd_open(int inode){
     fildes[fd].offset=0;
     return fd;
 }
-int filesys_alloc() {
+int fs_alloc() {
 	for (int i = 0; i < 16; i++)
 		if (!mount_table[i].use) 
 			return i;
 	return -1;
 }
-int filesys_free(int i) {
-    mount_yable[i].use=0;
+int fs_free(int i) {
+    mount_table[i].use=0;
 	return 0;
 }
 int vfs_dev(const char* name, device_t* dev, size_t size,void (*init)(filesystem_t*, const char*,device_t*)) {
