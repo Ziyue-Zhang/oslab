@@ -1,4 +1,4 @@
-#include<vfs.h>
+#include<proc.h>
 
 char pwd[200]="/";
 char path1[200];
