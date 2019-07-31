@@ -17,6 +17,7 @@ void *proc_add(char *name){
     procfs[id].time=0;
     procfs[id].inode=id;
     strcpy(procfs[id].name,name);
+    printf("nmsl\n");
     return &procfs[id];
 }
 void proc_mem(uint32_t mem_size, int flag){
