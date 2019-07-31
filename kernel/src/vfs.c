@@ -355,7 +355,7 @@ int vfs_dev(const char* name, device_t* dev, size_t size,void (*init)(filesystem
 	mount_table[id].rfs = pmm->alloc(size);
 	mount_table[id].dev = dev;
 	mount_table[id].init = init;
-	return idx;
+	return id;
 }
 void vfs_init(){
     memset(vinode,0,sizeof(vinode));
