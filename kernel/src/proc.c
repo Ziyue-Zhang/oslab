@@ -67,36 +67,27 @@ int proc_dir(filesystem_t* fs, vinode_t *node, int num){
 ssize_t proc_read(int id, uint64_t offset, char *buf){
     int k=0;
     if(strcmp(procfs[id].name,"cpuinfo")==0){
-        /*printf("cpuinfo:\n");
+        printf("cpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
             printf("pid:%d\n",j);
             printf("name:%s\n",procfs[j].name);
             printf("cpu_number:%d\n\n",procfs[j].cpu);
-        }*/
-
-        k+=sprintf(buf+k,"cpuinfo:\n");
-        for(int i=0;i<_ncpu();i++){
-            int j=jobs[i];
-            k+=sprintf(buf+k,"pid:%d\n",j);
-            k+=sprintf(buf+k,"name:%s\n",procfs[j].name);
-            k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);
         }
     }
     else if(strcmp(procfs[id].name,"meminfo")==0){
-        printf("mem\n");
-        k+=sprintf(buf+k,"meminfo:\n");
-        k+=sprintf(buf+k,"using mem: %d b\n",use_mem);
-        k+=sprintf(buf+k,"free mem: %d b\n",tot_mem-use_mem);
-        k+=sprintf(buf+k,"tot mem: %d b\n",tot_mem);
+        printf("meminfo:\n");
+        printf("using mem: %d b\n",use_mem);
+        printf("free mem: %d b\n",tot_mem-use_mem);
+        printf("tot mem: %d b\n",tot_mem);
     }
     else{
-        k+=sprintf(buf+k,"taskinfo:\n");
-        k+=sprintf(buf+k,"pid:%d\n",id);
-        k+=sprintf(buf+k,"name:%d\n",procfs[id].name);
-        k+=sprintf(buf+k,"cpu_number:%d\n",procfs[id].cpu);
-        k+=sprintf(buf+k,"mem:%d\n",procfs[id].mem);
-        k+=sprintf(buf+k,"cpu_time:%d\n",procfs[id].time);
+        printf("taskinfo:\n");
+        printf("pid:%d\n",id);
+        printf("name:%d\n",procfs[id].name);
+        printf("cpu_number:%d\n",procfs[id].cpu);
+        printf("mem:%d\n",procfs[id].mem);
+        printf("cpu_time:%d\n",procfs[id].time);
     }
     return k;
 }
