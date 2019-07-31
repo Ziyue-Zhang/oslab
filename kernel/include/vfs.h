@@ -37,7 +37,7 @@ typedef struct Vinode{
   int type;
   int mode;
   int size;
-  int link
+  int link;
   int link_head;
   int link_inode;
   int link_count;
