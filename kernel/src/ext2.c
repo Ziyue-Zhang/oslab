@@ -41,6 +41,8 @@ int ext2_read(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf){
     if(len+offset>4096)
         len=4096-offset;
     fs->dev->ops->read(fs->dev,start,buf,len);
+    buf[len]='\0';
+    printf("%s\n",buf);
     return len;
 }
 
@@ -55,7 +57,7 @@ int ext2_write(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf)
         len=4096-offset;
     //ext2fs->dev=dev_lookup("ramdisk0");
     fs->dev->ops->write(fs->dev,start,buf,len);
-    printf("%s\n",buf);
+    //printf("%s\n",buf);
     return len;
 }
 
