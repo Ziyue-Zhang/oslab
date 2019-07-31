@@ -376,7 +376,7 @@ void vfs_init(){
     vinode_addfile(dev_file,FILE,"tty2",TTY,NULL);
     vinode_addfile(dev_file,FILE,"tty3",TTY,NULL);
     vinode_addfile(dev_file,FILE,"tty4",TTY,NULL);
-    vfs_mount("/dev/ramdisk1",mount_table[r1]);
+    vfs_mount("/dev/ramdisk1",&mount_table[r1]);
 }
 
 int vfs_lookup(char *path){
