@@ -320,6 +320,8 @@ int vfs_mkdir(const char *path){
     char temp[200];
     char name[80];
     strcpy(temp, path);
+    if(vinode_find(temp)!=-1)
+      return -1;
     int i=strlen(temp)-1;
     while(1){
         if(temp[i]=='/')
