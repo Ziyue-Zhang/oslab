@@ -345,6 +345,8 @@ void vfs_init(){
     memset(fildes,0,sizeof(fildes));
     memset(mount_table,0,sizeof(mount_table));
     vinode_setroot();
+    proc_init(NULL,NULL,NULL);
+    vinode_adddir(0,DIR,"proc",PROC,NULL);
 }
 
 int vfs_lookup(char *path){
