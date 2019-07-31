@@ -297,9 +297,7 @@ void command_cat(char *line, char *text){
     ext2_read(&mount_table[r0],id,0,vinode[id].size,temp);
     temp[vinode[id].size]='\0';
     //printf("%s\n",temp);
-    printf("%s\n",temp);
-    printf("nmsl\n");
-    strcat(text,temp);
+    n+=sprintf(text+n, "%s\n",temp);
   }
   else if(vinode[id].filesystem==PROC){
     //proc_read(vinode[id].inode,0,text);
