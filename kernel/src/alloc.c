@@ -378,6 +378,7 @@ void my_free(void *ap)
 }
 
 
+extern void proc_mem();
 
 static void pmm_init() {
   pm_start = (uintptr_t)_heap.start;
@@ -391,7 +392,7 @@ static void *kalloc(size_t size) {
   kmt->spin_lock(&alc);
   void *ret = my_alloc(size);
 	kmt->spin_unlock(&alc);
-  unlock(&alloc_lock);
+  //unlock(&alloc_lock);
   return ret;
   //return NULL;
 
@@ -400,7 +401,8 @@ static void *kalloc(size_t size) {
 static void kfree(void *ptr) {
 	kmt->spin_lock(&alc);
 	my_free(ptr);
-	unlock(&alloc_lock);
+	kmt->spin_unlock(&alc);
+	//unlock(&alloc_lock);
 }
 
 MODULE_DEF(pmm) {
