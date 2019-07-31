@@ -47,8 +47,6 @@ int proc_build(int fa){
 }
 
 int proc_init(filesystem_t* fs, const char* name, device_t *dev){
-    use_mem=0;
-    tot_mem=0;
     proc_add("cpuinfo");
     proc_add("meminfo");    
     return 1;
@@ -67,7 +65,7 @@ int proc_dir(filesystem_t* fs, vinode_t *node, int num){
 ssize_t proc_read(int id, uint64_t offset, char *buf){
     int k=0;
     if(strcmp(procfs[id].name,"cpuinfo")==0){
-        printf("cpuinfo:\n");
+        printf("\ncpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
             printf("pid:%d\n",j);
@@ -76,13 +74,13 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
         }
     }
     else if(strcmp(procfs[id].name,"meminfo")==0){
-        printf("meminfo:\n");
+        printf("\nmeminfo:\n");
         printf("using mem: %d b\n",use_mem);
-        printf("free mem: %d b\n",tot_mem-use_mem);
+        printf("free mem: %d b\n",int(tot_mem-use_mem));
         printf("tot mem: %d b\n",tot_mem);
     }
     else{
-        printf("taskinfo:\n");
+        printf("\ntaskinfo:\n");
         printf("pid:%d\n",id);
         printf("name:%d\n",procfs[id].name);
         printf("cpu_number:%d\n",procfs[id].cpu);
