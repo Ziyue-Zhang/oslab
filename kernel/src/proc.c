@@ -48,7 +48,7 @@ int proc_build(int fa){
         }
         else{*/
             int id=vinode_addfile(fa,FILE,procfs[i].name,PROC,NULL);
-            printf("%s\n",procfs[i].name);
+            //printf("%s\n",procfs[i].name);
             vinode[id].inode=i;
     }
     return 0;
