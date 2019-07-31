@@ -17,7 +17,7 @@ void get_path(char *pwd, char *path){
   if(path[0]!='/'){
     path1[0]='\0';
     strcpy(path1,pwd);
-    strcpy(path1,path);
+    strcat(path1,path);
   }
   else{
     path1[0]='\0';
