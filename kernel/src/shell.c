@@ -288,7 +288,9 @@ void command_cat(char *line, char *text){
   }
   else if(vinode[id].filesystem==EXT2){
     printf("%d %d\n",id,vinode[id].size);
-    ext2_read(&mount_table[r0],id,0,vinode[id].size,text);
+    device_t dev=dev_lookup("ramdisk0");
+    int start=id*4096;
+    dev->ops->read(fs->dev,start,text,vinode[id].size);
   }
   else if(vinode[id].filesystem==PROC){
     //proc_read(vinode[id].inode,0,text);
