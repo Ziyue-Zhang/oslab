@@ -77,7 +77,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
             printf("pid:%d\n",j);
-            printf("name:%d\n",procfs[j].name);
+            printf("name:%s\n",procfs[j].name);
             printf("cpu_number:%d\n\n",procfs[j].cpu);
         }*/
 
@@ -85,7 +85,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
             k+=sprintf(buf+k,"pid:%d\n",j);
-            k+=sprintf(buf+k,"name:%d\n",procfs[j].name);
+            k+=sprintf(buf+k,"name:%s\n",procfs[j].name);
             k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);
         }
     }
