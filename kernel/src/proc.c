@@ -38,7 +38,7 @@ void proc_time(proc_t *old, proc_t *new){
     }
 }
 int proc_build(int fa){
-
+    return 0;
 
 }
 int proc_init(filesystem_t* fs, const char* name, device_t *dev){
