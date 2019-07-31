@@ -315,7 +315,9 @@ int vfs_unmount(const char *path){
     return 0;
 }
 int vfs_mkdir(const char *path){
-    int fa=vinode_find(path);
+    char temp[200];
+    strcpy(temp, path);
+    int fa=vinode_find(temp);
     int id=vinode_adddir(fa,DIR,NULL,VFS,NULL);
     return id;
 }
