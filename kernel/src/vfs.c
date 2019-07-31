@@ -370,12 +370,12 @@ void vfs_init(){
     int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
 
     proc_build(proc_file);
-    vinode_addfile(dev_file,"ramdisk0",FILE,EXT2,&mount_table[r0]);
-    vinode_addfile(dev_file,"ramdisk1",FILE,EXT2,&mount_table[r1]);
-    vinode_addfile(dev_file,"tty0",FILE,TTY,NULL);
-    vinode_addfile(dev_file,"tty1",FILE,TTY,NULL);
-    vinode_addfile(dev_file,"tty2",FILE,TTY,NULL);
-    vinode_addfile(dev_file,"tty3",FILE,TTY,NULL);
+    vinode_addfile(dev_file,FILE,"ramdisk0",EXT2,&mount_table[r0]);
+    vinode_addfile(dev_file,FILE,"ramdisk1",EXT2,&mount_table[r1]);
+    vinode_addfile(dev_file,FILE,"tty1",TTY,NULL);
+    vinode_addfile(dev_file,FILE,"tty2",TTY,NULL);
+    vinode_addfile(dev_file,FILE,"tty3",TTY,NULL);
+    vinode_addfile(dev_file,FILE,"tty4",TTY,NULL);
 }
 
 int vfs_lookup(char *path){
