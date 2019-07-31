@@ -258,6 +258,36 @@ void command_unlink(char *line, char *text){
   else  
     n+=sprintf(text+n, "unlink %s successful!\n",path1);
 }
+void command_cat(char *line, char *text){
+  int i=0;
+  int n=0;
+  while(line[i]){
+    if(line[i]==' ')
+      break;
+    i++;
+  }
+  if(line[i]=='\0'){
+    sprintf(text, "\n");
+    return;
+  }
+  i++;
+  char temp[200];
+  strcpy(temp,line+i);
+  if(temp[strlen(temp)-1]=='/')
+    temp[strlen(temp)-1]='\0';
+  strcpy(path1,pwd);
+  strcat(path1,temp);
+  int id=vfs_lookup(path1);
+  if(id==-1){
+    n+=sprintf(text+n, "wrong path %s, cat fail!\n",path1);
+  }
+  else if(vinode[id].type==DIR){
+    n+=sprintf(text+n, "this is a dir, cat fail!\n",path1);
+  }
+  else if(vinode[id].type==PROC){
+    proc_read(vinode[id].inode,0,text);
+  }
+}
 void terminal_task(void *name){
   device_t *tty = dev_lookup(name);
   char line[128], text[128];
@@ -291,6 +321,9 @@ void terminal_task(void *name){
       command_link(line,text); 
     }
     else if(strncmp(line,"unlink",strlen("unlink"))==0){
+      command_unlink(line,text); 
+    }
+    else if(strncmp(line,"cat",strlen("cat"))==0){
       command_unlink(line,text); 
     }
     else if(strncmp(line,"echo",strlen("echo"))==0){

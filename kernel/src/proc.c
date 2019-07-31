@@ -45,8 +45,6 @@ int proc_build(int fa){
         vinode[id].inode=i;
    }
     for(int i=0;i<proc_num-2;i++){
-        if(strcmp(procfs[i].name,"..")==0||strcmp(procfs[i].name,".")==0)
-            continue;
         int id=vinode_addfile(fa,FILE,procfs[i].name,PROC,NULL);
             //printf("%s\n",procfs[i].name);
         vinode[id].inode=i;
@@ -57,8 +55,6 @@ int proc_build(int fa){
 int proc_init(filesystem_t* fs, const char* name, device_t *dev){
     use_mem=0;
     tot_mem=0;
-    proc_add(".");
-    proc_add("..");
     proc_add("cpuinfo");
     proc_add("meminfo");    
     return 1;
@@ -78,7 +74,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
     if(!offset)
         return 0;
     int k=0;
-    if(id==2){
+    if(strcmp(procfs[id].name,"cpuinfo")==0){
         k+=sprintf(buf+k,"cpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
             int j=procfs[jobs[i]].inode;
@@ -87,7 +83,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
             k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);
         }
     }
-    else if(id==3){
+    else if(strcmp(procfs[id].name,"meminfo")==0){
         k+=sprintf(buf+k,"meminfo:\n");
         k+=sprintf(buf+k,"using mem: %d b\n",use_mem);
         k+=sprintf(buf+k,"free mem: %d b\n",tot_mem-use_mem);
