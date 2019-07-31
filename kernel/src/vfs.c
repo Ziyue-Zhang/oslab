@@ -21,9 +21,9 @@ int vinode_setroot(){
     int dot=vinode_alloc(DIR);
     int dotdot=vinode_alloc(DIR);
     strcpy(vinode[dot].name,".");
-    strcpy(vinode[dot].path,"/.");
+    strcpy(vinode[dot].path,"/");
     strcpy(vinode[dotdot].name,"..");
-    strcpy(vinode[dotdot].path,"/..");
+    strcpy(vinode[dotdot].path,"/");
 
     vinode[id].dot=-1;
     vinode[id].dotdot=-1;
