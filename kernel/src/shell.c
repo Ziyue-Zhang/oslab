@@ -66,11 +66,11 @@ void command_cd(char *line,char *text){
     return;
   }
   i++;
-  if(strcmp(line+i,".")==0){
+  if(strcmp(line+i,".")==0||strcmp(line+i,"./")==0){
     sprintf(text, "\n");
     return;
   }
-  else if(strcmp(line+i,"..")==0){
+  else if(strcmp(line+i,"..")==0||strcmp(line+i,"../")==0){
     if(strcmp(pwd,"/")==0){
       sprintf(text, "\n");
       return;
