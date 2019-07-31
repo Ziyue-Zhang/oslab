@@ -352,7 +352,7 @@ int fs_free(int i) {
 int vfs_dev(const char* name, device_t* dev, size_t size,void (*init)(filesystem_t*, const char*,device_t*)) {
 	int id = fs_alloc();
 	strcpy(mount_table[id].name, name);
-	mount_table[id].rfs = pmm->alloc(size);
+	mount_table[id].myfs = pmm->alloc(size);
 	mount_table[id].dev = dev;
 	mount_table[id].init = init;
 	return id;
@@ -364,8 +364,8 @@ void vfs_init(){
     vinode_setroot();
     proc_init(NULL,"proc",NULL);
     int proc_file=vinode_adddir(0,DIR,"proc",PROC,NULL);
-    int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
-    int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
+    //int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
+    //int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
 
     proc_build(proc_file);
 }

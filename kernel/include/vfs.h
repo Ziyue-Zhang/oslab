@@ -50,7 +50,7 @@ typedef struct fileroot{
   int son;
   int use; 
 }fileroot_t;
-fileroot_t mount_table[16];
+filesystem_t mount_table[16];
 vinode_t vinode[VINODE_SIZE];
 file_t fildes[FILE_SIZE];
 
