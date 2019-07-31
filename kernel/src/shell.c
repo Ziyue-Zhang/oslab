@@ -207,6 +207,10 @@ void command_link(char *line, char *text){
   char temp1[200],temp2[200];
   strncpy(temp1,line+i,j-i);
   strcpy(temp2,line+j+1);
+  if(temp1[strlen(temp1)-1]=='/')
+    temp1[strlen(temp1)-1]='\0';
+  if(temp1[strlen(temp2)-1]=='/')
+    temp1[strlen(temp2)-1]='\0';  
   n+=sprintf(text+n, "%s %s\n",temp1,temp2);
   /*for(int j=i;line[j]!='\0';j++){
     if(line[j]=='/'){
