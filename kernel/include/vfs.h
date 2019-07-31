@@ -17,7 +17,6 @@
 #define VFS 1
 #define EXT2 2
 #define TTY 3
-#define 
 
 #define O_RDONLY 0
 #define O_WRONLY 1
