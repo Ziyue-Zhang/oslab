@@ -214,8 +214,16 @@ void command_link(char *line, char *text){
   strcpy(path1,pwd);
   strcpy(path2,pwd);
   strcat(path1,temp1);
-  strcat(path2,temp2);  
-  n+=sprintf(text+n, "%s %s\n",path1,path2);
+  strcat(path2,temp2);
+  int mode=vfs_link(path1,path2);
+  if(mode==-2){
+    n+=sprintf(text+n, "wrong oldpath, link fail!\n");
+  }
+  else if(mode==-1){
+    n+=sprintf(text+n, "wrong newpath, link fail!\n");
+  }
+  else  
+    n+=sprintf(text+n, "link %s -> %s successful!\n",path1,path2);
   /*for(int j=i;line[j]!='\0';j++){
     if(line[j]=='/'){
       sprintf(text, "dir name can't have '/'!\n");

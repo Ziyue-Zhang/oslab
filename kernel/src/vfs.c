@@ -464,7 +464,7 @@ int vfs_link(const char *oldpath, const char *newpath){
     strcpy(temp,oldpath);
     int old=vinode_find(temp);
     if(old==-1){
-        return -1;
+        return -2;
     }
     temp[0]='\0';
     strcpy(temp,newpath);
