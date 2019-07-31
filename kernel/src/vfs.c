@@ -346,11 +346,11 @@ void vfs_init(){
     memset(mount_table,0,sizeof(mount_table));
     vinode_setroot();
     proc_init(NULL,"proc",NULL);
-    //int proc_file=vinode_adddir(0,DIR,"proc",PROC,NULL);
+    int proc_file=vinode_adddir(0,DIR,"proc",PROC,NULL);
     //int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
     //int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
 
-    //proc_build();
+    proc_build(proc);
 }
 
 int vfs_lookup(char *path){
@@ -544,7 +544,7 @@ ssize_t vfs_read(int fd, void *buf, size_t nbyte){
         fildes[fd].offset+=len;
     }
     else if(vinode[id].filesystem==PROC){
-        len=proc_read(vinode[id].inode, fildes[fd].offset, buf)
+        len=proc_read(vinode[id].inode, fildes[fd].offset, buf);
         fildes[fd].offset+=len;
     }
     return len;
