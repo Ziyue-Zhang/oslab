@@ -302,7 +302,7 @@ int vinode_lookup(char *path){
         else if(son_id==-1 && vinode[id].filesystem==VFS)
             return -1;
         else{
-            while(vinode[son_id].type==LINK){
+            while(vinode[son_id].link==1){
                 son_id=vinode[son_id].link_inode;
             }
             id=son_id;  
