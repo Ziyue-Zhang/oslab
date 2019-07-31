@@ -179,7 +179,7 @@ int vinode_deldir(int fa, int this){
         for(;vinode[p].nxt!=this;p=vinode[p].nxt);
         vinode[p].nxt=vinode[this].nxt;
         for(int i=vinode[this].son;i!=-1;i=vinode[i].nxt){
-            if(vinode[i].type==DIR){
+            if(vinode[i].type==DIR && vinode[i].dot!=i && vinode[i].dotdot!=i){
                 vinode_deldir(this,i);
             }
             else{
