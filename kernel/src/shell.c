@@ -120,7 +120,7 @@ void terminal_task(void *name){
       command_cd(line,text);
     }
     else if(strncmp(line,"echo",strlen("echo"))==0){
-      sprintf(text, "\n", line+5); 
+      sprintf(text, "%s\n", line+5); 
     }
     else
       sprintf(text, "Echo: %s.\n", line); 
