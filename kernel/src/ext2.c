@@ -50,8 +50,8 @@ int ext2_write(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf)
     }*/
     ext2_alloc(fs, inode);
     int start=inode*4096+offset;
-    if(len+offset>ext2fs->block_size)
-        len=ext2fs->block_size-offset;
+    if(len+offset>4096)
+        len=4096-offset;
     printf("nms\n");
     //ext2fs->dev=dev_lookup("ramdisk0");
     fs->dev->ops->write(ext2fs->dev,start,buf,len);
