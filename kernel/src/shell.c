@@ -290,7 +290,9 @@ void command_cat(char *line, char *text){
     printf("%d %d\n",id,vinode[id].size);
     device_t *de=dev_lookup("ramdisk0");
     int start=id*4096;
-    de->ops->read(de,start,text,vinode[id].size);
+    char buf[80];
+    de->ops->read(de,start,buf,vinode[id].size);
+    printf("%s",buf);
   }
   else if(vinode[id].filesystem==PROC){
     //proc_read(vinode[id].inode,0,text);
