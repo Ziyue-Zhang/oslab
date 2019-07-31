@@ -56,17 +56,17 @@ void command_cd(char *line,char *text){
     i++;
   }
   if(line[i]=='\0'){
-    command_pwd(text);
+    sprintf(text, "\n");
     return;
   }
   i++;
   if(strcmp(line+i,".")==0){
-    command_pwd(text);
+    sprintf(text, "\n");
     return;
   }
   else if(strcmp(line+i,"..")==0){
     if(strcmp(pwd,"/")==0){
-      command_pwd(text);
+      sprintf(text, "\n");
       return;
     }
     else{
@@ -77,7 +77,7 @@ void command_cd(char *line,char *text){
         j--;
       }
       pwd[j+1]='\0';
-      command_pwd(text);
+      sprintf(text, "\n");
       return;
     }
   }
@@ -92,7 +92,7 @@ void command_cd(char *line,char *text){
       strcpy(pwd,path1);
       strcat(pwd,"/");
     }
-    command_pwd(text);
+    sprintf(text, "\n");
   }
 }
 
