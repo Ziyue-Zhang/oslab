@@ -51,7 +51,6 @@ int proc_build(int fa){
 }
 
 int proc_init(filesystem_t* fs, const char* name, device_t *dev){
-    proc_num=0;
     use_mem=0;
     tot_mem=0;
     proc_add(".");
