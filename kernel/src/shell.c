@@ -176,7 +176,7 @@ void command_rmdir(char *line, char *text){
   else if(mode==1){
     n+=sprintf(text+n, "Can't find %s, remove it fail!\n",line+i);
   }
-  else if(mod==2){
+  else if(mode==2){
     n+=sprintf(text+n, "%s isn't a dir, remove it fail!\n",line+i);
   }
 }
