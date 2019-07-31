@@ -73,9 +73,9 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
     }
     else if(id==3){
         k+=sprintf(buf+k,"\nmeminfo:\n");
-        k+=sprintf(buf+k,"using mem: %d kb\n",use_mem/1024);
-        k+=sprintf(buf+k,"free mem: %d kb\n",(tot_mem-use_mem)/1024);
-        k+=sprintf(buf+k,"tot mem: %d kb\n",tot_mem/1024);
+        k+=sprintf(buf+k,"using mem: %d b\n",use_mem);
+        k+=sprintf(buf+k,"free mem: %d b\n",tot_mem-use_mem);
+        k+=sprintf(buf+k,"tot mem: %d b\n",tot_mem);
     }
     else{
         k+=sprintf(buf+k,"\ntaskinfo:\n");

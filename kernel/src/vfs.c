@@ -229,6 +229,42 @@ int vinode_find(char *path){
     }
     return id;
 }
+int vinode_findabs(char *path){
+    if(strlen(path)==1&&path[0]=='/')
+        return 0;
+    int len=strlen(path);
+    int id=0;
+    for(int i=0;i<len;i++){
+        int j=i;
+        if(path[j]=='/'){
+            i++;
+            j++;
+        }
+        char name[80];
+        int k=0;
+        for(;path[j]!='\0'&&path[j]!='/';k++,j++)
+            name[k]=path[j];
+        /*if(path[j]=='/'){
+            name[k]='/';
+            k++;
+        }*/
+        name[k]='\0';
+        i=j;
+        //printf("%s\n",name);
+        id=vinode[id].son;
+        if(id==0)
+            id=vinode[id].son;
+        while(id!=-1){
+            if(strcmp(vinode[id].name,name)==0)
+                break;
+            id=vinode[id].nxt;
+        }
+        if(id==-1)
+            return -1;
+        //printf("%s\n",name);
+    }
+    return id;
+}
 int vinode_lookup(char *path){
     int len=strlen(path);
     int id=0;
@@ -354,7 +390,7 @@ int vfs_rmdir(const char *path){
     }
     temp[i]='\0';
     int fa=vinode_find(temp);
-    printf("%d %d\n",fa,this);
+    //printf("%d %d\n",fa,this);
     vinode_deldir(fa, this);
     return 0;
 }

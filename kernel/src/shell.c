@@ -173,7 +173,7 @@ void command_rmdir(char *line, char *text){
   path2[0]='\0';
   strcpy(path2,pwd);
   strcat(path2,line+i);
-  printf("%s\n",path2);
+  //printf("%s\n",path2);
   int mode=vfs_rmdir(path2);
   if(mode==0){
     n+=sprintf(text+n, "remove %s successful!\n",line+i);
@@ -185,7 +185,10 @@ void command_rmdir(char *line, char *text){
     n+=sprintf(text+n, "%s isn't a dir, remove it fail!\n",line+i);
   }
 }
-
+void command_link(char *line, char *text){
+}
+void command_unlink(char *line, char *text){
+}
 void terminal_task(void *name){
   device_t *tty = dev_lookup(name);
   char line[128], text[128];
@@ -213,6 +216,12 @@ void terminal_task(void *name){
       command_mkdir(line,text);
     }
     else if(strncmp(line,"rmdir",strlen("rmdir"))==0){
+      command_rmdir(line,text); 
+    }
+    else if(strncmp(line,"link",strlen("link"))==0){
+      command_rmdir(line,text); 
+    }
+    else if(strncmp(line,"unlink",strlen("unlink"))==0){
       command_rmdir(line,text); 
     }
     else if(strncmp(line,"echo",strlen("echo"))==0){
