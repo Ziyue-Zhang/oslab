@@ -114,7 +114,7 @@ void command_cd(char *line,char *text){
   }
 }
 
-void command_mkdir(char *line, char *text{
+void command_mkdir(char *line, char *text){
   int i=0;
   int n=0;
   while(line[i]){
