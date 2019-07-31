@@ -166,7 +166,7 @@ int vinode_deldir(int fa, int this){
     if(this==p){
         vinode[fa].son=vinode[p].nxt;
         for(int i=vinode[this].son;i!=-1;i=vinode[i].nxt){
-            if(vinode[i].type==DIR){
+            if(vinode[i].type==DIR && vinode[i].dot!=i && vinode[i].dotdot!=i){
                 vinode_deldir(this,i);
             }
             else{
@@ -354,6 +354,7 @@ int vfs_rmdir(const char *path){
     }
     temp[i]='\0';
     int fa=vinode_find(temp);
+    printf("%d %d\n",fa,this);
     vinode_deldir(fa, this);
     return 0;
 }
