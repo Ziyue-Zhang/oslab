@@ -286,6 +286,9 @@ void command_cat(char *line, char *text){
   else if(vinode[id].type==DIR){
     n+=sprintf(text+n, "this is a dir, cat fail!\n",path1);
   }
+  else if(vinode[id].filesystem==EXT2){
+    ext2_read(&mount_table[r0],id,0,vinode[id].size,text);
+  }
   else if(vinode[id].filesystem==PROC){
     //proc_read(vinode[id].inode,0,text);
     id=vinode[id].inode;
