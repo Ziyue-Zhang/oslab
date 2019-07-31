@@ -491,7 +491,7 @@ int vfs_unlink(const char *path){
     char temp[200];
     temp[0]='\0';
     strcpy(temp,path);
-    int id=vinode_find(temp);
+    int id=vinode_findabs(temp);
     if(id==-1){
         return -1;
     }
