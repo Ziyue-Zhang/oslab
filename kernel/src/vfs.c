@@ -382,6 +382,7 @@ int vfs_mkdir(const char *path){
 int vfs_rmdir(const char *path){
     char temp[200];
     strcpy(temp,path);
+    printf("%s\n",path);
     int this=vinode_find(temp);
     if(this==-1){
         return 1;
