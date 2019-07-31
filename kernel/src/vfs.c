@@ -350,7 +350,7 @@ void vfs_init(){
     //int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
     //int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
 
-    proc_build(proc);
+    proc_build(proc_file);
 }
 
 int vfs_lookup(char *path){
