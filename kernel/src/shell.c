@@ -287,7 +287,7 @@ void command_cat(char *line, char *text){
     n+=sprintf(text+n, "this is a dir, cat fail!\n",path1);
   }
   else if(vinode[id].filesystem==EXT2){
-    //printf("%d %d\n",id,vinode[id].size);
+    printf("%d %d\n",id,vinode[id].size);
     /*device_t *de=dev_lookup("ramdisk0");
     int start=id*4096;
     char buf[80];
@@ -295,7 +295,9 @@ void command_cat(char *line, char *text){
     printf("%s",buf);*/
     char temp[80];
     ext2_read(&mount_table[r0],id,0,vinode[id].size,temp);
-    printf("%s\n",temp);
+    printf("nmsl\n");
+    //printf("%s\n",temp);
+    n+=sprintf(text+n, "\n");
   }
   else if(vinode[id].filesystem==PROC){
     //proc_read(vinode[id].inode,0,text);
