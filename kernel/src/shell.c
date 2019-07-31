@@ -94,7 +94,7 @@ void command_cd(char *line,char *text){
     }
     get_path(pwd, line+i);
     printf("%s\n",pwd);
-    printf("%s\n".line+i);
+    printf("%s\n",line+i);
     printf("%s\n",path1);
     if(vfs_lookup(path1)!=-1){
       pwd[0]='\0';
