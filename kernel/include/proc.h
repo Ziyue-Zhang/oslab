@@ -7,12 +7,6 @@
 
 #define PROC_SIZE 128
 
-typedef struct proc{
-    char name[20];
-    int inode;
-    int cpu;
-    int time;
-    int mem;
-}proc_t;
+
 
 #endif

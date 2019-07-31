@@ -17,6 +17,13 @@
 #define RD_ONLY 2
 #define WRRD_ONLY 3
 
+typedef struct proc{
+    char name[20];
+    int inode;
+    int cpu;
+    int time;
+    int mem;
+}proc_t;
 typedef struct file file_t;
 struct task {
     char name[80];
