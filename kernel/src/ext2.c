@@ -73,7 +73,7 @@ int ext2_build(int fa){
     vinode[id].size=len;
     char temp[80];
     ext2_read(&mount_table[r0],id,vinode[id].size,temp);
-    printf("%s\n",temp)
+    printf("%s\n",temp);
     id=vinode_addfile(fa, FILE, "hello.cpp", EXT2, &mount_table[r0]);
     char buf2[200]={"#include<iostream>\nusing namespace std;\nint main(){\n    cout<<\"hello world\"<<endl;\n    return 0;\n}\n"};
     len=ext2_write(&mount_table[r0],id,0,strlen(buf2),buf2);
