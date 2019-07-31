@@ -15,12 +15,12 @@ char path2[200];
 }*/
 void get_path(char *pwd, char *path){
   if(path[0]!='/'){
-    path1[0]='0';
+    path1[0]='\0';
     strcpy(path1,pwd);
-    strcpy(path1,"/");
     strcpy(path1,path);
   }
   else{
+    path1[0]='\0';
     strcpy(path1,path);
   }
 }
@@ -49,14 +49,17 @@ void command_cd(char *line,char *text){
       break;
     i++;
   }
+  if(line[i]=='0'){
+
+  }
   i++;
   if(strcmp(line+i,".")==0){
-    sprintf(line, "\n");
+    sprintf(text, "\n");
     return;
   }
   else if(strcmp(line+i,"..")==0){
     if(strcmp(pwd,"/")==0){
-      sprintf(line, "\n");
+      sprintf(text, "\n");
       return;
     }
     else{
@@ -66,7 +69,7 @@ void command_cd(char *line,char *text){
           break;
         j--;
         pwd[j]='0';
-        sprintf(line, "\n");
+        sprintf(text, "\n");
         return;
       }
     }
@@ -80,7 +83,7 @@ void command_cd(char *line,char *text){
     }
     pwd[0]='\0';
     strcpy(pwd,path1);
-    sprintf(line, "\n");
+    sprintf(text, "\n");
   }
 }
 
