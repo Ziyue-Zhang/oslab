@@ -42,7 +42,7 @@ int ext2_read(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf){
         len=4096-offset;
     fs->dev->ops->read(fs->dev,start,buf,len);
     buf[len]='\0';
-    printf("%s\n",buf);
+    printf("\n%s\n",buf);
     return len;
 }
 
