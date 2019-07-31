@@ -75,9 +75,10 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
         return 0;
     int k=0;
     if(strcmp(procfs[id].name,"cpuinfo")==0){
+        printf("nmsl\n");
         k+=sprintf(buf+k,"cpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
-            int j=procfs[jobs[i]].inode;
+            int j=jobs[i].inode;
             k+=sprintf(buf+k,"pid:%d\n",j-4);
             k+=sprintf(buf+k,"name:%d\n",procfs[j].name);
             k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);

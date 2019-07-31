@@ -278,8 +278,8 @@ void command_cat(char *line, char *text){
   strcpy(path1,pwd);
   strcat(path1,temp);
   int id=vinode_find(path1);
-  printf("%d\n",id);
-  printf("%d\n",vinode[id].type);
+  //printf("%d\n",id);
+  //printf("%d\n",vinode[id].type);
   if(id==-1){
     n+=sprintf(text+n, "wrong path %s, cat fail!\n",path1);
   }
@@ -287,7 +287,6 @@ void command_cat(char *line, char *text){
     n+=sprintf(text+n, "this is a dir, cat fail!\n",path1);
   }
   else if(vinode[id].filesystem==PROC){
-    printf("nmsl\n");
     proc_read(vinode[id].inode,0,text);
   }
 }
