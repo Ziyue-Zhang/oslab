@@ -97,9 +97,50 @@ void command_cd(char *line,char *text){
       pwd[0]='\0';
       strcpy(pwd,path1);
       strcat(pwd,"/");
+      sprintf(text, "\n");
+      return;
     }
-    sprintf(text, "\n");
+    sprintf(text, "wrong path!\n");
   }
+}
+
+void command_mkdir(char *line){
+  path2[0]='\0';
+  strcpy(path2,pwd);
+  if(strcmp(path2,"/")!=0){
+    int i=strlen(path2)-1;
+    path2[i]='\0';
+  }
+  int id=vfs_lookup(path2);
+  int son=vinode[id].son;
+  int n=0;
+  while(1){
+      n+=sprintf(line+n, "%s",vinode[son].name);
+      if(vinode[son].nxt==-1)
+        break;
+      n+=sprintf(line+n, "    ");
+      son=vinode[son].nxt;
+  }
+  n+=sprintf(line+n, "\n");
+}
+void command_rmdir(char *line){
+  path2[0]='\0';
+  strcpy(path2,pwd);
+  if(strcmp(path2,"/")!=0){
+    int i=strlen(path2)-1;
+    path2[i]='\0';
+  }
+  int id=vfs_lookup(path2);
+  int son=vinode[id].son;
+  int n=0;
+  while(1){
+      n+=sprintf(line+n, "%s",vinode[son].name);
+      if(vinode[son].nxt==-1)
+        break;
+      n+=sprintf(line+n, "    ");
+      son=vinode[son].nxt;
+  }
+  n+=sprintf(line+n, "\n");
 }
 
 void terminal_task(void *name){
