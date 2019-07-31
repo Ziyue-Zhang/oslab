@@ -113,6 +113,7 @@ int vfs_close(int fd);
 
 extern int ext2_read();
 extern int ext2_write();
+extern int ext2_build();
 extern int proc_build();
 extern int proc_init();
 extern int proc_read();
