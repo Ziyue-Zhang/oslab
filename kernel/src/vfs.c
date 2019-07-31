@@ -237,8 +237,8 @@ int vinode_find(char *path){
         if(id==-1)
             return -1;
         //printf("%s\n",name);
-        while(vinode[id].type==1){
-            id=vinode[id].link_inode;
+        while(vinode[son_id].link_inode!=son_id){
+            son_id=vinode[son_id].link_inode;
         }
     }
     return id;
@@ -309,7 +309,7 @@ int vinode_lookup(char *path){
         else if(son_id==-1 && vinode[id].filesystem==VFS)
             return -1;
         else{
-            while(vinode[son_id].link==1){
+            while(vinode[son_id].link_inode!=son_id){
                 son_id=vinode[son_id].link_inode;
             }
             id=son_id;  
@@ -473,7 +473,7 @@ int vfs_link(const char *oldpath, const char *newpath){
         return -1;
     }
     vinode[old].link=1;
-    vinode[old].link_inode=new;
+    vinode[old].link_inode=vinode[new].link_head;
     int id=old;
     while(1){
         vinode[id].link_head=old;
@@ -484,7 +484,39 @@ int vfs_link(const char *oldpath, const char *newpath){
     return 0;
 }
 int vfs_unlink(const char *path){
-    return 0;
+    char temp[200];
+    temp[0]='\0';
+    strcpy(temp,path);
+    int id=vinode_find(temp);
+    if(id==-1){
+        return -1;
+    }
+    if(vinode[id].link_inode==id){
+        retrurn 0;
+    }
+    vinode[id].link=0;
+    int head=vinode[id].link_head;
+    if(head==id){
+        head=vinode[id].link_inode;
+        int p=head;
+        while(1){
+            vinode[p].link_head=head;
+            if(vinode[p].link_inode==p)
+                break;
+        }
+    }
+    else{
+        int p=head;
+        while(1){
+            if(vinode[p].link_inode==id){
+                break;
+            }
+            vinode[p].link_inode=vinode[id].link_inode;
+        }
+    }
+    vinode[id].link_head=-1;
+    vinode[id].link_inode=id;
+    return 1;
 }
 int vfs_open(const char *path, int flags){
     int id=vfs_access(path,flags);
