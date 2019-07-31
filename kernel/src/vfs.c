@@ -349,7 +349,7 @@ int fs_free(int i) {
     mount_table[i].use=0;
 	return 0;
 }
-int vfs_dev(const char* name, device_t* dev, size_t size,void (*init)(filesystem_t*, const char*,device_t*)) {
+int vfs_dev(const char* name, device_t* dev, size_t size,int (*init)(filesystem_t*, const char*,device_t*)) {
 	int id = fs_alloc();
 	strcpy(mount_table[id].name, name);
 	mount_table[id].myfs = pmm->alloc(size);
