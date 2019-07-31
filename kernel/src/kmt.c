@@ -102,7 +102,7 @@ _Context *kmt_context_switch (_Event ev, _Context *context){
   current->state=RUNNING;
   //kmt_spin_unlock(&LK);
   task_t *temp2=current;
-  void proc_time(temp1->proc,temp2->proc);
+  proc_time(temp1->proc,temp2->proc);
   return &current->context;
 }
 void idle(void *arg){
