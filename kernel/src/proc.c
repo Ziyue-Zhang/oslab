@@ -75,7 +75,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
         return 0;
     int k=0;
     if(strcmp(procfs[id].name,"cpuinfo")==0){
-        printf("nmsl\n");
+        printf("cpu\n");
         k+=sprintf(buf+k,"cpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
@@ -85,6 +85,7 @@ ssize_t proc_read(int id, uint64_t offset, char *buf){
         }
     }
     else if(strcmp(procfs[id].name,"meminfo")==0){
+        printf("mem\n");
         k+=sprintf(buf+k,"meminfo:\n");
         k+=sprintf(buf+k,"using mem: %d b\n",use_mem);
         k+=sprintf(buf+k,"free mem: %d b\n",tot_mem-use_mem);
