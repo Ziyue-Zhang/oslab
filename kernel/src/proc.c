@@ -73,6 +73,7 @@ int proc_dir(filesystem_t* fs, vinode_t *node, int num){
 ssize_t proc_read(int id, uint64_t offset, char *buf){
     if(offset!=0)
         return 0;
+    printf("nmsl");
     int k=0;
     if(strcmp(procfs[id].name,"cpuinfo")==0){
         k+=sprintf(buf+k,"cpuinfo:\n");
