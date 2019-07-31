@@ -53,6 +53,7 @@ int ext2_write(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf)
     if(len+offset>ext2fs->block_size)
         len=ext2fs->block_size-offset;
     printf("nms\n");
+    ext2fs->dev=dev_lookup("ramdisk0");
     ext2fs->dev->ops->write(ext2fs->dev,start,buf,len);
     return len;
 }
