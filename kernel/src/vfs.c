@@ -351,10 +351,10 @@ int fs_free(int i) {
 }
 int vfs_dev(const char* name, device_t* dev, size_t size,void (*init)(filesystem_t*, const char*,device_t*)) {
 	int id = fs_alloc();
-	strcpy(mount_table[idx].name, name);
-	mount_table[idx].rfs = pmm->alloc(size);
-	mount_table[idx].dev = dev;
-	mount_table[idx].init = init;
+	strcpy(mount_table[id].name, name);
+	mount_table[id].rfs = pmm->alloc(size);
+	mount_table[id].dev = dev;
+	mount_table[id].init = init;
 	return idx;
 }
 void vfs_init(){
