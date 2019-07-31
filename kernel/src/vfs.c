@@ -367,9 +367,11 @@ void vfs_init(){
     int r0=vfs_dev("ramdisk0",dev_lookup("ramdisk0"),sizeof(ext2_t),ext2_init);
     int r1=vfs_dev("ramdisk1",dev_lookup("ramdisk1"),sizeof(ext2_t),ext2_init);
     int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
-    vinode_adddir(0,DIR,"mnt",VFS,NULL);
+    int vinode_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
 
     proc_build(proc_file);
+    ext2_build(ext2_file);
+
     vinode_addfile(dev_file,FILE,"ramdisk0",EXT2,&mount_table[r0]);
     vinode_addfile(dev_file,FILE,"ramdisk1",EXT2,&mount_table[r1]);
     vinode_addfile(dev_file,FILE,"tty1",TTY,NULL);
