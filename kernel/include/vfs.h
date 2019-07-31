@@ -6,7 +6,7 @@
 #include <klib.h>
 //#include <ext2.h>
 
-#define VINODE_SIZE 1024
+#define VINODE_SIZE 512
 #define FILE_SIZE 128
 
 #define EMPTY 0
