@@ -287,7 +287,7 @@ void command_cat(char *line, char *text){
     n+=sprintf(text+n, "this is a dir, cat fail!\n",path1);
   }
   else if(vinode[id].filesystem==EXT2){
-    printf("%d %d\n",id,vinode[id].size);
+    //printf("%d %d\n",id,vinode[id].size);
     /*device_t *de=dev_lookup("ramdisk0");
     int start=id*4096;
     char buf[80];

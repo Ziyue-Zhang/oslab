@@ -55,6 +55,7 @@ int ext2_write(filesystem_t *fs, int inode, uint64_t offset, int len, char *buf)
         len=4096-offset;
     //ext2fs->dev=dev_lookup("ramdisk0");
     fs->dev->ops->write(fs->dev,start,buf,len);
+    printf("%s\n",buf);
     return len;
 }
 
@@ -72,9 +73,9 @@ int ext2_build(int fa){
     char buf[80]={"hello\n"};
     int len=ext2_write(&mount_table[r0],id,0,strlen(buf),buf);
     vinode[id].size=len;
-    char temp[80];
+    /*char temp[80];
     ext2_read(&mount_table[r0],id,0,vinode[id].size,temp);
-    printf("%s\n",temp);
+    printf("%s\n",temp);*/
     id=vinode_addfile(fa, FILE, "hello.cpp", EXT2, &mount_table[r0]);
     char buf2[200]={"#include<iostream>\nusing namespace std;\nint main(){\n    cout<<\"hello world\"<<endl;\n    return 0;\n}\n"};
     len=ext2_write(&mount_table[r0],id,0,strlen(buf2),buf2);
