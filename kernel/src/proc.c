@@ -39,10 +39,14 @@ void proc_time(proc_t *old, proc_t *new){
     }
 }
 int proc_build(int fa){
-    for(int i=0;i<proc_num;i++){
+    for(int i=proc_num-2;i<proc_num;i++){
+        int id=vinode_addfile(fa,FILE,procfs[i].name,PROC,NULL);
+            //printf("%s\n",procfs[i].name);
+        vinode[id].inode=i;
+   }
+    for(int i=0;i<proc_num-2;i++){
         if(strcmp(procfs[i].name,"..")==0||strcmp(procfs[i].name,".")==0)
             continue;
-        printf("nmsl\n");
         int id=vinode_addfile(fa,FILE,procfs[i].name,PROC,NULL);
             //printf("%s\n",procfs[i].name);
         vinode[id].inode=i;
