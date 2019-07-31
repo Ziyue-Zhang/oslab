@@ -492,7 +492,7 @@ int vfs_unlink(const char *path){
         return -1;
     }
     if(vinode[id].link_inode==id){
-        retrurn 0;
+        return 0;
     }
     vinode[id].link=0;
     int head=vinode[id].link_head;
