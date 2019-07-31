@@ -58,7 +58,7 @@ extern ssize_t tty_write(device_t *dev, off_t offset, const void *buf, size_t co
 void vinode_free(int idx);
 int vinode_alloc(int type);
 int vinode_setroot();
-int vinode_find(char *path);
+int vinode_find(const char *path);
 int vinode_lookup(char *path);
 int vinode_dot(int id);
 int vinode_dotdot();
