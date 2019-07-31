@@ -116,6 +116,9 @@ void terminal_task(void *name){
     else if(strcmp(line,"pwd")==0){
       command_pwd(text);
     }
+    else if(strncmp(line,"cd",strlen("ls"))==0){
+      command_pwd(text);
+    }
     else
       sprintf(text, "Echo: %s.\n", line); 
     tty_write(tty, 0, text,strlen(text));
