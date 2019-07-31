@@ -142,7 +142,7 @@ void command_mkdir(char *line, char *text){
   strcat(path2,line+i);
   int mode=vfs_mkdir(path2);
   if(mode==-1){
-    n+=sprintf(text+n, "%s exists, make it fail!\n",line+i);
+    n+=sprintf(text+n, "dir %s exists, make it fail!\n",line+i);
   }
   else
     n+=sprintf(text+n, "make %s successful!\n",line+i);
@@ -173,6 +173,7 @@ void command_rmdir(char *line, char *text){
   path2[0]='\0';
   strcpy(path2,pwd);
   strcat(path2,line+i);
+  printf("%s\n",path2);
   int mode=vfs_rmdir(path2);
   if(mode==0){
     n+=sprintf(text+n, "remove %s successful!\n",line+i);
