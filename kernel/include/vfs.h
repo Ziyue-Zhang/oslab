@@ -61,6 +61,7 @@ typedef struct ext2{
 	device_t *dev;
 	char fsname[80];
 }ext2_t;
+int r0,r1;
 typedef struct ext2_inode{
     char name[20];
     int inode;
