@@ -316,19 +316,33 @@ int vfs_unmount(const char *path){
 }
 int vfs_mkdir(const char *path){
     char temp[200];
+    char name[80];
     strcpy(temp, path);
     int i=strlen(temp)-1;
     while(1){
-        if(temp[i]=='\')
+        if(temp[i]=='/')
             break;
         i--;
     }
-    
+    strcpy(name,temp+i+1);
+    temp[i]='\0';
     int fa=vinode_find(temp);
-    int id=vinode_adddir(fa,DIR,NULL,VFS,NULL);
+    int id=vinode_adddir(fa,DIR,name,VFS,NULL);
     return id;
 }
 int vfs_rmdir(const char *path){
+    char temp[200];
+    strcpy(temp,path);
+    int this=vinode_find(temp);
+    int i=strlen(temp)-1;
+    while(1){
+        if(temp[i]=='/')
+            break;
+        i--;
+    }
+    temp[i]='\0';
+    int fa=vinode_find(temp);
+    vinode_deldir(fa, this);
     return 0;
 }
 int vfs_link(const char *oldpath, const char *newpath){

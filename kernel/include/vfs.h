@@ -72,8 +72,8 @@ int vinode_adddot();
 int vinode_adddotdot();
 int vinode_adddir(int fa, int type, char *name, int filesystem, filesystem_t *fs);
 int vinode_addfile(int fa, int type, char *name, int filesystem, filesystem_t *fs);
-int vinode_deldir();
-int vinode_delfile();
+int vinode_deldir(int fa, int this);
+int vinode_delfile(int fa, int this);
 
 int fd_alloc();
 int fd_free(int fd);
