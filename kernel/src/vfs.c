@@ -338,6 +338,12 @@ int vfs_rmdir(const char *path){
     char temp[200];
     strcpy(temp,path);
     int this=vinode_find(temp);
+    if(this==-1){
+        return 1;
+    }
+    if(vinode[this].type!=DIR){
+        return 2;
+    }
     int i=strlen(temp)-1;
     while(1){
         if(temp[i]=='/')

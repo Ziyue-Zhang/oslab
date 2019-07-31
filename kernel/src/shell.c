@@ -141,26 +141,44 @@ void command_mkdir(char *line, char *text){
   strcpy(path2,pwd);
   strcat(path2,line+i);
   vfs_mkdir(path2);
-  n+=sprintf(text+n, "mkdir %s successful!\n",line+i);
+  n+=sprintf(text+n, "make %s successful!\n",line+i);
 }
 void command_rmdir(char *line){
+  int i=0;
+  int n=0;
+  while(line[i]){
+    if(line[i]==' ')
+      break;
+    i++;
+  }
+  if(line[i]=='\0'){
+    sprintf(text, "\n");
+    return;
+  }
+  i++;
+  for(int j=i;line[j]!='\0';j++){
+    if(line[j]=='/'){
+      sprintf(text, "dir name can't have '/'!\n");
+      return;
+    }
+  }
+  int j=strlen(line)-1;
+  if(line[j]=='/'){
+    line[j]='\0';
+  }
   path2[0]='\0';
   strcpy(path2,pwd);
-  if(strcmp(path2,"/")!=0){
-    int i=strlen(path2)-1;
-    path2[i]='\0';
+  strcat(path2,line+i);
+  int mode=vfs_mkdir(path2);
+  if(mode==0){
+    n+=sprintf(text+n, "remove %s successful!\n",line+i);
   }
-  int id=vfs_lookup(path2);
-  int son=vinode[id].son;
-  int n=0;
-  while(1){
-      n+=sprintf(line+n, "%s",vinode[son].name);
-      if(vinode[son].nxt==-1)
-        break;
-      n+=sprintf(line+n, "    ");
-      son=vinode[son].nxt;
+  else if(mode==1){
+    n+=sprintf(text+n, "Can't find %s, remove it fail!\n",line+i);
   }
-  n+=sprintf(line+n, "\n");
+  else if(mod==2){
+    n+=sprintf(text+n, "%s isn't a dir, remove it fail!\n",line+i);
+  }
 }
 
 void terminal_task(void *name){
@@ -190,7 +208,7 @@ void terminal_task(void *name){
       command_mkdir(line,text);
     }
     else if(strncmp(line,"rmdir",strlen("rmdir"))==0){
-      sprintf(text, "%s\n", line+5); 
+      command_rmdir(line,text); 
     }
     else if(strncmp(line,"echo",strlen("echo"))==0){
       sprintf(text, "%s\n", line+5); 
