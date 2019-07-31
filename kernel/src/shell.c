@@ -298,7 +298,7 @@ void command_cat(char *line, char *text){
     //printf("%s\n",temp);
     //printf("%s\n",temp);
     printf("nmsl\n");
-    strcpy(text,temp);
+    strcat(text,temp);
   }
   else if(vinode[id].filesystem==PROC){
     //proc_read(vinode[id].inode,0,text);
