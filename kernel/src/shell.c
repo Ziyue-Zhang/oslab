@@ -288,7 +288,7 @@ void command_cat(char *line, char *text){
   }
   else if(vinode[id].filesystem==PROC){
     proc_read(vinode[id].inode,0,text);
-    //n+=sprintf(text+n, "\n");
+    n+=sprintf(text+n, "\n");
   }
 }
 void terminal_task(void *name){
