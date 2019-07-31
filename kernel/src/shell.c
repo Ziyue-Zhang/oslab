@@ -117,7 +117,7 @@ void terminal_task(void *name){
       command_pwd(text);
     }
     else if(strncmp(line,"cd",strlen("cd"))==0){
-      command_cd(text);
+      command_cd(line,text);
     }
     else
       sprintf(text, "Echo: %s.\n", line); 
