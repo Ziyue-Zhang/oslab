@@ -39,7 +39,9 @@ void proc_time(proc_t *old, proc_t *new){
     }
 }
 int proc_build(int fa){
-    for(int i=2;i<proc_num;i++){
+    for(int i=0;i<proc_num;i++){
+        if(strcmp(procfs[i].name,"..")==0||strcmp(procfs[i].name,".")==0)
+            continue;
         /*if(i<4){
             int id =vinode_adddir(fa,DIR,procfs[i].name,PROC,NULL);
             vinode[id].inode=i;
