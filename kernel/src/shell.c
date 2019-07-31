@@ -1,4 +1,4 @@
-#include<proc.h>
+#include<vfs.h>
 
 char pwd[200]="/";
 char path1[200];
@@ -258,42 +258,6 @@ void command_unlink(char *line, char *text){
   else  
     n+=sprintf(text+n, "unlink %s successful!\n",path1);
 }
-ssize_t procread(int id, uint64_t offset, char *buf){
-    int k=0;
-    if(strcmp(procfs[id].name,"cpuinfo")==0){
-        /*printf("cpuinfo:\n");
-        for(int i=0;i<_ncpu();i++){
-            int j=jobs[i];
-            printf("pid:%d\n",j);
-            printf("name:%s\n",procfs[j].name);
-            printf("cpu_number:%d\n\n",procfs[j].cpu);
-        }*/
-
-        k+=sprintf(buf+k,"cpuinfo:\n");
-        for(int i=0;i<_ncpu();i++){
-            int j=jobs[i];
-            k+=sprintf(buf+k,"pid:%d\n",j);
-            k+=sprintf(buf+k,"name:%s\n",procfs[j].name);
-            k+=sprintf(buf+k,"cpu_number:%d\n",procfs[j].cpu);
-        }
-    }
-    else if(strcmp(procfs[id].name,"meminfo")==0){
-        printf("mem\n");
-        k+=sprintf(buf+k,"meminfo:\n");
-        k+=sprintf(buf+k,"using mem: %d b\n",use_mem);
-        k+=sprintf(buf+k,"free mem: %d b\n",tot_mem-use_mem);
-        k+=sprintf(buf+k,"tot mem: %d b\n",tot_mem);
-    }
-    else{
-        k+=sprintf(buf+k,"taskinfo:\n");
-        k+=sprintf(buf+k,"pid:%d\n",id);
-        k+=sprintf(buf+k,"name:%d\n",procfs[id].name);
-        k+=sprintf(buf+k,"cpu_number:%d\n",procfs[id].cpu);
-        k+=sprintf(buf+k,"mem:%d\n",procfs[id].mem);
-        k+=sprintf(buf+k,"cpu_time:%d\n",procfs[id].time);
-    }
-    return k;
-}
 void command_cat(char *line, char *text){
   int i=0;
   int n=0;
@@ -323,7 +287,7 @@ void command_cat(char *line, char *text){
     n+=sprintf(text+n, "this is a dir, cat fail!\n",path1);
   }
   else if(vinode[id].filesystem==PROC){
-    procread(vinode[id].inode,0,text);
+    proc_read(vinode[id].inode,0,text);
     n+=sprintf(text+n, "\n");
   }
 }
