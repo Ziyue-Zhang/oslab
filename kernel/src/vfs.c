@@ -370,7 +370,7 @@ void vfs_init(){
     int vinode_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
 
     proc_build(proc_file);
-    ext2_build(ext2_file);
+    ext2_build(vinode_file);
 
     vinode_addfile(dev_file,FILE,"ramdisk0",EXT2,&mount_table[r0]);
     vinode_addfile(dev_file,FILE,"ramdisk1",EXT2,&mount_table[r1]);
