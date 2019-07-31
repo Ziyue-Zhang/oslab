@@ -1,11 +1,5 @@
 #include <proc.h>
 
-int jobs[4];
-proc_t procfs[PROC_SIZE];
-int proc_num;
-uint64_t use_mem;
-uint64_t tot_mem;
-
 void *proc_add(char *name){
     if(proc_num==PROC_SIZE){
         return NULL;
