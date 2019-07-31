@@ -203,10 +203,10 @@ int vinode_find(char *path){
         int k=0;
         for(;path[j]!='\0'&&path[j]!='/';k++,j++)
             name[k]=path[j];
-        if(path[j]=='/'){
+        /*if(path[j]=='/'){
             name[k]='/';
             k++;
-        }
+        }*/
         name[k]='\0';
         i=j;
         id=vinode[id].son;

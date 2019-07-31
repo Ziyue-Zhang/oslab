@@ -39,7 +39,13 @@ void command_ls(char *line){
 }
 
 void command_pwd(char *line){
-  sprintf(line, "%s\n", pwd);
+  path2[0]='\0';
+  strcpy(path2,pwd);
+  if(strcmp(path2,"/")!=0){
+    int i=strlen(path2)-1;
+    path2[i]='\0';
+  }
+  sprintf(line, "%s\n", path2);
 }
 
 void command_cd(char *line,char *text){
@@ -49,8 +55,9 @@ void command_cd(char *line,char *text){
       break;
     i++;
   }
-  if(line[i]=='0'){
-
+  if(line[i]=='\0'){
+    sprintf(text, "\n");
+    return;
   }
   i++;
   if(strcmp(line+i,".")==0){
@@ -63,26 +70,28 @@ void command_cd(char *line,char *text){
       return;
     }
     else{
-      int j=strlen(pwd)-1;
+      int j=strlen(pwd)-2;
       while(1){
         if(pwd[j]=='/')
           break;
         j--;
-        pwd[j]='0';
-        sprintf(text, "\n");
-        return;
       }
+      pwd[j+1]='\0';
+      sprintf(text, "\n");
+      return;
     }
   }
   else{
-    char temp[200];
-    strcpy(temp,pwd);
-    get_path(temp, line+i);
-    if(vfs_lookup(temp)!=-1){
-      get_path(pwd, line+i);
+    int j=strlen(line)-1;
+    if(line[j]=='/'){
+      line[j]='\0';
     }
-    pwd[0]='\0';
-    strcpy(pwd,path1);
+    get_path(pwd, line+i);
+    if(vfs_lookup(path1)!=-1){
+      pwd[0]='\0';
+      strcpy(pwd,path1);
+      strcat(pwd,"/");
+    }
     sprintf(text, "\n");
   }
 }
@@ -91,7 +100,13 @@ void terminal_task(void *name){
   device_t *tty = dev_lookup(name);
   char line[128], text[128];
   while(1){
-    sprintf(text, "(%s) %s$ ", name,pwd); 
+    path2[0]='\0';
+    strcpy(path2,pwd);
+    if(strcmp(path2,"/")!=0){
+      int i=strlen(path2)-1;
+      path2[i]='\0';
+    }
+    sprintf(text, "(%s) %s$ ", name,path2); 
     tty->ops->write(tty, 0, text, strlen(text));
     int nread = tty->ops->read(tty, 0 ,line, sizeof(line));
     line[nread - 1] = '\0';
