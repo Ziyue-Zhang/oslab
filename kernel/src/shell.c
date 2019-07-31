@@ -140,8 +140,8 @@ void command_mkdir(char *line, char *text){
   path2[0]='\0';
   strcpy(path2,pwd);
   strcat(path2,line+i);
-  //vfs_mkdir
-  n+=sprintf(text+n, "mkdir %s success!\n",line+i);
+  vfs_mkdir(path2);
+  n+=sprintf(text+n, "mkdir %s successful!\n",line+i);
 }
 void command_rmdir(char *line){
   path2[0]='\0';
