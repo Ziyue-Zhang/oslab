@@ -100,7 +100,7 @@ void command_cd(char *line,char *text){
     if(id!=-1){
       if(vinode[id].type==DIR){
         pwd[0]='\0';
-        printf("%s\n",vinode[id].path);
+        //printf("%s\n",vinode[id].path);
         strcpy(pwd,vinode[id].path);
         sprintf(text, "\n");
         return;

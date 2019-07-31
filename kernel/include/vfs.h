@@ -84,7 +84,7 @@ int vfs_lookup(char *path);
 int vfs_access(const char *path, int mode);
 int vfs_mount(const char *path, filesystem_t *fs);
 int vfs_unmount(const char *path);
-int vfs_mkdir(const char *path);
+int vfs_mkdir(const char *path, char* name);
 int vfs_rmdir(const char *path);
 int vfs_link(const char *oldpath, const char *newpath);
 int vfs_unlink(const char *path);
