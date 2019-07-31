@@ -290,7 +290,7 @@ void command_cat(char *line, char *text){
     //proc_read(vinode[id].inode,0,text);
     id=vinode[id].inode;
     if(strcmp(procfs[id].name,"cpuinfo")==0){
-        n+=sprintf(text+n, "\ncpuinfo:\n");
+        n+=sprintf(text+n, "cpuinfo:\n");
         for(int i=0;i<_ncpu();i++){
             int j=jobs[i];
             n+=sprintf(text+n, "pid:%d\n",j);
@@ -299,13 +299,13 @@ void command_cat(char *line, char *text){
         }
     }
     else if(strcmp(procfs[id].name,"meminfo")==0){
-        n+=sprintf(text+n, "\nmeminfo:\n");
+        n+=sprintf(text+n, "meminfo:\n");
        n+=sprintf(text+n, "using mem: %d b\n",use_mem);
         n+=sprintf(text+n, "free mem: %d b\n",(int)(tot_mem-use_mem));
         n+=sprintf(text+n, "tot mem: %d b\n",tot_mem);
     }
     else{
-        n+=sprintf(text+n, "\ntaskinfo:\n");
+        n+=sprintf(text+n, "taskinfo:\n");
         n+=sprintf(text+n, "pid:%d\n",id);
         n+=sprintf(text+n, "name:%d\n",procfs[id].name);
         n+=sprintf(text+n, "cpu_number:%d\n",procfs[id].cpu);

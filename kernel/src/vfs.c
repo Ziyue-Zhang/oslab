@@ -339,7 +339,24 @@ int fd_open(int inode){
     fildes[fd].offset=0;
     return fd;
 }
-
+int filesys_alloc() {
+	for (int i = 0; i < 16; i++)
+		if (!mount_table[i].use) 
+			return i;
+	return -1;
+}
+int filesys_free(int i) {
+    mount_yable[i].use=0;
+	return 0;
+}
+int vfs_dev(const char* name, device_t* dev, size_t size,void (*init)(filesystem_t*, const char*,device_t*)) {
+	int id = fs_alloc();
+	strcpy(mount_table[idx].name, name);
+	mount_table[idx].rfs = pmm->alloc(size);
+	mount_table[idx].dev = dev;
+	mount_table[idx].init = init;
+	return idx;
+}
 void vfs_init(){
     memset(vinode,0,sizeof(vinode));
     memset(fildes,0,sizeof(fildes));
@@ -347,8 +364,8 @@ void vfs_init(){
     vinode_setroot();
     proc_init(NULL,"proc",NULL);
     int proc_file=vinode_adddir(0,DIR,"proc",PROC,NULL);
-    //int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
-    //int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
+    int dev_file=vinode_adddir(0,DIR,"dev",VFS,NULL);
+    int mnt_file=vinode_adddir(0,DIR,"mnt",VFS,NULL);
 
     proc_build(proc_file);
 }
