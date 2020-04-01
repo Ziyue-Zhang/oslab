@@ -1,0 +1,182 @@
+am/src/native/vme.c:77:    // but we do this to catch unexcepted behavior from Nanos-lite
+am/src/native/README.md:5:Currently we can run Nanos-lite over native!
+Binary file am/build/native/src/native/platform.o matches
+am/build/native/src/native/trm.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/native//src/native/trm.o: \
+am/build/native/src/native/trm.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/am.h \
+am/build/native/src/native/trm.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/native.h
+am/build/native/src/native/devices/video.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/native//src/native/devices/video.o: \
+am/build/native/src/native/devices/video.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/am.h \
+am/build/native/src/native/devices/video.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/native.h \
+am/build/native/src/native/devices/video.d:5: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/amdev.h
+Binary file am/build/native/src/native/devices/input.o matches
+Binary file am/build/native/src/native/devices/timer.o matches
+am/build/native/src/native/devices/input.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/native//src/native/devices/input.o: \
+am/build/native/src/native/devices/input.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/am.h \
+am/build/native/src/native/devices/input.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/native.h \
+am/build/native/src/native/devices/input.d:5: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/amdev.h
+am/build/native/src/native/devices/timer.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/native//src/native/devices/timer.o: \
+am/build/native/src/native/devices/timer.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/am.h \
+am/build/native/src/native/devices/timer.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/native.h \
+am/build/native/src/native/devices/timer.d:5: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/amdev.h
+Binary file am/build/native/src/native/devices/video.o matches
+Binary file am/build/native/src/native/ioe.o matches
+am/build/native/src/native/trap.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/native//src/native/trap.o: \
+am/build/native/src/native/platform.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/native//src/native/platform.o: \
+am/build/native/src/native/platform.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/include/klib.h \
+am/build/native/src/native/platform.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/am.h \
+am/build/native/src/native/platform.d:5: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/native.h
+Binary file am/build/native/src/native/vme.o matches
+Binary file am/build/native/src/native/trm.o matches
+am/build/native/src/native/cte.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/native//src/native/cte.o: \
+am/build/native/src/native/cte.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/am.h \
+am/build/native/src/native/cte.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/native.h \
+am/build/native/src/native/cte.d:5: /home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/include/klib.h
+Binary file am/build/native/src/native/cte.o matches
+am/build/native/src/native/vme.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/native//src/native/vme.o: \
+am/build/native/src/native/vme.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/am.h \
+am/build/native/src/native/vme.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/native.h \
+am/build/native/src/native/vme.d:5: /home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/include/klib.h
+am/build/native/src/native/ioe.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/native//src/native/ioe.o: \
+am/build/native/src/native/ioe.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/am.h \
+am/build/native/src/native/ioe.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/native.h \
+am/build/native/src/native/ioe.d:5: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/amdev.h
+Binary file am/build/am-x86-qemu.a matches
+Binary file am/build/am-native.a matches
+am/build/x86-qemu/src/x86/qemu/trm.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/trm.o: \
+am/build/x86-qemu/src/x86/qemu/trm.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/trm.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/trm.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/trm.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/trm.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/trm.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+Binary file am/build/x86-qemu/src/x86/qemu/devices/cpu.o matches
+Binary file am/build/x86-qemu/src/x86/qemu/devices/apic.o matches
+am/build/x86-qemu/src/x86/qemu/devices/video.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/devices/video.o: \
+am/build/x86-qemu/src/x86/qemu/devices/video.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/devices/video.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/devices/video.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/devices/video.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/devices/video.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/devices/video.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+am/build/x86-qemu/src/x86/qemu/devices/pcdev.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/devices/pcdev.o: \
+am/build/x86-qemu/src/x86/qemu/devices/pcdev.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/devices/pcdev.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/devices/pcdev.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/devices/pcdev.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/devices/pcdev.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/devices/pcdev.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+Binary file am/build/x86-qemu/src/x86/qemu/devices/pcdev.o matches
+Binary file am/build/x86-qemu/src/x86/qemu/devices/input.o matches
+Binary file am/build/x86-qemu/src/x86/qemu/devices/timer.o matches
+am/build/x86-qemu/src/x86/qemu/devices/input.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/devices/input.o: \
+am/build/x86-qemu/src/x86/qemu/devices/input.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/devices/input.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/devices/input.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/devices/input.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/devices/input.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/devices/input.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+am/build/x86-qemu/src/x86/qemu/devices/apic.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/devices/apic.o: \
+am/build/x86-qemu/src/x86/qemu/devices/apic.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/devices/apic.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/devices/apic.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/devices/apic.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/devices/apic.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/devices/apic.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+am/build/x86-qemu/src/x86/qemu/devices/timer.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/devices/timer.o: \
+am/build/x86-qemu/src/x86/qemu/devices/timer.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/devices/timer.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/devices/timer.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/devices/timer.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/devices/timer.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/devices/timer.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+am/build/x86-qemu/src/x86/qemu/devices/cpu.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/devices/cpu.o: \
+am/build/x86-qemu/src/x86/qemu/devices/cpu.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/devices/cpu.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/devices/cpu.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/devices/cpu.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/devices/cpu.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/devices/cpu.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+Binary file am/build/x86-qemu/src/x86/qemu/devices/video.o matches
+am/build/x86-qemu/src/x86/qemu/trace.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/trace.o: \
+am/build/x86-qemu/src/x86/qemu/trace.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/trace.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/trace.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/trace.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/trace.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/trace.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+Binary file am/build/x86-qemu/src/x86/qemu/ioe.o matches
+am/build/x86-qemu/src/x86/qemu/cte_trap.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/cte_trap.o: \
+am/build/x86-qemu/src/x86/qemu/cte_trap.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h
+am/build/x86-qemu/src/x86/qemu/mpe.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/mpe.o: \
+am/build/x86-qemu/src/x86/qemu/mpe.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/mpe.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/mpe.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/mpe.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/mpe.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/mpe.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+Binary file am/build/x86-qemu/src/x86/qemu/mpe.o matches
+Binary file am/build/x86-qemu/src/x86/qemu/vme.o matches
+Binary file am/build/x86-qemu/src/x86/qemu/trm.o matches
+am/build/x86-qemu/src/x86/qemu/cte.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/cte.o: \
+am/build/x86-qemu/src/x86/qemu/cte.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/cte.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/cte.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/cte.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/cte.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/cte.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+Binary file am/build/x86-qemu/src/x86/qemu/cte.o matches
+Binary file am/build/x86-qemu/src/x86/qemu/trace.o matches
+am/build/x86-qemu/src/x86/qemu/vme.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/vme.o: \
+am/build/x86-qemu/src/x86/qemu/vme.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/vme.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/vme.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/vme.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/vme.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/vme.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+am/build/x86-qemu/src/x86/qemu/ioe.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/am/build/x86-qemu//src/x86/qemu/ioe.o: \
+am/build/x86-qemu/src/x86/qemu/ioe.d:3: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+am/build/x86-qemu/src/x86/qemu/ioe.d:4: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/arch/x86-qemu.h \
+am/build/x86-qemu/src/x86/qemu/ioe.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h \
+am/build/x86-qemu/src/x86/qemu/ioe.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amtrace.h \
+am/build/x86-qemu/src/x86/qemu/ioe.d:7: /home/zhangziyue/oslab/os-workbench/abstract-machine/am/include/x86.h \
+am/build/x86-qemu/src/x86/qemu/ioe.d:8: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/libs/klib/include/klib.h
+apps/typing/README.md:5:这是[NJU 2013 oslab0的演示游戏](https://github.com/NJU-ProjectN/os-lab0)的AM移植版本。
+Binary file libs/klib/build/x86-qemu/src/cpp.o matches
+libs/klib/build/x86-qemu/src/stdio.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/build/x86-qemu//src/stdio.o: \
+libs/klib/build/x86-qemu/src/stdio.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/include/klib.h \
+libs/klib/build/x86-qemu/src/stdio.d:4: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+libs/klib/build/x86-qemu/src/stdio.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/include/arch/x86-qemu.h
+Binary file libs/klib/build/x86-qemu/src/stdlib.o matches
+Binary file libs/klib/build/x86-qemu/src/string.o matches
+libs/klib/build/x86-qemu/src/stdlib.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/build/x86-qemu//src/stdlib.o: \
+libs/klib/build/x86-qemu/src/string.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/build/x86-qemu//src/string.o: \
+libs/klib/build/x86-qemu/src/string.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/include/klib.h \
+libs/klib/build/x86-qemu/src/string.d:4: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+libs/klib/build/x86-qemu/src/string.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/include/arch/x86-qemu.h
+libs/klib/build/x86-qemu/src/cpp.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/build/x86-qemu//src/cpp.o: \
+libs/klib/build/x86-qemu/src/cpp.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/include/klib.h \
+libs/klib/build/x86-qemu/src/cpp.d:4: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+libs/klib/build/x86-qemu/src/cpp.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/include/arch/x86-qemu.h
+libs/klib/build/x86-qemu/src/io.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/build/x86-qemu//src/io.o: \
+libs/klib/build/x86-qemu/src/io.d:3: /home/zhangziyue/oslab/os-workbench/abstract-machine/libs/klib/include/klib.h \
+libs/klib/build/x86-qemu/src/io.d:4: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/am.h \
+libs/klib/build/x86-qemu/src/io.d:5: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/include/arch/x86-qemu.h \
+libs/klib/build/x86-qemu/src/io.d:6: /home/zhangziyue/oslab/os-workbench/kernel/../abstract-machine/am/amdev.h
+Binary file libs/klib/build/x86-qemu/src/stdio.o matches
+Binary file libs/klib/build/x86-qemu/src/io.o matches
+Binary file libs/klib/build/klib-x86-qemu.a matches
+libs/imgui/src/imgui_demo.cpp:2348:                        HistoryPos--;
+libs/fixmath/src/fix16.c:338:		bit_pos--;
+Binary file libs/compiler-rt/build/compiler-rt-x86-qemu.a matches
+libs/compiler-rt/build/x86-qemu/divdi3.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/compiler-rt/build/x86-qemu//./divdi3.o: \
+Binary file libs/compiler-rt/build/x86-qemu/udivdi3.o matches
+Binary file libs/compiler-rt/build/x86-qemu/divdi3.o matches
+Binary file libs/compiler-rt/build/x86-qemu/divmoddi4.o matches
+libs/compiler-rt/build/x86-qemu/moddi3.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/compiler-rt/build/x86-qemu//./moddi3.o: \
+Binary file libs/compiler-rt/build/x86-qemu/umoddi3.o matches
+libs/compiler-rt/build/x86-qemu/umoddi3.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/compiler-rt/build/x86-qemu//./umoddi3.o: \
+libs/compiler-rt/build/x86-qemu/divmoddi4.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/compiler-rt/build/x86-qemu//./divmoddi4.o: \
+libs/compiler-rt/build/x86-qemu/udivdi3.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/compiler-rt/build/x86-qemu//./udivdi3.o: \
+libs/compiler-rt/build/x86-qemu/udivmoddi4.d:1:/home/zhangziyue/oslab/os-workbench/abstract-machine/libs/compiler-rt/build/x86-qemu//./udivmoddi4.o: \
+Binary file libs/compiler-rt/build/x86-qemu/udivmoddi4.o matches
+Binary file libs/compiler-rt/build/x86-qemu/moddi3.o matches
